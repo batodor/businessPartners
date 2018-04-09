@@ -1,6 +1,24 @@
 {
   "run": [
     {
+      "filePath": "/webapp/test/flpSandbox.html",
+      "previewMode": 1,
+      "dataMode": 1,
+      "workspace": "withoutWorkspace",
+      "ui5ActiveVersion": null,
+      "ui5VerSource": null,
+      "isDefaultVersion": 0,
+      "urlParameters": [],
+      "hashParameter": "",
+      "backendSystem": [],
+      "_metadata": {
+        "runnerId": "webapprunner",
+        "id": 949151,
+        "displayName": "Run flpSandbox.html",
+        "lastRunTimeStamp": 1523276996792
+      }
+    },
+    {
       "filePath": "/Counterparties/webapp/test/flpSandbox.html",
       "previewMode": 1,
       "dataMode": 1,

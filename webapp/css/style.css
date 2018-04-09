@@ -125,6 +125,10 @@ span[data-rating="C"] {
 	padding-bottom: 0.25rem;
 }
 
+.sapUiTheme-utistheme1 .sapUiFup.sapUiFUM>form>div{
+	top: 0;
+}
+
 @media (min-width: 1024px){
 	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
 		margin: 1rem 1rem !important;

@@ -163,6 +163,9 @@ sap.ui.define([
 					path: "/CounterpartyListSet('" + sObjectId + "')/ToComplianceBlacklistedTab",
 					template: this.byId('blacklistedInfTable')['mBindingInfos'].items.template
 				});
+				
+				// Disabled edit mode
+				this.cancelMainInf();
 			}.bind(this));
 		},
 
@@ -223,10 +226,8 @@ sap.ui.define([
 
 			if (oObject.TypeID === '1') {
 				this.hideObjects(["cGenInf","fuMainInfFileUpload","bMainInfFileUpload"]);
-				//this.showObjects(["lDownloadDoc","linkDownloadDoc"]);
 			} else {
 				this.showObjects(["cGenInf","fuMainInfFileUpload","bMainInfFileUpload"]);
-				//this.hideObjects(["lDownloadDoc","linkDownloadDoc"]);
 			}
 
 			if (oObject.Sanctions) {
@@ -874,23 +875,23 @@ sap.ui.define([
 		
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
-			this.hideObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf"]);
-			this.showObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf"]);
+			this.hideObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
+			this.showObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
 			this.enableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
 			this.byId('itbMain').setSelectedKey('dashboard');
 		},
 		
 		// Save function of Main Information (Dashboard tab)
 		saveMainInf: function(){
-			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf"]);
-			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf"]);
+			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
+			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
 			this.disableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
 		},
 		
 		// Cancel function of Main Information (Dashboard tab)
 		cancelMainInf: function(){
-			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf"]);
-			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf"]);
+			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
+			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
 			this.disableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
 		},
 
