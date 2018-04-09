@@ -130,13 +130,13 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<Label text="{AddressType}"/>
-												<Label text="{Country}"/>
-												<Label text="{Region}"/>
-												<Label text="{ZIP}"/>
-												<Label text="{City}"/>
-												<Label text="{Street}"/>
-												<Label text="{Office}"/>
+												<Text text="{AddressType}"/>
+												<Text text="{Country}"/>
+												<Text text="{Region}"/>
+												<Text text="{ZIP}"/>
+												<Text text="{City}"/>
+												<Text text="{Street}"/>
+												<Text text="{Office}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -154,7 +154,7 @@
 									busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 									<columns>
 										<Column width="100px"><Label class="black" text="{i18n>country}"/></Column>
-										<Column width="140px"><Label class="black" text="{i18n>bank}"/></Column>
+										<Column width="180px"><Label class="black" text="{i18n>bank}"/></Column>
 										<Column width="90px"><Label class="black" text="{i18n>swift}"/></Column>
 										<Column><Label class="black" text="{i18n>address}"/></Column>
 										<Column width="120px"><Label class="black" text="{i18n>bcAcc}"/></Column>
@@ -208,13 +208,13 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<Label text="{Name}"/>
-												<Label text="{Surname}"/>
-												<Label text="{Position}"/>
-												<Label custom:key="{GoverType}" text="{GoverName}"/>
-												<Label text="{Phone}"/>
-												<Label text="{FaxNumber}"/>
-												<Label text="{Email}"/>
+												<Text text="{Name}"/>
+												<Text text="{Surname}"/>
+												<Text text="{Position}"/>
+												<Text custom:key="{GoverType}" text="{GoverName}"/>
+												<Text text="{Phone}"/>
+												<Text text="{FaxNumber}"/>
+												<Text text="{Email}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -246,13 +246,13 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<Label text="{Name}"/>
-												<Label text="{Surname}"/>
-												<Label text="{Position}"/>
-												<Label text="{Comment}"/>
-												<Label text="{Phone}"/>
-												<Label text="{FaxNumber}"/>
-												<Label text="{Email}"/>
+												<Text text="{Name}"/>
+												<Text text="{Surname}"/>
+												<Text text="{Position}"/>
+												<Text text="{Comment}"/>
+												<Text text="{Phone}"/>
+												<Text text="{FaxNumber}"/>
+												<Text text="{Email}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -335,12 +335,12 @@
 										<ColumnListItem>
 											<cells>
 												<CheckBox selected="{ExpressScore}" editable="false"/>
-												<Label text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-												<Label text="{BusinessScale}"/>
-												<Label text="{FinancialProfile}"/>
-												<Label text="{CommercialProfile}"/>
-												<Label text="{CorporateTransparency}"/>
-												<Label text="{RatingSet}"/>
+												<Text text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+												<Text text="{BusinessScale}"/>
+												<Text text="{FinancialProfile}"/>
+												<Text text="{CommercialProfile}"/>
+												<Text text="{CorporateTransparency}"/>
+												<Text text="{RatingSet}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -386,10 +386,10 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<Label
+												<Text
 													text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"/>
-												<Label text="{Currency}"/>
-												<Label text="{path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+												<Text text="{Currency}"/>
+												<Text text="{path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -455,13 +455,13 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<Label custom:key="{RiskType}" text="{Type}"/>
-												<!--<Label text="{ItemNumber}"/>-->
-												<Label text="{Description}"/>
-												<Label text="{Actions}"/>
-												<Label custom:key="{DateFrom}"
+												<Text custom:key="{RiskType}" text="{Type}"/>
+												<!--<Text text="{ItemNumber}"/>-->
+												<Text text="{Description}"/>
+												<Text text="{Actions}"/>
+												<Text custom:key="{DateFrom}"
 													text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
-												<Label custom:key="{DateTo}"
+												<Text custom:key="{DateTo}"
 													text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 												<CheckBox selected="{Actual}" editable="false"/>
 											</cells>
@@ -495,13 +495,13 @@
 									<items>
 										<ColumnListItem>
 											<cells>
-												<Label text="{Name}"/>
-												<Label text="{Surname}"/>
-												<Label text="{Position}"/>
-												<Label text="{Comment}"/>
-												<Label text="{Phone}"/>
-												<Label text="{FaxNumber}"/>
-												<Label text="{Email}"/>
+												<Text text="{Name}"/>
+												<Text text="{Surname}"/>
+												<Text text="{Position}"/>
+												<Text text="{Comment}"/>
+												<Text text="{Phone}"/>
+												<Text text="{FaxNumber}"/>
+												<Text text="{Email}"/>
 											</cells>
 										</ColumnListItem>
 									</items>
@@ -536,14 +536,16 @@
 									<columns>
 										<Column width="70px"><Label class="black" text="{i18n>blacklisted}"/></Column>
 										<Column><Label class="black" text="{i18n>justification}"/></Column>
+										<Column width="100px"><Label class="black" text="{i18n>user}"/></Column>
 										<Column width="80px"><Label class="black" text="{i18n>date}"/></Column>
 									</columns>
 									<items>
 										<ColumnListItem>
 											<cells>
 												<CheckBox selected="{BlackListed}" editable="false"/>
-												<Label class="black" text="{Justification}"/>
-												<Label text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+												<Text class="black" text="{Justification}"/>
+												<Text text="{User}"/>
+												<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 											</cells>
 										</ColumnListItem>
 									</items>

@@ -249,18 +249,13 @@ sap.ui.define([
 
 		// On tabs selection function
 		onTabSelected: function(e) {
-			// var key = e.getParameter("key");
-			// if (key === "government") {
-
-			// } else if (key === "rating") {
-
-			// } else if (key === "risks") {
-
-			// } else if (key === "deals") {
-
-			// } else if (key === "attachments") {
-
-			// }
+			var key = e.getParameter("key");
+			if (key === "dashboard") {
+				this.showObjects(["editMainInf"]);
+			} else {
+				this.cancelMainInf();
+				this.hideObjects(["editMainInf"]);
+			}
 		},
 
 		// Operations with updating counterparty rating
@@ -878,14 +873,11 @@ sap.ui.define([
 			this.hideObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
 			this.showObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
 			this.enableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
-			this.byId('itbMain').setSelectedKey('dashboard');
 		},
 		
 		// Save function of Main Information (Dashboard tab)
 		saveMainInf: function(){
-			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
-			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
-			this.disableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
+			this.cancelMainInf();
 		},
 		
 		// Cancel function of Main Information (Dashboard tab)

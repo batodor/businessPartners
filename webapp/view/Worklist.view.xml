@@ -26,7 +26,7 @@
 								<SearchField id="searchTaxNumber" placeholder="{i18n>regNumber}" showSearchButton="false" search="triggerSearch" width="auto"/>
 								<DatePicker id="searchDateFrom" placeholder="{i18n>createdDateFrom}" class="sapUiSmallMarginBottom"/>
 								<DatePicker id="searchDateTo" placeholder="{i18n>createdDateTo}" class="sapUiSmallMarginBottom"/>
-								<CheckBox text="{i18n>blacklisted}" id="cbSearchBlacklisted" selected="false"/>
+								<CheckBox text="{i18n>blacklisted}" select="triggerSearch" id="cbSearchBlacklisted" selected="false"/>
 								<Button id="bSearch" text="{i18n>search}" type="Accept" press="onSearch"/>
 							</HBox>
 						</content>

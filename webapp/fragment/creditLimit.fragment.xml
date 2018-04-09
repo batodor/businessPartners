@@ -9,7 +9,7 @@
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>validityDate}" width="250px"/>
-			<DatePicker id="dCreditLimitPeriodFrom" placeholder="{i18n>date}" width="260px" class="sapUiSmallMarginBottom"/>
+			<DatePicker id="dCreditLimitPeriodFrom" placeholder="{i18n>enterDate}" width="260px" class="sapUiSmallMarginBottom"/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:dialog="dRatingCredit" type="Back" press="closeDialog"/>

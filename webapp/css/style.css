@@ -25,8 +25,9 @@ table[id*="table"] .sapMCbBg.sapMCbMarkChecked:before {
     color: red !important;
 }
 
-table[id*="table"] .sapMText {
-    color: #666;
+.sapMListTbl .sapMText,
+.sapMListTbl .sapMLabel {
+    color: #777;
 }
 
 span[data-rating="C"] {
