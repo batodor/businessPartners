@@ -1,0 +1,139 @@
+.sapUiBlockLayoutSizeL .sapUiBlockCellContent>.sapMText,
+.sapMFlexItem>.sapMText {
+    font-size: .95rem;
+    line-height: 1.2rem;
+}
+
+.sapUiFup{
+	margin-right: 5px;
+}
+
+.red {
+    color: red !important;
+}
+
+.center {
+    display: block;
+    text-align: center !important;
+}
+
+table[id*="table"] .sapMCbMarkChecked {
+    border-color: red !important;
+}
+
+table[id*="table"] .sapMCbBg.sapMCbMarkChecked:before {
+    color: red !important;
+}
+
+table[id*="table"] .sapMText {
+    color: #666;
+}
+
+span[data-rating="C"] {
+    color: red !important;
+}
+
+.sapUiSizeCompact .sapMSF,
+.sapUiSizeCompact .sapMDP,
+.sapUiSizeCompact .sapMCb {
+    padding-right: 6px;
+    padding-bottom: 1px;
+}
+
+.sapUiSizeCompact .sapMTB {
+    padding-bottom: 5px;
+}
+
+.sapMDP .sapMInputBaseInner {
+    padding-right: 2.25rem !important;
+}
+
+.sapUiBlockLayoutSizeL .sapUiBlockCellContent {
+    padding: 1rem;
+}
+
+.margin-right {
+    margin-right: 7px;
+}
+
+.sapMText {
+    font-size: 1rem;
+}
+
+.rowCheckbox {
+    height: auto !important;
+}
+
+.rowCheckbox .sapMCbBg {
+    top: 1px;
+    left: 0;
+}
+
+.sapMIBar .sapMBarChild:first-child {
+    margin-left: 0;
+}
+
+
+/* --- Tabs styles --- */
+
+.sapMITBText {
+    font-weight: bold;
+    font-family: helvetica;
+}
+
+/* --- SUEK THEME styles --- */
+
+.sapUiTheme-sap_belize .black.sapMLabel,
+.sapUiTheme-sap_belize .black.sapMText,
+.sapUiTheme-sap_belize_plus .black.sapMLabel,
+.sapUiTheme-sap_belize_plus .black.sapMText {
+    color: #000 !important;
+}
+
+.sapUiTheme-utistheme1 div[id*="blMainInf"] .black,
+.sapUiTheme-utistheme1 div[id*="blMainInf"] .black {
+    color: #b0b63a !important;
+}
+
+.black.sapMLabel, .black.sapMText{
+    color: #000 !important;
+}
+
+.sapUiTheme-utistheme1 div[id*="blMainInf"] .sapMLabel,
+.sapUiTheme-utistheme1 div[id*="blMainInf"] .sapMText{
+	color: #f0f0f0;
+}
+
+.sapUiTheme-utistheme1 .sapUiSizeCompact .sapMPageWithFooter>section{
+	background: rgba(255,255,255,.2);
+}
+
+.sapUiTheme-utistheme1 .sapUiBlockLayoutSizeXL .sapUiBlockCellContent{
+	padding: 1rem !important;
+}
+.sapUiTheme-utistheme1 .sapMInputDivWrapper,
+.sapUiTheme-utistheme1 .sapMTextArea .sapMTextAreaInner{
+	height: 100%;
+}
+.sapUiTheme-utistheme1 .sapMTextAreaInner{
+	padding: 0.1875rem 0.5rem;
+	line-height: 1.4rem;
+}
+
+.sapUiTheme-utistheme1 .sapUiSizeCompact .sapMListTblCell{
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+}
+
+@media (min-width: 1024px){
+	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
+		margin: 1rem 1rem !important;
+	}
+}
+@media(min-width: 80rem){
+	.sapUiTheme-utistheme1 .sapUShellApplicationContainer{
+		width: 80rem !important;
+		margin-right: auto;
+		margin-left: auto;
+	}
+}

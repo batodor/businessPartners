@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>rating}" class="sapUiContentPadding">
+		<content>
+			<!--<Text text="{i18n>country}" width="250px"/>-->
+			<!--<Select id="sRatingSelectCountry" width="80px"></Select>-->
+			<!--<ToolbarSpacer/>-->
+			<Text text="{i18n>rBusinessScale}" width="280px"/>
+			<Select id="sRatingSelectScale" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+				<core:Item key="{Rating}" text="{Rating}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Text text="{i18n>rCorporateTransparency}" width="280px"/>
+			<Select id="sRatingSelectTransparency" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+				<core:Item key="{Rating}" text="{Rating}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Text text="{i18n>rFinancialProfile}" width="280px"/>
+			<Select id="sRatingSelectFinProfile" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+				<core:Item key="{Rating}" text="{Rating}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Text text="{i18n>rCommercialProfile}" width="280px"/>
+			<Select id="sRatingSelectComProfile" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+				<core:Item key="{Rating}" text="{Rating}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Text text="{i18n>rSet}" width="280px"/>
+			<Select id="sRatingSelectSet" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+				<core:Item key="{Rating}" text="{Rating}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Text text="{i18n>date}" width="280px"/>
+			<DatePicker id="dpRatingDate" width="145px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>expressScore}" width="280px"/>
+			<CheckBox id="sRatingCheckboxScore" selected="false"/>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" type="Back" custom:dialog="dRating" press="closeDialog"/>
+			<Button text="{i18n>update}" type="Accept" press="updateRating"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

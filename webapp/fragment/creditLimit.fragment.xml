@@ -1,0 +1,19 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>creditLimit}" class="sapUiContentPadding">
+		<content>
+			<Text text="{i18n>creditLimit}" width="250px"/>
+			<Input id="iCreditLimit" width="167px" class="margin-right"/>
+			<Select id="sCreditLimitCurrency" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px">
+				<core:Item key="{Currency}" text="{Currency}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Text text="{i18n>validityDate}" width="250px"/>
+			<DatePicker id="dCreditLimitPeriodFrom" placeholder="{i18n>date}" width="260px" class="sapUiSmallMarginBottom"/>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" custom:dialog="dRatingCredit" type="Back" press="closeDialog"/>
+			<Button text="{i18n>update}" type="Accept" press="updateCreditLimit"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

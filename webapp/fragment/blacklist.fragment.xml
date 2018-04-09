@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>blacklist}" class="sapUiContentPadding">
+		<content>
+			<Text text="{i18n>blacklisted}" width="150px"/>
+			<CheckBox id="cbDialogBlacklist" selected="false"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>justification}" textAlign="Begin" width="150px"/>
+			<TextArea id="taDialogJustification"  width="460px" height="80px"/>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" custom:dialog="dBlacklist" type="Back" press="closeDialog"/>
+			<Button text="{i18n>update}" type="Accept" press="updateBlacklist"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

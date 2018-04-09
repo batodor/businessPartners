@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="Edit Proxy" class="sapUiContentPadding">
+		<content>
+			<Text text="{i18n>name}" width="150px"/>
+			<Input id="iProxyName" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>surname}" width="150px"/>
+			<Input id="iProxySurname" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>position}" width="150px"/>
+			<Input id="iProxyPosition" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>comment}" width="150px"/>
+			<TextArea id="taProxyComment" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>phone}" width="150px"/>
+			<Input id="iProxyPhone" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>fax}" width="150px"/>
+			<Input id="iProxyFax" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>email}" width="150px"/>
+			<Input id="iProxyEmail" width="300px"/>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" type="Back" custom:dialog="dProxy" press="closeDialog"/>
+			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditProxy"/>
+			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddProxy"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="Edit Political Exposed Person" class="sapUiContentPadding">
+		<content>
+			<Text text="{i18n>name}" width="150px"/>
+			<Input id="iPoliticalName" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>surname}" width="150px"/>
+			<Input id="iPoliticalSurname" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>position}" width="150px"/>
+			<Input id="iPoliticalPosition" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>comment}" width="150px"/>
+			<TextArea id="taPoliticalComment" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>phone}" width="150px"/>
+			<Input id="iPoliticalPhone" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>fax}" width="150px"/>
+			<Input id="iPoliticalFax" width="300px"/>
+			<ToolbarSpacer/>
+			<Text text="{i18n>email}" width="150px"/>
+			<Input id="iPoliticalEmail" width="300px"/>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" custom:dialog="dPolitical" type="Back" press="closeDialog"/>
+			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditPolitical"/>
+			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddPolitical"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

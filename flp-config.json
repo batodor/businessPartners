@@ -1,0 +1,34 @@
+{
+    "application": {
+        "id": "",
+        "title": "counterparties.Counterparties.Counterparties",
+        "type": "SAP_UI5_Component",
+        "componentUrl": "/",
+        "appUrl": "#Counterparties-Display",
+        "navigationComponentName": "counterparties.Counterparties",
+        "intentSemanticObject": "Counterparties",
+        "intentAction": "Display",
+        "html5ApplicationName": "counterparties",
+        "HCPParentApplicationName": ""
+    },
+    "assignment": {
+        "groups": [
+            "c9c38f1c-a728-47dd-8993-2079ac63a2ee-1517314421366"
+        ],
+        "contentPackages": [
+            "f2ac9482-e469-4961-9c21-6d069c916baa-1517315502079"
+        ],
+        "categories": []
+    },
+    "tile": {
+        "type": "StaticTile",
+        "title": "Counterparties",
+        "subtitle": "Business partners app",
+        "searchKeywords": "Counterparties,Business partners app",
+        "displayIconUrl": "sap-icon://activities",
+        "displayInfoText": "",
+        "size": "1x1",
+        "serviceURL": "",
+        "refreshInterval": ""
+    }
+}
