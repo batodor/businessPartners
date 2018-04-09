@@ -164,8 +164,9 @@ sap.ui.define([
 					template: this.byId('blacklistedInfTable')['mBindingInfos'].items.template
 				});
 				
-				// Disabled edit mode
+				// Disabled edit mode and hide edit buttons
 				this.cancelMainInf();
+				this.onTabSelected();
 			}.bind(this));
 		},
 
@@ -225,15 +226,15 @@ sap.ui.define([
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 
 			if (oObject.TypeID === '1') {
-				this.hideObjects(["cGenInf","fuMainInfFileUpload","bMainInfFileUpload"]);
+				this.hideObjects(["cGenInf"]);
 			} else {
-				this.showObjects(["cGenInf","fuMainInfFileUpload","bMainInfFileUpload"]);
+				this.showObjects(["cGenInf"]);
 			}
 
 			if (oObject.Sanctions) {
-				this.byId('isUnderSanction').setVisible(true);
+				this.showObjects(["isUnderSanction"]);
 			} else {
-				this.byId('isUnderSanction').setVisible(false);
+				this.hideObjects(["isUnderSanction"]);
 			}
 		},
 
@@ -248,8 +249,8 @@ sap.ui.define([
 		},
 
 		// On tabs selection function
-		onTabSelected: function(e) {
-			var key = e.getParameter("key");
+		onTabSelected: function() {
+			var key = this.byId('itbMain').getSelectedKey();
 			if (key === "dashboard") {
 				this.showObjects(["editMainInf"]);
 			} else {
@@ -283,18 +284,13 @@ sap.ui.define([
 				}));
 			}
 
-			sap.ui.getCore().byId('sRatingSelectScale').setSelectedKey(this.byId("lBusinessScale").getText() ? this.byId("lBusinessScale").getText() :
-				"");
-			sap.ui.getCore().byId('sRatingSelectTransparency').setSelectedKey(this.byId("lCorporateTransparency").getText() ? this.byId(
-				"lCorporateTransparency").getText() : "");
-			sap.ui.getCore().byId('sRatingSelectFinProfile').setSelectedKey(this.byId("lFinancialProfile").getText() ? this.byId(
-				"lFinancialProfile").getText() : "");
-			sap.ui.getCore().byId('sRatingSelectComProfile').setSelectedKey(this.byId("lCommercialProfile").getText() ? this.byId(
-				"lCommercialProfile").getText() : "");
-			sap.ui.getCore().byId('sRatingSelectSet').setSelectedKey(this.byId("lRatingSet").getText() ? this.byId("lRatingSet").getText() :
-				"");
+			sap.ui.getCore().byId('sRatingSelectScale').setSelectedKey(this.byId("lBusinessScale").getText());
+			sap.ui.getCore().byId('sRatingSelectTransparency').setSelectedKey(this.byId("lCorporateTransparency").getText());
+			sap.ui.getCore().byId('sRatingSelectFinProfile').setSelectedKey(this.byId("lFinancialProfile").getText());
+			sap.ui.getCore().byId('sRatingSelectComProfile').setSelectedKey(this.byId("lCommercialProfile").getText());
+			sap.ui.getCore().byId('sRatingSelectSet').setSelectedKey(this.byId("lRatingSet").getText());
 			sap.ui.getCore().byId('sRatingCheckboxScore').setSelected(this.byId("chExpressScore").getSelected());
-			sap.ui.getCore().byId('dpRatingDate').setValue(this.byId("lRatingDate").data("key").toUTCString());
+			sap.ui.getCore().byId('dpRatingDate').setValue(this.byId("lRatingDate").data("key"));
 			this.dRating.open();
 		},
 
@@ -406,11 +402,6 @@ sap.ui.define([
 				error: that.errorFunction.bind(that)
 			});
 			this.dBlacklist.close();
-		},
-
-		// Edit partner function
-		editPartner: function() {
-
 		},
 
 		// Success and error default functions for dialog CRUD functions 
