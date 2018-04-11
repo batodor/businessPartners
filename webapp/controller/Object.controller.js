@@ -101,68 +101,13 @@ sap.ui.define([
 		 * @private
 		 */
 		_onObjectMatched: function(oEvent) {
-			var sObjectId = oEvent.getParameter("arguments").objectId;
+			var code = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
-
-				// Dashboard tab
-				this._bindView("/CounterpartyListSet('" + sObjectId + "')/ToCounterpartyHeader");
-				this.byId('blGenInf').bindElement({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToCounterpartyInformation"
-				});
-				this.byId('addressTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToCounterpartyAddressBook",
-					template: this.byId('addressTable')['mBindingInfos'].items.template
-				});
-				this.byId('bankAccountTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToCounterpartyBankAccounts",
-					template: this.byId('bankAccountTable')['mBindingInfos'].items.template
-				});
-
-				// Government Tab
-				this.byId('managementTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToGovernmentMgt",
-					template: this.byId('managementTable')['mBindingInfos'].items.template
-				});
-				this.byId('proxyTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToGovernmentProxy",
-					template: this.byId('proxyTable')['mBindingInfos'].items.template
-				});
-
-				// Rating Tab 
-				this.byId('blRatingGenInf').bindElement({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToRatingGeneral"
-				});
-				this.byId('historicalDataTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToRatingGeneralTab",
-					template: this.byId('historicalDataTable')['mBindingInfos'].items.template
-				});
-				this.byId('blCreditLimit').bindElement({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToRatingCreditLimit"
-				});
-				this.byId('historicalDataTable2').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToRatingCreditLimitTab",
-					template: this.byId('historicalDataTable2')['mBindingInfos'].items.template
-				});
-				this.byId('blInsuranceInf').bindElement({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToRatingInsure"
-				});
-
-				// Compliance risk
-				this.byId('complianceRisksTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToComplianceRisks",
-					template: this.byId('complianceRisksTable')['mBindingInfos'].items.template
-				});
-				this.byId('politicalExposedTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToCompliancePersons",
-					template: this.byId('politicalExposedTable')['mBindingInfos'].items.template
-				});
-				this.byId('blcBlacklisted').bindElement({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToComplianceBlacklisted"
-				});
-				this.byId('blacklistedInfTable').bindItems({
-					path: "/CounterpartyListSet('" + sObjectId + "')/ToComplianceBlacklistedTab",
-					template: this.byId('blacklistedInfTable')['mBindingInfos'].items.template
-				});
+				var partnerUrl = "/CounterpartyListSet('" + code + "')";
+				this._bindView(partnerUrl + "/ToCounterpartyHeader");
+				this.bindElement("blGenInf", partnerUrl + "/ToCounterpartyInformation");
+				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
+				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
 				
 				// Disabled edit mode and hide edit buttons
 				this.cancelMainInf();
@@ -251,9 +196,28 @@ sap.ui.define([
 		// On tabs selection function
 		onTabSelected: function() {
 			var key = this.byId('itbMain').getSelectedKey();
+			var code = this.byId('tSAPID').getText();
+			var partnerUrl = "/CounterpartyListSet('" + code + "')";
+			
 			if (key === "dashboard") {
 				this.showObjects(["editMainInf"]);
-			} else {
+			} else if(key === "government"){
+				this.bindTable("managementTable", partnerUrl + "/ToGovernmentMgt");
+				this.bindTable("proxyTable", partnerUrl + "/ToGovernmentProxy");
+			} else if (key === "rating"){
+				this.bindElement("blRatingGenInf", partnerUrl + "/ToRatingGeneral");
+				this.bindTable("historicalDataTable", partnerUrl + "/ToRatingGeneralTab");
+				this.bindElement("blCreditLimit", partnerUrl + "/ToRatingCreditLimit");
+				this.bindTable("historicalDataTable2", partnerUrl + "/ToRatingCreditLimitTab");
+				this.bindElement("blInsuranceInf", partnerUrl + "/ToRatingInsure");
+			} else if (key === "risks"){
+				this.bindTable("complianceRisksTable", partnerUrl + "/ToComplianceRisks");
+				this.bindTable("politicalExposedTable", partnerUrl + "/CounterpartyListSet");
+				this.bindElement("blcBlacklisted", partnerUrl + "/ToComplianceBlacklisted");
+				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
+			}
+			
+			if (key !== "dashboard") {
 				this.cancelMainInf();
 				this.hideObjects(["editMainInf"]);
 			}
@@ -407,11 +371,9 @@ sap.ui.define([
 		// Success and error default functions for dialog CRUD functions 
 		successFunction: function(event) {
 			console.log("Success!", event);
-			//this.getModel().refresh();
 		},
 		errorFunction: function(event) {
 			console.log("Error!", event);
-			//this.getModel().refresh();
 		},
 
 		// Delete,Add,Edit functions for Managament table from Government Tab
@@ -637,7 +599,6 @@ sap.ui.define([
 				}));
 			}
 			sap.ui.getCore().byId('sRiskRiskType').setSelectedKey("").setEnabled(true);
-			//sap.ui.getCore().byId('iRiskItemNumber').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('taRiskDescription').setValue("");
 			sap.ui.getCore().byId('taRiskRecommended').setValue("");
 			sap.ui.getCore().byId('dpRiskDateFrom').setDateValue(null).setEnabled(true);
@@ -650,7 +611,6 @@ sap.ui.define([
 		},
 
 		tableEditRisk: function() {
-			// Get data from row
 			var cells = this.byId('complianceRisksTable').getSelectedItem().getCells();
 			var cellsData = [];
 			for (var i = 0; i < cells.length; i++) {
@@ -665,7 +625,6 @@ sap.ui.define([
 
 			// Set data from row to Risks edit Dialog
 			sap.ui.getCore().byId('sRiskRiskType').setSelectedKey(cellsData[0]).setEnabled(false);
-			// sap.ui.getCore().byId('iRiskItemNumber').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('taRiskDescription').setValue(cellsData[1]);
 			sap.ui.getCore().byId('taRiskRecommended').setValue(cellsData[2]);
 			sap.ui.getCore().byId('dpRiskDateFrom').setDateValue(cellsData[3]).setEnabled(false);
@@ -949,6 +908,27 @@ sap.ui.define([
 		disableObjects: function(objects){
 			for(var i in objects){
 				this.byId(objects[i]).setEnabled(false);
+			}
+		},
+		
+		// Bind table function for all tables
+		// tableId = id of table, url = full path of binding
+		bindTable: function(tableId, url){
+			var oTable = this.byId(tableId);
+			if(typeof oTable.getBindingContext() === "undefined"){
+				oTable.bindItems({
+					path: url,
+					template: oTable['mBindingInfos'].items.template
+				});
+			}
+		},
+		
+		// Bind table function for all tables
+		// tableId = id of table, url = full path of binding
+		bindElement: function(elementId, url){
+			var oElement = this.byId(elementId);
+			if(typeof oElement.getBindingContext() === "undefined"){
+				oElement.bindElement(url);
 			}
 		}
 	});
