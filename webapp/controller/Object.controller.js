@@ -917,7 +917,7 @@ sap.ui.define([
 		
 		// Bind table function for all tables
 		// tableId = id of table, url = full path of binding
-		bindTable: function(tableId, url, onInit){
+		bindTable: function(tableId, url){
 			var oTable = this.byId(tableId);
 			if(oTable.mBindingInfos.items.path === ""){
 				oTable.bindItems({
@@ -928,7 +928,7 @@ sap.ui.define([
 		},
 		
 		// Bind element function for all elements
-		// tableId = id of element, url = full path of binding, update = flag if the operation is udpate
+		// tableId = id of element, url = full path of binding, update = flag if the operation is update
 		bindElement: function(elementId, url, update){
 			var oElement = this.byId(elementId);
 			if(Object.keys(oElement.mElementBindingContexts).length === 0 || update){
