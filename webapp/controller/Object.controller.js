@@ -103,6 +103,8 @@ sap.ui.define([
 		_onObjectMatched: function(oEvent) {
 			var code = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
+				
+				// Load Dashboard data and tables
 				var partnerUrl = "/CounterpartyListSet('" + code + "')";
 				this._bindView(partnerUrl + "/ToCounterpartyHeader");
 				this.bindElement("blGenInf", partnerUrl + "/ToCounterpartyInformation");
@@ -121,12 +123,12 @@ sap.ui.define([
 		 * @param {string} sObjectPath path to the object to be bound
 		 * @private
 		 */
-		_bindView: function(oPath) {
+		_bindView: function(url) {
 			var oViewModel = this.getModel("mMain"),
 				oDataModel = this.getModel();
 
 			this.getView().bindElement({
-				path: oPath,
+				path: url,
 				events: {
 					change: this._onBindingChange.bind(this),
 					dataRequested: function() {
@@ -262,6 +264,7 @@ sap.ui.define([
 			var oModel = this.getModel();
 			var date = sap.ui.getCore().byId('dpRatingDate').getDateValue();
 			if(date) { date.setMinutes(-date.getTimezoneOffset()); }
+			var code = this.byId("tSAPID").getText();
 			var oData = {
 				BusinessScale: sap.ui.getCore().byId('sRatingSelectScale').getSelectedKey(),
 				CorporateTransparency: sap.ui.getCore().byId('sRatingSelectTransparency').getSelectedKey(),
@@ -270,10 +273,12 @@ sap.ui.define([
 				RatingSet: sap.ui.getCore().byId('sRatingSelectSet').getSelectedKey(),
 				ExpressScore: sap.ui.getCore().byId('sRatingCheckboxScore').getSelected(),
 				Date: date,
-				Code: this.byId("tSAPID").getText()
+				Code: code
 			};
 			oModel.create("/RatingGeneralSet", oData, {
-				success: this.getModel().refresh(),
+				success: function(){
+					this.bindElement("blRatingGenInf","/CounterpartyListSet('" + code + "')/ToRatingGeneral", true);
+				},
 				error: this.errorFunction.bind(this)
 			});
 			this.dRating.close();
@@ -291,14 +296,17 @@ sap.ui.define([
 			var oModel = this.getModel();
 			var validityDate = sap.ui.getCore().byId('dCreditLimitPeriodFrom').getDateValue();
 			if(validityDate) { validityDate.setMinutes(-validityDate.getTimezoneOffset()); }
+			var code = this.byId("tSAPID").getText();
 			var oData = {
 				ValidityDate: validityDate,
 				CreditLimit: sap.ui.getCore().byId('iCreditLimit').getValue(),
 				Currency: sap.ui.getCore().byId('sCreditLimitCurrency').getSelectedKey(),
-				Code: this.byId("tSAPID").getText()
+				Code: code
 			};
 			oModel.create("/RatingCreditLimitSet", oData, {
-				success: this.getModel().refresh(),
+				success: function(){
+					this.bindElement("blCreditLimit", "/CounterpartyListSet('" + code + "')/ToRatingCreditLimit", true);
+				},
 				error: this.errorFunction.bind(this)
 			});
 			this.dRatingCredit.close();
@@ -331,16 +339,14 @@ sap.ui.define([
 			};
 			oModel.create("/RatingInsureSet", oData, {
 				success: function(){
-					that.byId('blInsuranceInf').bindElement({
-						path: url
-					});
+					that.bindElement("blInsuranceInf", url, true);
 				},
 				error: that.errorFunction.bind(that)
 			});
 			this.dInsurance.close();
 		},
 
-		// Operations with updating counterparty blacklist
+		// Operations with updating Blacklist
 		showBlacklist: function() {
 			sap.ui.getCore().byId('cbDialogBlacklist').setSelected(this.byId('cbBlacklist').getSelected());
 			sap.ui.getCore().byId('taDialogJustification').setValue(this.byId('taBlacklistJustification').getValue());
@@ -358,10 +364,8 @@ sap.ui.define([
 				Code: code
 			};
 			oModel.create("/ComplianceBlacklistedSet", oData, {
-				success: function() {
-					that.byId('blcBlacklisted').bindElement({
-						path: "/CounterpartyListSet('" + code + "')/ToComplianceBlacklisted"
-					});
+				success: function(){
+					this.bindElement("blcBlacklisted","/CounterpartyListSet('" + code + "')/ToComplianceBlacklisted", true);
 				},
 				error: that.errorFunction.bind(that)
 			});
@@ -913,9 +917,9 @@ sap.ui.define([
 		
 		// Bind table function for all tables
 		// tableId = id of table, url = full path of binding
-		bindTable: function(tableId, url){
+		bindTable: function(tableId, url, onInit){
 			var oTable = this.byId(tableId);
-			if(typeof oTable.getBindingContext() === "undefined"){
+			if(oTable.mBindingInfos.items.path === ""){
 				oTable.bindItems({
 					path: url,
 					template: oTable['mBindingInfos'].items.template
@@ -923,11 +927,11 @@ sap.ui.define([
 			}
 		},
 		
-		// Bind table function for all tables
-		// tableId = id of table, url = full path of binding
-		bindElement: function(elementId, url){
+		// Bind element function for all elements
+		// tableId = id of element, url = full path of binding, update = flag if the operation is udpate
+		bindElement: function(elementId, url, update){
 			var oElement = this.byId(elementId);
-			if(typeof oElement.getBindingContext() === "undefined"){
+			if(Object.keys(oElement.mElementBindingContexts).length === 0 || update){
 				oElement.bindElement(url);
 			}
 		}
