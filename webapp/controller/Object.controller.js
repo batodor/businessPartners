@@ -327,7 +327,7 @@ sap.ui.define([
 			var that = this;
 			var dateTo = sap.ui.getCore().byId('dInsuranceValidityDate').getDateValue();
 			if(dateTo) { dateTo.setMinutes(-dateTo.getTimezoneOffset()); }
-			var url = this.byId('blInsuranceInf').getBindingContext().getPath();
+			var code = this.byId("tSAPID").getText();
 			var oData = {
 				DateTo: dateTo,
 				Amount: sap.ui.getCore().byId('iInsuranceReceivables').getValue(),
@@ -335,11 +335,11 @@ sap.ui.define([
 				Rate: sap.ui.getCore().byId('iInsuranceRate').getValue(),
 				Unit: "%",
 				ContractNum: sap.ui.getCore().byId('iInsuranceContract').getValue(),
-				Code: this.byId("tSAPID").getText()
+				Code: code
 			};
 			oModel.create("/RatingInsureSet", oData, {
 				success: function(){
-					that.bindElement("blInsuranceInf", url, true);
+					that.bindElement("blInsuranceInf", "/CounterpartyListSet('" + code + "')/ToRatingInsure", true);
 				},
 				error: that.errorFunction.bind(that)
 			});
