@@ -103,17 +103,10 @@ sap.ui.define([
 		_onObjectMatched: function(oEvent) {
 			var code = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
-				
-				// Load Dashboard data and tables
-				var partnerUrl = "/CounterpartyListSet('" + code + "')";
-				this._bindView(partnerUrl + "/ToCounterpartyHeader");
-				this.bindElement("blGenInf", partnerUrl + "/ToCounterpartyInformation");
-				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
-				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
+				this._bindView("/CounterpartyListSet('" + code + "')/ToCounterpartyHeader");
 				
 				// Disabled edit mode and hide edit buttons
 				this.cancelMainInf();
-				this.onTabSelected();
 			}.bind(this));
 		},
 
@@ -126,7 +119,8 @@ sap.ui.define([
 		_bindView: function(url) {
 			var oViewModel = this.getModel("mMain"),
 				oDataModel = this.getModel();
-
+			var that = this;
+			
 			this.getView().bindElement({
 				path: url,
 				events: {
@@ -141,6 +135,8 @@ sap.ui.define([
 						});
 					},
 					dataReceived: function() {
+						that.byId('itbMain').setSelectedKey('dashboard');
+						that.onTabSelected('dashboard', true);
 						oViewModel.setProperty("/busy", false);
 					}
 				}
@@ -196,12 +192,17 @@ sap.ui.define([
 		},
 
 		// On tabs selection function
-		onTabSelected: function() {
-			var key = this.byId('itbMain').getSelectedKey();
+		onTabSelected: function(key, update) {
+			if(typeof key === "object"){
+				key = key.getParameters("arguments").key;
+			}
 			var code = this.byId('tSAPID').getText();
 			var partnerUrl = "/CounterpartyListSet('" + code + "')";
 			
 			if (key === "dashboard") {
+				this.bindElement("blGenInf", partnerUrl + "/ToCounterpartyInformation", update);
+				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
+				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
 				this.showObjects(["editMainInf"]);
 			} else if(key === "government"){
 				this.bindTable("managementTable", partnerUrl + "/ToGovernmentMgt");
@@ -919,7 +920,7 @@ sap.ui.define([
 		// tableId = id of table, url = full path of binding
 		bindTable: function(tableId, url){
 			var oTable = this.byId(tableId);
-			if(oTable.mBindingInfos.items.path === ""){
+			if(oTable.mBindingInfos.items.path !== url){
 				oTable.bindItems({
 					path: url,
 					template: oTable['mBindingInfos'].items.template
