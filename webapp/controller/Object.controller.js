@@ -825,20 +825,44 @@ sap.ui.define([
 		
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
-			this.hideObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
-			this.showObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
+			this.hideObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"]);
+			this.showObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
 			this.enableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
 		},
 		
 		// Save function of Main Information (Dashboard tab)
 		saveMainInf: function(){
+			var oModel = this.getModel();
+			var DateValidity = this.byId('dpMainInfDateValidity').getDateValue();
+			if(DateValidity) { DateValidity.setMinutes(-DateValidity.getTimezoneOffset()); }
+			var code = this.byId("tSAPID").getText();
+			var oData = {
+				DateValidity: DateValidity,
+				Currency: this.byId('sMainInfCurrency').getSelectedKey(),
+				LimitSecurity: this.byId('iMainInfLimitSecurity').getValue(),
+				RelationBP: this.byId('lMainInfRelationBP').getText(),
+				RelationCategory: this.byId('lMainInfRelationCategory').getText(),
+				RegistrationNumber: this.byId('lMainInfRegistrationNumber').getText(),
+				EnglishName: this.byId('lMainInfEnglishName').getText(),
+				LegalName: this.byId('lMainInfLegalName').getText(),
+				LegalForm: this.byId('iMainInfLegalForm').getValue(),
+				Identifier: this.byId('lMainInfIdentifier').getText(),
+				Code: code
+			};
+			var that = this;
+			oModel.create("/CounterpartyInformationSet", oData, {
+				success: function(){
+					that.bindElement("blGenInf", "/CounterpartyListSet('" + code + "')/ToCounterpartyInformation", true);
+				},
+				error: that.errorFunction.bind(that)
+			});
 			this.cancelMainInf();
 		},
 		
 		// Cancel function of Main Information (Dashboard tab)
 		cancelMainInf: function(){
-			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfValidityDate", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
-			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfValidityDate", "editMainInf", "lMainInfCurrency"]);
+			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
+			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"]);
 			this.disableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
 		},
 

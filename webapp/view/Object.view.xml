@@ -37,10 +37,10 @@
 								<Label text=""/>
 								<ToolbarSpacer/>
 								<Label class="black" text="{i18n>codeFromKioda}:" width="170px"/>
-								<Label text="{Identifier}"/>
+								<Label text="{Identifier}" id="lMainInfIdentifier" />
 								<ToolbarSpacer/>
 								<Label class="black" text="{i18n>regNumber}:" width="170px"/>
-								<Label text="{RegistrationNumber}"/>
+								<Label text="{RegistrationNumber}" id="lMainInfRegistrationNumber"/>
 								<ToolbarSpacer/>
 								<FlexBox width="100%" class="columns" alignItems="Stretch">
 									<items>
@@ -53,14 +53,14 @@
 								<FlexBox width="100%" class="columns" alignItems="Stretch">
 									<items>
 										<Label class="black" text="{i18n>legalName}:" width="170px"/>
-										<Label text="{LegalName}"/>
+										<Label text="{LegalName}" id="lMainInfLegalName"/>
 									</items>
 								</FlexBox>
 								<ToolbarSpacer/>
 								<FlexBox width="100%" class="columns" alignItems="Stretch">
 									<items>
 										<Label class="black" text="{i18n>englishName}:" width="170px"/>
-										<Label text="{EnglishName}"/>
+										<Label text="{EnglishName}" id="lMainInfEnglishName"/>
 									</items>
 								</FlexBox>
 							</l:BlockLayoutCell>
@@ -71,10 +71,10 @@
 								<Label text=""/>
 								<ToolbarSpacer/>
 								<Label class="black" text="{i18n>relCat}:" width="191px"/>
-								<Label id="addRelCat" text="{RelationCategory}"/>
+								<Label text="{RelationCategory}" id="lMainInfRelationCategory"/>
 								<ToolbarSpacer/>
 								<Label class="black" text="{i18n>relBP}:" width="191px"/>
-								<Label id="addRelBP" text="{RelationBP}"/>
+								<Label text="{RelationBP}" id="lMainInfRelationBP"/>
 								<ToolbarSpacer/>
 								<Label class="black" text="{i18n>limitSecurity}:" width="191px"/>
 								<Label
@@ -88,8 +88,8 @@
 								</Select>
 								<ToolbarSpacer/>
 								<Label class="black" text="{i18n>validityDate}:" width="191px"/>
-								<Label id="lMainInfValidityDate" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-								<DatePicker id="dpMainInfValidityDate" placeholder="{i18n>enterDate}" width="170px" visible="false" />
+								<Label id="lMainInfDateValidity" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+								<DatePicker id="dpMainInfDateValidity" placeholder="{i18n>enterDate}" value="{DateValidity}" width="170px" visible="false" />
 								<ToolbarSpacer/>
 								<Label class="black" id="lDownloadDoc" text="{i18n>downloadDocument}:" width="191px"/>
 								<Link id="linkDownloadDoc" text="document.pdf" press="handleLinkPress"/>
