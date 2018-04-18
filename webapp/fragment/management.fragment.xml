@@ -28,7 +28,7 @@
 								<Text text="{Surname}"/>
 								<Text text="{Position}"/>
 								<Text custom:key="{GoverType}" text="{GoverName}"/>
-								<Text text="{ContactType}"/>
+								<Text custom:key="{ContactType}" text="{ContactName}"/>
 								<Text text="{Phone}"/>
 								<Text text="{FaxNumber}"/>
 								<Text text="{Email}"/>
@@ -68,7 +68,7 @@
 								<Text text="{Surname}"/>
 								<Text text="{Position}"/>
 								<Text text="{Comment}"/>
-								<Text text="{ContactType}"/>
+								<Text custom:key="{ContactType}" text="{ContactName}"/>
 								<Text text="{Phone}"/>
 								<Text text="{FaxNumber}"/>
 								<Text text="{Email}"/>

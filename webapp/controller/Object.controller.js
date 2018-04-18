@@ -364,6 +364,7 @@ sap.ui.define([
 		},
 		errorFunction: function(event) {
 			console.log("Error!", event);
+			this.getModel().refresh();
 		},
 
 		// Delete,Add,Edit functions for Managament table from Government Tab
@@ -745,7 +746,13 @@ sap.ui.define([
 			var cells = this.byId('politicalExposedTable').getSelectedItem().getCells();
 			var cellsData = [];
 			for (var i = 0; i < cells.length; i++) {
-				cellsData.push(cells[i].getText());
+				if (cells[i].data("key")){
+					cellsData.push(cells[i].data("key"));
+				}else if (cells[i]['mBindingInfos'].text) {
+					cellsData.push(cells[i].getText());
+				} else {
+					cellsData.push(cells[i].getSelected());
+				}
 			}
 
 			// Set data from row to Risks edit Dialog
