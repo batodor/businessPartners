@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<UploadCollection change="changeAttachment" id="attachmentsTable" multiple="true" uploadComplete="onUploadComplete" uploadEnabled="true">
+		<UploadCollectionItem contributor="{OrderID}" enableEdit="false" fileName="{OrderID}" fileSize="20mb" mimeType="File Type"
+			thumbnailUrl="{thumbnailUrl}"
+			uploadedDate="{ path: 'RequiredDate', type: 'sap.ui.model.type.Date', formatOptions: { style: 'short', pattern: 'dd.MM.yyyy' } }"/>
+	</UploadCollection>
+</core:FragmentDefinition>

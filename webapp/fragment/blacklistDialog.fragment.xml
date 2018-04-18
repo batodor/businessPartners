@@ -9,7 +9,7 @@
 			<TextArea id="taDialogJustification"  width="460px" height="80px"/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" custom:dialog="dBlacklist" type="Back" press="closeDialog"/>
+			<Button text="{i18n>cancel}" custom:dialog="blacklistDialog" type="Back" press="closeDialog"/>
 			<Button text="{i18n>update}" type="Accept" press="updateBlacklist"/>
 		</buttons>
 	</Dialog>

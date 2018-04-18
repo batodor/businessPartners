@@ -48,24 +48,9 @@ sap.ui.define([
 				// Restore original busy indicator delay for the object view
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
 			});
-
-			// Define d = Dialog fragments inside view as depended of this view
-			this.dRating = sap.ui.xmlfragment("fragment.rating", this);
-			this.dRatingCredit = sap.ui.xmlfragment("fragment.creditLimit", this);
-			this.dInsurance = sap.ui.xmlfragment("fragment.insuranceInformation", this);
-			this.dBlacklist = sap.ui.xmlfragment("fragment.blacklist", this);
-			this.dManagement = sap.ui.xmlfragment("fragment.management", this);
-			this.dProxy = sap.ui.xmlfragment("fragment.proxy", this);
-			this.dPolitical = sap.ui.xmlfragment("fragment.political", this);
-			this.dRisk = sap.ui.xmlfragment("fragment.risk", this);
-			this.getView().addDependent(this.dRating);
-			this.getView().addDependent(this.dRatingCredit);
-			this.getView().addDependent(this.dInsurance);
-			this.getView().addDependent(this.dBlacklist);
-			this.getView().addDependent(this.dManagement);
-			this.getView().addDependent(this.dProxy);
-			this.getView().addDependent(this.dPolitical);
-			this.getView().addDependent(this.dRisk);
+			
+			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks"];
+			this.addDialogs(this.dialogArr);
 		},
 
 		/* =========================================================== */
@@ -258,7 +243,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('sRatingSelectSet').setSelectedKey(this.byId("lRatingSet").getText());
 			sap.ui.getCore().byId('sRatingCheckboxScore').setSelected(this.byId("chExpressScore").getSelected());
 			sap.ui.getCore().byId('dpRatingDate').setValue(this.byId("lRatingDate").data("key"));
-			this.dRating.open();
+			this.ratingDialog.open();
 		},
 
 		updateRating: function() {
@@ -282,7 +267,7 @@ sap.ui.define([
 				},
 				error: this.errorFunction.bind(this)
 			});
-			this.dRating.close();
+			this.ratingDialog.close();
 		},
 
 		// Operations with updating counterparty credit limit
@@ -290,7 +275,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iCreditLimit').setValue(this.byId('lCreditLimit').data('creditLimit'));
 			sap.ui.getCore().byId('sCreditLimitCurrency').setSelectedKey(this.byId('lCreditLimitCurrency').getText());
 			sap.ui.getCore().byId('dCreditLimitPeriodFrom').setDateValue(this.byId('lCreditLimitValidityDate').data('validityDate'));
-			this.dRatingCredit.open();
+			this.creditLimitDialog.open();
 		},
 
 		updateCreditLimit: function() {
@@ -310,7 +295,7 @@ sap.ui.define([
 				},
 				error: this.errorFunction.bind(this)
 			});
-			this.dRatingCredit.close();
+			this.creditLimitDialog.close();
 		},
 
 		// Operations with updating counterparty Insurance information
@@ -320,7 +305,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iInsuranceRate').setValue(this.byId('lInsuranceRate').data('rate'));
 			sap.ui.getCore().byId('iInsuranceContract').setValue(this.byId('lInsuranceContract').getText());
 			sap.ui.getCore().byId('dInsuranceValidityDate').setDateValue(this.byId('lInsuraceValidityDate').data('validityDate'));
-			this.dInsurance.open();
+			this.insuranceInformationDialog.open();
 		},
 
 		updateInsurance: function() {
@@ -344,14 +329,14 @@ sap.ui.define([
 				},
 				error: that.errorFunction.bind(that)
 			});
-			this.dInsurance.close();
+			this.insuranceInformationDialog.close();
 		},
 
 		// Operations with updating Blacklist
 		showBlacklist: function() {
 			sap.ui.getCore().byId('cbDialogBlacklist').setSelected(this.byId('cbBlacklist').getSelected());
 			sap.ui.getCore().byId('taDialogJustification').setValue(this.byId('taBlacklistJustification').getValue());
-			this.dBlacklist.open();
+			this.blacklistDialog.open();
 		},
 
 		updateBlacklist: function() {
@@ -370,7 +355,7 @@ sap.ui.define([
 				},
 				error: that.errorFunction.bind(that)
 			});
-			this.dBlacklist.close();
+			this.blacklistDialog.close();
 		},
 
 		// Success and error default functions for dialog CRUD functions 
@@ -388,18 +373,23 @@ sap.ui.define([
 					text: "",
 					key: ""
 				}));
+				sap.ui.getCore().byId('sManagementContactType').addItem(new sap.ui.core.Item({
+					text: "",
+					key: ""
+				}));
 			}
 			sap.ui.getCore().byId('iManagementName').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iManagementSurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iManagementPosition').setValue("");
 			sap.ui.getCore().byId('sManagementTypeOfGov').setSelectedKey("");
+			sap.ui.getCore().byId('sManagementContactType').setSelectedKey("");
 			sap.ui.getCore().byId('iManagementPhone').setValue("");
 			sap.ui.getCore().byId('iManagementFax').setValue("");
 			sap.ui.getCore().byId('iManagementEmail').setValue("");
-			this.dManagement.setTitle(this.getModel("i18n").getProperty('addManagement'));
-			this.dManagement.getButtons()[1].setVisible(false);
-			this.dManagement.getButtons()[2].setVisible(true);
-			this.dManagement.open();
+			this.managementDialog.setTitle(this.getModel("i18n").getProperty('addManagement'));
+			this.managementDialog.getButtons()[1].setVisible(false);
+			this.managementDialog.getButtons()[2].setVisible(true);
+			this.managementDialog.open();
 		},
 
 		tableEditManagement: function() {
@@ -419,15 +409,16 @@ sap.ui.define([
 			sap.ui.getCore().byId('iManagementSurname').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('iManagementPosition').setValue(cellsData[2]);
 			sap.ui.getCore().byId('sManagementTypeOfGov').setSelectedKey(cellsData[3]);
-			sap.ui.getCore().byId('iManagementPhone').setValue(cellsData[4]);
-			sap.ui.getCore().byId('iManagementFax').setValue(cellsData[5]);
-			sap.ui.getCore().byId('iManagementEmail').setValue(cellsData[6]);
+			sap.ui.getCore().byId('sManagementContactType').setSelectedKey(cellsData[4]);
+			sap.ui.getCore().byId('iManagementPhone').setValue(cellsData[5]);
+			sap.ui.getCore().byId('iManagementFax').setValue(cellsData[6]);
+			sap.ui.getCore().byId('iManagementEmail').setValue(cellsData[7]);
 
 			// Change dialog settings and open it
-			this.dManagement.setTitle(this.getModel("i18n").getProperty('editManagement'));
-			this.dManagement.getButtons()[1].setVisible(true);
-			this.dManagement.getButtons()[2].setVisible(false);
-			this.dManagement.open();
+			this.managementDialog.setTitle(this.getModel("i18n").getProperty('editManagement'));
+			this.managementDialog.getButtons()[1].setVisible(true);
+			this.managementDialog.getButtons()[2].setVisible(false);
+			this.managementDialog.open();
 		},
 
 		tableDeleteManagement: function() {
@@ -448,7 +439,8 @@ sap.ui.define([
 		},
 
 		dialogAddManagement: function() {
-			if (!sap.ui.getCore().byId('iManagementName').getValue() || !sap.ui.getCore().byId('iManagementSurname').getValue()) {
+			if (!sap.ui.getCore().byId('iManagementName').getValue() || !sap.ui.getCore().byId('iManagementSurname').getValue() 
+				|| !sap.ui.getCore().byId('sManagementContactType').getSelectedKey()) {
 				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurname"), {
 					actions: [sap.m.MessageBox.Action.CLOSE]
 				});
@@ -459,17 +451,19 @@ sap.ui.define([
 					Surname: sap.ui.getCore().byId('iManagementSurname').getValue(),
 					Position: sap.ui.getCore().byId('iManagementPosition').getValue(),
 					GoverType: sap.ui.getCore().byId('sManagementTypeOfGov').getSelectedKey(),
+					ContactType: sap.ui.getCore().byId('sManagementContactType').getSelectedKey(),
 					Phone: sap.ui.getCore().byId('iManagementPhone').getValue(),
 					FaxNumber: sap.ui.getCore().byId('iManagementFax').getValue(),
 					Email: sap.ui.getCore().byId('iManagementEmail').getValue(),
 					GoverName: "",
+					ContactName: "",
 					Code: this.byId("tSAPID").getText()
 				};
 				oModel.create("/GovernmentMgtSet", oData, {
 					success: this.successFunction.bind(this),
 					error: this.errorFunction.bind(this)
 				});
-				this.dManagement.close();
+				this.managementDialog.close();
 			}
 		},
 
@@ -481,7 +475,9 @@ sap.ui.define([
 				Surname: sap.ui.getCore().byId('iManagementSurname').getValue(),
 				Position: sap.ui.getCore().byId('iManagementPosition').getValue(),
 				GoverType: sap.ui.getCore().byId('sManagementTypeOfGov').getSelectedKey(),
+				ContactType: sap.ui.getCore().byId('sManagementContactType').getSelectedKey(),
 				GoverName: "",
+				ContactName: "",
 				Phone: sap.ui.getCore().byId('iManagementPhone').getValue(),
 				FaxNumber: sap.ui.getCore().byId('iManagementFax').getValue(),
 				Email: sap.ui.getCore().byId('iManagementEmail').getValue(),
@@ -491,7 +487,7 @@ sap.ui.define([
 				success: this.successFunction.bind(this),
 				error: this.errorFunction.bind(this)
 			});
-			this.dManagement.close();
+			this.managementDialog.close();
 		},
 
 		// Delete,Add,Edit functions for Proxy table from Government Tab
@@ -500,13 +496,14 @@ sap.ui.define([
 			sap.ui.getCore().byId('iProxySurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iProxyPosition').setValue("");
 			sap.ui.getCore().byId('taProxyComment').setValue("");
+			sap.ui.getCore().byId('sProxyContactType').setSelectedKey("");
 			sap.ui.getCore().byId('iProxyPhone').setValue("");
 			sap.ui.getCore().byId('iProxyFax').setValue("");
 			sap.ui.getCore().byId('iProxyEmail').setValue("");
-			this.dProxy.setTitle(this.getModel("i18n").getProperty('addProxy'));
-			this.dProxy.getButtons()[1].setVisible(false);
-			this.dProxy.getButtons()[2].setVisible(true);
-			this.dProxy.open();
+			this.proxyDialog.setTitle(this.getModel("i18n").getProperty('addProxy'));
+			this.proxyDialog.getButtons()[1].setVisible(false);
+			this.proxyDialog.getButtons()[2].setVisible(true);
+			this.proxyDialog.open();
 		},
 
 		tableEditProxy: function() {
@@ -522,15 +519,16 @@ sap.ui.define([
 			sap.ui.getCore().byId('iProxySurname').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('iProxyPosition').setValue(cellsData[2]);
 			sap.ui.getCore().byId('taProxyComment').setValue(cellsData[3]);
-			sap.ui.getCore().byId('iProxyPhone').setValue(cellsData[4]);
-			sap.ui.getCore().byId('iProxyFax').setValue(cellsData[5]);
-			sap.ui.getCore().byId('iProxyEmail').setValue(cellsData[6]);
+			sap.ui.getCore().byId('sProxyContactType').setSelectedKey(cellsData[4]);
+			sap.ui.getCore().byId('iProxyPhone').setValue(cellsData[5]);
+			sap.ui.getCore().byId('iProxyFax').setValue(cellsData[6]);
+			sap.ui.getCore().byId('iProxyEmail').setValue(cellsData[7]);
 
 			// Edit proxy dialog settings
-			this.dProxy.setTitle(this.getModel("i18n").getProperty('editProxy'));
-			this.dProxy.getButtons()[1].setVisible(true);
-			this.dProxy.getButtons()[2].setVisible(false);
-			this.dProxy.open();
+			this.proxyDialog.setTitle(this.getModel("i18n").getProperty('editProxy'));
+			this.proxyDialog.getButtons()[1].setVisible(true);
+			this.proxyDialog.getButtons()[2].setVisible(false);
+			this.proxyDialog.open();
 		},
 
 		tableDeleteProxy: function() {
@@ -562,6 +560,8 @@ sap.ui.define([
 					Surname: sap.ui.getCore().byId('iProxySurname').getValue(),
 					Position: sap.ui.getCore().byId('iProxyPosition').getValue(),
 					Comment: sap.ui.getCore().byId('taProxyComment').getValue(),
+					ContactType: sap.ui.getCore().byId('sProxyContactType').getSelectedKey(),
+					ContactName: "",
 					Phone: sap.ui.getCore().byId('iProxyPhone').getValue(),
 					FaxNumber: sap.ui.getCore().byId('iProxyFax').getValue(),
 					Email: sap.ui.getCore().byId('iProxyEmail').getValue(),
@@ -571,7 +571,7 @@ sap.ui.define([
 					success: this.successFunction.bind(this),
 					error: this.errorFunction.bind(this)
 				});
-				this.dProxy.close();
+				this.proxyDialog.close();
 			}
 		},
 
@@ -583,6 +583,8 @@ sap.ui.define([
 				Surname: sap.ui.getCore().byId('iProxySurname').getValue(),
 				Position: sap.ui.getCore().byId('iProxyPosition').getValue(),
 				Comment: sap.ui.getCore().byId('taProxyComment').getValue(),
+				ContactType: sap.ui.getCore().byId('sProxyContactType').getSelectedKey(),
+				ContactName: "",
 				Phone: sap.ui.getCore().byId('iProxyPhone').getValue(),
 				FaxNumber: sap.ui.getCore().byId('iProxyFax').getValue(),
 				Email: sap.ui.getCore().byId('iProxyEmail').getValue(),
@@ -592,7 +594,7 @@ sap.ui.define([
 				success: this.successFunction.bind(this),
 				error: this.errorFunction.bind(this)
 			});
-			this.dProxy.close();
+			this.proxyDialog.close();
 		},
 
 		// Delete,Add,Edit functions for Complience Risks table from Compliance Risks Tab
@@ -609,10 +611,10 @@ sap.ui.define([
 			sap.ui.getCore().byId('dpRiskDateFrom').setDateValue(null).setEnabled(true);
 			sap.ui.getCore().byId('dpRiskDateTo').setDateValue(null);
 			sap.ui.getCore().byId('cbRiskActual').setSelected(false);
-			this.dRisk.setTitle(this.getModel("i18n").getProperty('addRisk'));
-			this.dRisk.getButtons()[1].setVisible(false);
-			this.dRisk.getButtons()[2].setVisible(true);
-			this.dRisk.open();
+			this.risksDialog.setTitle(this.getModel("i18n").getProperty('addRisk'));
+			this.risksDialog.getButtons()[1].setVisible(false);
+			this.risksDialog.getButtons()[2].setVisible(true);
+			this.risksDialog.open();
 		},
 
 		tableEditRisk: function() {
@@ -640,10 +642,10 @@ sap.ui.define([
 			sap.ui.getCore().byId('cbRiskActual').setSelected(cellsData[5]);
 
 			// Edit risks dialog
-			this.dRisk.setTitle(this.getModel("i18n").getProperty('editRisk'));
-			this.dRisk.getButtons()[1].setVisible(true);
-			this.dRisk.getButtons()[2].setVisible(false);
-			this.dRisk.open();
+			this.risksDialog.setTitle(this.getModel("i18n").getProperty('editRisk'));
+			this.risksDialog.getButtons()[1].setVisible(true);
+			this.risksDialog.getButtons()[2].setVisible(false);
+			this.risksDialog.open();
 		},
 
 		tableDeleteRisk: function() {
@@ -689,7 +691,7 @@ sap.ui.define([
 					success: this.successFunction.bind(this),
 					error: this.errorFunction.bind(this)
 				});
-				this.dRisk.close();
+				this.risksDialog.close();
 			}
 		},
 
@@ -718,7 +720,7 @@ sap.ui.define([
 					success: this.successFunction.bind(this),
 					error: this.errorFunction.bind(this)
 				});
-				this.dRisk.close();
+				this.risksDialog.close();
 			}
 		},
 
@@ -728,13 +730,14 @@ sap.ui.define([
 			sap.ui.getCore().byId('iPoliticalSurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iPoliticalPosition').setValue("");
 			sap.ui.getCore().byId('taPoliticalComment').setValue("");
+			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey("");
 			sap.ui.getCore().byId('iPoliticalPhone').setValue("");
 			sap.ui.getCore().byId('iPoliticalFax').setValue("");
 			sap.ui.getCore().byId('iPoliticalEmail').setValue("");
-			this.dPolitical.setTitle(this.getModel("i18n").getProperty('addPolitical'));
-			this.dPolitical.getButtons()[1].setVisible(false);
-			this.dPolitical.getButtons()[2].setVisible(true);
-			this.dPolitical.open();
+			this.politicalDialog.setTitle(this.getModel("i18n").getProperty('addPolitical'));
+			this.politicalDialog.getButtons()[1].setVisible(false);
+			this.politicalDialog.getButtons()[2].setVisible(true);
+			this.politicalDialog.open();
 		},
 
 		tableEditPolitical: function() {
@@ -750,15 +753,16 @@ sap.ui.define([
 			sap.ui.getCore().byId('iPoliticalSurname').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('iPoliticalPosition').setValue(cellsData[2]);
 			sap.ui.getCore().byId('taPoliticalComment').setValue(cellsData[3]);
-			sap.ui.getCore().byId('iPoliticalPhone').setValue(cellsData[4]);
-			sap.ui.getCore().byId('iPoliticalFax').setValue(cellsData[5]);
-			sap.ui.getCore().byId('iPoliticalEmail').setValue(cellsData[6]);
+			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey(cellsData[4]);
+			sap.ui.getCore().byId('iPoliticalPhone').setValue(cellsData[5]);
+			sap.ui.getCore().byId('iPoliticalFax').setValue(cellsData[6]);
+			sap.ui.getCore().byId('iPoliticalEmail').setValue(cellsData[7]);
 
 			// Edit Political Exposed person dialog settings
-			this.dPolitical.setTitle(this.getModel("i18n").getProperty('editPolitical'));
-			this.dPolitical.getButtons()[1].setVisible(true);
-			this.dPolitical.getButtons()[2].setVisible(false);
-			this.dPolitical.open();
+			this.politicalDialog.setTitle(this.getModel("i18n").getProperty('editPolitical'));
+			this.politicalDialog.getButtons()[1].setVisible(true);
+			this.politicalDialog.getButtons()[2].setVisible(false);
+			this.politicalDialog.open();
 		},
 
 		tableDeletePolitical: function() {
@@ -790,6 +794,8 @@ sap.ui.define([
 					Surname: sap.ui.getCore().byId('iPoliticalSurname').getValue(),
 					Position: sap.ui.getCore().byId('iPoliticalPosition').getValue(),
 					Comment: sap.ui.getCore().byId('taPoliticalComment').getValue(),
+					ContactType: sap.ui.getCore().byId('sPoliticalContactType').getSelectedKey(),
+					ContactName: "",
 					Phone: sap.ui.getCore().byId('iPoliticalPhone').getValue(),
 					FaxNumber: sap.ui.getCore().byId('iPoliticalFax').getValue(),
 					Email: sap.ui.getCore().byId('iPoliticalEmail').getValue(),
@@ -799,7 +805,7 @@ sap.ui.define([
 					success: this.successFunction.bind(this),
 					error: this.errorFunction.bind(this)
 				});
-				this.dPolitical.close();
+				this.politicalDialog.close();
 			}
 		},
 
@@ -811,6 +817,8 @@ sap.ui.define([
 				Surname: sap.ui.getCore().byId('iPoliticalSurname').getValue(),
 				Position: sap.ui.getCore().byId('iPoliticalPosition').getValue(),
 				Comment: sap.ui.getCore().byId('taPoliticalComment').getValue(),
+				ContactType: sap.ui.getCore().byId('sPoliticalContactType').getSelectedKey(),
+				ContactName: "",
 				Phone: sap.ui.getCore().byId('iPoliticalPhone').getValue(),
 				FaxNumber: sap.ui.getCore().byId('iPoliticalFax').getValue(),
 				Email: sap.ui.getCore().byId('iPoliticalEmail').getValue(),
@@ -820,7 +828,7 @@ sap.ui.define([
 				success: this.successFunction.bind(this),
 				error: this.errorFunction.bind(this)
 			});
-			this.dPolitical.close();
+			this.politicalDialog.close();
 		},
 		
 		// Edit function of Main Information (Dashboard tab)
@@ -833,7 +841,7 @@ sap.ui.define([
 		// Save function of Main Information (Dashboard tab)
 		saveMainInf: function(){
 			var oModel = this.getModel();
-			var DateValidity = this.byId('dpMainInfDateValidity').getDateValue();
+			var DateValidity = new Date(this.byId('dpMainInfDateValidity').getValue());
 			if(DateValidity) { DateValidity.setMinutes(-DateValidity.getTimezoneOffset()); }
 			var code = this.byId("tSAPID").getText();
 			var oData = {
@@ -958,6 +966,20 @@ sap.ui.define([
 			var oElement = this.byId(elementId);
 			if(Object.keys(oElement.mElementBindingContexts).length === 0 || update){
 				oElement.bindElement(url);
+			}
+		},
+		
+		// Add all dialog xml fragments to this view as dependent, tableArr: array of string ids of tables
+		addDialogs: function(tableArr){
+			for(var i in tableArr){
+				// Just in case if any of the dialog fragment has syntax error
+				try {
+					this[tableArr[i] + "Dialog"] = sap.ui.xmlfragment("fragment." + tableArr[i] + "Dialog", this);
+					this.getView().addDependent(this[tableArr[i] + "Dialog"]);
+				} catch (err) {
+					console.log("Error in dialog with ID: " + this.tableArr[i] + "Dialog");
+				}
+				
 			}
 		}
 	});

@@ -1,0 +1,157 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" 
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<l:BlockLayout id="blGenInf">
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell id="cGenInf">
+				<OverflowToolbar>
+					<Title text="{i18n>genInf}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>codeFromKioda}:" width="170px"/>
+				<Label text="{Identifier}" id="lMainInfIdentifier" />
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>regNumber}:" width="170px"/>
+				<Label text="{RegistrationNumber}" id="lMainInfRegistrationNumber"/>
+				<ToolbarSpacer/>
+				<FlexBox width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Label class="black" text="{i18n>legalForm}:" width="170px"/>
+						<Label text="{LegalForm}" id="lMainInfLegalForm" />
+						<Input class="width-auto" id="iMainInfLegalForm" value="{LegalForm}" width="180px" visible="false" />
+					</items>
+				</FlexBox>
+				<ToolbarSpacer/>
+				<FlexBox width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Label class="black" text="{i18n>legalName}:" width="170px"/>
+						<Label text="{LegalName}" id="lMainInfLegalName"/>
+					</items>
+				</FlexBox>
+				<ToolbarSpacer/>
+				<FlexBox width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Label class="black" text="{i18n>englishName}:" width="170px"/>
+						<Label text="{EnglishName}" id="lMainInfEnglishName"/>
+					</items>
+				</FlexBox>
+			</l:BlockLayoutCell>
+			<l:BlockLayoutCell>
+				<OverflowToolbar>
+					<Title text="{i18n>addInf}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>relCat}:" width="191px"/>
+				<Label text="{RelationCategory}" id="lMainInfRelationCategory"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>relBP}:" width="191px"/>
+				<Label text="{RelationBP}" id="lMainInfRelationBP"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>limitSecurity}:" width="191px"/>
+				<Label
+					text="{ parts: [ {path: 'LimitSecurity'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+					class="margin-right"
+					id="lMainInfLimitSecurity" />
+				<Input value="{LimitSecurity}" id="iMainInfLimitSecurity" class="margin-right" width="165px" visible="false" />
+				<Label text="{Currency}" id="lMainInfCurrency" />
+				<Select id="sMainInfCurrency" selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px" visible="false">
+					<core:Item key="{Currency}" text="{Currency}"/>
+				</Select>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>validityDate}:" width="191px"/>
+				<Label id="lMainInfDateValidity" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<DatePicker id="dpMainInfDateValidity" placeholder="{i18n>enterDate}" value="{DateValidity}" width="170px" visible="false" />
+				<ToolbarSpacer/>
+				<Label class="black" id="lDownloadDoc" text="{i18n>downloadDocument}:" width="191px"/>
+				<Link id="linkDownloadDoc" text="document.pdf" press="handleLinkPress"/>
+				<ToolbarSpacer/>
+				<u:FileUploader enabled="false" id="fuMainInfFileUpload" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server"
+					uploadComplete="handleUploadComplete" change="handleValueChange" typeMissmatch="handleTypeMissmatch" style="Emphasized"
+					fileType="txt,jpg,pdf,doc,docx" placeholder="{i18n>chooseFile}">
+					<u:parameters>
+						<u:FileUploaderParameter name="param1" value="Foo"/>
+						<u:FileUploaderParameter name="param2" value="bar"/>
+					</u:parameters>
+					<u:headerParameters>
+						<u:FileUploaderParameter name="headerParam1" value="Foo"/>
+						<u:FileUploaderParameter name="headerParam2" value="bar"/>
+					</u:headerParameters>
+				</u:FileUploader>
+				<Button enabled="false" id="bMainInfFileUpload" text="Upload File" press="handleUploadPress"/>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar>
+					<Title text="{i18n>addressBook}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Table id="addressTable" width="auto" items="{}" noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column width="100px"><Label class="black" text="{i18n>addressType}"/></Column>
+						<Column width="100px"><Label class="black" text="{i18n>country}"/></Column>
+						<Column width="120px"><Label class="black" text="{i18n>region}"/></Column>
+						<Column width="90px"><Label class="black" text="{i18n>ZIP}"/></Column>
+						<Column width="120px"><Label class="black" text="{i18n>city}"/></Column>
+						<Column width="200px"><Label class="black" text="{i18n>street}"/></Column>
+						<Column width="100px"><Label class="black" text="{i18n>building}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{AddressType}"/>
+								<Text text="{Country}"/>
+								<Text text="{Region}"/>
+								<Text text="{ZIP}"/>
+								<Text text="{City}"/>
+								<Text text="{Street}"/>
+								<Text text="{Office}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar>
+					<Title text="{i18n>bankAccount}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Table id="bankAccountTable" width="auto" items="{}" noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column width="100px"><Label class="black" text="{i18n>country}"/></Column>
+						<Column width="180px"><Label class="black" text="{i18n>bank}"/></Column>
+						<Column width="90px"><Label class="black" text="{i18n>swift}"/></Column>
+						<Column><Label class="black" text="{i18n>address}"/></Column>
+						<Column width="120px"><Label class="black" text="{i18n>bcAcc}"/></Column>
+						<Column width="120px"><Label class="black" text="{i18n>iban}"/></Column>
+						<Column><Label class="black" text="{i18n>accountName}"/></Column>
+						<Column><Label class="black" text="{i18n>account}"/></Column>
+						<Column width="60px"><Label class="black" text="{i18n>currency}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Country}"/>
+								<Text text="{BankName}"/>
+								<Text text="{SWIFT}"/>
+								<Text text="{Address}"/>
+								<Text text="{AccountBC}"/>
+								<Text text="{IBAN}"/>
+								<Text text="{AccountName}"/>
+								<Text text="{Account}"/>
+								<Text text="{Currency}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+</core:FragmentDefinition>

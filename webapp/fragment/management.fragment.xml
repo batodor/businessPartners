@@ -1,34 +1,82 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Edit Management" class="sapUiContentPadding">
-		<content>
-			<Text text="{i18n>name}" width="170px"/>
-			<Input id="iManagementName" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>surname}" width="170px"/>
-			<Input id="iManagementSurname" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>position}" width="170px"/>
-			<Input id="iManagementPosition" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>typeOfGovernance}" width="170px"/>
-			<Select id="sManagementTypeOfGov" width="300px" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
-				<core:Item key="{GoverType}" text="{GoverType} - {GoverTypeName}"/>
-			</Select>
-			<ToolbarSpacer/>
-			<Text text="{i18n>phone}" width="170px"/>
-			<Input id="iManagementPhone" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>fax}" width="170px"/>
-			<Input id="iManagementFax" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>email}" width="170px"/>
-			<Input id="iManagementEmail" width="300px"/>
-		</content>
-		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:dialog="dManagement" press="closeDialog"/>
-			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditManagement"/>
-			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddManagement"/>
-		</buttons>
-	</Dialog>
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<l:BlockLayout >
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="100%">
+					<Title text="{i18n>management}" titleStyle="H3"/>
+					<ToolbarSpacer/>
+					<Button id="bAddManagement" text="{i18n>add}" press="tableAddManagement"/>
+					<Button id="bEditManagement" text="{i18n>edit}" press="tableEditManagement" enabled="false"/>
+					<Button id="bDeleteManagement" text="{i18n>delete}" press="tableDeleteManagement" type="Reject" enabled="false"/>
+				</OverflowToolbar>
+				<Table id="managementTable" width="100%" items="{}" mode="SingleSelectLeft" selectionChange="onManagementChange"
+					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
+					<columns>
+						<Column><Label class="black" text="{i18n>name}"/></Column>
+						<Column><Label class="black" text="{i18n>surname}"/></Column>
+						<Column><Label class="black" text="{i18n>position}"/></Column>
+						<Column><Label class="black" text="{i18n>typeOfGovernance}"/></Column>
+						<Column><Label class="black" text="{i18n>contactType}"/></Column>
+						<Column><Label class="black" text="{i18n>phone}"/></Column>
+						<Column><Label class="black" text="{i18n>fax}"/></Column>
+						<Column><Label class="black" text="{i18n>email}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Name}"/>
+								<Text text="{Surname}"/>
+								<Text text="{Position}"/>
+								<Text custom:key="{GoverType}" text="{GoverName}"/>
+								<Text text="{ContactType}"/>
+								<Text text="{Phone}"/>
+								<Text text="{FaxNumber}"/>
+								<Text text="{Email}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="100%">
+					<Title text="{i18n>proxy}" titleStyle="H3"/>
+					<ToolbarSpacer/>
+					<Button id="bAddProxy" text="{i18n>add}" press="tableAddProxy"/>
+					<Button id="bEditProxy" text="{i18n>edit}" press="tableEditProxy" enabled="false"/>
+					<Button id="bDeleteProxy" text="{i18n>delete}" press="tableDeleteProxy" type="Reject" enabled="false"/>
+				</OverflowToolbar>
+				<Table id="proxyTable" width="100%" items="{}" mode="SingleSelectLeft" selectionChange="onProxyChange"
+					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
+					<columns>
+						<Column><Label class="black" text="{i18n>name}"/></Column>
+						<Column><Label class="black" text="{i18n>surname}"/></Column>
+						<Column><Label class="black" text="{i18n>position}"/></Column>
+						<Column><Label class="black" text="{i18n>comment}"/></Column>
+						<Column><Label class="black" text="{i18n>contactType}"/></Column>
+						<Column><Label class="black" text="{i18n>phone}"/></Column>
+						<Column><Label class="black" text="{i18n>fax}"/></Column>
+						<Column><Label class="black" text="{i18n>email}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Name}"/>
+								<Text text="{Surname}"/>
+								<Text text="{Position}"/>
+								<Text text="{Comment}"/>
+								<Text text="{ContactType}"/>
+								<Text text="{Phone}"/>
+								<Text text="{FaxNumber}"/>
+								<Text text="{Email}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
 </core:FragmentDefinition>

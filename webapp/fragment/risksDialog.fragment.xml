@@ -1,5 +1,4 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding">
 		<content>
 			<Text text="{i18n>type}" width="160px"/>
@@ -7,8 +6,6 @@
 				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<!--<Text text="{i18n>itemNumber}" width="160px"/>-->
-			<!--<Input id="iRiskItemNumber" width="300px"/>-->
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="160px"/>
 			<TextArea id="taRiskDescription" width="300px"/>
@@ -26,7 +23,7 @@
 			<CheckBox id="cbRiskActual"/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:dialog="dRisk" press="closeDialog"/>
+			<Button text="{i18n>cancel}" type="Back" custom:dialog="risksDialog" press="closeDialog"/>
 			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditRisk"/>
 			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddRisk"/>
 		</buttons>

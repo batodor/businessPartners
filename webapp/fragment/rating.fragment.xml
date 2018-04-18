@@ -1,44 +1,165 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>rating}" class="sapUiContentPadding">
-		<content>
-			<!--<Text text="{i18n>country}" width="250px"/>-->
-			<!--<Select id="sRatingSelectCountry" width="80px"></Select>-->
-			<!--<ToolbarSpacer/>-->
-			<Text text="{i18n>rBusinessScale}" width="280px"/>
-			<Select id="sRatingSelectScale" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
-				<core:Item key="{Rating}" text="{Rating}"/>
-			</Select>
-			<ToolbarSpacer/>
-			<Text text="{i18n>rCorporateTransparency}" width="280px"/>
-			<Select id="sRatingSelectTransparency" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
-				<core:Item key="{Rating}" text="{Rating}"/>
-			</Select>
-			<ToolbarSpacer/>
-			<Text text="{i18n>rFinancialProfile}" width="280px"/>
-			<Select id="sRatingSelectFinProfile" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
-				<core:Item key="{Rating}" text="{Rating}"/>
-			</Select>
-			<ToolbarSpacer/>
-			<Text text="{i18n>rCommercialProfile}" width="280px"/>
-			<Select id="sRatingSelectComProfile" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
-				<core:Item key="{Rating}" text="{Rating}"/>
-			</Select>
-			<ToolbarSpacer/>
-			<Text text="{i18n>rSet}" width="280px"/>
-			<Select id="sRatingSelectSet" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
-				<core:Item key="{Rating}" text="{Rating}"/>
-			</Select>
-			<ToolbarSpacer/>
-			<Text text="{i18n>date}" width="280px"/>
-			<DatePicker id="dpRatingDate" width="145px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>expressScore}" width="280px"/>
-			<CheckBox id="sRatingCheckboxScore" selected="false"/>
-		</content>
-		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:dialog="dRating" press="closeDialog"/>
-			<Button text="{i18n>update}" type="Accept" press="updateRating"/>
-		</buttons>
-	</Dialog>
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">	
+	<l:BlockLayout id="blRatingGenInf">
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar>
+					<Title text="{i18n>rating}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>countryRating}:" width="240px"/>
+				<Label text="{CountryRating}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>rBusinessScale}:" width="240px"/>
+				<Label id="lBusinessScale" text="{BusinessScale}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>rCorporateTransparency}:" width="240px"/>
+				<Label id="lCorporateTransparency" text="{CorporateTransparency}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>rFinancialProfile}:" width="240px"/>
+				<Label id="lFinancialProfile" text="{FinancialProfile}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>rCommercialProfile}:" width="240px"/>
+				<Label id="lCommercialProfile" text="{CommercialProfile}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>rSet}:" width="240px"/>
+				<Label id="lRatingSet" text="{RatingSet}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>expressScore}:" width="240px"/>
+				<CheckBox class="rowCheckbox" id="chExpressScore" selected="{ExpressScore}" editable="false"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>date}:" width="240px"/>
+				<Label id="lRatingDate" custom:key="{Date}"
+					text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>updateRating}" type="Emphasized" press="showRating"/>
+			</l:BlockLayoutCell>
+			<l:BlockLayoutCell>
+				<OverflowToolbar>
+					<Title text="{i18n>limitsCurrentRating}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>tonnage}:" width="240px"/>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>period}:" width="240px"/>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>paymentTerms}:" width="240px"/>
+				<Label text=""/>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar>
+					<Title text="{i18n>historicalData}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Table id="historicalDataTable" width="auto" items="{}" noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>expressScore}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>date}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>businessScale}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>financeProfile}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>commercialProfile}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>corporateTransparency}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>rSet}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<CheckBox selected="{ExpressScore}" editable="false"/>
+								<Text text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+								<Text text="{BusinessScale}"/>
+								<Text text="{FinancialProfile}"/>
+								<Text text="{CommercialProfile}"/>
+								<Text text="{CorporateTransparency}"/>
+								<Text text="{RatingSet}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout id="blCreditLimit">
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="500px">
+					<Title text="{i18n>validatedCreditLimit}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>creditLimit}:" width="240px"/>
+				<Label id="lCreditLimit" custom:creditLimit="{CreditLimit}"
+					text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+					class="margin-right"/>
+				<Label id="lCreditLimitCurrency" text="{Currency}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>validityDate}:" width="240px"/>
+				<Label id="lCreditLimitValidityDate" custom:validityDate="{ValidityDate}"
+					text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>updateCreditLimit}" type="Emphasized" press="showCreditLimit"/>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="500px">
+					<Title text="{i18n>historicalData}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Table id="historicalDataTable2" width="500px" items="{}" noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>creditLimit}"/></Column>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>currency}"/></Column>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>validityDate}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text
+									text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"/>
+								<Text text="{Currency}"/>
+								<Text text="{path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout id="blInsuranceInf">
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="500px">
+					<Title text="{i18n>insuranceInformation}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>amountOfInsurancedReceivables}:" width="280px"/>
+				<Label id="lInsuranceReceivables" custom:receivables="{Amount}"
+					text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+					class="margin-right"/>
+				<Label id="lInsuranceCurrency" text="{Currency}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>insurancePremiumRatePercent}:" width="280px"/>
+				<Label id="lInsuranceRate" custom:rate="{Rate}" custom:unit="{Unit}" text="{Rate} {Unit}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>contractNumber}:" width="280px"/>
+				<Label id="lInsuranceContract" text="{ContractNum}"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>validityDate}:" width="280px"/>
+				<Label id="lInsuraceValidityDate" custom:validityDate="{DateTo}"
+					text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<ToolbarSpacer/>
+				<Button text="{i18n>updateInsuranceInformation}" type="Emphasized" press="showInsuranceInf"/>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
 </core:FragmentDefinition>

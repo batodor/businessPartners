@@ -1,0 +1,128 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<Title text="{i18n>complianceRisks}" titleStyle="H3"/>
+				<ToolbarSpacer/>
+				<Label text="{i18n>countryUnderSanction}" class="red" id="isUnderSanction"/>
+				<OverflowToolbar>
+					<Label class="black" text="{i18n>country}:" width="80px"/>
+					<Label text="{Country}"/>
+					<ToolbarSpacer/>
+					<Button id="bAddRisk" text="{i18n>add}" press="tableAddRisk"/>
+					<Button id="bEditRisk" text="{i18n>edit}" press="tableEditRisk" enabled="false"/>
+					<Button id="bDeleteRisk" text="{i18n>delete}" press="tableDeleteRisk" type="Reject" enabled="false"/>
+				</OverflowToolbar>
+				<Table id="complianceRisksTable" mode="SingleSelectLeft" selectionChange="onRiskSelect" width="auto" items="{}"
+					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
+					<columns>
+						<Column width="120px"><Label class="black" text="{i18n>type}"/></Column>
+						<Column><Label class="black" text="{i18n>description}"/></Column>
+						<Column><Label class="black" text="{i18n>recommendedActions}"/></Column>
+						<Column width="80px"><Label class="black" text="{i18n>dateFrom}"/></Column>
+						<Column width="80px"><Label class="black" text="{i18n>dateTo}"/></Column>
+						<Column width="80px"><Label class="black" text="{i18n>actual}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text custom:key="{RiskType}" text="{Type}"/>
+								<Text text="{Description}"/>
+								<Text text="{Actions}"/>
+								<Text custom:key="{DateFrom}"
+									text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+								<Text custom:key="{DateTo}"
+									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+								<CheckBox selected="{Actual}" editable="false"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="100%">
+					<Title text="{i18n>politicalExposedPerson}" titleStyle="H3"/>
+					<ToolbarSpacer/>
+					<Button text="{i18n>add}" press="tableAddPolitical"/>
+					<Button text="{i18n>edit}" press="tableEditPolitical" id="bEditPolitical" enabled="false"/>
+					<Button text="{i18n>delete}" press="tableDeletePolitical" id="bDeletePolitical" type="Reject" enabled="false"/>
+				</OverflowToolbar>
+				<Table id="politicalExposedTable" width="100%" mode="SingleSelectLeft" selectionChange="onPersonChange" items="{}"
+					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
+					<columns>
+						<Column><Label class="black" text="{i18n>name}"/></Column>
+						<Column><Label class="black" text="{i18n>surname}"/></Column>
+						<Column><Label class="black" text="{i18n>position}"/></Column>
+						<Column><Label class="black" text="{i18n>comment}"/></Column>
+						<Column><Label class="black" text="{i18n>contactType}"/></Column>
+						<Column><Label class="black" text="{i18n>phone}"/></Column>
+						<Column><Label class="black" text="{i18n>fax}"/></Column>
+						<Column><Label class="black" text="{i18n>email}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Name}"/>
+								<Text text="{Surname}"/>
+								<Text text="{Position}"/>
+								<Text text="{Comment}"/>
+								<Text text="{ContactType}"/>
+								<Text text="{Phone}"/>
+								<Text text="{FaxNumber}"/>
+								<Text text="{Email}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+	<l:BlockLayout>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell id="blcBlacklisted">
+				<OverflowToolbar width="600px">
+					<Title text="{i18n>blacklistedInf}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Label text=""/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>blacklisted}:" width="140px"/>
+				<CheckBox id="cbBlacklist" selected="{BlackListed}" class="rowCheckbox" editable="false"/>
+				<ToolbarSpacer/>
+				<Label class="black" text="{i18n>justification}:" width="140px"/>
+				<TextArea id="taBlacklistJustification" value="{Justification}" width="460px" height="80px" enabled="false" />
+				<ToolbarSpacer/>
+				<Button text="{i18n>updateBlacklistInf}" type="Emphasized" press="showBlacklist"/>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+		<l:BlockLayoutRow>
+			<l:BlockLayoutCell>
+				<OverflowToolbar width="600px">
+					<Title text="{i18n>historicalData}" titleStyle="H3"/>
+				</OverflowToolbar>
+				<Table id="blacklistedInfTable" width="600px" items="{}" noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column width="70px"><Label class="black" text="{i18n>blacklisted}"/></Column>
+						<Column><Label class="black" text="{i18n>justification}"/></Column>
+						<Column width="100px"><Label class="black" text="{i18n>user}"/></Column>
+						<Column width="80px"><Label class="black" text="{i18n>date}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<CheckBox selected="{BlackListed}" editable="false"/>
+								<Text class="black" text="{Justification}"/>
+								<Text text="{User}"/>
+								<Text text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</l:BlockLayoutCell>
+		</l:BlockLayoutRow>
+	</l:BlockLayout>
+</core:FragmentDefinition>
