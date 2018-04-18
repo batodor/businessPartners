@@ -383,7 +383,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iManagementSurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iManagementPosition').setValue("");
 			sap.ui.getCore().byId('sManagementTypeOfGov').setSelectedKey("");
-			sap.ui.getCore().byId('sManagementContactType').setSelectedKey("");
+			sap.ui.getCore().byId('sManagementContactType').setSelectedKey("").setEnabled(true);
 			sap.ui.getCore().byId('iManagementPhone').setValue("");
 			sap.ui.getCore().byId('iManagementFax').setValue("");
 			sap.ui.getCore().byId('iManagementEmail').setValue("");
@@ -410,7 +410,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iManagementSurname').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('iManagementPosition').setValue(cellsData[2]);
 			sap.ui.getCore().byId('sManagementTypeOfGov').setSelectedKey(cellsData[3]);
-			sap.ui.getCore().byId('sManagementContactType').setSelectedKey(cellsData[4]);
+			sap.ui.getCore().byId('sManagementContactType').setSelectedKey(cellsData[4]).setEnabled(false);
 			sap.ui.getCore().byId('iManagementPhone').setValue(cellsData[5]);
 			sap.ui.getCore().byId('iManagementFax').setValue(cellsData[6]);
 			sap.ui.getCore().byId('iManagementEmail').setValue(cellsData[7]);
@@ -497,7 +497,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iProxySurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iProxyPosition').setValue("");
 			sap.ui.getCore().byId('taProxyComment').setValue("");
-			sap.ui.getCore().byId('sProxyContactType').setSelectedKey("");
+			sap.ui.getCore().byId('sProxyContactType').setSelectedKey("").setEnabled(true);
 			sap.ui.getCore().byId('iProxyPhone').setValue("");
 			sap.ui.getCore().byId('iProxyFax').setValue("");
 			sap.ui.getCore().byId('iProxyEmail').setValue("");
@@ -520,7 +520,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iProxySurname').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('iProxyPosition').setValue(cellsData[2]);
 			sap.ui.getCore().byId('taProxyComment').setValue(cellsData[3]);
-			sap.ui.getCore().byId('sProxyContactType').setSelectedKey(cellsData[4]);
+			sap.ui.getCore().byId('sProxyContactType').setSelectedKey(cellsData[4]).setEnabled(false);
 			sap.ui.getCore().byId('iProxyPhone').setValue(cellsData[5]);
 			sap.ui.getCore().byId('iProxyFax').setValue(cellsData[6]);
 			sap.ui.getCore().byId('iProxyEmail').setValue(cellsData[7]);
@@ -731,7 +731,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iPoliticalSurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iPoliticalPosition').setValue("");
 			sap.ui.getCore().byId('taPoliticalComment').setValue("");
-			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey("");
+			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey("").setEnabled(true);
 			sap.ui.getCore().byId('iPoliticalPhone').setValue("");
 			sap.ui.getCore().byId('iPoliticalFax').setValue("");
 			sap.ui.getCore().byId('iPoliticalEmail').setValue("");
@@ -760,7 +760,7 @@ sap.ui.define([
 			sap.ui.getCore().byId('iPoliticalSurname').setValue(cellsData[1]).setEnabled(false);
 			sap.ui.getCore().byId('iPoliticalPosition').setValue(cellsData[2]);
 			sap.ui.getCore().byId('taPoliticalComment').setValue(cellsData[3]);
-			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey(cellsData[4]);
+			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey(cellsData[4]).setEnabled(false);
 			sap.ui.getCore().byId('iPoliticalPhone').setValue(cellsData[5]);
 			sap.ui.getCore().byId('iPoliticalFax').setValue(cellsData[6]);
 			sap.ui.getCore().byId('iPoliticalEmail').setValue(cellsData[7]);
