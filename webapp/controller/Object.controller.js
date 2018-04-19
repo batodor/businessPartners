@@ -200,7 +200,7 @@ sap.ui.define([
 				this.bindElement("blInsuranceInf", partnerUrl + "/ToRatingInsure");
 			} else if (key === "risks"){
 				this.bindTable("complianceRisksTable", partnerUrl + "/ToComplianceRisks");
-				this.bindTable("politicalExposedTable", partnerUrl + "/CounterpartyListSet");
+				this.bindTable("politicalExposedTable", partnerUrl + "/ToCompliancePersons");
 				this.bindElement("blcBlacklisted", partnerUrl + "/ToComplianceBlacklisted");
 				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
 			}
