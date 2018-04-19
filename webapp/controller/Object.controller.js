@@ -442,7 +442,7 @@ sap.ui.define([
 		dialogAddManagement: function() {
 			if (!sap.ui.getCore().byId('iManagementName').getValue() || !sap.ui.getCore().byId('iManagementSurname').getValue() 
 				|| !sap.ui.getCore().byId('sManagementContactType').getSelectedKey()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurname"), {
+				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
 					actions: [sap.m.MessageBox.Action.CLOSE]
 				});
 			} else {
@@ -493,6 +493,12 @@ sap.ui.define([
 
 		// Delete,Add,Edit functions for Proxy table from Government Tab
 		tableAddProxy: function() {
+			if (!sap.ui.getCore().byId('sProxyItem')) {
+				sap.ui.getCore().byId('sProxyContactType').addItem(new sap.ui.core.Item("sProxyItem", {
+					text: "",
+					key: ""
+				}));
+			}
 			sap.ui.getCore().byId('iProxyName').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iProxySurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iProxyPosition').setValue("");
@@ -550,8 +556,9 @@ sap.ui.define([
 		},
 
 		dialogAddProxy: function() {
-			if (!sap.ui.getCore().byId('iProxyName').getValue() || !sap.ui.getCore().byId('iProxySurname').getValue()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurname"), {
+			if (!sap.ui.getCore().byId('iProxyName').getValue() || !sap.ui.getCore().byId('iProxySurname').getValue()
+				|| !sap.ui.getCore().byId('sProxyContactType').getSelectedKey()) {
+				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
 					actions: [sap.m.MessageBox.Action.CLOSE]
 				});
 			} else {
@@ -727,6 +734,12 @@ sap.ui.define([
 
 		// Delete,Add,Edit functions for Political Exposed person table from Compliance Risks Tab
 		tableAddPolitical: function() {
+			if (!sap.ui.getCore().byId('sPoliticalItem')) {
+				sap.ui.getCore().byId('sPoliticalContactType').addItem(new sap.ui.core.Item("sPoliticalItem", {
+					text: "",
+					key: ""
+				}));
+			}
 			sap.ui.getCore().byId('iPoliticalName').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iPoliticalSurname').setValue("").setEnabled(true);
 			sap.ui.getCore().byId('iPoliticalPosition').setValue("");
@@ -790,8 +803,9 @@ sap.ui.define([
 		},
 
 		dialogAddPolitical: function() {
-			if (!sap.ui.getCore().byId('iPoliticalName').getValue() || !sap.ui.getCore().byId('iPoliticalSurname').getValue()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurname"), {
+			if (!sap.ui.getCore().byId('iPoliticalName').getValue() || !sap.ui.getCore().byId('iPoliticalSurname').getValue() 
+				|| !sap.ui.getCore().byId('sPoliticalContactType').getSelectedKey()) {
+				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
 					actions: [sap.m.MessageBox.Action.CLOSE]
 				});
 			} else {
