@@ -16,7 +16,7 @@
 			<ToolbarSpacer/>
 			<Text text="{i18n>contactType}" width="150px"/>
 			<Select id="sPoliticalContactType" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
-				<core:Item key="{ContactType}" text="{ContactType} - {ContactTypeName}"/>
+				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>phone}" width="150px"/>
