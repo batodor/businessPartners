@@ -14,7 +14,7 @@
 			<TextArea value="{Comment}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>contactType}" width="150px"/>
-			<Select forceSelection="false" custom:key="{i18n>contactType}" selectedKey="{ContactType}" width="300px" 
+			<Select forceSelection="false" custom:key="{i18n>contactType}" custom:omitKey="true" selectedKey="{ContactType}" width="300px" 
 				items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
 				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>

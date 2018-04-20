@@ -451,8 +451,10 @@ sap.ui.define([
 					if((oInput.mProperties.hasOwnProperty("value") && !oInput.getValue()) || 
 					(oInput.mProperties.hasOwnProperty("selectedKey") && !oInput.getSelectedKey()) ||
 					(oInput.mBindingInfos.hasOwnProperty("value") && !oInput.getValue()) ||
-					(inputs[i].hasOwnProperty("_oMaxDate") && !oInput.getDateValue())){
-						check = check + " " + oInput.data("key") + ", ";
+					(oInput.hasOwnProperty("_oMaxDate") && !oInput.getDateValue())){
+						if(oInput.data("omitKey") === null){
+							check = check + " " + oInput.data("key") + ", ";
+						}
 					}
 				}
 			}
