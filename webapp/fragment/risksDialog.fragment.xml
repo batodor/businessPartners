@@ -1,31 +1,33 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding">
+	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Text text="{i18n>type}" width="160px"/>
-			<Select id="sRiskRiskType" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
+			<Select forceSelection="false" custom:key="thisIsKey" selectedKey="{RiskType}" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
 				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="160px"/>
-			<TextArea id="taRiskDescription" width="300px"/>
+			<TextArea value="{Description}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>recommendedActions}" width="160px"/>
-			<TextArea id="taRiskRecommended" width="300px"/>
+			<TextArea value="{Actions}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="160px"/>
-			<DatePicker id="dpRiskDateFrom" width="300px"/>
+			<DatePicker custom:key="thisIsKey" dateValue="{DateFrom}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateTo}" width="160px"/>
-			<DatePicker id="dpRiskDateTo" width="300px"/>
+			<DatePicker dateValue="{DateTo}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>actual}" width="160px"/>
-			<CheckBox id="cbRiskActual"/>
+			<CheckBox selected="{Actual}" />
+			
+			<Input value="{Type}" custom:value="" visible="false" />
+			<Input value="{ItemNumber}" custom:value="1" visible="false" />
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:dialog="risksDialog" press="closeDialog"/>
-			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditRisk"/>
-			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddRisk"/>
+			<Button text="{i18n>cancel}" type="Back" custom:id="risksDialog" press="dialogClose"/>
+			<Button text="{i18n>edit}" visible="false" custom:id="risks" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>add}" visible="false" custom:id="risks" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

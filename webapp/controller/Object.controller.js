@@ -106,7 +106,7 @@ sap.ui.define([
 				oDataModel = this.getModel();
 			var that = this;
 			
-			this.getView().bindElement({
+			this.byId("blMainInf").bindElement({
 				path: url,
 				events: {
 					change: this._onBindingChange.bind(this),
@@ -129,9 +129,9 @@ sap.ui.define([
 		},
 
 		_onBindingChange: function() {
-			var oView = this.getView(),
+			var oElement = this.byId("blMainInf"),
 				oViewModel = this.getModel("mMain"),
-				oElementBinding = oView.getElementBinding();
+				oElementBinding = oElement.getElementBinding();
 
 			// No data for the binding
 			if (!oElementBinding.getBoundContext()) {
@@ -140,7 +140,7 @@ sap.ui.define([
 			}
 
 			var oResourceBundle = this.getResourceBundle(),
-				oObject = oView.getBindingContext().getObject(),
+				oObject = oElement.getBindingContext().getObject(),
 				sObjectId = oObject.Code,
 				sObjectName = oObject.Name;
 
@@ -199,8 +199,8 @@ sap.ui.define([
 				this.bindTable("historicalDataTable2", partnerUrl + "/ToRatingCreditLimitTab");
 				this.bindElement("blInsuranceInf", partnerUrl + "/ToRatingInsure");
 			} else if (key === "risks"){
-				this.bindTable("complianceRisksTable", partnerUrl + "/ToComplianceRisks");
-				this.bindTable("politicalExposedTable", partnerUrl + "/ToCompliancePersons");
+				this.bindTable("risksTable", partnerUrl + "/ToComplianceRisks");
+				this.bindTable("politicalTable", partnerUrl + "/ToCompliancePersons");
 				this.bindElement("blcBlacklisted", partnerUrl + "/ToComplianceBlacklisted");
 				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
 			}
@@ -366,491 +366,6 @@ sap.ui.define([
 			console.log("Error!", event);
 			this.getModel().refresh();
 		},
-
-		// Delete,Add,Edit functions for Managament table from Government Tab
-		tableAddManagement: function() {
-			if (!sap.ui.getCore().byId('sManagementItem')) {
-				sap.ui.getCore().byId('sManagementTypeOfGov').addItem(new sap.ui.core.Item("sManagementItem", {
-					text: "",
-					key: ""
-				}));
-				sap.ui.getCore().byId('sManagementContactType').addItem(new sap.ui.core.Item({
-					text: "",
-					key: ""
-				}));
-			}
-			sap.ui.getCore().byId('iManagementName').setValue("").setEnabled(true);
-			sap.ui.getCore().byId('iManagementSurname').setValue("").setEnabled(true);
-			sap.ui.getCore().byId('iManagementPosition').setValue("");
-			sap.ui.getCore().byId('sManagementTypeOfGov').setSelectedKey("");
-			sap.ui.getCore().byId('sManagementContactType').setSelectedKey("").setEnabled(true);
-			sap.ui.getCore().byId('iManagementPhone').setValue("");
-			sap.ui.getCore().byId('iManagementFax').setValue("");
-			sap.ui.getCore().byId('iManagementEmail').setValue("");
-			this.managementDialog.setTitle(this.getModel("i18n").getProperty('addManagement'));
-			this.managementDialog.getButtons()[1].setVisible(false);
-			this.managementDialog.getButtons()[2].setVisible(true);
-			this.managementDialog.open();
-		},
-
-		tableEditManagement: function() {
-			// Get data from row
-			var cells = this.byId('managementTable').getSelectedItem().getCells();
-			var cellsData = [];
-			for (var i = 0; i < cells.length; i++) {
-				if (cells[i].data("key")) {
-					cellsData.push(cells[i].data("key"));
-				} else {
-					cellsData.push(cells[i].getText());
-				}
-			}
-
-			// Set data from row to Risks edit Dialog
-			sap.ui.getCore().byId('iManagementName').setValue(cellsData[0]).setEnabled(false);
-			sap.ui.getCore().byId('iManagementSurname').setValue(cellsData[1]).setEnabled(false);
-			sap.ui.getCore().byId('iManagementPosition').setValue(cellsData[2]);
-			sap.ui.getCore().byId('sManagementTypeOfGov').setSelectedKey(cellsData[3]);
-			sap.ui.getCore().byId('sManagementContactType').setSelectedKey(cellsData[4]).setEnabled(false);
-			sap.ui.getCore().byId('iManagementPhone').setValue(cellsData[5]);
-			sap.ui.getCore().byId('iManagementFax').setValue(cellsData[6]);
-			sap.ui.getCore().byId('iManagementEmail').setValue(cellsData[7]);
-
-			// Change dialog settings and open it
-			this.managementDialog.setTitle(this.getModel("i18n").getProperty('editManagement'));
-			this.managementDialog.getButtons()[1].setVisible(true);
-			this.managementDialog.getButtons()[2].setVisible(false);
-			this.managementDialog.open();
-		},
-
-		tableDeleteManagement: function() {
-			var that = this;
-			var oModel = this.getModel();
-			var url = this.byId('managementTable').getSelectedItem().getBindingContextPath();
-			MessageBox.confirm("Are you sure you want to delete?", {
-				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
-				onClose: function(sAction) {
-					if (sAction === "Delete") {
-						oModel.remove(url, {
-							success: that.successFunction.bind(that),
-							error: that.errorFunction.bind(that)
-						});
-					}
-				}
-			});
-		},
-
-		dialogAddManagement: function() {
-			if (!sap.ui.getCore().byId('iManagementName').getValue() || !sap.ui.getCore().byId('iManagementSurname').getValue() 
-				|| !sap.ui.getCore().byId('sManagementContactType').getSelectedKey()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
-					actions: [sap.m.MessageBox.Action.CLOSE]
-				});
-			} else {
-				var oModel = this.getModel();
-				var oData = {
-					Name: sap.ui.getCore().byId('iManagementName').getValue(),
-					Surname: sap.ui.getCore().byId('iManagementSurname').getValue(),
-					Position: sap.ui.getCore().byId('iManagementPosition').getValue(),
-					GoverType: sap.ui.getCore().byId('sManagementTypeOfGov').getSelectedKey(),
-					ContactType: sap.ui.getCore().byId('sManagementContactType').getSelectedKey(),
-					Phone: sap.ui.getCore().byId('iManagementPhone').getValue(),
-					FaxNumber: sap.ui.getCore().byId('iManagementFax').getValue(),
-					Email: sap.ui.getCore().byId('iManagementEmail').getValue(),
-					GoverName: "",
-					ContactName: "",
-					Code: this.byId("tSAPID").getText()
-				};
-				oModel.create("/GovernmentMgtSet", oData, {
-					success: this.successFunction.bind(this),
-					error: this.errorFunction.bind(this)
-				});
-				this.managementDialog.close();
-			}
-		},
-
-		dialogEditManagement: function() {
-			var oModel = this.getModel();
-			var url = this.byId('managementTable').getSelectedItem().getBindingContextPath();
-			var oData = {
-				Name: sap.ui.getCore().byId('iManagementName').getValue(),
-				Surname: sap.ui.getCore().byId('iManagementSurname').getValue(),
-				Position: sap.ui.getCore().byId('iManagementPosition').getValue(),
-				GoverType: sap.ui.getCore().byId('sManagementTypeOfGov').getSelectedKey(),
-				ContactType: sap.ui.getCore().byId('sManagementContactType').getSelectedKey(),
-				GoverName: "",
-				ContactName: "",
-				Phone: sap.ui.getCore().byId('iManagementPhone').getValue(),
-				FaxNumber: sap.ui.getCore().byId('iManagementFax').getValue(),
-				Email: sap.ui.getCore().byId('iManagementEmail').getValue(),
-				Code: this.byId("tSAPID").getText()
-			};
-			oModel.update(url, oData, {
-				success: this.successFunction.bind(this),
-				error: this.errorFunction.bind(this)
-			});
-			this.managementDialog.close();
-		},
-
-		// Delete,Add,Edit functions for Proxy table from Government Tab
-		tableAddProxy: function() {
-			if (!sap.ui.getCore().byId('sProxyItem')) {
-				sap.ui.getCore().byId('sProxyContactType').addItem(new sap.ui.core.Item("sProxyItem", {
-					text: "",
-					key: ""
-				}));
-			}
-			sap.ui.getCore().byId('iProxyName').setValue("").setEnabled(true);
-			sap.ui.getCore().byId('iProxySurname').setValue("").setEnabled(true);
-			sap.ui.getCore().byId('iProxyPosition').setValue("");
-			sap.ui.getCore().byId('taProxyComment').setValue("");
-			sap.ui.getCore().byId('sProxyContactType').setSelectedKey("").setEnabled(true);
-			sap.ui.getCore().byId('iProxyPhone').setValue("");
-			sap.ui.getCore().byId('iProxyFax').setValue("");
-			sap.ui.getCore().byId('iProxyEmail').setValue("");
-			this.proxyDialog.setTitle(this.getModel("i18n").getProperty('addProxy'));
-			this.proxyDialog.getButtons()[1].setVisible(false);
-			this.proxyDialog.getButtons()[2].setVisible(true);
-			this.proxyDialog.open();
-		},
-
-		tableEditProxy: function() {
-			// Get data from row
-			var cells = this.byId('proxyTable').getSelectedItem().getCells();
-			var cellsData = [];
-			for (var i = 0; i < cells.length; i++) {
-				cellsData.push(cells[i].getText());
-			}
-
-			// Set data from row to Risks edit Dialog
-			sap.ui.getCore().byId('iProxyName').setValue(cellsData[0]).setEnabled(false);
-			sap.ui.getCore().byId('iProxySurname').setValue(cellsData[1]).setEnabled(false);
-			sap.ui.getCore().byId('iProxyPosition').setValue(cellsData[2]);
-			sap.ui.getCore().byId('taProxyComment').setValue(cellsData[3]);
-			sap.ui.getCore().byId('sProxyContactType').setSelectedKey(cellsData[4]).setEnabled(false);
-			sap.ui.getCore().byId('iProxyPhone').setValue(cellsData[5]);
-			sap.ui.getCore().byId('iProxyFax').setValue(cellsData[6]);
-			sap.ui.getCore().byId('iProxyEmail').setValue(cellsData[7]);
-
-			// Edit proxy dialog settings
-			this.proxyDialog.setTitle(this.getModel("i18n").getProperty('editProxy'));
-			this.proxyDialog.getButtons()[1].setVisible(true);
-			this.proxyDialog.getButtons()[2].setVisible(false);
-			this.proxyDialog.open();
-		},
-
-		tableDeleteProxy: function() {
-			var that = this;
-			var oModel = this.getModel();
-			var url = this.byId('proxyTable').getSelectedItem().getBindingContextPath();
-			MessageBox.confirm("Are you sure you want to delete?", {
-				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
-				onClose: function(sAction) {
-					if (sAction === "Delete") {
-						oModel.remove(url, {
-							success: that.successFunction.bind(that),
-							error: that.errorFunction.bind(that)
-						});
-					}
-				}
-			});
-		},
-
-		dialogAddProxy: function() {
-			if (!sap.ui.getCore().byId('iProxyName').getValue() || !sap.ui.getCore().byId('iProxySurname').getValue()
-				|| !sap.ui.getCore().byId('sProxyContactType').getSelectedKey()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
-					actions: [sap.m.MessageBox.Action.CLOSE]
-				});
-			} else {
-				var oModel = this.getModel();
-				var oData = {
-					Name: sap.ui.getCore().byId('iProxyName').getValue(),
-					Surname: sap.ui.getCore().byId('iProxySurname').getValue(),
-					Position: sap.ui.getCore().byId('iProxyPosition').getValue(),
-					Comment: sap.ui.getCore().byId('taProxyComment').getValue(),
-					ContactType: sap.ui.getCore().byId('sProxyContactType').getSelectedKey(),
-					ContactName: "",
-					Phone: sap.ui.getCore().byId('iProxyPhone').getValue(),
-					FaxNumber: sap.ui.getCore().byId('iProxyFax').getValue(),
-					Email: sap.ui.getCore().byId('iProxyEmail').getValue(),
-					Code: this.byId("tSAPID").getText()
-				};
-				oModel.create("/GovernmentProxySet", oData, {
-					success: this.successFunction.bind(this),
-					error: this.errorFunction.bind(this)
-				});
-				this.proxyDialog.close();
-			}
-		},
-
-		dialogEditProxy: function() {
-			var oModel = this.getModel();
-			var url = this.byId('proxyTable').getSelectedItem().getBindingContextPath();
-			var oData = {
-				Name: sap.ui.getCore().byId('iProxyName').getValue(),
-				Surname: sap.ui.getCore().byId('iProxySurname').getValue(),
-				Position: sap.ui.getCore().byId('iProxyPosition').getValue(),
-				Comment: sap.ui.getCore().byId('taProxyComment').getValue(),
-				ContactType: sap.ui.getCore().byId('sProxyContactType').getSelectedKey(),
-				ContactName: "",
-				Phone: sap.ui.getCore().byId('iProxyPhone').getValue(),
-				FaxNumber: sap.ui.getCore().byId('iProxyFax').getValue(),
-				Email: sap.ui.getCore().byId('iProxyEmail').getValue(),
-				Code: this.byId("tSAPID").getText()
-			};
-			oModel.update(url, oData, {
-				success: this.successFunction.bind(this),
-				error: this.errorFunction.bind(this)
-			});
-			this.proxyDialog.close();
-		},
-
-		// Delete,Add,Edit functions for Complience Risks table from Compliance Risks Tab
-		tableAddRisk: function() {
-			if (!sap.ui.getCore().byId('sRiskItem')) {
-				sap.ui.getCore().byId('sRiskRiskType').addItem(new sap.ui.core.Item("sRiskItem", {
-					text: "",
-					key: ""
-				}));
-			}
-			sap.ui.getCore().byId('sRiskRiskType').setSelectedKey("").setEnabled(true);
-			sap.ui.getCore().byId('taRiskDescription').setValue("");
-			sap.ui.getCore().byId('taRiskRecommended').setValue("");
-			sap.ui.getCore().byId('dpRiskDateFrom').setDateValue(null).setEnabled(true);
-			sap.ui.getCore().byId('dpRiskDateTo').setDateValue(null);
-			sap.ui.getCore().byId('cbRiskActual').setSelected(false);
-			this.risksDialog.setTitle(this.getModel("i18n").getProperty('addRisk'));
-			this.risksDialog.getButtons()[1].setVisible(false);
-			this.risksDialog.getButtons()[2].setVisible(true);
-			this.risksDialog.open();
-		},
-
-		tableEditRisk: function() {
-			var cells = this.byId('complianceRisksTable').getSelectedItem().getCells();
-			var cellsData = [];
-			for (var i = 0; i < cells.length; i++) {
-				if (cells[i].data("key")){
-					cellsData.push(cells[i].data("key"));
-				}else if (cells[i]['mBindingInfos'].text) {
-					cellsData.push(cells[i].getText());
-				} else {
-					cellsData.push(cells[i].getSelected());
-				}
-			}
-
-			// Set data from row to Risks edit Dialog
-			sap.ui.getCore().byId('sRiskRiskType').setSelectedKey(cellsData[0]).setEnabled(false);
-			sap.ui.getCore().byId('taRiskDescription').setValue(cellsData[1]);
-			sap.ui.getCore().byId('taRiskRecommended').setValue(cellsData[2]);
-			sap.ui.getCore().byId('dpRiskDateFrom').setDateValue(cellsData[3]).setEnabled(false);
-			if (cellsData[4] === "") {
-				cellsData[4] = null;
-			}
-			sap.ui.getCore().byId('dpRiskDateTo').setDateValue(cellsData[4]);
-			sap.ui.getCore().byId('cbRiskActual').setSelected(cellsData[5]);
-
-			// Edit risks dialog
-			this.risksDialog.setTitle(this.getModel("i18n").getProperty('editRisk'));
-			this.risksDialog.getButtons()[1].setVisible(true);
-			this.risksDialog.getButtons()[2].setVisible(false);
-			this.risksDialog.open();
-		},
-
-		tableDeleteRisk: function() {
-			var that = this;
-			var oModel = this.getModel();
-			var url = this.byId('complianceRisksTable').getSelectedItem().getBindingContextPath();
-			MessageBox.confirm("Are you sure you want to delete?", {
-				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
-				onClose: function(sAction) {
-					if (sAction === "Delete") {
-						oModel.remove(url, {
-							success: that.successFunction.bind(that),
-							error: that.errorFunction.bind(that)
-						});
-					}
-				}
-			});
-		},
-
-		dialogAddRisk: function() {
-			if (!sap.ui.getCore().byId('sRiskRiskType').getSelectedKey() || !sap.ui.getCore().byId('dpRiskDateFrom').getDateValue()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterTypeItemNumberDateFrom"), {
-					actions: [sap.m.MessageBox.Action.CLOSE]
-				});
-			} else {
-				var oModel = this.getModel();
-				var dateFrom = sap.ui.getCore().byId('dpRiskDateFrom').getDateValue();
-				var dateTo = sap.ui.getCore().byId('dpRiskDateTo').getDateValue();
-				dateFrom.setMinutes(-dateFrom.getTimezoneOffset());
-				if(dateTo) { dateTo.setMinutes(-dateTo.getTimezoneOffset()); }
-				var oData = {
-					RiskType: sap.ui.getCore().byId('sRiskRiskType').getSelectedKey(),
-					ItemNumber: "1",
-					DateFrom: dateFrom,
-					Type: "",
-					Description: sap.ui.getCore().byId('taRiskDescription').getValue(),
-					Actions: sap.ui.getCore().byId('taRiskRecommended').getValue(),
-					DateTo: dateTo,
-					Actual: sap.ui.getCore().byId('cbRiskActual').getSelected(),
-					Code: this.byId("tSAPID").getText()
-				};
-				oModel.create("/ComplianceRisksSet", oData, {
-					success: this.successFunction.bind(this),
-					error: this.errorFunction.bind(this)
-				});
-				this.risksDialog.close();
-			}
-		},
-
-		dialogEditRisk: function() {
-			if (!sap.ui.getCore().byId('sRiskRiskType').getSelectedKey() || !sap.ui.getCore().byId('dpRiskDateFrom').getDateValue()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterTypeItemNumberDateFrom"), {
-					actions: [sap.m.MessageBox.Action.CLOSE]
-				});
-			} else {
-				var oModel = this.getModel();
-				var url = this.byId('complianceRisksTable').getSelectedItem().getBindingContextPath();
-				var dateTo = sap.ui.getCore().byId('dpRiskDateTo').getDateValue();
-				if(dateTo) { dateTo.setMinutes(-dateTo.getTimezoneOffset()); }
-				var oData = {
-					RiskType: sap.ui.getCore().byId('sRiskRiskType').getSelectedKey(),
-					ItemNumber: "1",
-					DateFrom: sap.ui.getCore().byId('dpRiskDateFrom').getDateValue(),
-					Type: "",
-					Description: sap.ui.getCore().byId('taRiskDescription').getValue(),
-					Actions: sap.ui.getCore().byId('taRiskRecommended').getValue(),
-					DateTo: dateTo,
-					Actual: sap.ui.getCore().byId('cbRiskActual').getSelected(),
-					Code: this.byId("tSAPID").getText()
-				};
-				oModel.update(url, oData, {
-					success: this.successFunction.bind(this),
-					error: this.errorFunction.bind(this)
-				});
-				this.risksDialog.close();
-			}
-		},
-
-		// Delete,Add,Edit functions for Political Exposed person table from Compliance Risks Tab
-		tableAddPolitical: function() {
-			if (!sap.ui.getCore().byId('sPoliticalItem')) {
-				sap.ui.getCore().byId('sPoliticalContactType').addItem(new sap.ui.core.Item("sPoliticalItem", {
-					text: "",
-					key: ""
-				}));
-			}
-			sap.ui.getCore().byId('iPoliticalName').setValue("").setEnabled(true);
-			sap.ui.getCore().byId('iPoliticalSurname').setValue("").setEnabled(true);
-			sap.ui.getCore().byId('iPoliticalPosition').setValue("");
-			sap.ui.getCore().byId('taPoliticalComment').setValue("");
-			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey("").setEnabled(true);
-			sap.ui.getCore().byId('iPoliticalPhone').setValue("");
-			sap.ui.getCore().byId('iPoliticalFax').setValue("");
-			sap.ui.getCore().byId('iPoliticalEmail').setValue("");
-			this.politicalDialog.setTitle(this.getModel("i18n").getProperty('addPolitical'));
-			this.politicalDialog.getButtons()[1].setVisible(false);
-			this.politicalDialog.getButtons()[2].setVisible(true);
-			this.politicalDialog.open();
-		},
-
-		tableEditPolitical: function() {
-			// Get data from row
-			var cells = this.byId('politicalExposedTable').getSelectedItem().getCells();
-			var cellsData = [];
-			for (var i = 0; i < cells.length; i++) {
-				if (cells[i].data("key")){
-					cellsData.push(cells[i].data("key"));
-				}else if (cells[i]['mBindingInfos'].text) {
-					cellsData.push(cells[i].getText());
-				} else {
-					cellsData.push(cells[i].getSelected());
-				}
-			}
-
-			// Set data from row to Risks edit Dialog
-			sap.ui.getCore().byId('iPoliticalName').setValue(cellsData[0]).setEnabled(false);
-			sap.ui.getCore().byId('iPoliticalSurname').setValue(cellsData[1]).setEnabled(false);
-			sap.ui.getCore().byId('iPoliticalPosition').setValue(cellsData[2]);
-			sap.ui.getCore().byId('taPoliticalComment').setValue(cellsData[3]);
-			sap.ui.getCore().byId('sPoliticalContactType').setSelectedKey(cellsData[4]).setEnabled(false);
-			sap.ui.getCore().byId('iPoliticalPhone').setValue(cellsData[5]);
-			sap.ui.getCore().byId('iPoliticalFax').setValue(cellsData[6]);
-			sap.ui.getCore().byId('iPoliticalEmail').setValue(cellsData[7]);
-
-			// Edit Political Exposed person dialog settings
-			this.politicalDialog.setTitle(this.getModel("i18n").getProperty('editPolitical'));
-			this.politicalDialog.getButtons()[1].setVisible(true);
-			this.politicalDialog.getButtons()[2].setVisible(false);
-			this.politicalDialog.open();
-		},
-
-		tableDeletePolitical: function() {
-			var that = this;
-			var oModel = this.getModel();
-			var url = this.byId('politicalExposedTable').getSelectedItem().getBindingContextPath();
-			MessageBox.confirm("Are you sure you want to delete?", {
-				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
-				onClose: function(sAction) {
-					if (sAction === "Delete") {
-						oModel.remove(url, {
-							success: that.successFunction.bind(that),
-							error: that.errorFunction.bind(that)
-						});
-					}
-				}
-			});
-		},
-
-		dialogAddPolitical: function() {
-			if (!sap.ui.getCore().byId('iPoliticalName').getValue() || !sap.ui.getCore().byId('iPoliticalSurname').getValue() 
-				|| !sap.ui.getCore().byId('sPoliticalContactType').getSelectedKey()) {
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
-					actions: [sap.m.MessageBox.Action.CLOSE]
-				});
-			} else {
-				var oModel = this.getModel();
-				var oData = {
-					Name: sap.ui.getCore().byId('iPoliticalName').getValue(),
-					Surname: sap.ui.getCore().byId('iPoliticalSurname').getValue(),
-					Position: sap.ui.getCore().byId('iPoliticalPosition').getValue(),
-					Comment: sap.ui.getCore().byId('taPoliticalComment').getValue(),
-					ContactType: sap.ui.getCore().byId('sPoliticalContactType').getSelectedKey(),
-					ContactName: "",
-					Phone: sap.ui.getCore().byId('iPoliticalPhone').getValue(),
-					FaxNumber: sap.ui.getCore().byId('iPoliticalFax').getValue(),
-					Email: sap.ui.getCore().byId('iPoliticalEmail').getValue(),
-					Code: this.byId("tSAPID").getText()
-				};
-				oModel.create("/CompliancePersonsSet", oData, {
-					success: this.successFunction.bind(this),
-					error: this.errorFunction.bind(this)
-				});
-				this.politicalDialog.close();
-			}
-		},
-
-		dialogEditPolitical: function() {
-			var oModel = this.getModel();
-			var url = this.byId('politicalExposedTable').getSelectedItem().getBindingContextPath();
-			var oData = {
-				Name: sap.ui.getCore().byId('iPoliticalName').getValue(),
-				Surname: sap.ui.getCore().byId('iPoliticalSurname').getValue(),
-				Position: sap.ui.getCore().byId('iPoliticalPosition').getValue(),
-				Comment: sap.ui.getCore().byId('taPoliticalComment').getValue(),
-				ContactType: sap.ui.getCore().byId('sPoliticalContactType').getSelectedKey(),
-				ContactName: "",
-				Phone: sap.ui.getCore().byId('iPoliticalPhone').getValue(),
-				FaxNumber: sap.ui.getCore().byId('iPoliticalFax').getValue(),
-				Email: sap.ui.getCore().byId('iPoliticalEmail').getValue(),
-				Code: this.byId("tSAPID").getText()
-			};
-			oModel.update(url, oData, {
-				success: this.successFunction.bind(this),
-				error: this.errorFunction.bind(this)
-			});
-			this.politicalDialog.close();
-		},
 		
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
@@ -896,49 +411,13 @@ sap.ui.define([
 		},
 
 		// On select item in Compliance Risks table
-		onRiskSelect: function(e) {
+		onTableSelect: function(e){
 			var listItems = e.getParameters("listItem");
 			if (listItems) {
-				// Make enabed edit buttons
-				this.byId('bDeleteRisk').setEnabled(true);
-				this.byId('bEditRisk').setEnabled(true);
+				var id = e.getSource().data("id");
+				this.byId(id + "Delete").setEnabled(true);
+				this.byId(id + "Edit").setEnabled(true);
 			}
-		},
-
-		// On select item in Political Exposed Person table
-		onPersonChange: function(e) {
-			var listItems = e.getParameters("listItem");
-			if (listItems) {
-				// Make enabed edit buttons
-				this.byId('bDeletePolitical').setEnabled(true);
-				this.byId('bEditPolitical').setEnabled(true);
-			}
-		},
-
-		// On select item in Political Exposed Person table
-		onManagementChange: function(e) {
-			var listItems = e.getParameters("listItem");
-			if (listItems) {
-				// Make enabed edit buttons
-				this.byId('bDeleteManagement').setEnabled(true);
-				this.byId('bEditManagement').setEnabled(true);
-			}
-		},
-
-		// On select item in Political Exposed Person table
-		onProxyChange: function(e) {
-			var listItems = e.getParameters("listItem");
-			if (listItems) {
-				// Make enabed edit buttons
-				this.byId('bDeleteProxy').setEnabled(true);
-				this.byId('bEditProxy').setEnabled(true);
-			}
-		},
-
-		// Close dialog function
-		closeDialog: function(e) {
-			var dialog = e.getSource().data('dialog');
-			this[dialog].close();
 		},
 		
 		// General Hide function | objects: array of ids of objects
@@ -1002,7 +481,142 @@ sap.ui.define([
 				}
 				
 			}
+		},
+		
+		// Table buttons function for add/edit/delete of items
+		tableAdd: function(oEvent) {
+			var id = oEvent.getSource().data("id");
+			sap.ui.getCore().byId(id + "Dialog").unbindElement();
+			var oDialog = this.dialogOpen(oEvent);
+			this.setEnabled(oDialog, true);
+			oDialog.getButtons()[1].setVisible(false);
+			oDialog.getButtons()[2].setVisible(true);
+		},
+		tableEdit: function(oEvent) {
+			var id = oEvent.getSource().data("id");
+			var url = this.byId(id + "Table").getSelectedItem().getBindingContextPath();
+			sap.ui.getCore().byId(id + "Dialog").bindElement(url);
+			var oDialog = this.dialogOpen(oEvent);
+			this.setEnabled(oDialog, false);
+			oDialog.getButtons()[1].setVisible(true);
+			oDialog.getButtons()[2].setVisible(false);
+		},
+		tableDelete: function(oEvent) {
+			var sTableId = oEvent.getSource().data("id");
+			var oTable = this.byId(sTableId + "Table");
+			var sUrl = oTable.getSelectedItem().getBindingContextPath();
+			var oModel = oTable.getModel();
+			MessageBox.confirm("Are you sure you want to delete?", {
+				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
+				onClose: function(sAction) {
+					if (sAction === "Delete") {
+						oModel.remove(sUrl);
+					} else {
+						MessageToast.show("Delete canceled!");
+					}
+				}
+			});
+		},
+		
+		// Add/Edit/Close dialog functions
+		dialogAdd: function(oEvent) {
+			var oButton = oEvent.getSource();
+			var sTableId = oButton.data("id");
+			var oDialog = oButton.getParent();
+			var oModel = oDialog.getModel();
+			var oData = this.getOdata(oDialog);
+			var bCheck = this.checkKeys(oDialog);
+			var sUrl = this.byId(sTableId + "Table").getItems()[0].getBindingContextPath();
+			sUrl = sUrl.slice(0, sUrl.indexOf("("));
+			if(bCheck){
+				oModel.create(sUrl, oData);
+				this[sTableId + "Dialog"].close();
+			}else{
+				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
+					actions: [sap.m.MessageBox.Action.CLOSE]
+				});
+			}
+		},
+		dialogEdit: function(oEvent) {
+			var sTableId = oEvent.getSource().data("id");
+			var oDialog = sap.ui.getCore().byId(sTableId + "Dialog");
+			var sUrl = oDialog.getBindingContext().getPath();
+			var oModel = oDialog.getModel();
+			var oData = this.getOdata(oDialog);
+			oModel.update(sUrl, oData);
+			this[sTableId + "Dialog"].close();
+		},
+		dialogClose: function(e) {
+			var dialog = e.getSource().data('id');
+			this[dialog].close();
+		},
+		
+		// Function for openning the dialog for create/edit/copy functions
+		// Also returns dialog object
+		dialogOpen: function(oEvent) {
+			var sTableId = oEvent.getSource().data("id");
+			this[sTableId + "Dialog"].open();
+			return this[sTableId + "Dialog"];
+		},
+		
+		// Set key inputs as disabled/enabled for editting, oDialog = object dialog, flag = boolean flag for enabled/disabled
+		setEnabled: function(oDialog, flag){
+			var inputs = oDialog.getAggregation("content");
+			for(var i in inputs){
+				if(inputs[i].data("key")){
+					if(flag){
+						inputs[i].setEnabled(true);
+					}else{
+						inputs[i].setEnabled(false);
+					}
+				}
+			}
+		},
+		
+		// Set odata from any dialog, oDialog = object dialog / return object Data
+		getOdata: function(oDialog){
+			var oData = {};
+			var inputs = oDialog.getAggregation("content");
+			for(var i in inputs){
+				if(inputs[i].data("value") !== null){
+					oData[inputs[i].getBindingInfo("value").binding.sPath] = inputs[i].data("value");
+				}else if(inputs[i].hasOwnProperty("_oMaxDate")){
+					var date = inputs[i].getDateValue();
+					if(date) {
+						date.setMinutes(-date.getTimezoneOffset());
+					} else { 
+						date = null;
+					}
+					oData[inputs[i].getBindingInfo("dateValue").binding.sPath] = date;
+				}else if(inputs[i].getBindingInfo("value")){
+					oData[inputs[i].getBindingInfo("value").binding.sPath] = inputs[i].getValue();
+				}else if(inputs[i].getBindingInfo("selectedKey")){
+					oData[inputs[i].getBindingInfo("selectedKey").binding.sPath] = inputs[i].getSelectedKey();
+				}else if(inputs[i].getBindingInfo("selected")){
+					oData[inputs[i].getBindingInfo("selected").binding.sPath] = inputs[i].getSelected();
+				}
+			}
+			oData.Code = this.byId("tSAPID").getText();
+			return oData;
+		},
+		
+		// Checks the key values to lock them on update
+		checkKeys: function(oDialog){
+			var check = true;
+			var inputs = oDialog.getAggregation("content");
+			for(var i in inputs){
+				var oInput = inputs[i];
+				if(oInput.data("key")){
+					if(oInput.mProperties.hasOwnProperty("value") && !oInput.getValue()){
+						check = false;
+					}else if(oInput.mProperties.hasOwnProperty("selectedKey") && !oInput.getSelectedKey()){
+						check = false;
+					}else if(oInput.mBindingInfos.hasOwnProperty("value") && !oInput.getValue()){
+						check = false;
+					}
+				}
+			}
+			return check;
 		}
 	});
-
 });

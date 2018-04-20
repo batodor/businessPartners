@@ -1,37 +1,36 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Edit Political Exposed Person" class="sapUiContentPadding">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="Edit Political Exposed Person" class="sapUiContentPadding" id="politicalDialog">
 		<content>
 			<Text text="{i18n>name}" width="150px"/>
-			<Input id="iPoliticalName" width="300px"/>
+			<Input custom:key="thisIsKey" value="{Name}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>surname}" width="150px"/>
-			<Input id="iPoliticalSurname" width="300px"/>
+			<Input custom:key="thisIsKey" value="{Surname}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>position}" width="150px"/>
-			<Input id="iPoliticalPosition" width="300px"/>
+			<Input value="{Position}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>comment}" width="150px"/>
-			<TextArea id="taPoliticalComment" width="300px"/>
+			<TextArea value="{Comment}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>contactType}" width="150px"/>
-			<Select id="sPoliticalContactType" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
+			<Select forceSelection="false" custom:key="thisIsKey" selectedKey="{ContactType}" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
 				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>phone}" width="150px"/>
-			<Input id="iPoliticalPhone" width="300px"/>
+			<Input value="{Phone}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>fax}" width="150px"/>
-			<Input id="iPoliticalFax" width="300px"/>
+			<Input value="{FaxNumber}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>email}" width="150px"/>
-			<Input id="iPoliticalEmail" width="300px"/>
+			<Input value="{Email}" width="300px"/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" custom:dialog="politicalDialog" type="Back" press="closeDialog"/>
-			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditPolitical"/>
-			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddPolitical"/>
+			<Button text="{i18n>cancel}" custom:id="politicalDialog" type="Back" press="dialogClose"/>
+			<Button text="{i18n>edit}" custom:id="political" visible="false" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>add}" custom:id="political" visible="false" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

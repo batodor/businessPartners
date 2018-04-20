@@ -12,7 +12,7 @@
 			<DatePicker id="dCreditLimitPeriodFrom" placeholder="{i18n>enterDate}" width="260px" class="sapUiSmallMarginBottom"/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" custom:dialog="creditLimitDialog" type="Back" press="closeDialog"/>
+			<Button text="{i18n>cancel}" custom:id="creditLimitDialog" type="Back" press="dialogClose"/>
 			<Button text="{i18n>update}" type="Accept" press="updateCreditLimit"/>
 		</buttons>
 	</Dialog>

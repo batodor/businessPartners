@@ -9,11 +9,11 @@
 					<Label class="black" text="{i18n>country}:" width="80px"/>
 					<Label text="{Country}"/>
 					<ToolbarSpacer/>
-					<Button id="bAddRisk" text="{i18n>add}" press="tableAddRisk"/>
-					<Button id="bEditRisk" text="{i18n>edit}" press="tableEditRisk" enabled="false"/>
-					<Button id="bDeleteRisk" text="{i18n>delete}" press="tableDeleteRisk" type="Reject" enabled="false"/>
+					<Button custom:id="risks" text="{i18n>add}" press="tableAdd"/>
+					<Button id="risksEdit" custom:id="risks" text="{i18n>edit}" press="tableEdit" enabled="false"/>
+					<Button id="risksDelete" custom:id="risks" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="complianceRisksTable" mode="SingleSelectLeft" selectionChange="onRiskSelect" width="auto" items="{}"
+				<Table id="risksTable" mode="SingleSelectLeft" custom:id="risks" selectionChange="onTableSelect" width="auto" items="{}"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column width="120px"><Label class="black" text="{i18n>type}"/></Column>
@@ -47,11 +47,11 @@
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>politicalExposedPerson}" titleStyle="H3"/>
 					<ToolbarSpacer/>
-					<Button text="{i18n>add}" press="tableAddPolitical"/>
-					<Button text="{i18n>edit}" press="tableEditPolitical" id="bEditPolitical" enabled="false"/>
-					<Button text="{i18n>delete}" press="tableDeletePolitical" id="bDeletePolitical" type="Reject" enabled="false"/>
+					<Button text="{i18n>add}" custom:id="political" press="tableAdd"/>
+					<Button text="{i18n>edit}" custom:id="political" press="tableEdit" id="politicalEdit" enabled="false"/>
+					<Button text="{i18n>delete}" custom:id="political" press="tableDelete" id="politicalDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="politicalExposedTable" width="100%" mode="SingleSelectLeft" selectionChange="onPersonChange" items="{}"
+				<Table id="politicalTable" width="100%" custom:id="political" mode="SingleSelectLeft" selectionChange="onTableSelect" items="{}"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>

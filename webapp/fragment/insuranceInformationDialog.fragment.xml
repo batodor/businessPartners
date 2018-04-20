@@ -19,7 +19,7 @@
 			<DatePicker id="dInsuranceValidityDate" width="260px" class="sapUiSmallMarginBottom"/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:dialog="insuranceInformationDialog" press="closeDialog"/>
+			<Button text="{i18n>cancel}" type="Back" custom:id="insuranceInformationDialog" press="dialogClose"/>
 			<Button text="{i18n>update}" type="Accept" press="updateInsurance"/>
 		</buttons>
 	</Dialog>

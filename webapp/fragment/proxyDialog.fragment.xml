@@ -1,37 +1,38 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Edit Proxy" class="sapUiContentPadding">
+	<Dialog title="Edit Proxy" class="sapUiContentPadding" id="proxyDialog">
 		<content>
 			<Text text="{i18n>name}" width="150px"/>
-			<Input id="iProxyName" width="300px"/>
+			<Input custom:key="thisIsKey" value="{Name}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>surname}" width="150px"/>
-			<Input id="iProxySurname" width="300px"/>
+			<Input custom:key="thisIsKey" value="{Surname}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>position}" width="150px"/>
-			<Input id="iProxyPosition" width="300px"/>
+			<Input value="{Position}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>comment}" width="150px"/>
-			<TextArea id="taProxyComment" width="300px"/>
+			<TextArea value="{Comment}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>contactType}" width="150px"/>
-			<Select id="sProxyContactType" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
+			<Select forceSelection="false" custom:key="thisIsKey" selectedKey="{ContactType}" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
 				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>
+			<Input value="{ContactName}" custom:value="" visible="false" />
 			<ToolbarSpacer/>
 			<Text text="{i18n>phone}" width="150px"/>
-			<Input id="iProxyPhone" width="300px"/>
+			<Input value="{Phone}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>fax}" width="150px"/>
-			<Input id="iProxyFax" width="300px"/>
+			<Input value="{FaxNumber}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>email}" width="150px"/>
-			<Input id="iProxyEmail" width="300px"/>
+			<Input value="{Email}" width="300px"/>
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:dialog="proxyDialog" press="closeDialog"/>
-			<Button text="{i18n>edit}" visible="false" type="Accept" press="dialogEditProxy"/>
-			<Button text="{i18n>add}" visible="false" type="Accept" press="dialogAddProxy"/>
+			<Button text="{i18n>cancel}" type="Back" custom:id="proxyDialog" press="dialogClose"/>
+			<Button text="{i18n>edit}" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>add}" visible="false" custom:id="proxy" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

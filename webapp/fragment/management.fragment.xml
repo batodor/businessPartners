@@ -5,11 +5,11 @@
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>management}" titleStyle="H3"/>
 					<ToolbarSpacer/>
-					<Button id="bAddManagement" text="{i18n>add}" press="tableAddManagement"/>
-					<Button id="bEditManagement" text="{i18n>edit}" press="tableEditManagement" enabled="false"/>
-					<Button id="bDeleteManagement" text="{i18n>delete}" press="tableDeleteManagement" type="Reject" enabled="false"/>
+					<Button id="managementAdd" custom:id="management" text="{i18n>add}" press="tableAdd"/>
+					<Button id="managementEdit" custom:id="management" text="{i18n>edit}" press="tableEdit" enabled="false"/>
+					<Button id="managementDelete" custom:id="management" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="managementTable" width="100%" items="{}" mode="SingleSelectLeft" selectionChange="onManagementChange"
+				<Table id="managementTable" custom:id="management" width="100%" items="{}" mode="SingleSelectLeft" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
@@ -45,11 +45,11 @@
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>proxy}" titleStyle="H3"/>
 					<ToolbarSpacer/>
-					<Button id="bAddProxy" text="{i18n>add}" press="tableAddProxy"/>
-					<Button id="bEditProxy" text="{i18n>edit}" press="tableEditProxy" enabled="false"/>
-					<Button id="bDeleteProxy" text="{i18n>delete}" press="tableDeleteProxy" type="Reject" enabled="false"/>
+					<Button id="proxyAdd" custom:id="proxy" text="{i18n>add}" press="tableAdd"/>
+					<Button id="proxyEdit" custom:id="proxy" text="{i18n>edit}" press="tableEdit" enabled="false"/>
+					<Button id="proxyDelete" custom:id="proxy" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="proxyTable" width="100%" items="{}" mode="SingleSelectLeft" selectionChange="onProxyChange"
+				<Table id="proxyTable" width="100%" custom:id="proxy" items="{}" mode="SingleSelectLeft" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
