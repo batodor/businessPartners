@@ -2,7 +2,7 @@
 	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Text text="{i18n>type}" width="160px"/>
-			<Select forceSelection="false" custom:key="thisIsKey" selectedKey="{RiskType}" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
+			<Select forceSelection="false" custom:key="{i18n>type}" selectedKey="{RiskType}" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
 				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
@@ -13,7 +13,7 @@
 			<TextArea value="{Actions}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="160px"/>
-			<DatePicker custom:key="thisIsKey" dateValue="{DateFrom}" width="300px"/>
+			<DatePicker custom:key="{i18n>dateFrom}"  dateValue="{DateFrom}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateTo}" width="160px"/>
 			<DatePicker dateValue="{DateTo}" width="300px"/>
@@ -27,7 +27,7 @@
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="risksDialog" press="dialogClose"/>
 			<Button text="{i18n>edit}" visible="false" custom:id="risks" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" visible="false" custom:id="risks" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>add}" visible="false" custom:id="risks" custom:url="/ComplianceRisksSet" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

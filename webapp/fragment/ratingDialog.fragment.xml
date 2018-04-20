@@ -1,41 +1,42 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>rating}" class="sapUiContentPadding">
+	<Dialog title="{i18n>rating}" class="sapUiContentPadding" id="ratingDialog">
 		<content>
 			<Text text="{i18n>rBusinessScale}" width="280px"/>
-			<Select id="sRatingSelectScale" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select forceSelection="false" selectedKey="{BusinessScale}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>rCorporateTransparency}" width="280px"/>
-			<Select id="sRatingSelectTransparency" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select forceSelection="false" selectedKey="{CorporateTransparency}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>rFinancialProfile}" width="280px"/>
-			<Select id="sRatingSelectFinProfile" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select forceSelection="false" selectedKey="{FinancialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>rCommercialProfile}" width="280px"/>
-			<Select id="sRatingSelectComProfile" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select forceSelection="false" selectedKey="{CommercialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>rSet}" width="280px"/>
-			<Select id="sRatingSelectSet" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select forceSelection="false" selectedKey="{RatingSet}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>date}" width="280px"/>
-			<DatePicker id="dpRatingDate" width="145px"/>
+			<DatePicker dateValue="{Date}" width="145px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>expressScore}" width="280px"/>
-			<CheckBox id="sRatingCheckboxScore" selected="false"/>
+			<CheckBox selected="{ExpressScore}"/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="ratingDialog" press="dialogClose"/>
-			<Button text="{i18n>update}" type="Accept" press="updateRating"/>
+			<Button text="{i18n>edit}" type="Accept" custom:id="rating" custom:create="true" custom:url="/RatingGeneralSet" 
+				custom:expandUrl="/ToRatingGeneral" press="dialogEdit"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

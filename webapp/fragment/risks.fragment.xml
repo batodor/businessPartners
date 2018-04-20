@@ -83,19 +83,19 @@
 	</l:BlockLayout>
 	<l:BlockLayout>
 		<l:BlockLayoutRow>
-			<l:BlockLayoutCell id="blcBlacklisted">
+			<l:BlockLayoutCell id="blacklistElement">
 				<OverflowToolbar width="600px">
 					<Title text="{i18n>blacklistedInf}" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label text=""/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>blacklisted}:" width="140px"/>
-				<CheckBox id="cbBlacklist" selected="{BlackListed}" class="rowCheckbox" editable="false"/>
+				<CheckBox selected="{BlackListed}" class="rowCheckbox" editable="false"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>justification}:" width="140px"/>
-				<TextArea id="taBlacklistJustification" value="{Justification}" width="460px" height="80px" enabled="false" />
+				<TextArea value="{Justification}" width="460px" height="80px" enabled="false" />
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateBlacklistInf}" type="Emphasized" press="showBlacklist"/>
+				<Button text="{i18n>updateBlacklistInf}" type="Emphasized" custom:id="blacklist" press="elementEdit"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>

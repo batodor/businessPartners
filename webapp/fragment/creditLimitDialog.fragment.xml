@@ -1,19 +1,19 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
-	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>creditLimit}" class="sapUiContentPadding">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>creditLimit}" class="sapUiContentPadding" id="creditLimitDialog">
 		<content>
 			<Text text="{i18n>creditLimit}" width="250px"/>
-			<Input id="iCreditLimit" width="167px" class="margin-right"/>
-			<Select id="sCreditLimitCurrency" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px">
+			<Input value="{CreditLimit}" width="167px" class="margin-right"/>
+			<Select selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px">
 				<core:Item key="{Currency}" text="{Currency}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>validityDate}" width="250px"/>
-			<DatePicker id="dCreditLimitPeriodFrom" placeholder="{i18n>enterDate}" width="260px" class="sapUiSmallMarginBottom"/>
+			<DatePicker dateValue="{ValidityDate}" placeholder="{i18n>enterDate}" width="260px" class="sapUiSmallMarginBottom"/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="creditLimitDialog" type="Back" press="dialogClose"/>
-			<Button text="{i18n>update}" type="Accept" press="updateCreditLimit"/>
+			<Button text="{i18n>edit}" type="Accept" custom:id="creditLimit" custom:create="true" custom:url="/RatingCreditLimitSet" 
+				custom:expandUrl="/ToRatingCreditLimit" press="dialogEdit"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

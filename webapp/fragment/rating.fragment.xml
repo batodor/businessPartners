@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">	
-	<l:BlockLayout id="blRatingGenInf">
+	<l:BlockLayout id="ratingElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
 				<OverflowToolbar>
@@ -11,28 +11,28 @@
 				<Label text="{CountryRating}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rBusinessScale}:" width="240px"/>
-				<Label id="lBusinessScale" text="{BusinessScale}"/>
+				<Label text="{BusinessScale}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rCorporateTransparency}:" width="240px"/>
-				<Label id="lCorporateTransparency" text="{CorporateTransparency}"/>
+				<Label text="{CorporateTransparency}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rFinancialProfile}:" width="240px"/>
-				<Label id="lFinancialProfile" text="{FinancialProfile}"/>
+				<Label text="{FinancialProfile}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rCommercialProfile}:" width="240px"/>
-				<Label id="lCommercialProfile" text="{CommercialProfile}"/>
+				<Label text="{CommercialProfile}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>rSet}:" width="240px"/>
-				<Label id="lRatingSet" text="{RatingSet}"/>
+				<Label text="{RatingSet}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>expressScore}:" width="240px"/>
-				<CheckBox class="rowCheckbox" id="chExpressScore" selected="{ExpressScore}" editable="false"/>
+				<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>date}:" width="240px"/>
-				<Label id="lRatingDate" custom:key="{Date}"
+				<Label custom:key="{Date}"
 					text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateRating}" type="Emphasized" press="showRating"/>
+				<Button text="{i18n>updateRating}" custom:id="rating" type="Emphasized" press="elementEdit"/>
 			</l:BlockLayoutCell>
 			<l:BlockLayoutCell>
 				<OverflowToolbar>
@@ -85,7 +85,7 @@
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
-	<l:BlockLayout id="blCreditLimit">
+	<l:BlockLayout id="creditLimitElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="500px">
@@ -94,16 +94,13 @@
 				<Label text=""/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>creditLimit}:" width="240px"/>
-				<Label id="lCreditLimit" custom:creditLimit="{CreditLimit}"
-					text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
-					class="margin-right"/>
-				<Label id="lCreditLimitCurrency" text="{Currency}"/>
+				<Label text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" class="margin-right"/>
+				<Label text="{Currency}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>validityDate}:" width="240px"/>
-				<Label id="lCreditLimitValidityDate" custom:validityDate="{ValidityDate}"
-					text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<Label text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateCreditLimit}" type="Emphasized" press="showCreditLimit"/>
+				<Button text="{i18n>updateCreditLimit}" custom:id="creditLimit" type="Emphasized" press="elementEdit"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
@@ -134,7 +131,7 @@
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
-	<l:BlockLayout id="blInsuranceInf">
+	<l:BlockLayout id="insuranceInformationElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
 				<OverflowToolbar width="500px">
@@ -143,22 +140,19 @@
 				<Label text=""/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>amountOfInsurancedReceivables}:" width="280px"/>
-				<Label id="lInsuranceReceivables" custom:receivables="{Amount}"
-					text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
-					class="margin-right"/>
-				<Label id="lInsuranceCurrency" text="{Currency}"/>
+				<Label text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" class="margin-right"/>
+				<Label text="{Currency}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>insurancePremiumRatePercent}:" width="280px"/>
-				<Label id="lInsuranceRate" custom:rate="{Rate}" custom:unit="{Unit}" text="{Rate} {Unit}"/>
+				<Label text="{Rate} {Unit}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>contractNumber}:" width="280px"/>
-				<Label id="lInsuranceContract" text="{ContractNum}"/>
+				<Label text="{ContractNum}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>validityDate}:" width="280px"/>
-				<Label id="lInsuraceValidityDate" custom:validityDate="{DateTo}"
-					text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+				<Label text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateInsuranceInformation}" type="Emphasized" press="showInsuranceInf"/>
+				<Button text="{i18n>updateInsuranceInformation}" type="Emphasized" custom:id="insuranceInformation" press="elementEdit"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>

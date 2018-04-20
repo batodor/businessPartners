@@ -3,10 +3,10 @@
 	<Dialog title="Edit Proxy" class="sapUiContentPadding" id="proxyDialog">
 		<content>
 			<Text text="{i18n>name}" width="150px"/>
-			<Input custom:key="thisIsKey" value="{Name}" width="300px"/>
+			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>surname}" width="150px"/>
-			<Input custom:key="thisIsKey" value="{Surname}" width="300px"/>
+			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>position}" width="150px"/>
 			<Input value="{Position}" width="300px"/>
@@ -15,7 +15,7 @@
 			<TextArea value="{Comment}" width="300px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>contactType}" width="150px"/>
-			<Select forceSelection="false" custom:key="thisIsKey" selectedKey="{ContactType}" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
+			<Select forceSelection="false" custom:key="{i18n>contactType}" selectedKey="{ContactType}" width="300px" items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
 				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>
 			<Input value="{ContactName}" custom:value="" visible="false" />
@@ -32,7 +32,7 @@
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="proxyDialog" press="dialogClose"/>
 			<Button text="{i18n>edit}" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" visible="false" custom:id="proxy" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>add}" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

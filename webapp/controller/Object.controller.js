@@ -89,7 +89,7 @@ sap.ui.define([
 			var code = oEvent.getParameter("arguments").objectId;
 			this.getModel().metadataLoaded().then(function() {
 				this._bindView("/CounterpartyListSet('" + code + "')/ToCounterpartyHeader");
-				
+				this.code = code;
 				// Disabled edit mode and hide edit buttons
 				this.cancelMainInf();
 			}.bind(this));
@@ -106,7 +106,7 @@ sap.ui.define([
 				oDataModel = this.getModel();
 			var that = this;
 			
-			this.byId("blMainInf").bindElement({
+			this.byId("mainElement").bindElement({
 				path: url,
 				events: {
 					change: this._onBindingChange.bind(this),
@@ -129,7 +129,7 @@ sap.ui.define([
 		},
 
 		_onBindingChange: function() {
-			var oElement = this.byId("blMainInf"),
+			var oElement = this.byId("mainElement"),
 				oViewModel = this.getModel("mMain"),
 				oElementBinding = oElement.getElementBinding();
 
@@ -154,15 +154,15 @@ sap.ui.define([
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 
 			if (oObject.TypeID === '1') {
-				this.hideObjects(["cGenInf"]);
+				this.setVisible(["cGenInf"], false);
 			} else {
-				this.showObjects(["cGenInf"]);
+				this.setVisible(["cGenInf"], true);
 			}
 
 			if (oObject.Sanctions) {
-				this.showObjects(["isUnderSanction"]);
+				this.setVisible(["isUnderSanction"], true);
 			} else {
-				this.hideObjects(["isUnderSanction"]);
+				this.setVisible(["isUnderSanction"], false);
 			}
 		},
 
@@ -188,190 +188,42 @@ sap.ui.define([
 				this.bindElement("blGenInf", partnerUrl + "/ToCounterpartyInformation", update);
 				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
 				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
-				this.showObjects(["editMainInf"]);
+				this.setVisible(["editMainInf"], true);
 			} else if(key === "government"){
 				this.bindTable("managementTable", partnerUrl + "/ToGovernmentMgt");
 				this.bindTable("proxyTable", partnerUrl + "/ToGovernmentProxy");
 			} else if (key === "rating"){
-				this.bindElement("blRatingGenInf", partnerUrl + "/ToRatingGeneral");
+				this.bindElement("ratingElement", partnerUrl + "/ToRatingGeneral");
 				this.bindTable("historicalDataTable", partnerUrl + "/ToRatingGeneralTab");
-				this.bindElement("blCreditLimit", partnerUrl + "/ToRatingCreditLimit");
+				this.bindElement("creditLimitElement", partnerUrl + "/ToRatingCreditLimit");
 				this.bindTable("historicalDataTable2", partnerUrl + "/ToRatingCreditLimitTab");
-				this.bindElement("blInsuranceInf", partnerUrl + "/ToRatingInsure");
+				this.bindElement("insuranceInformationElement", partnerUrl + "/ToRatingInsure");
 			} else if (key === "risks"){
 				this.bindTable("risksTable", partnerUrl + "/ToComplianceRisks");
 				this.bindTable("politicalTable", partnerUrl + "/ToCompliancePersons");
-				this.bindElement("blcBlacklisted", partnerUrl + "/ToComplianceBlacklisted");
+				this.bindElement("blacklistElement", partnerUrl + "/ToComplianceBlacklisted");
 				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
 			}
 			
 			if (key !== "dashboard") {
 				this.cancelMainInf();
-				this.hideObjects(["editMainInf"]);
+				this.setVisible(["editMainInf"], false);
 			}
 		},
-
-		// Operations with updating counterparty rating
-		showRating: function() {
-			if (!sap.ui.getCore().byId('sRatingItem')) {
-				sap.ui.getCore().byId('sRatingSelectScale').addItem(new sap.ui.core.Item("sRatingItem", {
-					text: "",
-					key: ""
-				}));
-				sap.ui.getCore().byId('sRatingSelectTransparency').addItem(new sap.ui.core.Item({
-					text: "",
-					key: ""
-				}));
-				sap.ui.getCore().byId('sRatingSelectFinProfile').addItem(new sap.ui.core.Item({
-					text: "",
-					key: ""
-				}));
-				sap.ui.getCore().byId('sRatingSelectComProfile').addItem(new sap.ui.core.Item({
-					text: "",
-					key: ""
-				}));
-				sap.ui.getCore().byId('sRatingSelectSet').addItem(new sap.ui.core.Item({
-					text: "",
-					key: ""
-				}));
-			}
-
-			sap.ui.getCore().byId('sRatingSelectScale').setSelectedKey(this.byId("lBusinessScale").getText());
-			sap.ui.getCore().byId('sRatingSelectTransparency').setSelectedKey(this.byId("lCorporateTransparency").getText());
-			sap.ui.getCore().byId('sRatingSelectFinProfile').setSelectedKey(this.byId("lFinancialProfile").getText());
-			sap.ui.getCore().byId('sRatingSelectComProfile').setSelectedKey(this.byId("lCommercialProfile").getText());
-			sap.ui.getCore().byId('sRatingSelectSet').setSelectedKey(this.byId("lRatingSet").getText());
-			sap.ui.getCore().byId('sRatingCheckboxScore').setSelected(this.byId("chExpressScore").getSelected());
-			sap.ui.getCore().byId('dpRatingDate').setValue(this.byId("lRatingDate").data("key"));
-			this.ratingDialog.open();
-		},
-
-		updateRating: function() {
-			var oModel = this.getModel();
-			var date = sap.ui.getCore().byId('dpRatingDate').getDateValue();
-			if(date) { date.setMinutes(-date.getTimezoneOffset()); }
-			var code = this.byId("tSAPID").getText();
-			var oData = {
-				BusinessScale: sap.ui.getCore().byId('sRatingSelectScale').getSelectedKey(),
-				CorporateTransparency: sap.ui.getCore().byId('sRatingSelectTransparency').getSelectedKey(),
-				FinancialProfile: sap.ui.getCore().byId('sRatingSelectFinProfile').getSelectedKey(),
-				CommercialProfile: sap.ui.getCore().byId('sRatingSelectComProfile').getSelectedKey(),
-				RatingSet: sap.ui.getCore().byId('sRatingSelectSet').getSelectedKey(),
-				ExpressScore: sap.ui.getCore().byId('sRatingCheckboxScore').getSelected(),
-				Date: date,
-				Code: code
-			};
-			oModel.create("/RatingGeneralSet", oData, {
-				success: function(){
-					this.bindElement("blRatingGenInf","/CounterpartyListSet('" + code + "')/ToRatingGeneral", true);
-				},
-				error: this.errorFunction.bind(this)
-			});
-			this.ratingDialog.close();
-		},
-
-		// Operations with updating counterparty credit limit
-		showCreditLimit: function() {
-			sap.ui.getCore().byId('iCreditLimit').setValue(this.byId('lCreditLimit').data('creditLimit'));
-			sap.ui.getCore().byId('sCreditLimitCurrency').setSelectedKey(this.byId('lCreditLimitCurrency').getText());
-			sap.ui.getCore().byId('dCreditLimitPeriodFrom').setDateValue(this.byId('lCreditLimitValidityDate').data('validityDate'));
-			this.creditLimitDialog.open();
-		},
-
-		updateCreditLimit: function() {
-			var oModel = this.getModel();
-			var validityDate = sap.ui.getCore().byId('dCreditLimitPeriodFrom').getDateValue();
-			if(validityDate) { validityDate.setMinutes(-validityDate.getTimezoneOffset()); }
-			var code = this.byId("tSAPID").getText();
-			var oData = {
-				ValidityDate: validityDate,
-				CreditLimit: sap.ui.getCore().byId('iCreditLimit').getValue(),
-				Currency: sap.ui.getCore().byId('sCreditLimitCurrency').getSelectedKey(),
-				Code: code
-			};
-			oModel.create("/RatingCreditLimitSet", oData, {
-				success: function(){
-					this.bindElement("blCreditLimit", "/CounterpartyListSet('" + code + "')/ToRatingCreditLimit", true);
-				},
-				error: this.errorFunction.bind(this)
-			});
-			this.creditLimitDialog.close();
-		},
-
-		// Operations with updating counterparty Insurance information
-		showInsuranceInf: function() {
-			sap.ui.getCore().byId('iInsuranceReceivables').setValue(this.byId('lInsuranceReceivables').data('receivables'));
-			sap.ui.getCore().byId('sInsuranceCurrency').setSelectedKey(this.byId('lInsuranceCurrency').getText());
-			sap.ui.getCore().byId('iInsuranceRate').setValue(this.byId('lInsuranceRate').data('rate'));
-			sap.ui.getCore().byId('iInsuranceContract').setValue(this.byId('lInsuranceContract').getText());
-			sap.ui.getCore().byId('dInsuranceValidityDate').setDateValue(this.byId('lInsuraceValidityDate').data('validityDate'));
-			this.insuranceInformationDialog.open();
-		},
-
-		updateInsurance: function() {
-			var oModel = this.getModel();
-			var that = this;
-			var dateTo = sap.ui.getCore().byId('dInsuranceValidityDate').getDateValue();
-			if(dateTo) { dateTo.setMinutes(-dateTo.getTimezoneOffset()); }
-			var code = this.byId("tSAPID").getText();
-			var oData = {
-				DateTo: dateTo,
-				Amount: sap.ui.getCore().byId('iInsuranceReceivables').getValue(),
-				Currency: sap.ui.getCore().byId('sInsuranceCurrency').getSelectedKey(),
-				Rate: sap.ui.getCore().byId('iInsuranceRate').getValue(),
-				Unit: "%",
-				ContractNum: sap.ui.getCore().byId('iInsuranceContract').getValue(),
-				Code: code
-			};
-			oModel.create("/RatingInsureSet", oData, {
-				success: function(){
-					that.bindElement("blInsuranceInf", "/CounterpartyListSet('" + code + "')/ToRatingInsure", true);
-				},
-				error: that.errorFunction.bind(that)
-			});
-			this.insuranceInformationDialog.close();
-		},
-
-		// Operations with updating Blacklist
-		showBlacklist: function() {
-			sap.ui.getCore().byId('cbDialogBlacklist').setSelected(this.byId('cbBlacklist').getSelected());
-			sap.ui.getCore().byId('taDialogJustification').setValue(this.byId('taBlacklistJustification').getValue());
-			this.blacklistDialog.open();
-		},
-
-		updateBlacklist: function() {
-			var oModel = this.getModel();
-			var that = this;
-			var code = this.byId("tSAPID").getText();
-			var oData = {
-				DateFrom: new Date(),
-				Justification: sap.ui.getCore().byId('taDialogJustification').getValue(),
-				BlackListed: sap.ui.getCore().byId('cbDialogBlacklist').getSelected(),
-				Code: code
-			};
-			oModel.create("/ComplianceBlacklistedSet", oData, {
-				success: function(){
-					this.bindElement("blcBlacklisted","/CounterpartyListSet('" + code + "')/ToComplianceBlacklisted", true);
-				},
-				error: that.errorFunction.bind(that)
-			});
-			this.blacklistDialog.close();
-		},
-
+		
 		// Success and error default functions for dialog CRUD functions 
 		successFunction: function(event) {
 			console.log("Success!", event);
 		},
 		errorFunction: function(event) {
 			console.log("Error!", event);
-			this.getModel().refresh();
 		},
 		
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
-			this.hideObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"]);
-			this.showObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
-			this.enableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
+			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], false);
+			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"], true);
+			this.setEnabled(["fuMainInfFileUpload", "bMainInfFileUpload"], true);
 		},
 		
 		// Save function of Main Information (Dashboard tab)
@@ -405,9 +257,9 @@ sap.ui.define([
 		
 		// Cancel function of Main Information (Dashboard tab)
 		cancelMainInf: function(){
-			this.hideObjects(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"]);
-			this.showObjects(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"]);
-			this.disableObjects(["fuMainInfFileUpload", "bMainInfFileUpload"]);
+			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"], false);
+			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], true);
+			this.setEnabled(["fuMainInfFileUpload", "bMainInfFileUpload"], false);
 		},
 
 		// On select item in Compliance Risks table
@@ -415,36 +267,16 @@ sap.ui.define([
 			var listItems = e.getParameters("listItem");
 			if (listItems) {
 				var id = e.getSource().data("id");
-				this.byId(id + "Delete").setEnabled(true);
-				this.byId(id + "Edit").setEnabled(true);
-			}
-		},
-		
-		// General Hide function | objects: array of ids of objects
-		hideObjects: function(objects){
-			for(var i in objects){
-				this.byId(objects[i]).setVisible(false);
+				this.setEnabled([id + "Delete", id + "Edit"], true);
 			}
 		},
 		
 		// General Show function | objects: array of ids of objects
-		showObjects: function(objects){
+		setVisible: function(objects, flag){
 			for(var i in objects){
-				this.byId(objects[i]).setVisible(true);
-			}
-		},
-		
-		// General Enable function | objects: array of ids of objects
-		enableObjects: function(objects){
-			for(var i in objects){
-				this.byId(objects[i]).setEnabled(true);
-			}
-		},
-		
-		// General Disable | objects: array of ids of objects
-		disableObjects: function(objects){
-			for(var i in objects){
-				this.byId(objects[i]).setEnabled(false);
+				if(this.byId(objects[i])){
+					this.byId(objects[i]).setVisible(flag);
+				}
 			}
 		},
 		
@@ -488,7 +320,7 @@ sap.ui.define([
 			var id = oEvent.getSource().data("id");
 			sap.ui.getCore().byId(id + "Dialog").unbindElement();
 			var oDialog = this.dialogOpen(oEvent);
-			this.setEnabled(oDialog, true);
+			this.setDialogEnabled(oDialog, true);
 			oDialog.getButtons()[1].setVisible(false);
 			oDialog.getButtons()[2].setVisible(true);
 		},
@@ -497,7 +329,7 @@ sap.ui.define([
 			var url = this.byId(id + "Table").getSelectedItem().getBindingContextPath();
 			sap.ui.getCore().byId(id + "Dialog").bindElement(url);
 			var oDialog = this.dialogOpen(oEvent);
-			this.setEnabled(oDialog, false);
+			this.setDialogEnabled(oDialog, false);
 			oDialog.getButtons()[1].setVisible(true);
 			oDialog.getButtons()[2].setVisible(false);
 		},
@@ -525,26 +357,39 @@ sap.ui.define([
 			var oDialog = oButton.getParent();
 			var oModel = oDialog.getModel();
 			var oData = this.getOdata(oDialog);
-			var bCheck = this.checkKeys(oDialog);
-			var sUrl = this.byId(sTableId + "Table").getItems()[0].getBindingContextPath();
-			sUrl = sUrl.slice(0, sUrl.indexOf("("));
-			if(bCheck){
+			var bCheckAlert = this.checkKeys(oDialog);
+			var sUrl = oButton.data("url");
+			if(bCheckAlert === "Please, enter"){
 				oModel.create(sUrl, oData);
 				this[sTableId + "Dialog"].close();
 			}else{
-				MessageBox.alert(this.getModel('i18n').getResourceBundle().getText("enterNameSurnameContact"), {
+				MessageBox.alert(bCheckAlert.slice(0, -2), {
 					actions: [sap.m.MessageBox.Action.CLOSE]
 				});
 			}
 		},
 		dialogEdit: function(oEvent) {
-			var sTableId = oEvent.getSource().data("id");
-			var oDialog = sap.ui.getCore().byId(sTableId + "Dialog");
-			var sUrl = oDialog.getBindingContext().getPath();
+			var id = oEvent.getSource().data("id");
+			var isCreate = oEvent.getSource().data("create");
+			var oDialog = sap.ui.getCore().byId(id + "Dialog");
+			var url = '';
 			var oModel = oDialog.getModel();
 			var oData = this.getOdata(oDialog);
-			oModel.update(sUrl, oData);
-			this[sTableId + "Dialog"].close();
+			if(isCreate){
+				var that = this;
+				var expandUrl = oEvent.getSource().data("expandUrl");
+				url = oEvent.getSource().data("url");
+				var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
+				oModel.create(url, oData, {
+					success: function(){
+						that.bindElement(id + "Element", elementUrl, true);
+					}	
+				});
+			}else{
+				url = oDialog.getBindingContext().getPath();
+				oModel.update(url, oData);
+			}
+			this[id + "Dialog"].close();
 		},
 		dialogClose: function(e) {
 			var dialog = e.getSource().data('id');
@@ -560,15 +405,11 @@ sap.ui.define([
 		},
 		
 		// Set key inputs as disabled/enabled for editting, oDialog = object dialog, flag = boolean flag for enabled/disabled
-		setEnabled: function(oDialog, flag){
+		setDialogEnabled: function(oDialog, flag){
 			var inputs = oDialog.getAggregation("content");
 			for(var i in inputs){
 				if(inputs[i].data("key")){
-					if(flag){
-						inputs[i].setEnabled(true);
-					}else{
-						inputs[i].setEnabled(false);
-					}
+					inputs[i].setEnabled(flag);
 				}
 			}
 		},
@@ -596,27 +437,46 @@ sap.ui.define([
 					oData[inputs[i].getBindingInfo("selected").binding.sPath] = inputs[i].getSelected();
 				}
 			}
-			oData.Code = this.byId("tSAPID").getText();
+			oData.Code = this.code;
 			return oData;
 		},
 		
 		// Checks the key values to lock them on update
 		checkKeys: function(oDialog){
-			var check = true;
+			var check = this.getModel('i18n').getResourceBundle().getText("plsEnter");
 			var inputs = oDialog.getAggregation("content");
 			for(var i in inputs){
 				var oInput = inputs[i];
 				if(oInput.data("key")){
-					if(oInput.mProperties.hasOwnProperty("value") && !oInput.getValue()){
-						check = false;
-					}else if(oInput.mProperties.hasOwnProperty("selectedKey") && !oInput.getSelectedKey()){
-						check = false;
-					}else if(oInput.mBindingInfos.hasOwnProperty("value") && !oInput.getValue()){
-						check = false;
+					if((oInput.mProperties.hasOwnProperty("value") && !oInput.getValue()) || 
+					(oInput.mProperties.hasOwnProperty("selectedKey") && !oInput.getSelectedKey()) ||
+					(oInput.mBindingInfos.hasOwnProperty("value") && !oInput.getValue()) ||
+					(inputs[i].hasOwnProperty("_oMaxDate") && !oInput.getDateValue())){
+						check = check + " " + oInput.data("key") + ", ";
 					}
 				}
 			}
 			return check;
+		},
+		
+		// Enable/Disables inputs depending flag arg
+		setEnabled: function(idArr, flag){
+			for(var i in idArr){
+				if(this.byId(idArr[i])){
+					this.byId(idArr[i]).setEnabled(flag);
+				}
+			}
+		},
+		
+		// Edit element function
+		elementEdit: function(oEvent){
+			var id = oEvent.getSource().data("id");
+			var oElement = this.byId(id + "Element");
+			if(oElement.getBindingContext()){
+				var url = this.byId(id + "Element").getBindingContext().getPath();
+				sap.ui.getCore().byId(id + "Dialog").bindElement(url);
+			}
+			this[id + "Dialog"].open();
 		}
 	});
 });
