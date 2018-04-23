@@ -185,7 +185,7 @@ sap.ui.define([
 			var partnerUrl = "/CounterpartyListSet('" + code + "')";
 			
 			if (key === "dashboard") {
-				this.bindElement("blGenInf", partnerUrl + "/ToCounterpartyInformation", update);
+				this.bindElement("generalElement", partnerUrl + "/ToCounterpartyInformation", update);
 				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
 				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
 				this.setVisible(["editMainInf"], true);
@@ -203,6 +203,7 @@ sap.ui.define([
 				this.bindTable("politicalTable", partnerUrl + "/ToCompliancePersons");
 				this.bindElement("blacklistElement", partnerUrl + "/ToComplianceBlacklisted");
 				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
+				this.bindElement("risksCountryElement", partnerUrl + "/ToCounterpartyHeader");
 			}
 			
 			if (key !== "dashboard") {
@@ -236,7 +237,6 @@ sap.ui.define([
 				DateValidity: DateValidity,
 				Currency: this.byId('sMainInfCurrency').getSelectedKey(),
 				LimitSecurity: this.byId('iMainInfLimitSecurity').getValue(),
-				RelationBP: this.byId('lMainInfRelationBP').getText(),
 				RelationCategory: this.byId('lMainInfRelationCategory').getText(),
 				RegistrationNumber: this.byId('lMainInfRegistrationNumber').getText(),
 				EnglishName: this.byId('lMainInfEnglishName').getText(),
@@ -248,7 +248,7 @@ sap.ui.define([
 			var that = this;
 			oModel.create("/CounterpartyInformationSet", oData, {
 				success: function(){
-					that.bindElement("blGenInf", "/CounterpartyListSet('" + code + "')/ToCounterpartyInformation", true);
+					that.bindElement("generalElement", "/CounterpartyListSet('" + code + "')/ToCounterpartyInformation", true);
 				},
 				error: that.errorFunction.bind(that)
 			});

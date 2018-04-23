@@ -7,7 +7,7 @@
 				<Label text="{i18n>countryUnderSanction}" class="red" id="isUnderSanction"/>
 				<OverflowToolbar>
 					<Label class="black" text="{i18n>country}:" width="80px"/>
-					<Label text="{Country}"/>
+					<Label id="risksCountryElement" text="{Country}"/>
 					<ToolbarSpacer/>
 					<Button custom:id="risks" text="{i18n>add}" press="tableAdd"/>
 					<Button id="risksEdit" custom:id="risks" text="{i18n>edit}" press="tableEdit" enabled="false"/>

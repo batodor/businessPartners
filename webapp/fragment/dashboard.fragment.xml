@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<l:BlockLayout id="blGenInf">
+	<l:BlockLayout id="generalElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell id="cGenInf">
 				<OverflowToolbar>
