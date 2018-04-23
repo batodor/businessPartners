@@ -338,11 +338,18 @@ sap.ui.define([
 			var oTable = this.byId(sTableId + "Table");
 			var sUrl = oTable.getSelectedItem().getBindingContextPath();
 			var oModel = oTable.getModel();
+			var that = this;
 			MessageBox.confirm("Are you sure you want to delete?", {
 				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
 				onClose: function(sAction) {
 					if (sAction === "Delete") {
-						oModel.remove(sUrl);
+						oModel.remove(sUrl,{
+							success: function(){
+								if(oTable.getItems().length === 0){
+									that.setEnabled([sTableId + "Delete", sTableId + "Edit"], false);
+								}
+							}
+						});
 					} else {
 						MessageToast.show("Delete canceled!");
 					}
@@ -373,7 +380,7 @@ sap.ui.define([
 			var isCreate = oEvent.getSource().data("create");
 			var oDialog = sap.ui.getCore().byId(id + "Dialog");
 			var url = '';
-			var oModel = oDialog.getModel();
+			var oModel = this.getView().getModel();
 			var oData = this.getOdata(oDialog);
 			if(isCreate){
 				var that = this;
@@ -387,6 +394,7 @@ sap.ui.define([
 				});
 			}else{
 				url = oDialog.getBindingContext().getPath();
+				oDialog.unbindElement();
 				oModel.update(url, oData);
 			}
 			this[id + "Dialog"].close();
@@ -452,9 +460,9 @@ sap.ui.define([
 					(oInput.mProperties.hasOwnProperty("selectedKey") && !oInput.getSelectedKey()) ||
 					(oInput.mBindingInfos.hasOwnProperty("value") && !oInput.getValue()) ||
 					(oInput.hasOwnProperty("_oMaxDate") && !oInput.getDateValue())){
-						if(oInput.data("omitKey") === null){
+						//if(oInput.data("omitKey") === null){
 							check = check + " " + oInput.data("key") + ", ";
-						}
+						//}
 					}
 				}
 			}
