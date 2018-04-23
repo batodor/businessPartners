@@ -1,17 +1,24 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<l:BlockLayout id="mainElement">
 		<l:BlockLayoutRow>
-			<l:BlockLayoutCell width="50%">
+			<l:BlockLayoutCell width="30%">
 				<Title id="tCompanyName" text="{Name}" titleStyle="H1"/>
 				<ToolbarSpacer/>
 				<Label id="tSAPID" text="{Code}"/>
 			</l:BlockLayoutCell>
-			<l:BlockLayoutCell width="25%">
-				<Label class="black" text="{i18n>type}:" width="100px"/>
-				<Label text="{Type}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>legalEntity}:" width="100px"/>
-				<Label text="{Company}"/>
+			<l:BlockLayoutCell width="45%">
+				<FlexBox width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Text class="black" text="{i18n>type}:" width="100px"/>
+						<Text text="{Type}"/>
+					</items>
+				</FlexBox>
+				<FlexBox width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Text class="black" text="{i18n>legalEntity}:" width="100px"/>
+						<Text text="{Company}"/>
+					</items>
+				</FlexBox>
 			</l:BlockLayoutCell>
 			<l:BlockLayoutCell width="25%">
 				<Label class="black" text="{i18n>country}:" width="150px"/>

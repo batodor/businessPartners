@@ -26,8 +26,10 @@ table[id*="table"] .sapMCbBg.sapMCbMarkChecked:before {
 }
 
 .sapMListTbl .sapMText,
-.sapMListTbl .sapMLabel {
+.sapMListTbl .sapMLabel,
+.sapMFlexItem>.sapMText{
     color: #777;
+    font-size: 0.875rem;
 }
 
 span[data-rating="C"] {
@@ -91,8 +93,8 @@ span[data-rating="C"] {
     color: #000 !important;
 }
 
-.sapUiTheme-utistheme1 div[id*="blMainInf"] .black,
-.sapUiTheme-utistheme1 div[id*="blMainInf"] .black {
+.sapUiTheme-utistheme1 div[id*="mainElement"] .black,
+.sapUiTheme-utistheme1 div[id*="mainElement"] .black {
     color: #b0b63a !important;
 }
 
@@ -100,8 +102,8 @@ span[data-rating="C"] {
     color: #000 !important;
 }
 
-.sapUiTheme-utistheme1 div[id*="blMainInf"] .sapMLabel,
-.sapUiTheme-utistheme1 div[id*="blMainInf"] .sapMText{
+.sapUiTheme-utistheme1 div[id*="mainElement"] .sapMLabel,
+.sapUiTheme-utistheme1 div[id*="mainElement"] .sapMText{
 	color: #f0f0f0;
 }
 

@@ -379,9 +379,10 @@ sap.ui.define([
 			var id = oEvent.getSource().data("id");
 			var isCreate = oEvent.getSource().data("create");
 			var oDialog = sap.ui.getCore().byId(id + "Dialog");
-			var url = '';
+			var url = oDialog.getBindingContext().getPath();
 			var oModel = this.getView().getModel();
 			var oData = this.getOdata(oDialog);
+			oDialog.unbindElement();
 			if(isCreate){
 				var that = this;
 				var expandUrl = oEvent.getSource().data("expandUrl");
@@ -393,8 +394,6 @@ sap.ui.define([
 					}	
 				});
 			}else{
-				url = oDialog.getBindingContext().getPath();
-				oDialog.unbindElement();
 				oModel.update(url, oData);
 			}
 			this[id + "Dialog"].close();
