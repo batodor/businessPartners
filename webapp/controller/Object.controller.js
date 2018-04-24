@@ -118,6 +118,7 @@ sap.ui.define([
 		
 		// Relations BP function
 		setRelations: function(array, id){
+			var that = this;
 			var flexBox = this.byId(id);
 			var innerFlexBox = this.byId(id + "Flex");
 			innerFlexBox.removeAllItems();
@@ -126,7 +127,11 @@ sap.ui.define([
 				for(var i in array){
 					var link = new sap.m.Link({
 						text: array[i].RelatedCode + " - " + array[i].RelatedBPName,
-						href: "/CounterpartyHeaderSet/" + array[i].RelatedCode,
+						press: function(){
+							that.getRouter().navTo("object", {
+								objectId: array[i].RelatedCode
+							});
+						},
 						wrapping: true
 					});
 					innerFlexBox.addItem(link);
