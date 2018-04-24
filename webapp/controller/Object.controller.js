@@ -92,7 +92,48 @@ sap.ui.define([
 				this.code = code;
 				// Disabled edit mode and hide edit buttons
 				this.cancelMainInf();
+				
+				// Set Relations BP
+				var that = this;
+				var relationModel = new JSONModel();
+				var modelLink = this.getModel().sServiceUrl;
+				relationModel.loadData(modelLink + "/CounterpartyListSet('" + this.code + "')/ToBPRelationships");
+				relationModel.attachRequestCompleted(function(){
+					var items = this.getData().d.results;
+					var isParent = [];
+					var isChild = [];
+					for(var i in items){
+						if(items[i].IsParent){
+							isParent.push(items[i]);
+						}else{
+							isChild.push(items[i]);
+						}
+					}
+					that.setRelations(isParent, "relationBPParent");
+					that.setRelations(isChild, "relationBPChild");
+					relationModel.detachRequestCompleted(this);
+				});
 			}.bind(this));
+		},
+		
+		// Relations BP function
+		setRelations: function(array, id){
+			var flexBox = this.byId(id);
+			var innerFlexBox = this.byId(id + "Flex");
+			innerFlexBox.removeAllItems();
+			if(array.length > 0){
+				flexBox.setVisible(true);
+				for(var i in array){
+					var link = new sap.m.Link({
+						text: array[i].RelatedCode + " - " + array[i].RelatedBPName,
+						href: "/CounterpartyHeaderSet/" + array[i].RelatedCode,
+						wrapping: true
+					});
+					innerFlexBox.addItem(link);
+				}
+			}else{
+				flexBox.setVisible(false);
+			}
 		},
 
 		/**

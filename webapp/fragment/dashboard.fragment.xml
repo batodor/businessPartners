@@ -42,12 +42,19 @@
 				</OverflowToolbar>
 				<Label text=""/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>relCat}:" width="191px"/>
-				<Label text="{RelationCategory}" id="lMainInfRelationCategory"/>
+				<FlexBox id="relationBPParent" visible="false" width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Label class="black" text="{i18n>isParent}:" width="191px"/>
+						<FlexBox id="relationBPParentFlex" wrap="Wrap"></FlexBox>
+					</items>
+				</FlexBox>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>relBP}:" width="191px"/>
-				<Label text="{RelationBP}" id="lMainInfRelationBP"/>
-				<ToolbarSpacer/>
+				<FlexBox id="relationBPChild" visible="false" width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Label class="black" text="{i18n>isChild}:" width="191px"/>
+						<FlexBox id="relationBPChildFlex" wrap="Wrap"></FlexBox>
+					</items>
+				</FlexBox>
 				<Label class="black" text="{i18n>limitSecurity}:" width="191px"/>
 				<Label
 					text="{ parts: [ {path: 'LimitSecurity'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
