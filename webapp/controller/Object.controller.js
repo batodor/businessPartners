@@ -94,24 +94,25 @@ sap.ui.define([
 				this.cancelMainInf();
 				
 				// Set Relations BP
+				var url = this.getModel().sServiceUrl + "/CounterpartyListSet('" + this.code + "')/ToBPRelationships?$format=json";
 				var that = this;
-				var relationModel = new JSONModel();
-				var modelLink = this.getModel().sServiceUrl;
-				relationModel.loadData(modelLink + "/CounterpartyListSet('" + this.code + "')/ToBPRelationships");
-				relationModel.attachRequestCompleted(function(){
-					var items = this.getData().d.results;
-					var isParent = [];
-					var isChild = [];
-					for(var i in items){
-						if(items[i].IsParent){
-							isParent.push(items[i]);
-						}else{
-							isChild.push(items[i]);
+				$.ajax({
+				    url: url,
+				    type: 'GET',
+				    success: function(data){ 
+				        var items = data.d.results;
+						var isParent = [];
+						var isChild = [];
+						for(var i in items){
+							if(items[i].IsParent){
+								isParent.push(items[i]);
+							}else{
+								isChild.push(items[i]);
+							}
 						}
-					}
-					that.setRelations(isParent, "relationBPParent");
-					that.setRelations(isChild, "relationBPChild");
-					relationModel.detachRequestCompleted(this);
+						that.setRelations(isParent, "relationBPParent");
+						that.setRelations(isChild, "relationBPChild");
+				    }
 				});
 			}.bind(this));
 		},
