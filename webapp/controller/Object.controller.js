@@ -128,13 +128,15 @@ sap.ui.define([
 				for(var i in array){
 					var link = new sap.m.Link({
 						text: array[i].RelatedCode + " - " + array[i].RelatedBPName,
-						press: function(){
+						press: function(oEvent){
+							var code = oEvent.getSource().data("code");
 							that.getRouter().navTo("object", {
-								objectId: array[i].RelatedCode
+								objectId: code
 							});
 						},
 						wrapping: true
 					});
+					link.data("code", array[i].RelatedCode);
 					innerFlexBox.addItem(link);
 				}
 			}else{
