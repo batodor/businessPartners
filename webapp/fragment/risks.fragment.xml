@@ -106,10 +106,10 @@
 				<Table id="blacklistedInfTable" width="600px" items="{}" noDataText="{worklistView>/tableNoDataText}"
 					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
-						<Column width="70px"><Label class="black" text="{i18n>blacklisted}"/></Column>
+						<Column hAlign="Center" width="70px"><Label class="black" text="{i18n>blacklisted}"/></Column>
 						<Column><Label class="black" text="{i18n>justification}"/></Column>
-						<Column width="100px"><Label class="black" text="{i18n>user}"/></Column>
-						<Column width="80px"><Label class="black" text="{i18n>date}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>user}"/></Column>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>date}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
