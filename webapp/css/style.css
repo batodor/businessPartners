@@ -4,6 +4,10 @@
     line-height: 1.2rem;
 }
 
+.sapUiBlockLayoutSizeL:not(.sapUiBlockLayoutKeepFontSize) .sapUiBlockCellContent{
+	padding:1rem;
+}
+
 .sapUiFup{
 	margin-right: 5px;
 }

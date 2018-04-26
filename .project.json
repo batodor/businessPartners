@@ -2,5 +2,10 @@
   "deploy": {
     "destination": "ERE",
     "name": "ZTS_PARTNERS"
+  },
+  "hcpdeploy": {
+    "account": "p1942467308trial",
+    "name": "counterparties",
+    "lastVersionWeTriedToDeploy": "1.0.43"
   }
 }
