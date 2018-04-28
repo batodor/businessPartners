@@ -431,21 +431,28 @@ sap.ui.define([
 			var url = oDialog.getBindingContext().getPath();
 			var oModel = this.getView().getModel();
 			var oData = this.getOdata(oDialog);
-			oDialog.unbindElement();
-			if(isCreate){
-				var that = this;
-				var expandUrl = oEvent.getSource().data("expandUrl");
-				url = oEvent.getSource().data("url");
-				var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
-				oModel.create(url, oData, {
-					success: function(){
-						that.bindElement(id + "Element", elementUrl, true);
-					}	
-				});
+			var bCheckAlert = this.checkKeys(oDialog);
+			if(bCheckAlert === "Please, enter"){
+				oDialog.unbindElement();
+				if(isCreate){
+					var that = this;
+					var expandUrl = oEvent.getSource().data("expandUrl");
+					url = oEvent.getSource().data("url");
+					var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
+					oModel.create(url, oData, {
+						success: function(){
+							that.bindElement(id + "Element", elementUrl, true);
+						}	
+					});
+				}else{
+					oModel.update(url, oData);
+				}
+				this[id + "Dialog"].close();
 			}else{
-				oModel.update(url, oData);
+				MessageBox.alert(bCheckAlert.slice(0, -2), {
+					actions: [sap.m.MessageBox.Action.CLOSE]
+				});
 			}
-			this[id + "Dialog"].close();
 		},
 		dialogClose: function(e) {
 			var dialog = e.getSource().data('id');

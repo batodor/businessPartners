@@ -5,7 +5,7 @@
 			<CheckBox selected="{BlackListed}"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>justification}" textAlign="Begin" width="150px"/>
-			<TextArea value="{Justification}" width="460px" height="80px"/>
+			<TextArea custom:key="{i18n>justification}" value="{Justification}" width="460px" height="80px"/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="blacklistDialog" type="Back" press="dialogClose"/>
