@@ -70,22 +70,30 @@
 				<Label id="lMainInfDateValidity" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<DatePicker id="dpMainInfDateValidity" placeholder="{i18n>enterDate}" value="{DateValidity}" width="170px" visible="false" />
 				<ToolbarSpacer/>
-				<Label class="black" id="lDownloadDoc" text="{i18n>downloadDocument}:" width="191px"/>
-				<Link id="linkDownloadDoc" text="document.pdf" press="handleLinkPress"/>
-				<ToolbarSpacer/>
-				<u:FileUploader enabled="false" id="fuMainInfFileUpload" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server"
-					uploadComplete="handleUploadComplete" change="handleValueChange" typeMissmatch="handleTypeMissmatch" style="Emphasized"
-					fileType="txt,jpg,pdf,doc,docx" placeholder="{i18n>chooseFile}">
-					<u:parameters>
-						<u:FileUploaderParameter name="param1" value="Foo"/>
-						<u:FileUploaderParameter name="param2" value="bar"/>
-					</u:parameters>
-					<u:headerParameters>
-						<u:FileUploaderParameter name="headerParam1" value="Foo"/>
-						<u:FileUploaderParameter name="headerParam2" value="bar"/>
-					</u:headerParameters>
-				</u:FileUploader>
-				<Button enabled="false" id="bMainInfFileUpload" text="Upload File" press="handleUploadPress"/>
+				
+				<OverflowToolbar class="toolbar" width="100%">
+					<Text class="black" text="{i18n>attachments}"/>
+					<ToolbarSpacer/>
+					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" text="{i18n>add}" press="tableAdd"/>
+					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
+				</OverflowToolbar>
+				<Table id="uploadDashboardTable" width="100%" items="{}" noDataText="{worklistView>/tableNoDataText}"
+					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>type}"/></Column>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>name}"/></Column>
+						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>uploadDate}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Type}"/>
+								<Text text="{Name}"/>
+								<Text text="{UploadDate}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>

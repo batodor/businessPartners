@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>insureInformation}" class="sapUiContentPadding" id="insuranceInformationDialog">
+	<Dialog title="{i18n>insuranceInformation}" class="sapUiContentPadding" id="insuranceInformationDialog">
 		<content>
-			<Text text="{i18n>amountOfInsuredReceivables}" width="250px"/>
+			<Text text="{i18n>amountOfInsurancedReceivables}" width="250px"/>
 			<Input value="{Amount}" width="167px" class="margin-right"/>
 			<Select selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px">
 				<core:Item key="{Currency}" text="{Currency}"/>

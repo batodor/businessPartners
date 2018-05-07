@@ -49,7 +49,7 @@ sap.ui.define([
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
 			});
 			
-			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks"];
+			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks", "upload", "uploadDashboard"];
 			this.addDialogs(this.dialogArr);
 		},
 
@@ -273,7 +273,6 @@ sap.ui.define([
 		editMainInf: function(){
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], false);
 			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"], true);
-			this.setEnabled(["fuMainInfFileUpload", "bMainInfFileUpload"], true);
 		},
 		
 		// Save function of Main Information (Dashboard tab)
@@ -308,7 +307,6 @@ sap.ui.define([
 		cancelMainInf: function(){
 			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"], false);
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], true);
-			this.setEnabled(["fuMainInfFileUpload", "bMainInfFileUpload"], false);
 		},
 
 		// On select item in Compliance Risks table
@@ -358,7 +356,7 @@ sap.ui.define([
 					this[tableArr[i] + "Dialog"] = sap.ui.xmlfragment("fragment." + tableArr[i] + "Dialog", this);
 					this.getView().addDependent(this[tableArr[i] + "Dialog"]);
 				} catch (err) {
-					console.log("Error in dialog with ID: " + this.tableArr[i] + "Dialog");
+					console.log("Error in dialog with ID: " + tableArr[i] + "Dialog");
 				}
 				
 			}

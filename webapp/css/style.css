@@ -4,6 +4,10 @@
     line-height: 1.2rem;
 }
 
+.sapMDialog .sapMDialogScrollCont>*{
+	vertical-align: text-top;
+}
+
 .sapUiBlockLayoutSizeL:not(.sapUiBlockLayoutKeepFontSize) .sapUiBlockCellContent{
 	padding:1rem;
 }
@@ -29,11 +33,12 @@ table[id*="table"] .sapMCbBg.sapMCbMarkChecked:before {
     color: red !important;
 }
 
+.toolbar .sapMText,
 .sapMListTbl .sapMText,
 .sapMListTbl .sapMLabel,
 .sapMFlexItem>.sapMText{
     color: #777;
-    font-size: 0.875rem;
+    font-size: 0.875rem !important;
 }
 
 span[data-rating="C"] {
