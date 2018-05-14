@@ -278,29 +278,33 @@ sap.ui.define([
 		// Save function of Main Information (Dashboard tab)
 		saveMainInf: function(){
 			var oModel = this.getModel();
-			var DateValidity = new Date(this.byId('dpMainInfDateValidity').getValue());
-			if(DateValidity) { DateValidity.setMinutes(-DateValidity.getTimezoneOffset()); }
-			var code = this.byId("tSAPID").getText();
-			var oData = {
-				DateValidity: DateValidity,
-				Currency: this.byId('sMainInfCurrency').getSelectedKey(),
-				LimitSecurity: this.byId('iMainInfLimitSecurity').getValue(),
-				RelationCategory: this.byId('lMainInfRelationCategory').getText(),
-				RegistrationNumber: this.byId('lMainInfRegistrationNumber').getText(),
-				EnglishName: this.byId('lMainInfEnglishName').getText(),
-				LegalName: this.byId('lMainInfLegalName').getText(),
-				LegalForm: this.byId('iMainInfLegalForm').getValue(),
-				Identifier: this.byId('lMainInfIdentifier').getText(),
-				Code: code
-			};
-			var that = this;
-			oModel.create("/CounterpartyInformationSet", oData, {
-				success: function(){
-					that.bindElement("generalElement", "/CounterpartyListSet('" + code + "')/ToCounterpartyInformation", true);
-				},
-				error: that.errorFunction.bind(that)
-			});
-			this.cancelMainInf();
+			var DateValidity = this.byId('dpMainInfDateValidity').getDateValue();
+			if(DateValidity) { 
+				DateValidity.setMinutes(-DateValidity.getTimezoneOffset());
+				var code = this.byId("tSAPID").getText();
+				var oData = {
+					DateValidity: DateValidity,
+					Currency: this.byId('sMainInfCurrency').getSelectedKey(),
+					LimitSecurity: this.byId('iMainInfLimitSecurity').getValue(),
+					RelationCategory: "",
+					RegistrationNumber: this.byId('lMainInfRegistrationNumber').getText(),
+					EnglishName: this.byId('lMainInfEnglishName').getText(),
+					LegalName: this.byId('lMainInfLegalName').getText(),
+					LegalForm: this.byId('iMainInfLegalForm').getValue(),
+					Identifier: this.byId('lMainInfIdentifier').getText(),
+					Code: code
+				};
+				var that = this;
+				oModel.create("/CounterpartyInformationSet", oData, {
+					success: function(){
+						that.bindElement("generalElement", "/CounterpartyListSet('" + code + "')/ToCounterpartyInformation", true);
+					},
+					error: that.errorFunction.bind(that)
+				});
+				this.cancelMainInf();
+			}else{
+				MessageToast.show(this.getModel('i18n').getResourceBundle().getText("plsEnter") + ' ' + this.getModel('i18n').getResourceBundle().getText("validityDate"));
+			}
 		},
 		
 		// Cancel function of Main Information (Dashboard tab)
