@@ -278,8 +278,11 @@ sap.ui.define([
 		// Save function of Main Information (Dashboard tab)
 		saveMainInf: function(){
 			var oModel = this.getModel();
-			var DateValidity = this.byId('dpMainInfDateValidity').getDateValue();
-			if(DateValidity) { 
+			var DateValidity = this.byId('dpMainInfDateValidity').getDateValue() || this.byId('dpMainInfDateValidity').getValue();
+			if(DateValidity) {
+				if(typeof DateValidity === "string"){
+					DateValidity = new Date(DateValidity);
+				}
 				DateValidity.setMinutes(-DateValidity.getTimezoneOffset());
 				var code = this.byId("tSAPID").getText();
 				var oData = {
