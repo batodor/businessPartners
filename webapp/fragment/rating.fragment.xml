@@ -34,21 +34,21 @@
 				<ToolbarSpacer/>
 				<Button text="{i18n>updateRating}" custom:id="rating" type="Emphasized" press="elementEdit"/>
 			</l:BlockLayoutCell>
-			<l:BlockLayoutCell>
-				<OverflowToolbar>
-					<Title text="{i18n>limitsCurrentRating}" titleStyle="H3"/>
-				</OverflowToolbar>
-				<Label text=""/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>tonnage}:" width="240px"/>
-				<Label text=""/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>period}:" width="240px"/>
-				<Label text=""/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>paymentTerms}:" width="240px"/>
-				<Label text=""/>
-			</l:BlockLayoutCell>
+			<!--<l:BlockLayoutCell>-->
+			<!--	<OverflowToolbar>-->
+			<!--		<Title text="{i18n>limitsCurrentRating}" titleStyle="H3"/>-->
+			<!--	</OverflowToolbar>-->
+			<!--	<Label text=""/>-->
+			<!--	<ToolbarSpacer/>-->
+			<!--	<Label class="black" text="{i18n>tonnage}:" width="240px"/>-->
+			<!--	<Label text=""/>-->
+			<!--	<ToolbarSpacer/>-->
+			<!--	<Label class="black" text="{i18n>period}:" width="240px"/>-->
+			<!--	<Label text=""/>-->
+			<!--	<ToolbarSpacer/>-->
+			<!--	<Label class="black" text="{i18n>paymentTerms}:" width="240px"/>-->
+			<!--	<Label text=""/>-->
+			<!--</l:BlockLayoutCell>-->
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
 	<l:BlockLayout>
