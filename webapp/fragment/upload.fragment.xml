@@ -2,29 +2,33 @@
 	<l:BlockLayout>
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar width="100%">
-					<Title text="{i18n>attachments}" titleStyle="H3"/>
-					<ToolbarSpacer/>
-					<Button id="uploadAdd" custom:id="upload" text="{i18n>add}" press="tableAdd"/>
-					<Button id="uploadDelete" custom:id="upload" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
-				</OverflowToolbar>
-				<Table id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" noDataText="{worklistView>/tableNoDataText}"
-					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
-					<columns>
-						<Column><Label class="black" text="{i18n>name}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>
-					</columns>
+				<UploadCollection id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" width="100%" items="{}" 
+					fileSizeExceed="onFileSizeExceed"
+					selectionChange="onSelectionChange"
+					typeMissmatch="onTypeMissmatch"
+					uploadComplete="onUploadComplete"
+					beforeUploadStarts="onBeforeUploadStarts">
+					<toolbar>
+						<OverflowToolbar>
+							<Title text="{i18n>attachments}" id="uploadTitle" />
+							<ToolbarSpacer />
+							<Button text="{i18n>download}" custom:id="upload"  id="uploadDownload" press="onDownloadItem" enabled="false" />
+							<Button text="{i18n>update}"  custom:id="upload" id="uploadUpdate" press="onUpdateItem" enabled="false" />
+							<UploadCollectionToolbarPlaceholder/>
+						</OverflowToolbar>
+					</toolbar>
 					<items>
-						<ColumnListItem>
-							<cells>
-								<Text text="{FileName}"/>
-								<Text text="{DocType}"/>
-								<Text text="{UploadDate}"/>
-							</cells>
-						</ColumnListItem>
+						<UploadCollectionItem
+							documentId="{FileGUID}"
+							fileName="{FileName}"
+							mimeType="{MimeType}"
+							enableEdit="true"
+							enableDelete="true"
+							visibleDelete="true"
+							visibleEdit="true">
+						</UploadCollectionItem>
 					</items>
-				</Table>
+				</UploadCollection>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
