@@ -555,6 +555,16 @@ sap.ui.define([
 		},
 		
 		// ===================== Upload functions =======================
+		
+		onChange: function(oEvent) {
+			var oUploadCollection = oEvent.getSource();
+			// Header Token
+			var oCustomerHeaderToken = new UploadCollectionParameter({
+				name: "x-csrf-token",
+				value: "securityTokenFromModel"
+			});
+			oUploadCollection.addHeaderParameter(oCustomerHeaderToken);
+		},
 
 		onFileSizeExceed: function() {
 			MessageToast.show("FileSize Exceed");

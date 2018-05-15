@@ -3,6 +3,7 @@
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
 				<UploadCollection id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" width="100%" items="{}" 
+					onChange="onChange"
 					fileSizeExceed="onFileSizeExceed"
 					selectionChange="onSelectionChange"
 					typeMissmatch="onTypeMissmatch"
@@ -19,6 +20,7 @@
 					</toolbar>
 					<items>
 						<UploadCollectionItem
+							url="{FileName}"
 							documentId="{FileGUID}"
 							fileName="{FileName}"
 							mimeType="{MimeType}"
