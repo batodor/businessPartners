@@ -77,18 +77,18 @@
 					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" text="{i18n>add}" press="tableAdd"/>
 					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="uploadDashboardTable" width="100%" items="{}" noDataText="{worklistView>/tableNoDataText}"
-					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+				<Table id="uploadDashboardTable" custom:id="uploadDashboard" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
+					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
-						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>name}"/></Column>
-						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>uploadDate}"/></Column>
+						<Column><Label class="black" text="{i18n>name}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>type}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
 							<cells>
-								<Text text="{Type}"/>
-								<Text text="{Name}"/>
+								<Text text="{FileName}"/>
+								<Text text="{DocType}"/>
 								<Text text="{UploadDate}"/>
 							</cells>
 						</ColumnListItem>

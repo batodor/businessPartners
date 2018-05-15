@@ -237,6 +237,7 @@ sap.ui.define([
 				this.bindElement("generalElement", partnerUrl + "/ToCounterpartyInformation", update);
 				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
 				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
+				this.bindTable("uploadDashboardTable", partnerUrl + "/ToAttachments");
 				this.setVisible(["editMainInf"], true);
 			} else if(key === "government"){
 				this.bindTable("managementTable", partnerUrl + "/ToGovernmentMgt");
@@ -253,6 +254,8 @@ sap.ui.define([
 				this.bindElement("blacklistElement", partnerUrl + "/ToComplianceBlacklisted");
 				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
 				this.bindElement("risksCountryElement", partnerUrl + "/ToCounterpartyHeader");
+			} else if (key === "attachments"){
+				this.bindTable("uploadTable", partnerUrl + "/ToAttachments");
 			}
 			
 			if (key !== "dashboard") {
