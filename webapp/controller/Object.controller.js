@@ -645,11 +645,14 @@ sap.ui.define([
 
 		onDownloadItem: function(oEvent) {
 			var oUploadCollection = this.byId(oEvent.getSource().data('id') + "Table");
-			var aSelectedItems = oUploadCollection.getSelectedItems();
-			if (aSelectedItems) {
-				for (var i = 0; i < aSelectedItems.length; i++) {
-					oUploadCollection.downloadItem(aSelectedItems[i], true);
-				}
+			var selectedItem = oUploadCollection.getSelectedItem();
+			if (selectedItem) {
+				var path = selectedItem.getBindingContext().getPath();
+				var url = selectedItem.getModel().getData(path).__metadata.media_src;
+				// var model = selectedItem.getModel();
+				// var id = selectedItem.getProperty("documentId");
+				// var url = "https://ws-ere.corp.suek.ru" + model.sServiceUrl + "/AttachmentSet('" + id + "')/$value";
+				window.open(url,"_self");
 			} else {
 				MessageToast.show("Select an item to download");
 			}

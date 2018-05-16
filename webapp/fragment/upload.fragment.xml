@@ -20,7 +20,6 @@
 					</toolbar>
 					<items>
 						<UploadCollectionItem
-							url="{FileName}"
 							documentId="{FileGUID}"
 							fileName="{FileName}"
 							mimeType="{MimeType}"
