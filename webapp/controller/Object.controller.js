@@ -440,7 +440,12 @@ sap.ui.define([
 			var id = oEvent.getSource().data("id");
 			var isCreate = oEvent.getSource().data("create");
 			var oDialog = sap.ui.getCore().byId(id + "Dialog");
-			var url = oDialog.getBindingContext().getPath();
+			var url = '';
+			if(oDialog.getElementBinding()){
+				url = oDialog.getElementBinding().getPath();
+			}else if(oDialog.getBindingContext()){
+				url = oDialog.getElementBinding().getPath();
+			}
 			var oModel = this.getView().getModel();
 			var oData = this.getOdata(oDialog);
 			var bCheckAlert = this.checkKeys(oDialog);
@@ -549,8 +554,8 @@ sap.ui.define([
 		elementEdit: function(oEvent){
 			var id = oEvent.getSource().data("id");
 			var oElement = this.byId(id + "Element");
-			if(oElement.getBindingContext()){
-				var url = this.byId(id + "Element").getBindingContext().getPath();
+			if(oElement.getElementBinding()){
+				var url = this.byId(id + "Element").getElementBinding().getPath();
 				sap.ui.getCore().byId(id + "Dialog").bindElement(url);
 			}
 			this[id + "Dialog"].open();
