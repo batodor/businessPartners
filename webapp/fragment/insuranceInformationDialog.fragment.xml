@@ -9,7 +9,7 @@
 			<ToolbarSpacer/>
 			<Text text="{i18n>insurancePremiumRatePercent}" width="250px"/>
 			<Input value="{Rate}" width="167px" class="margin-right"/>
-			<Input value="{Unit}" id="iInsuranceUnit" width="80px" editable="false"/>
+			<Input value="%" id="iInsuranceUnit" width="80px" editable="false"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>contactNumber}" width="250px"/>
 			<Input value="{ContractNum}" width="255px"/>
@@ -19,7 +19,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="insuranceInformationDialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" type="Accept" custom:id="insuranceInformation" custom:create="true" custom:url="/CounterpartyInformationSet" 
+			<Button text="{i18n>edit}" type="Accept" custom:id="insuranceInformation" custom:create="true" custom:url="/RatingInsureSet" 
 				custom:expandUrl="/ToRatingInsure" press="dialogEdit"/>
 		</buttons>
 	</Dialog>

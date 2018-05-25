@@ -144,7 +144,7 @@
 				<Label text="{Currency}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>insurancePremiumRatePercent}:" width="280px"/>
-				<Label text="{Rate} {Unit}"/>
+				<Label text="{Rate} {= ${Rate} ? '%' : ''}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>contractNumber}:" width="280px"/>
 				<Label text="{ContractNum}"/>
