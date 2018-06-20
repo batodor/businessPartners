@@ -13,7 +13,7 @@
 					<Button id="risksEdit" custom:id="risks" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="risksDelete" custom:id="risks" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="risksTable" mode="SingleSelectLeft" custom:id="risks" selectionChange="onTableSelect" width="auto" items="{}"
+				<Table id="risksTable" mode="SingleSelectLeft" includeItemInSelection="true" custom:id="risks" selectionChange="onTableSelect" width="auto" items="{}"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column width="120px"><Label class="black" text="{i18n>type}"/></Column>
@@ -51,7 +51,7 @@
 					<Button text="{i18n>edit}" custom:id="political" press="tableEdit" id="politicalEdit" enabled="false"/>
 					<Button text="{i18n>delete}" custom:id="political" press="tableDelete" id="politicalDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="politicalTable" width="100%" custom:id="political" mode="SingleSelectLeft" selectionChange="onTableSelect" items="{}"
+				<Table id="politicalTable" width="100%" custom:id="political" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect" items="{}"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>

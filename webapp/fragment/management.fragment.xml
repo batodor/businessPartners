@@ -9,7 +9,7 @@
 					<Button id="managementEdit" custom:id="management" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="managementDelete" custom:id="management" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="managementTable" custom:id="management" width="100%" items="{}" mode="SingleSelectLeft" selectionChange="onTableSelect"
+				<Table id="managementTable" custom:id="management" width="100%" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
@@ -49,7 +49,7 @@
 					<Button id="proxyEdit" custom:id="proxy" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="proxyDelete" custom:id="proxy" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="proxyTable" width="100%" custom:id="proxy" items="{}" mode="SingleSelectLeft" selectionChange="onTableSelect"
+				<Table id="proxyTable" width="100%" custom:id="proxy" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
