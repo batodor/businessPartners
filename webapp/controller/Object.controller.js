@@ -258,9 +258,10 @@ sap.ui.define([
 				this.bindElement("risksCountryElement", partnerUrl + "/ToCounterpartyHeader");
 			} else if (key === "attachments"){
 				var url = partnerUrl + "/ToAttachments";
-				var oHeaders = this.getModel().oHeaders;
+				var model = this.getModel();
+				var oHeaders = model.oHeaders;
 				var sToken = oHeaders['x-csrf-token'];
-	            var uploadModel = new JSONModel({uploadUrl: url, csfrToken: sToken});
+	            var uploadModel = new JSONModel({uploadUrl: model.sServiceUrl + url, csfrToken: sToken});
 	            this.byId("uploadTable").setModel(uploadModel,"upload");
 				this.bindTable("uploadTable", url);
 			}
