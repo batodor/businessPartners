@@ -9,6 +9,7 @@
 					typeMissmatch="onTypeMissmatch"
 					uploadComplete="onUploadComplete"
 					uploadEnabled="true"
+					instantUpload="true"
 					uploadUrl="{upload>/uploadUrl}"
 					beforeUploadStarts="onBeforeUploadStarts">
 					<toolbar>
@@ -31,9 +32,9 @@
 							visibleEdit="true">
 						</UploadCollectionItem>
 					</items>
-					<headerParameters>
-                        <UploadCollectionParameter name="x-csrf-token" value="{upload>/csfrToken}" />
-                    </headerParameters>
+					<!--<headerParameters>-->
+     <!--                   <UploadCollectionParameter name="x-csrf-token" value="{upload>/csfrToken}" />-->
+     <!--               </headerParameters>-->
 				</UploadCollection>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>

@@ -568,7 +568,9 @@ sap.ui.define([
 		//============================= UPLOAD Functions =============================
 		onUploadChange: function(oEvent) {
 			var oUploadCollection = oEvent.getSource();
-			var oHeaders = oUploadCollection.getModel().oHeaders;
+			var oModel = oUploadCollection.getModel();
+			oModel.refreshSecurityToken(null, null, false);
+			var oHeaders = oModel.oHeaders;
 			var sToken = oHeaders['x-csrf-token'];
 			// Header Token
 			var oCustomerHeaderToken = new UploadCollectionParameter({
@@ -648,7 +650,8 @@ sap.ui.define([
 				value: oEvent.getParameter("fileName")
 			});
 			oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
-			MessageToast.show("Before Upload Starts");
+			this.onUploadChange(oEvent);
+			//MessageToast.show("Before Upload Starts");
 		},
 		
 		getAttachmentTitleText: function(id) {
