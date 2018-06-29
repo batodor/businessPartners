@@ -3,11 +3,13 @@
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
 				<UploadCollection id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" width="100%" items="{}" 
-					onChange="onChange"
+					onChange="onUploadChange"
 					fileSizeExceed="onFileSizeExceed"
-					selectionChange="onSelectionChange"
+					selectionChange="onUploadSelectionChange"
 					typeMissmatch="onTypeMissmatch"
 					uploadComplete="onUploadComplete"
+					uploadEnabled="true"
+					uploadUrl="{upload>/uploadUrl}"
 					beforeUploadStarts="onBeforeUploadStarts">
 					<toolbar>
 						<OverflowToolbar>
@@ -29,6 +31,9 @@
 							visibleEdit="true">
 						</UploadCollectionItem>
 					</items>
+					<headerParameters>
+                        <UploadCollectionParameter name="x-csrf-token" value="{upload>/csfrToken}" />
+                    </headerParameters>
 				</UploadCollection>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
