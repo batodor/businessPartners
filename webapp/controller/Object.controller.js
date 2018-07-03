@@ -567,17 +567,7 @@ sap.ui.define([
 		
 		//============================= UPLOAD Functions =============================
 		onUploadChange: function(oEvent) {
-			var oUploadCollection = oEvent.getSource();
-			var oModel = oUploadCollection.getModel();
-			oModel.refreshSecurityToken(null, null, false);
-			var oHeaders = oModel.oHeaders;
-			var sToken = oHeaders['x-csrf-token'];
-			// Header Token
-			var oCustomerHeaderToken = new UploadCollectionParameter({
-				name: "x-csrf-token",
-				value: sToken
-			});
-			oUploadCollection.addHeaderParameter(oCustomerHeaderToken);
+			
 		},
 		
 		onFileSizeExceed: function() {
@@ -644,14 +634,22 @@ sap.ui.define([
 		},
 		
 		onBeforeUploadStarts: function(oEvent) {
-			//oEvent.getSource().getModel().refreshSecurityToken();
-			var oCustomerHeaderSlug = new UploadCollectionParameter({
-				name: "slug",
-				value: oEvent.getParameter("fileName")
+			var oUploadParameters = oEvent.getParameters();
+			var oModel = oEvent.getSource().getModel();
+			oModel.refreshSecurityToken(null, null, false);
+			var oHeaders = oModel.oHeaders;
+			var sToken = oHeaders['x-csrf-token'];
+			// Header Token
+			var oCustomerHeaderToken = new UploadCollectionParameter({
+				name: "x-csrf-token",
+				value: sToken
 			});
-			oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);
-			this.onUploadChange(oEvent);
-			//MessageToast.show("Before Upload Starts");
+			// var oCustomerHeaderSlug = new UploadCollectionParameter({
+			// 	name: "slug",
+			// 	value: oEvent.getParameter("fileName")
+			// });
+			// oUploadParameters.addHeaderParameter(oCustomerHeaderSlug);
+			oUploadParameters.addHeaderParameter(oCustomerHeaderToken);
 		},
 		
 		getAttachmentTitleText: function(id) {
@@ -665,9 +663,8 @@ sap.ui.define([
 			if (selectedItem) {
 				var path = selectedItem.getBindingContext().getPath();
 				var url = selectedItem.getModel().getData(path).__metadata.media_src;
-				// var model = selectedItem.getModel();
-				// var id = selectedItem.getProperty("documentId");
-				// var url = "https://ws-ere.corp.suek.ru" + model.sServiceUrl + "/AttachmentSet('" + id + "')/$value";
+				// Remove location url
+				url = url.replace(/^.*\/\/[^\/]+/, '');
 				window.open(url,"_self");
 			} else {
 				MessageToast.show("Select an item to download");
