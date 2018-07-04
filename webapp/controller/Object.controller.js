@@ -579,58 +579,13 @@ sap.ui.define([
 		},
 		
 		onUploadComplete: function(oEvent) {
-			// var id = oEvent.getSource().data('id');
-			// // If the upload is triggered by a new version, this function updates the metadata of the old file and deletes the progress indicator once the upload was finished.
-			// if (this.bIsUploadVersion) {
-			// 	this.updateFile(id);
-			// } else {
-			// 	var oUploadCollection = this.byId(id + "Table");
-			// 	var oData = oUploadCollection.getModel().getData();
-			// 	var aItems = jQuery.extend(true, {}, oData).items;
-			// 	var oItem = {};
-			// 	var sUploadedFile = oEvent.getParameter("files")[0].fileName;
-			// 	// at the moment parameter fileName is not set in IE9
-			// 	if (!sUploadedFile) {
-			// 		var aUploadedFile = (oEvent.getParameters().getSource().getProperty("value")).split(/\" "/);
-			// 		sUploadedFile = aUploadedFile[0];
-			// 	}
-			// 	oItem = {
-			// 		"documentId": jQuery.now().toString(), // generate Id,
-			// 		"fileName": sUploadedFile,
-			// 		"mimeType": "",
-			// 		"thumbnailUrl": "",
-			// 		"url": "",
-			// 		"attributes": [
-			// 			{
-			// 				"title": "Uploaded By",
-			// 				"text": "You"
-			// 			},
-			// 			{
-			// 				"title": "Uploaded On",
-			// 				"text": new Date(jQuery.now()).toLocaleDateString()
-			// 			},
-			// 			{
-			// 				"title": "File Size",
-			// 				"text": "505000"
-			// 			},
-			// 			{
-			// 				"title": "Version",
-			// 				"text": "1"
-			// 			}
-			// 		]
-			// 	};
-			// 	aItems.unshift(oItem);
-			// 	oUploadCollection.getModel().setData({
-			// 		"items": aItems
-			// 	});
-			// 	// Sets the text to the label
-			// 	this.byId(id + "Title").setText(this.getAttachmentTitleText(id));
-			// }
-		
-			// delay the success message for to notice onChange message
-			setTimeout(function() {
-				MessageToast.show("Upload Complete");
-			}, 4000);
+			var table = oEvent.getSource();
+			var id = table.data("id") + "Table";
+			var url = table.getBinding("items").getPath();
+			table.bindItems({
+				path: url,
+				template: table['mBindingInfos'].items.template
+			});
 		},
 		
 		onBeforeUploadStarts: function(oEvent) {
@@ -644,11 +599,11 @@ sap.ui.define([
 				name: "x-csrf-token",
 				value: sToken
 			});
-			// var oCustomerHeaderSlug = new UploadCollectionParameter({
-			// 	name: "slug",
-			// 	value: oEvent.getParameter("fileName")
-			// });
-			// oUploadParameters.addHeaderParameter(oCustomerHeaderSlug);
+			var oCustomerHeaderSlug = new UploadCollectionParameter({
+			 	name: "slug",
+			 	value: oEvent.getParameter("fileName")
+			});
+		    oUploadParameters.addHeaderParameter(oCustomerHeaderSlug);
 			oUploadParameters.addHeaderParameter(oCustomerHeaderToken);
 		},
 		
@@ -711,6 +666,17 @@ sap.ui.define([
 			// Sets the flag back to false.
 			this.bIsUploadVersion = false;
 			this.oItemToUpdate = null;
+		},
+		
+		onUploadDelete: function(oEvent){
+			var item = oEvent.getParameter("item");
+			var model = item.getModel();
+			var url = item.getBindingContext().getPath() + "/$value";
+			model.remove(url,{
+				success: function(){
+					console.log("deleted!");
+				}
+			});
 		}
 	});
 });

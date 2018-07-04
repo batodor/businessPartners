@@ -10,6 +10,7 @@
 					uploadComplete="onUploadComplete"
 					uploadEnabled="true"
 					instantUpload="true"
+					fileDeleted="onUploadDelete"
 					uploadUrl="{upload>/uploadUrl}"
 					beforeUploadStarts="onBeforeUploadStarts">
 					<toolbar>
