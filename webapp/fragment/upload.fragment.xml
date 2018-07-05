@@ -18,7 +18,6 @@
 							<Title text="{i18n>attachments}" id="uploadTitle" />
 							<ToolbarSpacer />
 							<Button text="{i18n>download}" custom:id="upload"  id="uploadDownload" press="onDownloadItem" enabled="false" />
-							<Button text="{i18n>update}"  custom:id="upload" id="uploadUpdate" press="onUpdateItem" enabled="false" />
 							<UploadCollectionToolbarPlaceholder/>
 						</OverflowToolbar>
 					</toolbar>
@@ -30,12 +29,9 @@
 							enableEdit="true"
 							enableDelete="true"
 							visibleDelete="true"
-							visibleEdit="true">
+							visibleEdit="false">
 						</UploadCollectionItem>
 					</items>
-					<!--<headerParameters>-->
-     <!--                   <UploadCollectionParameter name="x-csrf-token" value="{upload>/csfrToken}" />-->
-     <!--               </headerParameters>-->
 				</UploadCollection>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>

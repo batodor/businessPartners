@@ -607,11 +607,6 @@ sap.ui.define([
 			oUploadParameters.addHeaderParameter(oCustomerHeaderToken);
 		},
 		
-		getAttachmentTitleText: function(id) {
-			var aItems = this.byId(id + "Table").getItems();
-			return "Uploaded (" + aItems.length + ")";
-		},
-		
 		onDownloadItem: function(oEvent) {
 			var oUploadCollection = this.byId(oEvent.getSource().data('id') + "Table");
 			var selectedItem = oUploadCollection.getSelectedItem();
@@ -626,13 +621,6 @@ sap.ui.define([
 			}
 		},
 		
-		onUpdateItem: function(oEvent) {
-			var oUploadCollection = this.byId(oEvent.getSource().data('id') + "Table");
-			this.bIsUploadVersion = true;
-			this.oItemToUpdate = oUploadCollection.getSelectedItem();
-			oUploadCollection.openFileDialog(this.oItemToUpdate);
-		},
-		
 		onUploadSelectionChange: function(oEvent) {
 			var id = oEvent.getSource().data('id');
 			var oUploadCollection = this.byId(id + "Table");
@@ -643,40 +631,11 @@ sap.ui.define([
 			}
 		},
 		
-		updateFile: function(id) {
-			var oData = this.byId(id + "Table").getModel().getData();
-			var aItems = jQuery.extend(true, {}, oData).items;
-			// Adds the new metadata to the file which was updated.
-			for (var i = 0; i < aItems.length; i++) {
-				if (aItems[i].documentId === this.oItemToUpdate.getDocumentId()) {
-					// Uploaded by
-					aItems[i].attributes[0].text = "You";
-					// Uploaded on
-					aItems[i].attributes[1].text = new Date(jQuery.now()).toLocaleDateString();
-					// Version
-					var iVersion = parseInt(aItems[i].attributes[3].text, 10);
-					iVersion++;
-					aItems[i].attributes[3].text = iVersion;
-				}
-			}
-			// Updates the model.
-			this.byId(id + "Table").getModel().setData({
-				"items": aItems
-			});
-			// Sets the flag back to false.
-			this.bIsUploadVersion = false;
-			this.oItemToUpdate = null;
-		},
-		
 		onUploadDelete: function(oEvent){
 			var item = oEvent.getParameter("item");
 			var model = item.getModel();
 			var url = item.getBindingContext().getPath() + "/$value";
-			model.remove(url,{
-				success: function(){
-					console.log("deleted!");
-				}
-			});
+			model.remove(url);
 		}
 	});
 });

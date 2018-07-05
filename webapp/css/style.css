@@ -85,21 +85,21 @@ span[data-rating="C"] {
     margin-left: 0;
 }
 
-
-/* --- Tabs styles --- */
-
 .sapMITBText {
     font-weight: bold;
     font-family: helvetica;
 }
-
-/* --- SUEK THEME styles --- */
 
 .sapUiTheme-sap_belize .black.sapMLabel,
 .sapUiTheme-sap_belize .black.sapMText,
 .sapUiTheme-sap_belize_plus .black.sapMLabel,
 .sapUiTheme-sap_belize_plus .black.sapMText {
     color: #000 !important;
+}
+
+/* --- SUEK THEME styles --- */
+.sapUiTheme-utistheme1 .sapMLIBSelected .sapMBtnIcon{
+	color: black !important;
 }
 
 .sapUiTheme-utistheme1 div[id*="mainElement"] .black,
