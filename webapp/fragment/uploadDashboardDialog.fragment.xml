@@ -2,30 +2,26 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>attachments}" class="sapUiContentPadding" id="uploadDashboardDialog">
 		<content>
-			<Text text="{i18n>type}" width="150px"/>
-			<Select forceSelection="false" selectedKey="{Type}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="250px">
-				<core:Item key="{Rating}" text="{Rating}"/>
+			<Text text="{i18n>type}" width="100px"/>
+			<Select forceSelection="false" change="onTypeSelect" width="200px" custom:id="uploadDashboard"
+				items="{ path: '/DictionaryDocTypeSet', sorter: { path: 'DocType' } }">
+				<core:Item key="{DocType}" text="{DocType} - {Description}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>file}" width="150px"/>
-			<u:FileUploader name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server"
-				uploadComplete="handleUploadComplete" change="handleValueChange" typeMissmatch="handleTypeMissmatch" style="Emphasized"
-				fileType="txt,jpg,pdf,doc,docx">
-				<u:parameters>
-					<u:FileUploaderParameter name="param1" value="Foo"/>
-					<u:FileUploaderParameter name="param2" value="bar"/>
-				</u:parameters>
+			<Text text="{i18n>file}" width="100px"/>
+			<u:FileUploader id="uploadDashboard" useMultipart="false" uploadOnChange="false" custom:id="uploadDashboard" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
+				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="200px">
 				<u:headerParameters>
-					<u:FileUploaderParameter name="headerParam1" value="Foo"/>
-					<u:FileUploaderParameter name="headerParam2" value="bar"/>
+					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
+					<u:FileUploaderParameter name="fileType" value="{upload>/fileType}"/>
+					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
 				</u:headerParameters>
 			</u:FileUploader>
-			<Button text="Upload File" press="handleUploadPress"/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="uploadDashboardDialog" press="dialogClose"/>
 			<Button text="{i18n>edit}" visible="false" custom:id="uploadDashboard" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" visible="false" custom:id="uploadDashboard" custom:url="/ComplianceRisksSet" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>uploadFile}" visible="false" enabled="false" id="uploadDashboardButton" custom:id="uploadDashboard" type="Accept" press="dialogUpload"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

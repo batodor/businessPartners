@@ -233,37 +233,31 @@ sap.ui.define([
 				key = key.getParameters("arguments").key;
 			}
 			var code = this.byId('tSAPID').getText();
-			var partnerUrl = "/CounterpartyListSet('" + code + "')";
+			this.partnerUrl = "/CounterpartyListSet('" + code + "')";
 			
 			if (key === "dashboard") {
-				this.bindElement("generalElement", partnerUrl + "/ToCounterpartyInformation", update);
-				this.bindTable("addressTable", partnerUrl + "/ToCounterpartyAddressBook");
-				this.bindTable("bankAccountTable", partnerUrl + "/ToCounterpartyBankAccounts");
-				this.bindTable("uploadDashboardTable", partnerUrl + "/ToAttachments");
+				this.bindElement("generalElement", this.partnerUrl + "/ToCounterpartyInformation", update);
+				this.bindTable("addressTable", this.partnerUrl + "/ToCounterpartyAddressBook");
+				this.bindTable("bankAccountTable", this.partnerUrl + "/ToCounterpartyBankAccounts");
+				this.bindTable("uploadDashboardTable", this.partnerUrl + "/ToAttachments");
 				this.setVisible(["editMainInf"], true);
 			} else if(key === "government"){
-				this.bindTable("managementTable", partnerUrl + "/ToGovernmentMgt");
-				this.bindTable("proxyTable", partnerUrl + "/ToGovernmentProxy");
+				this.bindTable("managementTable", this.partnerUrl + "/ToGovernmentMgt");
+				this.bindTable("proxyTable", this.partnerUrl + "/ToGovernmentProxy");
 			} else if (key === "rating"){
-				this.bindElement("ratingElement", partnerUrl + "/ToRatingGeneral");
-				this.bindTable("historicalDataTable", partnerUrl + "/ToRatingGeneralTab");
-				this.bindElement("creditLimitElement", partnerUrl + "/ToRatingCreditLimit");
-				this.bindTable("historicalDataTable2", partnerUrl + "/ToRatingCreditLimitTab");
-				this.bindElement("insuranceInformationElement", partnerUrl + "/ToRatingInsure");
+				this.bindElement("ratingElement", this.partnerUrl + "/ToRatingGeneral");
+				this.bindTable("historicalDataTable", this.partnerUrl + "/ToRatingGeneralTab");
+				this.bindElement("creditLimitElement", this.partnerUrl + "/ToRatingCreditLimit");
+				this.bindTable("historicalDataTable2", this.partnerUrl + "/ToRatingCreditLimitTab");
+				this.bindElement("insuranceInformationElement", this.partnerUrl + "/ToRatingInsure");
 			} else if (key === "risks"){
-				this.bindTable("risksTable", partnerUrl + "/ToComplianceRisks");
-				this.bindTable("politicalTable", partnerUrl + "/ToCompliancePersons");
-				this.bindElement("blacklistElement", partnerUrl + "/ToComplianceBlacklisted");
-				this.bindTable("blacklistedInfTable", partnerUrl + "/ToComplianceBlacklistedTab");
-				this.bindElement("risksCountryElement", partnerUrl + "/ToCounterpartyHeader");
+				this.bindTable("risksTable", this.partnerUrl + "/ToComplianceRisks");
+				this.bindTable("politicalTable", this.partnerUrl + "/ToCompliancePersons");
+				this.bindElement("blacklistElement", this.partnerUrl + "/ToComplianceBlacklisted");
+				this.bindTable("blacklistedInfTable", this.partnerUrl + "/ToComplianceBlacklistedTab");
+				this.bindElement("risksCountryElement", this.partnerUrl + "/ToCounterpartyHeader");
 			} else if (key === "attachments"){
-				var url = partnerUrl + "/ToAttachments";
-				var model = this.getModel();
-				var oHeaders = model.oHeaders;
-				var sToken = oHeaders['x-csrf-token'];
-	            var uploadModel = new JSONModel({uploadUrl: model.sServiceUrl + url, csfrToken: sToken});
-	            this.byId("uploadTable").setModel(uploadModel,"upload");
-				this.bindTable("uploadTable", url);
+				this.bindTable("uploadTable", this.partnerUrl + "/ToAttachments");
 			}
 			
 			if (key !== "dashboard") {
@@ -347,9 +341,10 @@ sap.ui.define([
 		
 		// Bind table function for all tables
 		// tableId = id of table, url = full path of binding
-		bindTable: function(tableId, url){
+		// Update boolean force to update
+		bindTable: function(tableId, url, update){
 			var oTable = this.byId(tableId);
-			if(oTable.mBindingInfos.items.path !== url){
+			if(oTable.mBindingInfos.items.path !== url || update){
 				oTable.bindItems({
 					path: url,
 					template: oTable['mBindingInfos'].items.template
@@ -382,12 +377,21 @@ sap.ui.define([
 		
 		// Table buttons function for add/edit/delete of items
 		tableAdd: function(oEvent) {
-			var id = oEvent.getSource().data("id");
+			var button = oEvent.getSource();
+			var id = button.data("id");
 			sap.ui.getCore().byId(id + "Dialog").unbindElement();
 			var oDialog = this.dialogOpen(oEvent);
 			this.setDialogEnabled(oDialog, true);
 			oDialog.getButtons()[1].setVisible(false);
 			oDialog.getButtons()[2].setVisible(true);
+			
+			// If upload table set token to uploader
+			if(button.data("upload")){
+				var uploader = this.byId(id) || sap.ui.getCore().byId(id);
+				var model = this.getModel();
+	            var uploadModel = new JSONModel({token: model.getSecurityToken()});
+	            uploader.setModel(uploadModel,"upload");
+			}
 		},
 		tableEdit: function(oEvent) {
 			var id = oEvent.getSource().data("id");
@@ -399,18 +403,25 @@ sap.ui.define([
 			oDialog.getButtons()[2].setVisible(false);
 		},
 		tableDelete: function(oEvent) {
-			var sTableId = oEvent.getSource().data("id");
-			var oTable = this.byId(sTableId + "Table");
-			var sUrl = oTable.getSelectedItem().getBindingContextPath();
-			var oModel = oTable.getModel();
+			var button = oEvent.getSource();
+			var id = button.data("id");
+			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+			var url = table.getSelectedItem().getBindingContextPath();
+			
+			// If upload table change the delete url
+			if(button.data("upload")){
+				url = url + "/$value";
+			}
+			
+			var model = table.getModel();
 			var that = this;
 			MessageBox.confirm("Are you sure you want to delete?", {
 				actions: ["Delete", sap.m.MessageBox.Action.CLOSE],
 				onClose: function(sAction) {
 					if (sAction === "Delete") {
-						oModel.remove(sUrl,{
+						model.remove(url,{
 							success: function(){
-								if(oTable.getItems().length === 0){
+								if(table.getItems().length === 0){
 									that.setEnabled([sTableId + "Delete", sTableId + "Edit"], false);
 								}
 							}
@@ -566,76 +577,47 @@ sap.ui.define([
 		},
 		
 		//============================= UPLOAD Functions =============================
-		onUploadChange: function(oEvent) {
-			
+		// Set file DocType by changing uploadUrl
+		onTypeSelect: function(oEvent){
+			var select = oEvent.getSource();
+			var selectedKey = select.getSelectedItem().getKey();
+			var id = select.data("id");
+			var uploader = this.byId(id) || sap.ui.getCore().byId(id);
+			var model = uploader.getModel("upload");
+			var data = model.getData();
+			data.fileType = selectedKey;
+			var url = this.getModel().sServiceUrl + "/AttachHelperSet(PartnerCode='" + this.code + "',DocType='" + selectedKey + "')/ToAttachments";
+			data.uploadUrl = url;
+			model.setData(data);
+			var button = this.byId(id + "Button") || sap.ui.getCore().byId(id + "Button");
+			selectedKey ? button.setEnabled(true) : button.setEnabled(false);
 		},
 		
-		onFileSizeExceed: function() {
-			MessageToast.show("FileSize Exceed");
+		// Triggered each time the new file was selected in fileUploader
+		// Changes the fileName (slug)
+		onFileChange: function(oEvent){
+			var uploader = oEvent.getSource();
+			var name = oEvent.getParameter("newValue");
+			var model = uploader.getModel("upload");
+			var data = model.getData();
+			data.fileName = name;
+			model.setData(data);
 		},
 		
-		onTypeMissmatch: function() {
-			MessageToast.show("Type Missmatch");
+		// After file uploaded, closes dialog and refreshes the table
+		onFileUploaded: function(oEvent){
+			var id = oEvent.getSource().data("id");
+			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+			var url = table.mBindingInfos.items.path;
+			this.bindTable(id + "Table", url, true);
+			this[id + "Dialog"].close();
 		},
 		
-		onUploadComplete: function(oEvent) {
-			var table = oEvent.getSource();
-			var id = table.data("id") + "Table";
-			var url = table.getBinding("items").getPath();
-			table.bindItems({
-				path: url,
-				template: table['mBindingInfos'].items.template
-			});
-		},
-		
-		onBeforeUploadStarts: function(oEvent) {
-			var oUploadParameters = oEvent.getParameters();
-			var oModel = oEvent.getSource().getModel();
-			oModel.refreshSecurityToken(null, null, false);
-			var oHeaders = oModel.oHeaders;
-			var sToken = oHeaders['x-csrf-token'];
-			// Header Token
-			var oCustomerHeaderToken = new UploadCollectionParameter({
-				name: "x-csrf-token",
-				value: sToken
-			});
-			var oCustomerHeaderSlug = new UploadCollectionParameter({
-			 	name: "slug",
-			 	value: oEvent.getParameter("fileName")
-			});
-		    oUploadParameters.addHeaderParameter(oCustomerHeaderSlug);
-			oUploadParameters.addHeaderParameter(oCustomerHeaderToken);
-		},
-		
-		onDownloadItem: function(oEvent) {
-			var oUploadCollection = this.byId(oEvent.getSource().data('id') + "Table");
-			var selectedItem = oUploadCollection.getSelectedItem();
-			if (selectedItem) {
-				var path = selectedItem.getBindingContext().getPath();
-				var url = selectedItem.getModel().getData(path).__metadata.media_src;
-				// Remove location url
-				url = url.replace(/^.*\/\/[^\/]+/, '');
-				window.open(url,"_self");
-			} else {
-				MessageToast.show("Select an item to download");
-			}
-		},
-		
-		onUploadSelectionChange: function(oEvent) {
-			var id = oEvent.getSource().data('id');
-			var oUploadCollection = this.byId(id + "Table");
-			if (oUploadCollection.getSelectedItems().length > 0) {
-				this.setEnabled([id + "Download", id + "Update"], true);
-			} else {
-				this.setEnabled([id + "Download", id + "Update"], false);
-			}
-		},
-		
-		onUploadDelete: function(oEvent){
-			var item = oEvent.getParameter("item");
-			var model = item.getModel();
-			var url = item.getBindingContext().getPath() + "/$value";
-			model.remove(url);
+		// Simple upload function
+		dialogUpload: function(oEvent){
+			var id = oEvent.getSource().data("id");
+			var uploader = this.byId(id) || sap.ui.getCore().byId(id);
+			uploader.upload();
 		}
 	});
 });

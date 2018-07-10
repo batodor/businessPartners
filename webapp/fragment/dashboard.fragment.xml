@@ -74,8 +74,8 @@
 				<OverflowToolbar class="toolbar" width="100%">
 					<Text class="black" text="{i18n>attachments}"/>
 					<ToolbarSpacer/>
-					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" text="{i18n>add}" press="tableAdd"/>
-					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
+					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" custom:upload="true" text="{i18n>add}" press="tableAdd"/>
+					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="uploadDashboardTable" custom:id="uploadDashboard" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">

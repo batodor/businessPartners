@@ -5,7 +5,7 @@
 }
 
 .sapMDialog .sapMDialogScrollCont>*{
-	vertical-align: text-top;
+	/*vertical-align: text-top;*/
 }
 
 .sapUiBlockLayoutSizeL:not(.sapUiBlockLayoutKeepFontSize) .sapUiBlockCellContent{
