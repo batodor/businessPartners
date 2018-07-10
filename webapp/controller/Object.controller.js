@@ -326,7 +326,7 @@ sap.ui.define([
 			var listItems = e.getParameters("listItem");
 			if (listItems) {
 				var id = e.getSource().data("id");
-				this.setEnabled([id + "Delete", id + "Edit"], true);
+				this.setEnabled([id + "Delete", id + "Edit", id + "Download"], true);
 			}
 		},
 		
@@ -618,6 +618,14 @@ sap.ui.define([
 			var id = oEvent.getSource().data("id");
 			var uploader = this.byId(id) || sap.ui.getCore().byId(id);
 			uploader.upload();
+		},
+		
+		// Download function
+		tableDownload: function(oEvent){
+			var id = oEvent.getSource().data("id");
+			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+			var url = table.getModel().sServiceUrl + table.getSelectedItem().getBindingContextPath() + "/$value";
+			window.open(url);
 		}
 	});
 });

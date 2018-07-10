@@ -6,6 +6,7 @@
 					<Title text="{i18n>attachments}" titleStyle="H3"/>
 					<ToolbarSpacer/>
 					<Button id="uploadAdd" custom:id="upload" custom:upload="true" text="{i18n>add}" press="tableAdd"/>
+					<Button id="uploadDownload" custom:id="upload" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
 					<Button id="uploadDelete" custom:id="upload" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 

@@ -75,10 +75,12 @@
 					<Text class="black" text="{i18n>attachments}"/>
 					<ToolbarSpacer/>
 					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" custom:upload="true" text="{i18n>add}" press="tableAdd"/>
+					<Button id="uploadDashboardDownload" custom:id="uploadDashboard" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
 					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="uploadDashboardTable" custom:id="uploadDashboard" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
-					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false"
+					class="sapUiSizeCompact">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
 						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>type}"/></Column>
