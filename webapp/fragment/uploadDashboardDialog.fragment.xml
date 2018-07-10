@@ -3,13 +3,13 @@
 	<Dialog title="{i18n>attachments}" class="sapUiContentPadding" id="uploadDashboardDialog">
 		<content>
 			<Text text="{i18n>type}" width="100px"/>
-			<Select forceSelection="false" change="onTypeSelect" width="200px" custom:id="uploadDashboard"
+			<Select forceSelection="false" change="onTypeSelect" id="uploadDashboardSelect" width="200px" custom:id="uploadDashboard"
 				items="{ path: '/DictionaryDocTypeSet', sorter: { path: 'DocType' } }">
 				<core:Item key="{DocType}" text="{DocType} - {Description}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>file}" width="100px"/>
-			<u:FileUploader id="uploadDashboard" useMultipart="false" uploadOnChange="false" custom:id="uploadDashboard" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
+			<u:FileUploader id="uploadDashboard" uploadOnChange="false" custom:id="uploadDashboard" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
 				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="200px">
 				<u:headerParameters>
 					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>

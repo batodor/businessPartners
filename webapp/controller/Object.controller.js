@@ -5,16 +5,14 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"counterparties/Counterparties/model/formatter",
 	'sap/m/MessageToast',
-	'sap/m/MessageBox',
-	"sap/m/UploadCollectionParameter"
+	'sap/m/MessageBox'
 ], function(
 	BaseController,
 	JSONModel,
 	History,
 	formatter,
 	MessageToast,
-	MessageBox,
-	UploadCollectionParameter
+	MessageBox
 ) {
 	"use strict";
 
@@ -239,8 +237,10 @@ sap.ui.define([
 				this.bindElement("generalElement", this.partnerUrl + "/ToCounterpartyInformation", update);
 				this.bindTable("addressTable", this.partnerUrl + "/ToCounterpartyAddressBook");
 				this.bindTable("bankAccountTable", this.partnerUrl + "/ToCounterpartyBankAccounts");
-				this.bindTable("uploadDashboardTable", this.partnerUrl + "/ToAttachments");
 				this.setVisible(["editMainInf"], true);
+				
+				var uploadFilter = [{ path: "DocType", operator: "EQ", value: '6'}];
+				this.bindTable("uploadDashboardTable", this.partnerUrl + "/ToAttachments", false, uploadFilter);
 			} else if(key === "government"){
 				this.bindTable("managementTable", this.partnerUrl + "/ToGovernmentMgt");
 				this.bindTable("proxyTable", this.partnerUrl + "/ToGovernmentProxy");
@@ -340,15 +340,27 @@ sap.ui.define([
 		},
 		
 		// Bind table function for all tables
-		// tableId = id of table, url = full path of binding
+		// id = id of table, url = full path of binding
 		// Update boolean force to update
-		bindTable: function(tableId, url, update){
-			var oTable = this.byId(tableId);
-			if(oTable.mBindingInfos.items.path !== url || update){
-				oTable.bindItems({
+		// argFilters array of objects, each object contain path, operator and value for Filters.
+		bindTable: function(id, url, update, argFilters){
+			var table = this.byId(id) || sap.ui.getCore().byId(id);
+			if(table.mBindingInfos.items.path !== url || update){
+				var parameters = {
 					path: url,
-					template: oTable['mBindingInfos'].items.template
-				});
+					template: table['mBindingInfos'].items.template
+				};
+				if(argFilters && argFilters[0].path){
+					var filters = [];
+					for(var i = 0; i < argFilters.length; i++){
+						var filter = new sap.ui.model.Filter(argFilters[i].path, sap.ui.model.FilterOperator[argFilters[i].operator], argFilters[i].value);
+						filters.push(filter);
+					}
+					parameters.filters = filters;
+				}else if(argFilters && argFilters[0].sPath){
+					parameters.filters = argFilters;
+				}
+				table.bindItems(parameters);
 			}
 		},
 		
@@ -388,6 +400,10 @@ sap.ui.define([
 			// If upload table set token to uploader
 			if(button.data("upload")){
 				var uploader = this.byId(id) || sap.ui.getCore().byId(id);
+				var select = this.byId(id + "Select") || sap.ui.getCore().byId(id + "Select");
+				//reset uploader and select
+				uploader.oFilePath.setValue(""); 
+				select.setSelectedKey("");
 				var model = this.getModel();
 	            var uploadModel = new JSONModel({token: model.getSecurityToken()});
 	            uploader.setModel(uploadModel,"upload");
@@ -600,7 +616,7 @@ sap.ui.define([
 			var name = oEvent.getParameter("newValue");
 			var model = uploader.getModel("upload");
 			var data = model.getData();
-			data.fileName = name;
+			data.fileName = encodeURI(name);
 			model.setData(data);
 		},
 		
@@ -609,7 +625,8 @@ sap.ui.define([
 			var id = oEvent.getSource().data("id");
 			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
 			var url = table.mBindingInfos.items.path;
-			this.bindTable(id + "Table", url, true);
+			var filters = table.mBindingInfos.items.filters;
+			this.bindTable(id + "Table", url, true, filters);
 			this[id + "Dialog"].close();
 		},
 		

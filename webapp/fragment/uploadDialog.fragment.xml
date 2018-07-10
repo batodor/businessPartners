@@ -3,7 +3,7 @@
 	<Dialog title="{i18n>attachments}" class="sapUiContentPadding" id="uploadDialog">
 		<content>
 			<Text text="{i18n>type}" width="100px"/>
-			<Select forceSelection="false" change="onTypeSelect" width="200px" custom:id="upload"
+			<Select forceSelection="false" change="onTypeSelect" id="uploadSelect" width="200px" custom:id="upload"
 				items="{ path: '/DictionaryDocTypeSet', sorter: { path: 'DocType' } }">
 				<core:Item key="{DocType}" text="{DocType} - {Description}"/>
 			</Select>
