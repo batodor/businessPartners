@@ -12,9 +12,9 @@
 				<Table id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
-						<Column><Label class="black" text="{i18n>name}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>
+						<Column width="40%"><Label class="black" text="{i18n>name}"/></Column>
+						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>type}"/></Column>
+						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>uploadDate}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>

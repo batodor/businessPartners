@@ -277,7 +277,7 @@ sap.ui.define([
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], false);
-			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"], true);
+			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", "uploadDashboardAdd", "uploadDashboardDelete"], true);
 		},
 		
 		// Save function of Main Information (Dashboard tab)
@@ -317,7 +317,7 @@ sap.ui.define([
 		
 		// Cancel function of Main Information (Dashboard tab)
 		cancelMainInf: function(){
-			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency"], false);
+			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", "uploadDashboardAdd", "uploadDashboardDelete"], false);
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], true);
 		},
 
@@ -404,6 +404,9 @@ sap.ui.define([
 				//reset uploader and select
 				uploader.oFilePath.setValue(""); 
 				select.setSelectedKey("");
+				if(button.data("select")){
+					select.setEnabled(false).setSelectedKey(button.data("select"));
+				}
 				var model = this.getModel();
 	            var uploadModel = new JSONModel({token: model.getSecurityToken()});
 	            uploader.setModel(uploadModel,"upload");

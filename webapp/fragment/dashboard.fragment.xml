@@ -74,17 +74,17 @@
 				<OverflowToolbar class="toolbar" width="100%">
 					<Text class="black" text="{i18n>attachments}"/>
 					<ToolbarSpacer/>
-					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" custom:upload="true" text="{i18n>add}" press="tableAdd"/>
+					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" custom:upload="true" custom:select="6" text="{i18n>add}" press="tableAdd" visible="false"/>
 					<Button id="uploadDashboardDownload" custom:id="uploadDashboard" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
-					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
+					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false" visible="false"/>
 				</OverflowToolbar>
 				<Table id="uploadDashboardTable" custom:id="uploadDashboard" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false"
 					class="sapUiSizeCompact">
 					<columns>
-						<Column><Label class="black" text="{i18n>name}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>
+						<Column width="40%"><Label class="black" text="{i18n>name}"/></Column>
+						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>type}"/></Column>
+						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>uploadDate}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
