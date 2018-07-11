@@ -2,21 +2,21 @@
 	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Text text="{i18n>type}" width="160px"/>
-			<Select forceSelection="false" custom:key="{i18n>type}" selectedKey="{RiskType}" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="300px">
+			<Select forceSelection="false" custom:key="{i18n>type}" selectedKey="{RiskType}" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="350px">
 				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>description}" width="160px"/>
-			<TextArea value="{Description}" width="300px"/>
+			<TextArea value="{Description}" width="350px" height="150px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>recommendedActions}" width="160px"/>
-			<TextArea value="{Actions}" width="300px"/>
+			<TextArea value="{Actions}" width="350px" height="150px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateFrom}" width="160px"/>
-			<DatePicker custom:key="{i18n>dateFrom}"  dateValue="{DateFrom}" width="300px"/>
+			<DatePicker custom:key="{i18n>dateFrom}"  dateValue="{DateFrom}" width="350px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>dateTo}" width="160px"/>
-			<DatePicker dateValue="{DateTo}" width="300px"/>
+			<DatePicker dateValue="{DateTo}" width="350px"/>
 			<ToolbarSpacer/>
 			<Text text="{i18n>actual}" width="160px"/>
 			<CheckBox selected="{Actual}" />
