@@ -90,7 +90,7 @@
 						<ColumnListItem>
 							<cells>
 								<Text text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
-								<Text text="{DocType}"/>
+								<Text text="{DocType} - {DocTypeDescr}"/>
 								<Text text="{ path: 'UploadDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 							</cells>
 						</ColumnListItem>
