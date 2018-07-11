@@ -9,11 +9,10 @@
 			</Select>
 			<ToolbarSpacer/>
 			<Text text="{i18n>file}" width="100px"/>
-			<u:FileUploader id="upload" useMultipart="false" uploadOnChange="false" custom:id="upload" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
+			<u:FileUploader name="upload" id="upload" useMultipart="false" uploadOnChange="false" custom:id="upload" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
 				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="200px">
 				<u:headerParameters>
 					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
-					<u:FileUploaderParameter name="fileType" value="{upload>/fileType}"/>
 					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
 				</u:headerParameters>
 			</u:FileUploader>
@@ -21,7 +20,7 @@
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="uploadDialog" press="dialogClose"/>
 			<Button text="{i18n>edit}" visible="false" custom:id="upload" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>uploadFile}" visible="false" enabled="false" id="uploadButton" custom:id="upload" type="Accept" press="dialogUpload"/>
+			<Button text="{i18n>uploadFile}" visible="false" id="uploadButton" custom:id="upload" type="Accept" press="dialogUpload"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

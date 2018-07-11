@@ -404,12 +404,17 @@ sap.ui.define([
 				//reset uploader and select
 				uploader.oFilePath.setValue(""); 
 				select.setSelectedKey("");
-				if(button.data("select")){
-					select.setEnabled(false).setSelectedKey(button.data("select"));
-				}
 				var model = this.getModel();
-	            var uploadModel = new JSONModel({token: model.getSecurityToken()});
-	            uploader.setModel(uploadModel,"upload");
+				var oData = { token: model.getSecurityToken() };
+				// if select predefined, then defines url too
+	            if(button.data("select")){
+	            	var selectedKey = button.data("select");
+					select.setEnabled(false).setSelectedKey(selectedKey);
+					var url = this.getModel().sServiceUrl + "/AttachHelperSet(PartnerCode='" + this.code + "',DocType='" + selectedKey + "')/ToAttachments";
+					oData.uploadUrl = url;
+				}
+				var uploadModel = new JSONModel(oData);
+				uploader.setModel(uploadModel,"upload");
 			}
 		},
 		tableEdit: function(oEvent) {
@@ -604,12 +609,9 @@ sap.ui.define([
 			var uploader = this.byId(id) || sap.ui.getCore().byId(id);
 			var model = uploader.getModel("upload");
 			var data = model.getData();
-			data.fileType = selectedKey;
 			var url = this.getModel().sServiceUrl + "/AttachHelperSet(PartnerCode='" + this.code + "',DocType='" + selectedKey + "')/ToAttachments";
 			data.uploadUrl = url;
 			model.setData(data);
-			var button = this.byId(id + "Button") || sap.ui.getCore().byId(id + "Button");
-			selectedKey ? button.setEnabled(true) : button.setEnabled(false);
 		},
 		
 		// Triggered each time the new file was selected in fileUploader
@@ -637,7 +639,14 @@ sap.ui.define([
 		dialogUpload: function(oEvent){
 			var id = oEvent.getSource().data("id");
 			var uploader = this.byId(id) || sap.ui.getCore().byId(id);
-			uploader.upload();
+			var select = this.byId(id + "Select") || sap.ui.getCore().byId(id + "Select");
+			if(select.getSelectedKey() && uploader.getValue()){
+				uploader.upload();
+			}else{
+				MessageBox.alert("Please, select Type and File!", {
+					actions: [sap.m.MessageBox.Action.CLOSE]
+				});
+			}
 		},
 		
 		// Download function
