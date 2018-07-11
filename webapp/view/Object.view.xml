@@ -21,15 +21,6 @@
 				</IconTabFilter>
 			</items>
 		</IconTabBar>
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id="shareTile" title="{objectView>/saveAsTileTitle}"/>
-		</semantic:saveAsTileAction>
 		<semantic:editAction>
 			<semantic:EditAction id="editMainInf" title="{i18n>edit}" press="editMainInf"/>
 		</semantic:editAction>
