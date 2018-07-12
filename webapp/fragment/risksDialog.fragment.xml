@@ -1,24 +1,24 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding" id="risksDialog">
 		<content>
-			<Text text="{i18n>type}" width="160px"/>
+			<Label required="true" text="{i18n>type}" width="160px"/>
 			<Select forceSelection="false" custom:key="{i18n>type}" selectedKey="{RiskType}" items="{ path: '/DictionaryRiskTypeSet', sorter: { path: 'RiskType' } }" width="350px">
 				<core:Item key="{RiskType}" text="{RiskType} - {RiskTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>description}" width="160px"/>
-			<TextArea value="{Description}" width="350px" height="150px"/>
+			<Label text="{i18n>description}" width="160px"/>
+			<TextArea value="{Description}" width="350px" height="150px" />
 			<ToolbarSpacer/>
-			<Text text="{i18n>recommendedActions}" width="160px"/>
+			<Label text="{i18n>recommendedActions}" width="160px"/>
 			<TextArea value="{Actions}" width="350px" height="150px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>dateFrom}" width="160px"/>
+			<Label required="true" text="{i18n>dateFrom}" width="160px"/>
 			<DatePicker custom:key="{i18n>dateFrom}"  dateValue="{DateFrom}" width="350px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>dateTo}" width="160px"/>
+			<Label text="{i18n>dateTo}" width="160px"/>
 			<DatePicker dateValue="{DateTo}" width="350px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>actual}" width="160px"/>
+			<Label text="{i18n>actual}" width="160px"/>
 			<CheckBox selected="{Actual}" />
 			
 			<Input value="{Type}" custom:value="" visible="false" />
