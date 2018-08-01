@@ -1,6 +1,6 @@
 {
   "deploy": {
-    "destination": "ER8",
+    "destination": "ERE",
     "name": "ZTS_PARTNERS"
   },
   "hcpdeploy": {

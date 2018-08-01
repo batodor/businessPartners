@@ -141,6 +141,9 @@ span[data-rating="C"] {
 .sapUiTheme-utistheme1 .sapUiFup.sapUiFUM>form>div{
 	top: 0;
 }
+.sapUshellShell .sapMPageBgStandard{
+	background-color:transparent;
+}
 
 @media (min-width: 1024px){
 	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
