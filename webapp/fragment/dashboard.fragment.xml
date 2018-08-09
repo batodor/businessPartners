@@ -74,7 +74,7 @@
 				<OverflowToolbar class="toolbar" width="100%">
 					<Text class="black" text="{i18n>attachments}"/>
 					<ToolbarSpacer/>
-					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" custom:upload="true" custom:select="6" text="{i18n>add}" press="tableAdd" visible="false"/>
+					<Button id="uploadDashboardAdd" custom:id="uploadDashboard" custom:upload="uploadDashboard" custom:select="6" text="{i18n>add}" press="tableAdd" visible="false"/>
 					<Button id="uploadDashboardDownload" custom:id="uploadDashboard" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
 					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false" visible="false"/>
 				</OverflowToolbar>

@@ -1,39 +1,48 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="Edit Proxy" class="sapUiContentPadding" id="proxyDialog">
 		<content>
-			<Text text="{i18n>name}" width="150px"/>
+			<Label required="true" text="{i18n>name}" width="150px"/>
 			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>surname}" width="150px"/>
+			<Label required="true" text="{i18n>surname}" width="150px"/>
 			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>position}" width="150px"/>
-			<Input value="{Position}" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>comment}" width="150px"/>
-			<TextArea value="{Comment}" width="300px"/>
-			<ToolbarSpacer/>
-			<Text text="{i18n>contactType}" width="150px"/>
+			<Label required="true" text="{i18n>contactType}" width="150px"/>
 			<Select forceSelection="false" custom:key="{i18n>contactType}" custom:omitKey="true" selectedKey="{ContactType}" width="300px" 
 				items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
 				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>
+			<ToolbarSpacer/>
+			<Label text="{i18n>position}" width="150px"/>
+			<Input value="{Position}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>comment}" width="150px"/>
+			<TextArea value="{Comment}" width="300px"/>
 			<Input value="{ContactName}" custom:value="" visible="false" />
 			<ToolbarSpacer/>
-			<Text text="{i18n>phone}" width="150px"/>
+			<Label text="{i18n>phone}" width="150px"/>
 			<Input value="{Phone}" width="300px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>fax}" width="150px"/>
+			<Label text="{i18n>fax}" width="150px"/>
 			<Input value="{FaxNumber}" width="300px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>email}" width="150px"/>
+			<Label text="{i18n>email}" width="150px"/>
 			<Input value="{Email}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>file}" width="150px"/>
+			<u:FileUploader name="uploadProxy" id="uploadProxy" uploadOnChange="false" custom:id="proxy" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
+				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="300px">
+				<u:headerParameters>
+					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
+					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
+				</u:headerParameters>
+			</u:FileUploader>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="proxyDialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>edit}" custom:upload="uploadProxy" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>add}" custom:upload="uploadProxy" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

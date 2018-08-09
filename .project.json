@@ -7,5 +7,19 @@
     "account": "p1942467308trial",
     "name": "counterparties",
     "lastVersionWeTriedToDeploy": "1.0.43"
+  },
+  "generation": [
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Thu, 09 Aug 2018 09:21:11 GMT"
+    }
+  ],
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZTS_MD_BP_SRV",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
   }
 }

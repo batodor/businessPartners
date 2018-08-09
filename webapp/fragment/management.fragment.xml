@@ -45,8 +45,8 @@
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>proxy}" titleStyle="H3"/>
 					<ToolbarSpacer/>
-					<Button id="proxyAdd" custom:id="proxy" text="{i18n>add}" press="tableAdd"/>
-					<Button id="proxyEdit" custom:id="proxy" text="{i18n>edit}" press="tableEdit" enabled="false"/>
+					<Button id="proxyAdd" custom:id="proxy" custom:upload="uploadProxy" text="{i18n>add}" press="tableAdd"/>
+					<Button id="proxyEdit" custom:id="proxy" custom:upload="uploadProxy" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="proxyDelete" custom:id="proxy" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="proxyTable" width="100%" custom:id="proxy" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
@@ -60,6 +60,7 @@
 						<Column><Label class="black" text="{i18n>phone}"/></Column>
 						<Column><Label class="black" text="{i18n>fax}"/></Column>
 						<Column><Label class="black" text="{i18n>email}"/></Column>
+						<Column><Label class="black" text="{i18n>file}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -72,6 +73,11 @@
 								<Text text="{Phone}"/>
 								<Text text="{FaxNumber}"/>
 								<Text text="{Email}"/>
+								<List items="{ path: 'ToAttachments', templateShareable:false }" class="attachmentsList" showNoData="false">
+									<CustomListItem>
+										<Button icon="sap-icon://download" press="downloadButton" />
+									</CustomListItem>
+								</List>
 							</cells>
 						</ColumnListItem>
 					</items>

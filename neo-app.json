@@ -44,10 +44,10 @@
       "path": "/sap/opu/odata",
       "target": {
         "type": "destination",
-        "name": "ERE",
+        "name": "ERD_150",
         "entryPath": "/sap/opu/odata"
       },
-      "description": "Trading system"
+      "description": "ERD 150"
     }
   ],
   "welcomeFile": "/webapp/test/flpSandbox.html",

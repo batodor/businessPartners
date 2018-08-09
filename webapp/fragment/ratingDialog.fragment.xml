@@ -2,35 +2,35 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>rating}" class="sapUiContentPadding" id="ratingDialog">
 		<content>
-			<Text text="{i18n>rBusinessScale}" width="280px"/>
+			<Label text="{i18n>rBusinessScale}" width="280px"/>
 			<Select forceSelection="false" selectedKey="{BusinessScale}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>rCorporateTransparency}" width="280px"/>
+			<Label text="{i18n>rCorporateTransparency}" width="280px"/>
 			<Select forceSelection="false" selectedKey="{CorporateTransparency}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>rFinancialProfile}" width="280px"/>
+			<Label text="{i18n>rFinancialProfile}" width="280px"/>
 			<Select forceSelection="false" selectedKey="{FinancialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>rCommercialProfile}" width="280px"/>
+			<Label text="{i18n>rCommercialProfile}" width="280px"/>
 			<Select forceSelection="false" selectedKey="{CommercialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>rSet}" width="280px"/>
+			<Label text="{i18n>rSet}" width="280px"/>
 			<Select forceSelection="false" selectedKey="{RatingSet}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>date}" width="280px"/>
+			<Label text="{i18n>date}" width="280px"/>
 			<DatePicker dateValue="{Date}" width="145px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>expressScore}" width="280px"/>
+			<Label text="{i18n>expressScore}" width="280px"/>
 			<CheckBox selected="{ExpressScore}"/>
 		</content>
 		<buttons>

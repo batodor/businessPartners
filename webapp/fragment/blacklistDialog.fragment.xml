@@ -1,10 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>blacklist}" class="sapUiContentPadding" id="blacklistDialog">
 		<content>
-			<Text text="{i18n>blacklisted}" width="150px"/>
+			<Label text="{i18n>blacklisted}" width="150px"/>
 			<CheckBox selected="{BlackListed}"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>justification}" textAlign="Begin" width="150px"/>
+			<Label text="{i18n>justification}" textAlign="Begin" width="150px"/>
 			<TextArea custom:key="{i18n>justification}" value="{Justification}" width="460px" height="80px"/>
 		</content>
 		<buttons>

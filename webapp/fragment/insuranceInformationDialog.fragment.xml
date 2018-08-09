@@ -1,20 +1,20 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>insuranceInformation}" class="sapUiContentPadding" id="insuranceInformationDialog">
 		<content>
-			<Text text="{i18n>amountOfInsurancedReceivables}" width="250px"/>
+			<Label text="{i18n>amountOfInsurancedReceivables}" width="250px"/>
 			<Input value="{Amount}" width="167px" class="margin-right"/>
 			<Select selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px">
 				<core:Item key="{Currency}" text="{Currency}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>insurancePremiumRatePercent}" width="250px"/>
+			<Label text="{i18n>insurancePremiumRatePercent}" width="250px"/>
 			<Input value="{Rate}" width="167px" class="margin-right"/>
 			<Input value="%" id="iInsuranceUnit" width="80px" editable="false"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>contactNumber}" width="250px"/>
+			<Label text="{i18n>contactNumber}" width="250px"/>
 			<Input value="{ContractNum}" width="255px"/>
 			<ToolbarSpacer/>
-			<Text text="{i18n>validityDate}" width="250px"/>
+			<Label text="{i18n>validityDate}" width="250px"/>
 			<DatePicker dateValue="{DateTo}" width="260px" class="sapUiSmallMarginBottom"/>
 		</content>
 		<buttons>

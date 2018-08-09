@@ -399,11 +399,12 @@ sap.ui.define([
 			
 			// If upload table set token to uploader
 			if(button.data("upload")){
-				var uploader = this.byId(id) || sap.ui.getCore().byId(id);
-				var select = this.byId(id + "Select") || sap.ui.getCore().byId(id + "Select");
-				//reset uploader and select
+				var uploader = this.byId(button.data("upload")) || sap.ui.getCore().byId(button.data("upload"));
 				uploader.oFilePath.setValue(""); 
-				select.setSelectedKey("");
+				var select = this.byId(id + "Select") || sap.ui.getCore().byId(id + "Select");
+				if(select){
+					select.setSelectedKey("");
+				}
 				var model = this.getModel();
 				var oData = { token: model.getSecurityToken() };
 				// if select predefined, then defines url too
@@ -418,13 +419,24 @@ sap.ui.define([
 			}
 		},
 		tableEdit: function(oEvent) {
-			var id = oEvent.getSource().data("id");
+			var button = oEvent.getSource();
+			var id = button.data("id");
 			var url = this.byId(id + "Table").getSelectedItem().getBindingContextPath();
 			sap.ui.getCore().byId(id + "Dialog").bindElement(url);
 			var oDialog = this.dialogOpen(oEvent);
 			this.setDialogEnabled(oDialog, false);
 			oDialog.getButtons()[1].setVisible(true);
 			oDialog.getButtons()[2].setVisible(false);
+			
+			// If upload table set token to uploader
+			if(button.data("upload")){
+				var uploader = this.byId(button.data("upload")) || sap.ui.getCore().byId(button.data("upload"));
+				uploader.oFilePath.setValue("");
+				var model = this.getModel();
+				var oData = { token: model.getSecurityToken() };
+				var uploadModel = new JSONModel(oData);
+				uploader.setModel(uploadModel,"upload");
+			}
 		},
 		tableDelete: function(oEvent) {
 			var button = oEvent.getSource();
@@ -459,16 +471,29 @@ sap.ui.define([
 		
 		// Add/Edit/Close dialog functions
 		dialogAdd: function(oEvent) {
-			var oButton = oEvent.getSource();
-			var sTableId = oButton.data("id");
-			var oDialog = oButton.getParent();
-			var oModel = oDialog.getModel();
-			var oData = this.getOdata(oDialog);
-			var bCheckAlert = this.checkKeys(oDialog);
-			var sUrl = oButton.data("url");
+			var button = oEvent.getSource();
+			var id = button.data("id");
+			var dialog = button.getParent();
+			var model = dialog.getModel();
+			var oData = this.getOdata(dialog);
+			var bCheckAlert = this.checkKeys(dialog);
+			var sUrl = button.data("url");
+			var settings = {};
+			if(button.data("upload")){
+				var uploader = this.byId(button.data("upload")) || sap.ui.getCore().byId(button.data("upload"));
+				settings.success = function(oData, response) {
+					if(uploader.getValue()){
+						var fullUrl = response.headers.location;
+						var serviceUrl = uploader.getModel().sServiceUrl;
+						var uploadUrl = serviceUrl + fullUrl.split(serviceUrl)[1] + "/ToAttachments";
+						uploader.setUploadUrl(uploadUrl);
+						uploader.upload();
+					}
+				};
+			}
 			if(bCheckAlert === "Please, enter"){
-				oModel.create(sUrl, oData);
-				this[sTableId + "Dialog"].close();
+				model.create(sUrl, oData, settings);
+				this[id + "Dialog"].close();
 			}else{
 				MessageBox.alert(bCheckAlert.slice(0, -2), {
 					actions: [sap.m.MessageBox.Action.CLOSE]
@@ -476,32 +501,45 @@ sap.ui.define([
 			}
 		},
 		dialogEdit: function(oEvent) {
-			var id = oEvent.getSource().data("id");
-			var isCreate = oEvent.getSource().data("create");
-			var oDialog = sap.ui.getCore().byId(id + "Dialog");
+			var button = oEvent.getSource();
+			var id = button.data("id");
+			var isCreate = button.data("create");
+			var dialog = sap.ui.getCore().byId(id + "Dialog");
 			var url = '';
-			if(oDialog.getElementBinding()){
-				url = oDialog.getElementBinding().getPath();
-			}else if(oDialog.getBindingContext()){
-				url = oDialog.getElementBinding().getPath();
+			if(dialog.getElementBinding()){
+				url = dialog.getElementBinding().getPath();
+			}else if(dialog.getBindingContext()){
+				url = dialog.getElementBinding().getPath();
 			}
 			var oModel = this.getView().getModel();
-			var oData = this.getOdata(oDialog);
-			var bCheckAlert = this.checkKeys(oDialog);
+			var oData = this.getOdata(dialog);
+			var bCheckAlert = this.checkKeys(dialog);
+			
+			var settings = {};
+			if(button.data("upload")){
+				var uploader = this.byId(button.data("upload")) || sap.ui.getCore().byId(button.data("upload"));
+				settings.success = function(oData, response) {
+					if(uploader.getValue()){
+						var uploadUrl = uploader.getModel().sServiceUrl + url + "/ToAttachments";
+						uploader.setUploadUrl(uploadUrl);
+						uploader.upload();
+					}
+				};
+			}
+			
 			if(bCheckAlert === "Please, enter"){
-				oDialog.unbindElement();
+				dialog.unbindElement();
 				if(isCreate){
 					var that = this;
 					var expandUrl = oEvent.getSource().data("expandUrl");
 					url = oEvent.getSource().data("url");
 					var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
-					oModel.create(url, oData, {
-						success: function(){
-							that.bindElement(id + "Element", elementUrl, true);
-						}	
-					});
+					settings.success = function(){
+						that.bindElement(id + "Element", elementUrl, true);
+					};
+					oModel.create(url, oData, settings);
 				}else{
-					oModel.update(url, oData);
+					oModel.update(url, oData, settings);
 				}
 				this[id + "Dialog"].close();
 			}else{
@@ -655,6 +693,15 @@ sap.ui.define([
 			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
 			var url = table.getModel().sServiceUrl + table.getSelectedItem().getBindingContextPath() + "/$value";
 			window.open(url);
+		},
+		
+		// Proxy table row button download
+		downloadButton: function(oEvent){
+			var button = oEvent.getSource();
+			var serviceUrl = button.getModel().sServiceUrl;
+			var url = button.getBindingContext().getPath();
+			var fullUrl = serviceUrl + url + "/$value";
+			window.open(fullUrl);
 		}
 	});
 });

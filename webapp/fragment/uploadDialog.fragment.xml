@@ -2,13 +2,13 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>attachments}" class="sapUiContentPadding" id="uploadDialog">
 		<content>
-			<Text text="{i18n>type}" width="100px"/>
+			<Label text="{i18n>type}" width="100px"/>
 			<Select forceSelection="false" change="onTypeSelect" id="uploadSelect" width="200px" custom:id="upload"
 				items="{ path: '/DictionaryDocTypeSet', sorter: { path: 'DocType' } }">
 				<core:Item key="{DocType}" text="{DocType} - {Description}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Text text="{i18n>file}" width="100px"/>
+			<Label text="{i18n>file}" width="100px"/>
 			<u:FileUploader name="upload" id="upload" useMultipart="false" uploadOnChange="false" custom:id="upload" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
 				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="200px">
 				<u:headerParameters>
