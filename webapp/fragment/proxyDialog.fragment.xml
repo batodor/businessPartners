@@ -38,11 +38,22 @@
 					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
 				</u:headerParameters>
 			</u:FileUploader>
+			<ToolbarSpacer/>
+			<Label text="" width="150px"/>
+			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsListDialog" showNoData="false" width="300px">
+				<CustomListItem>
+					<HBox justifyContent="SpaceBetween" alignItems="Center">
+						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
+						<Button icon="sap-icon://delete" custom:id="proxyDialog" press="deleteAttachmentButton" />
+					</HBox>
+				</CustomListItem>
+			</List>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="proxyDialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" custom:upload="uploadProxy" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" custom:upload="uploadProxy" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>edit}" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>add}" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" 
+				type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

@@ -73,9 +73,9 @@
 								<Text text="{Phone}"/>
 								<Text text="{FaxNumber}"/>
 								<Text text="{Email}"/>
-								<List items="{ path: 'ToAttachments', templateShareable:false }" class="attachmentsList" showNoData="false">
+								<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsList" showNoData="false">
 									<CustomListItem>
-										<Button icon="sap-icon://download" press="downloadButton" />
+										<Button icon="sap-icon://download" press="downloadAttachmentButton" />
 									</CustomListItem>
 								</List>
 							</cells>

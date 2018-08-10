@@ -7,6 +7,12 @@
 .attachmentsList .sapMListNoData{
 	background-color: transparent;
 }
+.attachmentsListDialog{
+	display: inline-block;
+}
+.attachmentsListDialog .sapMLIB{
+	border: 0;
+}
 
 .sapMDialog .sapMDialogScrollCont>*{
 	/*vertical-align: text-top;*/
