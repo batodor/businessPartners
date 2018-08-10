@@ -31,7 +31,7 @@
 			<Input value="{Email}" width="300px"/>
 			<ToolbarSpacer/>
 			<Label text="{i18n>file}" width="150px"/>
-			<u:FileUploader name="uploadProxy" id="uploadProxy" uploadOnChange="false" custom:id="proxy" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
+			<u:FileUploader name="uploadProxy" useMultipart="false" id="uploadProxy" uploadOnChange="false" custom:id="proxy" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
 				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="300px">
 				<u:headerParameters>
 					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
