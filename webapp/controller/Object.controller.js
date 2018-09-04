@@ -456,7 +456,8 @@ sap.ui.define([
 		tableDelete: function(oEvent) {
 			var button = oEvent.getSource();
 			var id = button.data("id");
-			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+			var table = button.data("table") ? this.byId(button.data("table") + "Table") || sap.ui.getCore().byId(button.data("table") + "Table") : 
+				this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
 			var url = table.getSelectedItem().getBindingContextPath();
 			
 			// If upload table change the delete url
