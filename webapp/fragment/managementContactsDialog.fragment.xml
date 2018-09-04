@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>managementContacts}" class="sapUiContentPadding" id="managementContactsDialog">
+		<content>
+			<Label required="true" text="{i18n>name}" width="170px"/>
+			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label required="true" text="{i18n>surname}" width="170px"/>
+			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>position}" width="170px"/>
+			<Input value="{Position}" enabled="false"  width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>typeOfGovernance}" width="170px"/>
+			<Select forceSelection="false" enabled="false" selectedKey="{GoverType}" width="300px" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
+				<core:Item key="{GoverType}" text="{GoverType} - {GoverTypeName}"/>
+			</Select>
+			<Table class="marginTop" id="managementContactsTable" custom:id="managementContacts" width="100%" items="{ path: 'ToManagementContacts' }" mode="SingleSelectLeft" 
+				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
+				growing="true" growingScrollToLoad="true">
+				<columns>
+					<Column><Label class="black" text="{i18n>name}"/></Column>
+					<Column><Label class="black" text="{i18n>surname}"/></Column>
+					<Column><Label class="black" text="{i18n>position}"/></Column>
+					<Column><Label class="black" text="{i18n>contactType}"/></Column>
+					<Column><Label class="black" text="{i18n>phone}"/></Column>
+					<Column><Label class="black" text="{i18n>fax}"/></Column>
+					<Column><Label class="black" text="{i18n>email}"/></Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Name}"/>
+							<Text text="{Surname}"/>
+							<Text text="{Position}"/>
+							<Text custom:key="{ContactType}" text="{ContactName}"/>
+							<Text text="{Phone}"/>
+							<Text text="{Fax}"/>
+							<Link text="{Email}" href="mailto:{Email}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" type="Back" custom:id="managementContactsDialog" press="dialogClose"/>
+			<Button text="{i18n>add}" custom:id="contacts" custom:url="/managementContactsSet" type="Emphasized" press="tableAdd"/>
+			<Button text="{i18n>edit}" enabled="false" id="managementContactsEdit" custom:id="contacts" custom:table="managementContacts" type="Accept" press="tableEdit"/>
+			<Button text="{i18n>delete}" enabled="false" id="managementContactsDelete" custom:id="contacts" custom:table="managementContacts" type="Reject" press="tableDelete"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

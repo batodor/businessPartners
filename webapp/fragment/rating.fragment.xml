@@ -1,4 +1,4 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">	
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:c="sap.ui.commons" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">	
 	<l:BlockLayout id="ratingElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
@@ -22,8 +22,9 @@
 				<Label class="black" text="{i18n>rCommercialProfile}:" width="240px"/>
 				<Label text="{CommercialProfile}"/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rSet}:" width="240px"/>
-				<Label text="{RatingSet}"/>
+				<c:HorizontalDivider/>
+				<Label design="Bold" class="black" text="{i18n>rSet}:" width="240px"/>
+				<Label design="Bold" text="{RatingSet}"/>
 				<ToolbarSpacer/>
 				<Label class="black" text="{i18n>expressScore}:" width="240px"/>
 				<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>

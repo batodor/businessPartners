@@ -17,7 +17,9 @@
 .sapMDialog .sapMDialogScrollCont>*{
 	/*vertical-align: text-top;*/
 }
-
+.marginTop{
+	margin-top: 1rem;
+}
 .sapUiBlockLayoutSizeL:not(.sapUiBlockLayoutKeepFontSize) .sapUiBlockCellContent{
 	padding:1rem;
 }

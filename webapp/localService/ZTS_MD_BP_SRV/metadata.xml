@@ -1,628 +1,632 @@
-<edmx:Edmx
-    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
-    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
-    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
-    <edmx:DataServices m:DataServiceVersion="2.0">
-        <Schema
-            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZTS_MD_BP_SRV" xml:lang="ru" sap:schema-version="1">
-            <EntityType Name="RatingCreditLimit" sap:label="Ratin validated credit limit" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="ValidityDate"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ValidityDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Validity Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CreditLimit" Type="Edm.Decimal" Precision="11" Scale="2" sap:unicode="false" sap:unit="Currency" sap:label="UTIS: Credit Limit" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
-            </EntityType>
-            <EntityType Name="RatingInsure" sap:label="Rating insure information" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="DateTo"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="To Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Amount" Type="Edm.Decimal" Precision="11" Scale="2" sap:unicode="false" sap:unit="Currency" sap:label="AmountInsuredReceiv"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
-                <Property Name="Rate" Type="Edm.Decimal" Precision="5" Scale="2" sap:unicode="false" sap:unit="Unit" sap:label="InsurancePremiumRate" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Unit" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Int. Meas. Unit" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="ContractNum" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS:ContractNumber" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="ComplianceRisks" sap:label="Compliance risks" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="RiskType"/>
-                    <PropertyRef Name="ItemNumber"/>
-                    <PropertyRef Name="DateFrom"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Risk type" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ItemNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="UTIS: Item Number" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="From date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Type" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Risk type" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Actions" Type="Edm.String" sap:unicode="false" sap:label="Recommended actions" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateTo" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="To Date" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Actual" Type="Edm.Boolean" sap:unicode="false" sap:label="Active" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="LastChanged" Type="Edm.DateTime" Nullable="false" Precision="0" ConcurrencyMode="Fixed" sap:unicode="false" sap:label="Last Changed" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="CompliancePersons" sap:label="Political exposed persons" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="Name"/>
-                    <PropertyRef Name="Surname"/>
-                    <PropertyRef Name="ContactType"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
-                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="UTIS: Name" sap:updatable="false"/>
-                <Property Name="Surname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="UTIS: Surname" sap:updatable="false"/>
-                <Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
-                <Property Name="Position" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS: Position" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:filterable="false"/>
-                <Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:filterable="false"/>
-                <Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:filterable="false"/>
-                <Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Comment" Type="Edm.String" sap:unicode="false" sap:label="Comment" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="ComplianceBlacklisted" sap:label="Blacklisted information" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="DateFrom"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="From date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="BlackListed" Type="Edm.Boolean" sap:unicode="false" sap:label="UTIS: Black List" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Username" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Justification" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Justification" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryRating" sap:label="Dictionary of ratings" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Rating"/>
-                </Key>
-                <Property Name="Rating" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Rating" sap:creatable="false" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryCurrency" sap:label="Dictionary of currencies" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Currency"/>
-                </Key>
-                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:semantics="currency-code"/>
-            </EntityType>
-            <EntityType Name="DictionaryCountry" sap:label="Dictionary of countries" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Key"/>
-                </Key>
-                <Property Name="NameLong" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Long name" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryRiskType" sap:label="Types of risks" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="RiskType"/>
-                </Key>
-                <Property Name="RiskTypeName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Risk type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-            </EntityType>
-            <EntityType Name="BPRelationships" sap:label="BP Relationships" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="RelatedCode"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RelatedCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Related Business Partner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RelatedBPName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Related BP Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="IsParent" Type="Edm.Boolean" sap:unicode="false" sap:label="BP is Parent" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryContactType" sap:label="Contact types" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="ContactType"/>
-                </Key>
-                <Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name"/>
-                <Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="Attachment" m:HasStream="true" sap:label="Attachment" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="PartnerCode"/>
-                    <PropertyRef Name="FileGUID"/>
-                </Key>
-                <Property Name="PartnerCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Partner Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FileGUID" Type="Edm.String" Nullable="false" MaxLength="46" sap:unicode="false" sap:label="Folder Entry ID (Obj+Fol+Forwarder Name)" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="MIME type" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FileName" Type="Edm.String" sap:unicode="false" sap:label="File Name" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Document Type" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="DocTypeDescr" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Doc Type Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="UploadDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Upload Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="DictionaryGoverType" sap:label="Types of Governance (DDIC)" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="GoverType"/>
-                </Key>
-                <Property Name="GoverType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS:Type Governance" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="GoverTypeName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Type of Gover Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-            </EntityType>
-            <EntityType Name="AttachHelper" sap:label="Attachments Helper" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="PartnerCode"/>
-                    <PropertyRef Name="DocType"/>
-                </Key>
-                <Property Name="PartnerCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Partner Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="ToAttachments" Relationship="ZTS_MD_BP_SRV.AttachHelperToAttachments" FromRole="FromRole_AttachHelperToAttachments" ToRole="ToRole_AttachHelperToAttachments"/>
-            </EntityType>
-            <EntityType Name="DictionaryDocType" sap:label="Document Types" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="DocType"/>
-                </Key>
-                <Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Description" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="RatingGeneral" sap:label="Rating information" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="Date"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Date" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="From date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CountryRating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Country Rating" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="BusinessScale" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingBusinessScale" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CorporateTransparency" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingCorpTranspar" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FinancialProfile" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingFinancialProf" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="CommercialProfile" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingCommercialProf" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="RatingSet" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="UTIS: Rating Set" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ExpressScore" Type="Edm.Boolean" sap:unicode="false" sap:label="UTIS: Express Score" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <EntityType Name="CounterpartyList" sap:label="Counterparty list" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Code" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="EngName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="English Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="TaxNumber" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Registration Number" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Blacklisted" Type="Edm.Boolean" sap:unicode="false" sap:label="Blacklisted" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="CodeKioda" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Code From Kioda" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="DateCreation" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Creation Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Rating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Rating" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="LegalForm" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Legal Form" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="LegalName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="Legal Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <NavigationProperty Name="ToCounterpartyHeader" Relationship="ZTS_MD_BP_SRV.CounterpartyListToHeader" FromRole="FromRole_CounterpartyListToHeader" ToRole="ToRole_CounterpartyListToHeader"/>
-                <NavigationProperty Name="ToGovernmentMgt" Relationship="ZTS_MD_BP_SRV.CounterpartyListToGovernmentMgt" FromRole="FromRole_CounterpartyListToGovernmentMgt" ToRole="ToRole_CounterpartyListToGovernmentMgt"/>
-                <NavigationProperty Name="ToGovernmentProxy" Relationship="ZTS_MD_BP_SRV.CounterpartyListToGovernmentProxy" FromRole="FromRole_CounterpartyListToGovernmentProxy" ToRole="ToRole_CounterpartyListToGovernmentProxy"/>
-                <NavigationProperty Name="ToCounterpartyInformation" Relationship="ZTS_MD_BP_SRV.CounterpartyListToInformation" FromRole="FromRole_CounterpartyListToInformation" ToRole="ToRole_CounterpartyListToInformation"/>
-                <NavigationProperty Name="ToCounterpartyAddressBook" Relationship="ZTS_MD_BP_SRV.CounterpartyListToAddressBook" FromRole="FromRole_CounterpartyListToAddressBook" ToRole="ToRole_CounterpartyListToAddressBook"/>
-                <NavigationProperty Name="ToCounterpartyBankAccounts" Relationship="ZTS_MD_BP_SRV.CounterpartyListToBankAccounts" FromRole="FromRole_CounterpartyListToBankAccounts" ToRole="ToRole_CounterpartyListToBankAccounts"/>
-                <NavigationProperty Name="ToRatingGeneral" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneral" FromRole="FromRole_CounterpartyListToRatingGeneral" ToRole="ToRole_CounterpartyListToRatingGeneral"/>
-                <NavigationProperty Name="ToRatingGeneralTab" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneralTab" FromRole="FromRole_CounterpartyListToRatingGeneralTab" ToRole="ToRole_CounterpartyListToRatingGeneralTab"/>
-                <NavigationProperty Name="ToRatingCreditLimit" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimit" FromRole="FromRole_CounterpartyListToRatingCreditLimit" ToRole="ToRole_CounterpartyListToRatingCreditLimit"/>
-                <NavigationProperty Name="ToRatingCreditLimitTab" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimitTab" FromRole="FromRole_CounterpartyListToRatingCreditLimitTab" ToRole="ToRole_CounterpartyListToRatingCreditLimitTab"/>
-                <NavigationProperty Name="ToRatingInsure" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingInsure" FromRole="FromRole_CounterpartyListToRatingInsure" ToRole="ToRole_CounterpartyListToRatingInsure"/>
-                <NavigationProperty Name="ToComplianceRisks" Relationship="ZTS_MD_BP_SRV.CounterpartyListToComplianceRisks" FromRole="FromRole_CounterpartyListToComplianceRisks" ToRole="ToRole_CounterpartyListToComplianceRisks"/>
-                <NavigationProperty Name="ToCompliancePersons" Relationship="ZTS_MD_BP_SRV.CounterpartyListToCompliancePersons" FromRole="FromRole_CounterpartyListToCompliancePersons" ToRole="ToRole_CounterpartyListToCompliancePersons"/>
-                <NavigationProperty Name="ToComplianceBlacklisted" Relationship="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklisted" FromRole="FromRole_CounterpartyListToComplianceBlacklisted" ToRole="ToRole_CounterpartyListToComplianceBlacklisted"/>
-                <NavigationProperty Name="ToComplianceBlacklistedTab" Relationship="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklistTab" FromRole="FromRole_CounterpartyListToComplianceBlacklistTab" ToRole="ToRole_CounterpartyListToComplianceBlacklistTab"/>
-                <NavigationProperty Name="ToBPRelationships" Relationship="ZTS_MD_BP_SRV.CounerpartyListToBPRelationships" FromRole="FromRole_CounerpartyListToBPRelationships" ToRole="ToRole_CounerpartyListToBPRelationships"/>
-                <NavigationProperty Name="ToAttachments" Relationship="ZTS_MD_BP_SRV.CounerpartyListToAttachments" FromRole="FromRole_CounerpartyListToAttachments" ToRole="ToRole_CounerpartyListToAttachments"/>
-            </EntityType>
-            <EntityType Name="CounterpartyHeader" sap:label="Counterparty header" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Company" Type="Edm.String" sap:unicode="false" sap:label="Legal Entity" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="DateCreation" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Created on" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="TypeID" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="TypeID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Type" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-                <Property Name="Sanctions" Type="Edm.Boolean" sap:unicode="false" sap:label="Flag of Sanctions" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
-            </EntityType>
-            <EntityType Name="CounterpartyInformation" sap:label="Counterparty information" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="DateValidity" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Validity Date"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:semantics="currency-code"/>
-                <Property Name="LimitSecurity" Type="Edm.Decimal" Precision="11" Scale="2" sap:unicode="false" sap:unit="Currency" sap:label="UTIS:LimitOfSecurity"/>
-                <Property Name="RelationBP" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Relationship to BP"/>
-                <Property Name="RelationCategory" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Relationsh.Cat."/>
-                <Property Name="RegistrationNumber" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Registration Number"/>
-                <Property Name="EnglishName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="English Name"/>
-                <Property Name="LegalName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="Legal Name"/>
-                <Property Name="LegalForm" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="UTIS: Legal Form"/>
-                <Property Name="Identifier" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="ID number"/>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="CounterpartyAddressBook" sap:label="Counterparty address book" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="AddressNumber"/>
-                    <PropertyRef Name="AddrTypeID"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
-                <Property Name="AddressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address number" sap:updatable="false"/>
-                <Property Name="AddrTypeID" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address Type ID" sap:updatable="false"/>
-                <Property Name="AddressType" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Address Type"/>
-                <Property Name="Region" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Region"/>
-                <Property Name="City" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="City"/>
-                <Property Name="Street" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Street"/>
-                <Property Name="Office" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="House Number"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country"/>
-                <Property Name="ZIP" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Postal Code"/>
-            </EntityType>
-            <EntityType Name="CounterpartyBankAccounts" sap:label="Counterparty bank accounts details" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="DetailsID"/>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="DetailsID" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Bank details" sap:updatable="false"/>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country"/>
-                <Property Name="SWIFT" Type="Edm.String" MaxLength="11" sap:unicode="false" sap:label="SWIFT/BIC"/>
-                <Property Name="BankName" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Bank name"/>
-                <Property Name="AccountBC" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="BC Account"/>
-                <Property Name="Account" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Bank acct"/>
-                <Property Name="AccountName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Account Name"/>
-                <Property Name="Address" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Address"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:semantics="currency-code"/>
-                <Property Name="IBAN" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:label="IBAN"/>
-            </EntityType>
-            <EntityType Name="GovernmentProxy" sap:label="Government proxy" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="Name"/>
-                    <PropertyRef Name="Surname"/>
-                    <PropertyRef Name="ContactType"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
-                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="UTIS: Name" sap:updatable="false"/>
-                <Property Name="Surname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="UTIS: Surname" sap:updatable="false"/>
-                <Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
-                <Property Name="Position" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS: Position" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Comment" Type="Edm.String" sap:unicode="false" sap:label="Comment" sap:sortable="false" sap:filterable="false"/>
-                <NavigationProperty Name="ToAttachments" Relationship="ZTS_MD_BP_SRV.GovernmentProxyToAttachments" FromRole="FromRole_GovernmentProxyToAttachments" ToRole="ToRole_GovernmentProxyToAttachments"/>
-            </EntityType>
-            <EntityType Name="GovernmentMgt" sap:label="Government management" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                    <PropertyRef Name="Name"/>
-                    <PropertyRef Name="Surname"/>
-                    <PropertyRef Name="ContactType"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
-                <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="UTIS: Name" sap:updatable="false"/>
-                <Property Name="Surname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="UTIS: Surname" sap:updatable="false"/>
-                <Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
-                <Property Name="Position" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS: Position" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="GoverType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="UTIS:Type Governance" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-                <Property Name="GoverName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Type of Gover Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
-            </EntityType>
-            <Association Name="CounterpartyListToGovernmentMgt" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToGovernmentMgt"/>
-                <End Type="ZTS_MD_BP_SRV.GovernmentMgt" Multiplicity="*" Role="ToRole_CounterpartyListToGovernmentMgt"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToGovernmentMgt">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToGovernmentMgt">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToGovernmentProxy" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToGovernmentProxy"/>
-                <End Type="ZTS_MD_BP_SRV.GovernmentProxy" Multiplicity="*" Role="ToRole_CounterpartyListToGovernmentProxy"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToGovernmentProxy">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToGovernmentProxy">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToInformation" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToInformation"/>
-                <End Type="ZTS_MD_BP_SRV.CounterpartyInformation" Multiplicity="0..1" Role="ToRole_CounterpartyListToInformation"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToInformation">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToInformation">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToAddressBook" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToAddressBook"/>
-                <End Type="ZTS_MD_BP_SRV.CounterpartyAddressBook" Multiplicity="*" Role="ToRole_CounterpartyListToAddressBook"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToAddressBook">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToAddressBook">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToBankAccounts" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToBankAccounts"/>
-                <End Type="ZTS_MD_BP_SRV.CounterpartyBankAccounts" Multiplicity="*" Role="ToRole_CounterpartyListToBankAccounts"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToBankAccounts">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToBankAccounts">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToRatingGeneral" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingGeneral"/>
-                <End Type="ZTS_MD_BP_SRV.RatingGeneral" Multiplicity="0..1" Role="ToRole_CounterpartyListToRatingGeneral"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToRatingGeneral">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToRatingGeneral">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToRatingGeneralTab" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingGeneralTab"/>
-                <End Type="ZTS_MD_BP_SRV.RatingGeneral" Multiplicity="*" Role="ToRole_CounterpartyListToRatingGeneralTab"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToRatingGeneralTab">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToRatingGeneralTab">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToRatingCreditLimit" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingCreditLimit"/>
-                <End Type="ZTS_MD_BP_SRV.RatingCreditLimit" Multiplicity="0..1" Role="ToRole_CounterpartyListToRatingCreditLimit"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToRatingCreditLimit">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToRatingCreditLimit">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToRatingCreditLimitTab" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingCreditLimitTab"/>
-                <End Type="ZTS_MD_BP_SRV.RatingCreditLimit" Multiplicity="*" Role="ToRole_CounterpartyListToRatingCreditLimitTab"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToRatingCreditLimitTab">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToRatingCreditLimitTab">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToRatingInsure" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingInsure"/>
-                <End Type="ZTS_MD_BP_SRV.RatingInsure" Multiplicity="0..1" Role="ToRole_CounterpartyListToRatingInsure"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToRatingInsure">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToRatingInsure">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToComplianceRisks" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToComplianceRisks"/>
-                <End Type="ZTS_MD_BP_SRV.ComplianceRisks" Multiplicity="*" Role="ToRole_CounterpartyListToComplianceRisks"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToComplianceRisks">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToComplianceRisks">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToCompliancePersons" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToCompliancePersons"/>
-                <End Type="ZTS_MD_BP_SRV.CompliancePersons" Multiplicity="*" Role="ToRole_CounterpartyListToCompliancePersons"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToCompliancePersons">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToCompliancePersons">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToComplianceBlacklisted" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToComplianceBlacklisted"/>
-                <End Type="ZTS_MD_BP_SRV.ComplianceBlacklisted" Multiplicity="0..1" Role="ToRole_CounterpartyListToComplianceBlacklisted"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToComplianceBlacklisted">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToComplianceBlacklisted">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounterpartyListToComplianceBlacklistTab" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToComplianceBlacklistTab"/>
-                <End Type="ZTS_MD_BP_SRV.ComplianceBlacklisted" Multiplicity="*" Role="ToRole_CounterpartyListToComplianceBlacklistTab"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToComplianceBlacklistTab">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToComplianceBlacklistTab">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounerpartyListToBPRelationships" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounerpartyListToBPRelationships"/>
-                <End Type="ZTS_MD_BP_SRV.BPRelationships" Multiplicity="*" Role="ToRole_CounerpartyListToBPRelationships"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounerpartyListToBPRelationships">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounerpartyListToBPRelationships">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="CounerpartyListToAttachments" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounerpartyListToAttachments"/>
-                <End Type="ZTS_MD_BP_SRV.Attachment" Multiplicity="*" Role="ToRole_CounerpartyListToAttachments"/>
-            </Association>
-            <Association Name="CounterpartyListToHeader" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToHeader"/>
-                <End Type="ZTS_MD_BP_SRV.CounterpartyHeader" Multiplicity="0..1" Role="ToRole_CounterpartyListToHeader"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_CounterpartyListToHeader">
-                        <PropertyRef Name="Code"/>
-                    </Principal>
-                    <Dependent Role="ToRole_CounterpartyListToHeader">
-                        <PropertyRef Name="Code"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <Association Name="GovernmentProxyToAttachments" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.GovernmentProxy" Multiplicity="1" Role="FromRole_GovernmentProxyToAttachments"/>
-                <End Type="ZTS_MD_BP_SRV.Attachment" Multiplicity="*" Role="ToRole_GovernmentProxyToAttachments"/>
-            </Association>
-            <Association Name="AttachHelperToAttachments" sap:content-version="1">
-                <End Type="ZTS_MD_BP_SRV.AttachHelper" Multiplicity="1" Role="FromRole_AttachHelperToAttachments"/>
-                <End Type="ZTS_MD_BP_SRV.Attachment" Multiplicity="*" Role="ToRole_AttachHelperToAttachments"/>
-                <ReferentialConstraint>
-                    <Principal Role="FromRole_AttachHelperToAttachments">
-                        <PropertyRef Name="DocType"/>
-                        <PropertyRef Name="PartnerCode"/>
-                    </Principal>
-                    <Dependent Role="ToRole_AttachHelperToAttachments">
-                        <PropertyRef Name="DocType"/>
-                        <PropertyRef Name="PartnerCode"/>
-                    </Dependent>
-                </ReferentialConstraint>
-            </Association>
-            <EntityContainer Name="ZTS_MD_BP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
-                <EntitySet Name="RatingCreditLimitSet" EntityType="ZTS_MD_BP_SRV.RatingCreditLimit" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="RatingInsureSet" EntityType="ZTS_MD_BP_SRV.RatingInsure" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="ComplianceRisksSet" EntityType="ZTS_MD_BP_SRV.ComplianceRisks" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="CompliancePersonsSet" EntityType="ZTS_MD_BP_SRV.CompliancePersons" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="ComplianceBlacklistedSet" EntityType="ZTS_MD_BP_SRV.ComplianceBlacklisted" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="DictionaryRatingSet" EntityType="ZTS_MD_BP_SRV.DictionaryRating" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="DictionaryCurrencySet" EntityType="ZTS_MD_BP_SRV.DictionaryCurrency" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="DictionaryCountrySet" EntityType="ZTS_MD_BP_SRV.DictionaryCountry" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="DictionaryRiskTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryRiskType" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="BPRelationshipsSet" EntityType="ZTS_MD_BP_SRV.BPRelationships" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="DictionaryContactTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryContactType" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="AttachmentSet" EntityType="ZTS_MD_BP_SRV.Attachment" sap:updatable="false" sap:pageable="false" sap:content-version="1"/>
-                <EntitySet Name="DictionaryGoverTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryGoverType" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="AttachHelperSet" EntityType="ZTS_MD_BP_SRV.AttachHelper" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="DictionaryDocTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryDocType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="RatingGeneralSet" EntityType="ZTS_MD_BP_SRV.RatingGeneral" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="CounterpartyListSet" EntityType="ZTS_MD_BP_SRV.CounterpartyList" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="CounterpartyHeaderSet" EntityType="ZTS_MD_BP_SRV.CounterpartyHeader" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="CounterpartyInformationSet" EntityType="ZTS_MD_BP_SRV.CounterpartyInformation" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="CounterpartyAddressBookSet" EntityType="ZTS_MD_BP_SRV.CounterpartyAddressBook" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="CounterpartyBankAccountsSet" EntityType="ZTS_MD_BP_SRV.CounterpartyBankAccounts" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="GovernmentProxySet" EntityType="ZTS_MD_BP_SRV.GovernmentProxy" sap:searchable="true" sap:content-version="1"/>
-                <EntitySet Name="GovernmentMgtSet" EntityType="ZTS_MD_BP_SRV.GovernmentMgt" sap:searchable="true" sap:content-version="1"/>
-                <AssociationSet Name="CounterpartyListToHeaderSet" Association="ZTS_MD_BP_SRV.CounterpartyListToHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToHeader"/>
-                    <End EntitySet="CounterpartyHeaderSet" Role="ToRole_CounterpartyListToHeader"/>
-                </AssociationSet>
-                <AssociationSet Name="GovernmentProxyToAttachmentsSet" Association="ZTS_MD_BP_SRV.GovernmentProxyToAttachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="GovernmentProxySet" Role="FromRole_GovernmentProxyToAttachments"/>
-                    <End EntitySet="AttachmentSet" Role="ToRole_GovernmentProxyToAttachments"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToRatingGeneralSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneral" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingGeneral"/>
-                    <End EntitySet="RatingGeneralSet" Role="ToRole_CounterpartyListToRatingGeneral"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToGovernmentMgtSet" Association="ZTS_MD_BP_SRV.CounterpartyListToGovernmentMgt" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToGovernmentMgt"/>
-                    <End EntitySet="GovernmentMgtSet" Role="ToRole_CounterpartyListToGovernmentMgt"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToCompliBlacklistTabSet" Association="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklistTab" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToComplianceBlacklistTab"/>
-                    <End EntitySet="ComplianceBlacklistedSet" Role="ToRole_CounterpartyListToComplianceBlacklistTab"/>
-                </AssociationSet>
-                <AssociationSet Name="CounerpartyListToAttachmentSet" Association="ZTS_MD_BP_SRV.CounerpartyListToAttachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounerpartyListToAttachments"/>
-                    <End EntitySet="AttachmentSet" Role="ToRole_CounerpartyListToAttachments"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToGovernmentProxySet" Association="ZTS_MD_BP_SRV.CounterpartyListToGovernmentProxy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToGovernmentProxy"/>
-                    <End EntitySet="GovernmentProxySet" Role="ToRole_CounterpartyListToGovernmentProxy"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToInformationSet" Association="ZTS_MD_BP_SRV.CounterpartyListToInformation" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToInformation"/>
-                    <End EntitySet="CounterpartyInformationSet" Role="ToRole_CounterpartyListToInformation"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToCompliancePersonsSet" Association="ZTS_MD_BP_SRV.CounterpartyListToCompliancePersons" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToCompliancePersons"/>
-                    <End EntitySet="CompliancePersonsSet" Role="ToRole_CounterpartyListToCompliancePersons"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToComplianceBlacklisted_" Association="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklisted" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToComplianceBlacklisted"/>
-                    <End EntitySet="ComplianceBlacklistedSet" Role="ToRole_CounterpartyListToComplianceBlacklisted"/>
-                </AssociationSet>
-                <AssociationSet Name="CounerpartyListToBPRelationshipsSet" Association="ZTS_MD_BP_SRV.CounerpartyListToBPRelationships" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounerpartyListToBPRelationships"/>
-                    <End EntitySet="BPRelationshipsSet" Role="ToRole_CounerpartyListToBPRelationships"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToComplianceRisksSet" Association="ZTS_MD_BP_SRV.CounterpartyListToComplianceRisks" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToComplianceRisks"/>
-                    <End EntitySet="ComplianceRisksSet" Role="ToRole_CounterpartyListToComplianceRisks"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToRatingCreditLimTabSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimitTab" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingCreditLimitTab"/>
-                    <End EntitySet="RatingCreditLimitSet" Role="ToRole_CounterpartyListToRatingCreditLimitTab"/>
-                </AssociationSet>
-                <AssociationSet Name="AttachHelperToAttachmentsSet" Association="ZTS_MD_BP_SRV.AttachHelperToAttachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="AttachHelperSet" Role="FromRole_AttachHelperToAttachments"/>
-                    <End EntitySet="AttachmentSet" Role="ToRole_AttachHelperToAttachments"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToAddressBookSet" Association="ZTS_MD_BP_SRV.CounterpartyListToAddressBook" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToAddressBook"/>
-                    <End EntitySet="CounterpartyAddressBookSet" Role="ToRole_CounterpartyListToAddressBook"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToRatingCreditLimitSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingCreditLimit"/>
-                    <End EntitySet="RatingCreditLimitSet" Role="ToRole_CounterpartyListToRatingCreditLimit"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToBankAccountsSet" Association="ZTS_MD_BP_SRV.CounterpartyListToBankAccounts" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToBankAccounts"/>
-                    <End EntitySet="CounterpartyBankAccountsSet" Role="ToRole_CounterpartyListToBankAccounts"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToRatingGeneralTabSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneralTab" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingGeneralTab"/>
-                    <End EntitySet="RatingGeneralSet" Role="ToRole_CounterpartyListToRatingGeneralTab"/>
-                </AssociationSet>
-                <AssociationSet Name="CounterpartyListToRatingInsureSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingInsure" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingInsure"/>
-                    <End EntitySet="RatingInsureSet" Role="ToRole_CounterpartyListToRatingInsure"/>
-                </AssociationSet>
-            </EntityContainer>
-            <atom:link
-                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTS_MD_BP_SRV/$metadata"/>
-                <atom:link
-                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTS_MD_BP_SRV/$metadata"/>
-                </Schema>
-            </edmx:DataServices>
-        </edmx:Edmx>
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+<edmx:DataServices m:DataServiceVersion="2.0">
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZTS_MD_BP_SRV" xml:lang="en" sap:schema-version="1">
+<EntityType Name="AttachmentProxy" m:HasStream="true" sap:label="AttachmentProxy" sap:content-version="1">
+<Key>
+<PropertyRef Name="FileGUID"/>
+</Key>
+<Property Name="FileGUID" Type="Edm.String" Nullable="false" MaxLength="46" sap:unicode="false" sap:label="Folder Entry ID (Obj+Fol+Forwarder Name)" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="MIME type" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FileName" Type="Edm.String" sap:unicode="false" sap:label="File Name" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="RatingCreditLimit" sap:label="Ratin validated credit limit" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="ValidityDate"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ValidityDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="Validity Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CreditLimit" Type="Edm.Decimal" Precision="11" Scale="2" sap:unicode="false" sap:unit="Currency" sap:label="UTIS: Credit Limit" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+</EntityType>
+<EntityType Name="RatingInsure" sap:label="Rating insure information" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="DateTo"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="To Date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Amount" Type="Edm.Decimal" Precision="11" Scale="2" sap:unicode="false" sap:unit="Currency" sap:label="AmountInsuredReceiv"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+<Property Name="Rate" Type="Edm.Decimal" Precision="5" Scale="2" sap:unicode="false" sap:unit="Unit" sap:label="InsurancePremiumRate" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Unit" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Int. Meas. Unit" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+<Property Name="ContractNum" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS:ContractNumber" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="ComplianceRisks" sap:label="Compliance risks" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="RiskType"/>
+<PropertyRef Name="ItemNumber"/>
+<PropertyRef Name="DateFrom"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Risk type" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ItemNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="UTIS: Item Number" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="From date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Type" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Risk type" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Description" Type="Edm.String" sap:unicode="false" sap:label="Description" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Actions" Type="Edm.String" sap:unicode="false" sap:label="Recommended actions" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateTo" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="To Date" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Actual" Type="Edm.Boolean" sap:unicode="false" sap:label="Active" sap:sortable="false" sap:filterable="false"/>
+<Property Name="LastChanged" Type="Edm.DateTime" Nullable="false" Precision="0" ConcurrencyMode="Fixed" sap:unicode="false" sap:label="Last Changed" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="CompliancePersons" sap:label="Political exposed persons" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="Name"/>
+<PropertyRef Name="Surname"/>
+<PropertyRef Name="ContactType"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="UTIS: Name" sap:updatable="false"/>
+<Property Name="Surname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="UTIS: Surname" sap:updatable="false"/>
+<Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
+<Property Name="Position" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS: Position" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:filterable="false"/>
+<Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:filterable="false"/>
+<Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:filterable="false"/>
+<Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Comment" Type="Edm.String" sap:unicode="false" sap:label="Comment" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="ComplianceBlacklisted" sap:label="Blacklisted information" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="DateFrom"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="From date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="BlackListed" Type="Edm.Boolean" sap:unicode="false" sap:label="UTIS: Black List" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Username" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:label="User Name" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Justification" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Justification" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="DictionaryRating" sap:label="Dictionary of ratings" sap:content-version="1">
+<Key>
+<PropertyRef Name="Rating"/>
+</Key>
+<Property Name="Rating" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Rating" sap:creatable="false" sap:updatable="false"/>
+</EntityType>
+<EntityType Name="DictionaryCurrency" sap:label="Dictionary of currencies" sap:content-version="1">
+<Key>
+<PropertyRef Name="Currency"/>
+</Key>
+<Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:creatable="false" sap:updatable="false" sap:semantics="currency-code"/>
+</EntityType>
+<EntityType Name="DictionaryCountry" sap:label="Dictionary of countries" sap:content-version="1">
+<Key>
+<PropertyRef Name="Key"/>
+</Key>
+<Property Name="NameLong" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="Long name" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Key" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false"/>
+</EntityType>
+<EntityType Name="DictionaryRiskType" sap:label="Types of risks" sap:content-version="1">
+<Key>
+<PropertyRef Name="RiskType"/>
+</Key>
+<Property Name="RiskTypeName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Risk type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+</EntityType>
+<EntityType Name="BPRelationships" sap:label="BP Relationships" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="RelatedCode"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RelatedCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Related Business Partner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RelatedBPName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Related BP Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="IsParent" Type="Edm.Boolean" sap:unicode="false" sap:label="BP is Parent" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="DictionaryContactType" sap:label="Contact types" sap:content-version="1">
+<Key>
+<PropertyRef Name="ContactType"/>
+</Key>
+<Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name"/>
+<Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
+</EntityType>
+<EntityType Name="Attachment" m:HasStream="true" sap:label="Attachment" sap:content-version="1">
+<Key>
+<PropertyRef Name="PartnerCode"/>
+<PropertyRef Name="FileGUID"/>
+</Key>
+<Property Name="PartnerCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Partner Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FileGUID" Type="Edm.String" Nullable="false" MaxLength="46" sap:unicode="false" sap:label="Folder Entry ID (Obj+Fol+Forwarder Name)" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:unicode="false" sap:label="MIME type" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FileName" Type="Edm.String" sap:unicode="false" sap:label="File Name" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Document Type" sap:updatable="false" sap:sortable="false"/>
+<Property Name="DocTypeDescr" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Doc Type Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="UploadDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Upload Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="DictionaryGoverType" sap:label="Types of Governance (DDIC)" sap:content-version="1">
+<Key>
+<PropertyRef Name="GoverType"/>
+</Key>
+<Property Name="GoverType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS:Type Governance" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="GoverTypeName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Type of Gover Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+</EntityType>
+<EntityType Name="AttachHelper" sap:label="Attachments Helper" sap:content-version="1">
+<Key>
+<PropertyRef Name="PartnerCode"/>
+<PropertyRef Name="DocType"/>
+</Key>
+<Property Name="PartnerCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Partner Code" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="ToAttachments" Relationship="ZTS_MD_BP_SRV.AttachHelperToAttachments" FromRole="FromRole_AttachHelperToAttachments" ToRole="ToRole_AttachHelperToAttachments"/>
+</EntityType>
+<EntityType Name="DictionaryDocType" sap:label="Document Types" sap:content-version="1">
+<Key>
+<PropertyRef Name="DocType"/>
+</Key>
+<Property Name="DocType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Document Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Description" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="RatingGeneral" sap:label="Rating information" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="Date"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Date" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:label="From date" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CountryRating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Country Rating" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="BusinessScale" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingBusinessScale" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CorporateTransparency" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingCorpTranspar" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FinancialProfile" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingFinancialProf" sap:sortable="false" sap:filterable="false"/>
+<Property Name="CommercialProfile" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="RatingCommercialProf" sap:sortable="false" sap:filterable="false"/>
+<Property Name="RatingSet" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="UTIS: Rating Set" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ExpressScore" Type="Edm.Boolean" sap:unicode="false" sap:label="UTIS: Express Score" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<EntityType Name="CounterpartyList" sap:label="Counterparty list" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Code" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="EngName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="English Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="TaxNumber" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Registration Number" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Blacklisted" Type="Edm.Boolean" sap:unicode="false" sap:label="Blacklisted" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="CodeKioda" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Code From Kioda" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="DateCreation" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Creation Date" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Rating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="Rating" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="LegalForm" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Legal Form" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="LegalName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="Legal Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<NavigationProperty Name="ToCounterpartyHeader" Relationship="ZTS_MD_BP_SRV.CounterpartyListToHeader" FromRole="FromRole_CounterpartyListToHeader" ToRole="ToRole_CounterpartyListToHeader"/>
+<NavigationProperty Name="ToGovernmentMgt" Relationship="ZTS_MD_BP_SRV.CounterpartyListToGovernmentMgt" FromRole="FromRole_CounterpartyListToGovernmentMgt" ToRole="ToRole_CounterpartyListToGovernmentMgt"/>
+<NavigationProperty Name="ToGovernmentProxy" Relationship="ZTS_MD_BP_SRV.CounterpartyListToGovernmentProxy" FromRole="FromRole_CounterpartyListToGovernmentProxy" ToRole="ToRole_CounterpartyListToGovernmentProxy"/>
+<NavigationProperty Name="ToCounterpartyInformation" Relationship="ZTS_MD_BP_SRV.CounterpartyListToInformation" FromRole="FromRole_CounterpartyListToInformation" ToRole="ToRole_CounterpartyListToInformation"/>
+<NavigationProperty Name="ToCounterpartyAddressBook" Relationship="ZTS_MD_BP_SRV.CounterpartyListToAddressBook" FromRole="FromRole_CounterpartyListToAddressBook" ToRole="ToRole_CounterpartyListToAddressBook"/>
+<NavigationProperty Name="ToCounterpartyBankAccounts" Relationship="ZTS_MD_BP_SRV.CounterpartyListToBankAccounts" FromRole="FromRole_CounterpartyListToBankAccounts" ToRole="ToRole_CounterpartyListToBankAccounts"/>
+<NavigationProperty Name="ToRatingGeneral" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneral" FromRole="FromRole_CounterpartyListToRatingGeneral" ToRole="ToRole_CounterpartyListToRatingGeneral"/>
+<NavigationProperty Name="ToRatingGeneralTab" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneralTab" FromRole="FromRole_CounterpartyListToRatingGeneralTab" ToRole="ToRole_CounterpartyListToRatingGeneralTab"/>
+<NavigationProperty Name="ToRatingCreditLimit" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimit" FromRole="FromRole_CounterpartyListToRatingCreditLimit" ToRole="ToRole_CounterpartyListToRatingCreditLimit"/>
+<NavigationProperty Name="ToRatingCreditLimitTab" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimitTab" FromRole="FromRole_CounterpartyListToRatingCreditLimitTab" ToRole="ToRole_CounterpartyListToRatingCreditLimitTab"/>
+<NavigationProperty Name="ToRatingInsure" Relationship="ZTS_MD_BP_SRV.CounterpartyListToRatingInsure" FromRole="FromRole_CounterpartyListToRatingInsure" ToRole="ToRole_CounterpartyListToRatingInsure"/>
+<NavigationProperty Name="ToComplianceRisks" Relationship="ZTS_MD_BP_SRV.CounterpartyListToComplianceRisks" FromRole="FromRole_CounterpartyListToComplianceRisks" ToRole="ToRole_CounterpartyListToComplianceRisks"/>
+<NavigationProperty Name="ToCompliancePersons" Relationship="ZTS_MD_BP_SRV.CounterpartyListToCompliancePersons" FromRole="FromRole_CounterpartyListToCompliancePersons" ToRole="ToRole_CounterpartyListToCompliancePersons"/>
+<NavigationProperty Name="ToComplianceBlacklisted" Relationship="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklisted" FromRole="FromRole_CounterpartyListToComplianceBlacklisted" ToRole="ToRole_CounterpartyListToComplianceBlacklisted"/>
+<NavigationProperty Name="ToComplianceBlacklistedTab" Relationship="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklistTab" FromRole="FromRole_CounterpartyListToComplianceBlacklistTab" ToRole="ToRole_CounterpartyListToComplianceBlacklistTab"/>
+<NavigationProperty Name="ToBPRelationships" Relationship="ZTS_MD_BP_SRV.CounerpartyListToBPRelationships" FromRole="FromRole_CounerpartyListToBPRelationships" ToRole="ToRole_CounerpartyListToBPRelationships"/>
+<NavigationProperty Name="ToAttachments" Relationship="ZTS_MD_BP_SRV.CounerpartyListToAttachments" FromRole="FromRole_CounerpartyListToAttachments" ToRole="ToRole_CounerpartyListToAttachments"/>
+</EntityType>
+<EntityType Name="CounterpartyHeader" sap:label="Counterparty header" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Company" Type="Edm.String" sap:unicode="false" sap:label="Legal Entity" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="DateCreation" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Created on" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="TypeID" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="TypeID" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Type" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Type" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+<Property Name="Sanctions" Type="Edm.Boolean" sap:unicode="false" sap:label="Flag of Sanctions" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+</EntityType>
+<EntityType Name="CounterpartyInformation" sap:label="Counterparty information" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+</Key>
+<Property Name="RatingSet" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="UTIS: Rating Set"/>
+<Property Name="DateValidity" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:label="Validity Date"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:semantics="currency-code"/>
+<Property Name="LimitSecurity" Type="Edm.Decimal" Precision="11" Scale="2" sap:unicode="false" sap:unit="Currency" sap:label="UTIS:LimitOfSecurity"/>
+<Property Name="RelationBP" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Relationship to BP"/>
+<Property Name="RelationCategory" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Relationsh.Cat."/>
+<Property Name="RegistrationNumber" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Registration Number"/>
+<Property Name="EnglishName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="English Name"/>
+<Property Name="LegalName" Type="Edm.String" MaxLength="180" sap:unicode="false" sap:label="Legal Name"/>
+<Property Name="LegalForm" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="UTIS: Legal Form"/>
+<Property Name="Identifier" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="ID number"/>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
+</EntityType>
+<EntityType Name="CounterpartyAddressBook" sap:label="Counterparty address book" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="AddressNumber"/>
+<PropertyRef Name="AddrTypeID"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
+<Property Name="AddressNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address number" sap:updatable="false"/>
+<Property Name="AddrTypeID" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Address Type ID" sap:updatable="false"/>
+<Property Name="AddressType" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Address Type"/>
+<Property Name="Region" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Region"/>
+<Property Name="City" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="City"/>
+<Property Name="Street" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Street"/>
+<Property Name="Office" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="House Number"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country"/>
+<Property Name="ZIP" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:label="Postal Code"/>
+</EntityType>
+<EntityType Name="CounterpartyBankAccounts" sap:label="Counterparty bank accounts details" sap:content-version="1">
+<Key>
+<PropertyRef Name="DetailsID"/>
+<PropertyRef Name="Code"/>
+</Key>
+<Property Name="DetailsID" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Bank details" sap:updatable="false"/>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
+<Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:label="Country"/>
+<Property Name="SWIFT" Type="Edm.String" MaxLength="11" sap:unicode="false" sap:label="SWIFT/BIC"/>
+<Property Name="BankName" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Bank name"/>
+<Property Name="AccountBC" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="BC Account"/>
+<Property Name="Account" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:label="Bank acct"/>
+<Property Name="AccountName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Account Name"/>
+<Property Name="Address" Type="Edm.String" MaxLength="120" sap:unicode="false" sap:label="Address"/>
+<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Currency" sap:semantics="currency-code"/>
+<Property Name="IBAN" Type="Edm.String" MaxLength="34" sap:unicode="false" sap:label="IBAN"/>
+</EntityType>
+<EntityType Name="GovernmentProxy" sap:label="Government proxy" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="Name"/>
+<PropertyRef Name="Surname"/>
+<PropertyRef Name="ContactType"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="UTIS: Name" sap:updatable="false"/>
+<Property Name="Surname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="UTIS: Surname" sap:updatable="false"/>
+<Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
+<Property Name="Position" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS: Position" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Comment" Type="Edm.String" sap:unicode="false" sap:label="Comment" sap:sortable="false" sap:filterable="false"/>
+<NavigationProperty Name="ToAttachmentProxy" Relationship="ZTS_MD_BP_SRV.GovernmentProxyToAttachmentProxy" FromRole="FromRole_GovernmentProxyToAttachmentProxy" ToRole="ToRole_GovernmentProxyToAttachmentProxy"/>
+</EntityType>
+<EntityType Name="GovernmentMgt" sap:label="Government management" sap:content-version="1">
+<Key>
+<PropertyRef Name="Code"/>
+<PropertyRef Name="Name"/>
+<PropertyRef Name="Surname"/>
+<PropertyRef Name="ContactType"/>
+</Key>
+<Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:updatable="false"/>
+<Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="UTIS: Name" sap:updatable="false"/>
+<Property Name="Surname" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="UTIS: Surname" sap:updatable="false"/>
+<Property Name="ContactType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="UTIS: Contact Type" sap:updatable="false"/>
+<Property Name="Position" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="UTIS: Position" sap:sortable="false" sap:filterable="false"/>
+<Property Name="GoverType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:label="UTIS:Type Governance" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Email" Type="Edm.String" MaxLength="241" sap:unicode="false" sap:label="E-Mail Address" sap:sortable="false" sap:filterable="false"/>
+<Property Name="Phone" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Telephone" sap:sortable="false" sap:filterable="false"/>
+<Property Name="FaxNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:label="Fax" sap:sortable="false" sap:filterable="false"/>
+<Property Name="ContactName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+<Property Name="GoverName" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Type of Gover Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+</EntityType>
+<Association Name="CounterpartyListToHeader" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToHeader"/>
+<End Type="ZTS_MD_BP_SRV.CounterpartyHeader" Multiplicity="0..1" Role="ToRole_CounterpartyListToHeader"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToHeader">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToHeader">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToGovernmentMgt" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToGovernmentMgt"/>
+<End Type="ZTS_MD_BP_SRV.GovernmentMgt" Multiplicity="*" Role="ToRole_CounterpartyListToGovernmentMgt"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToGovernmentMgt">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToGovernmentMgt">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToGovernmentProxy" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToGovernmentProxy"/>
+<End Type="ZTS_MD_BP_SRV.GovernmentProxy" Multiplicity="*" Role="ToRole_CounterpartyListToGovernmentProxy"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToGovernmentProxy">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToGovernmentProxy">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToInformation" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToInformation"/>
+<End Type="ZTS_MD_BP_SRV.CounterpartyInformation" Multiplicity="0..1" Role="ToRole_CounterpartyListToInformation"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToInformation">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToInformation">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToAddressBook" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToAddressBook"/>
+<End Type="ZTS_MD_BP_SRV.CounterpartyAddressBook" Multiplicity="*" Role="ToRole_CounterpartyListToAddressBook"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToAddressBook">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToAddressBook">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToBankAccounts" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToBankAccounts"/>
+<End Type="ZTS_MD_BP_SRV.CounterpartyBankAccounts" Multiplicity="*" Role="ToRole_CounterpartyListToBankAccounts"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToBankAccounts">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToBankAccounts">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToRatingGeneral" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingGeneral"/>
+<End Type="ZTS_MD_BP_SRV.RatingGeneral" Multiplicity="0..1" Role="ToRole_CounterpartyListToRatingGeneral"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToRatingGeneral">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToRatingGeneral">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToRatingGeneralTab" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingGeneralTab"/>
+<End Type="ZTS_MD_BP_SRV.RatingGeneral" Multiplicity="*" Role="ToRole_CounterpartyListToRatingGeneralTab"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToRatingGeneralTab">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToRatingGeneralTab">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToRatingCreditLimit" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingCreditLimit"/>
+<End Type="ZTS_MD_BP_SRV.RatingCreditLimit" Multiplicity="0..1" Role="ToRole_CounterpartyListToRatingCreditLimit"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToRatingCreditLimit">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToRatingCreditLimit">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToRatingCreditLimitTab" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingCreditLimitTab"/>
+<End Type="ZTS_MD_BP_SRV.RatingCreditLimit" Multiplicity="*" Role="ToRole_CounterpartyListToRatingCreditLimitTab"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToRatingCreditLimitTab">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToRatingCreditLimitTab">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToRatingInsure" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToRatingInsure"/>
+<End Type="ZTS_MD_BP_SRV.RatingInsure" Multiplicity="0..1" Role="ToRole_CounterpartyListToRatingInsure"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToRatingInsure">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToRatingInsure">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToComplianceRisks" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToComplianceRisks"/>
+<End Type="ZTS_MD_BP_SRV.ComplianceRisks" Multiplicity="*" Role="ToRole_CounterpartyListToComplianceRisks"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToComplianceRisks">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToComplianceRisks">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToCompliancePersons" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToCompliancePersons"/>
+<End Type="ZTS_MD_BP_SRV.CompliancePersons" Multiplicity="*" Role="ToRole_CounterpartyListToCompliancePersons"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToCompliancePersons">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToCompliancePersons">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToComplianceBlacklisted" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToComplianceBlacklisted"/>
+<End Type="ZTS_MD_BP_SRV.ComplianceBlacklisted" Multiplicity="0..1" Role="ToRole_CounterpartyListToComplianceBlacklisted"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToComplianceBlacklisted">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToComplianceBlacklisted">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounterpartyListToComplianceBlacklistTab" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounterpartyListToComplianceBlacklistTab"/>
+<End Type="ZTS_MD_BP_SRV.ComplianceBlacklisted" Multiplicity="*" Role="ToRole_CounterpartyListToComplianceBlacklistTab"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounterpartyListToComplianceBlacklistTab">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounterpartyListToComplianceBlacklistTab">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounerpartyListToBPRelationships" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounerpartyListToBPRelationships"/>
+<End Type="ZTS_MD_BP_SRV.BPRelationships" Multiplicity="*" Role="ToRole_CounerpartyListToBPRelationships"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_CounerpartyListToBPRelationships">
+<PropertyRef Name="Code"/>
+</Principal>
+<Dependent Role="ToRole_CounerpartyListToBPRelationships">
+<PropertyRef Name="Code"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<Association Name="CounerpartyListToAttachments" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.CounterpartyList" Multiplicity="1" Role="FromRole_CounerpartyListToAttachments"/>
+<End Type="ZTS_MD_BP_SRV.Attachment" Multiplicity="*" Role="ToRole_CounerpartyListToAttachments"/>
+</Association>
+<Association Name="GovernmentProxyToAttachmentProxy" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.GovernmentProxy" Multiplicity="1" Role="FromRole_GovernmentProxyToAttachmentProxy"/>
+<End Type="ZTS_MD_BP_SRV.AttachmentProxy" Multiplicity="*" Role="ToRole_GovernmentProxyToAttachmentProxy"/>
+</Association>
+<Association Name="AttachHelperToAttachments" sap:content-version="1">
+<End Type="ZTS_MD_BP_SRV.AttachHelper" Multiplicity="1" Role="FromRole_AttachHelperToAttachments"/>
+<End Type="ZTS_MD_BP_SRV.Attachment" Multiplicity="*" Role="ToRole_AttachHelperToAttachments"/>
+<ReferentialConstraint>
+<Principal Role="FromRole_AttachHelperToAttachments">
+<PropertyRef Name="DocType"/>
+<PropertyRef Name="PartnerCode"/>
+</Principal>
+<Dependent Role="ToRole_AttachHelperToAttachments">
+<PropertyRef Name="DocType"/>
+<PropertyRef Name="PartnerCode"/>
+</Dependent>
+</ReferentialConstraint>
+</Association>
+<EntityContainer Name="ZTS_MD_BP_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+<EntitySet Name="AttachmentProxySet" EntityType="ZTS_MD_BP_SRV.AttachmentProxy" sap:updatable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="RatingCreditLimitSet" EntityType="ZTS_MD_BP_SRV.RatingCreditLimit" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="RatingInsureSet" EntityType="ZTS_MD_BP_SRV.RatingInsure" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="ComplianceRisksSet" EntityType="ZTS_MD_BP_SRV.ComplianceRisks" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="CompliancePersonsSet" EntityType="ZTS_MD_BP_SRV.CompliancePersons" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="ComplianceBlacklistedSet" EntityType="ZTS_MD_BP_SRV.ComplianceBlacklisted" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="DictionaryRatingSet" EntityType="ZTS_MD_BP_SRV.DictionaryRating" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="DictionaryCurrencySet" EntityType="ZTS_MD_BP_SRV.DictionaryCurrency" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="DictionaryCountrySet" EntityType="ZTS_MD_BP_SRV.DictionaryCountry" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="DictionaryRiskTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryRiskType" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="BPRelationshipsSet" EntityType="ZTS_MD_BP_SRV.BPRelationships" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="DictionaryContactTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryContactType" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="AttachmentSet" EntityType="ZTS_MD_BP_SRV.Attachment" sap:updatable="false" sap:pageable="false" sap:content-version="1"/>
+<EntitySet Name="DictionaryGoverTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryGoverType" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="AttachHelperSet" EntityType="ZTS_MD_BP_SRV.AttachHelper" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="DictionaryDocTypeSet" EntityType="ZTS_MD_BP_SRV.DictionaryDocType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+<EntitySet Name="RatingGeneralSet" EntityType="ZTS_MD_BP_SRV.RatingGeneral" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="CounterpartyListSet" EntityType="ZTS_MD_BP_SRV.CounterpartyList" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="CounterpartyHeaderSet" EntityType="ZTS_MD_BP_SRV.CounterpartyHeader" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="CounterpartyInformationSet" EntityType="ZTS_MD_BP_SRV.CounterpartyInformation" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="CounterpartyAddressBookSet" EntityType="ZTS_MD_BP_SRV.CounterpartyAddressBook" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="CounterpartyBankAccountsSet" EntityType="ZTS_MD_BP_SRV.CounterpartyBankAccounts" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="GovernmentProxySet" EntityType="ZTS_MD_BP_SRV.GovernmentProxy" sap:searchable="true" sap:content-version="1"/>
+<EntitySet Name="GovernmentMgtSet" EntityType="ZTS_MD_BP_SRV.GovernmentMgt" sap:searchable="true" sap:content-version="1"/>
+<AssociationSet Name="CounterpartyListToHeaderSet" Association="ZTS_MD_BP_SRV.CounterpartyListToHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToHeader"/>
+<End EntitySet="CounterpartyHeaderSet" Role="ToRole_CounterpartyListToHeader"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToRatingGeneralSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneral" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingGeneral"/>
+<End EntitySet="RatingGeneralSet" Role="ToRole_CounterpartyListToRatingGeneral"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToGovernmentMgtSet" Association="ZTS_MD_BP_SRV.CounterpartyListToGovernmentMgt" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToGovernmentMgt"/>
+<End EntitySet="GovernmentMgtSet" Role="ToRole_CounterpartyListToGovernmentMgt"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToCompliBlacklistTabSet" Association="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklistTab" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToComplianceBlacklistTab"/>
+<End EntitySet="ComplianceBlacklistedSet" Role="ToRole_CounterpartyListToComplianceBlacklistTab"/>
+</AssociationSet>
+<AssociationSet Name="CounerpartyListToAttachmentSet" Association="ZTS_MD_BP_SRV.CounerpartyListToAttachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounerpartyListToAttachments"/>
+<End EntitySet="AttachmentSet" Role="ToRole_CounerpartyListToAttachments"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToGovernmentProxySet" Association="ZTS_MD_BP_SRV.CounterpartyListToGovernmentProxy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToGovernmentProxy"/>
+<End EntitySet="GovernmentProxySet" Role="ToRole_CounterpartyListToGovernmentProxy"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToInformationSet" Association="ZTS_MD_BP_SRV.CounterpartyListToInformation" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToInformation"/>
+<End EntitySet="CounterpartyInformationSet" Role="ToRole_CounterpartyListToInformation"/>
+</AssociationSet>
+<AssociationSet Name="GovernmentProxyToAttachmentProxySet" Association="ZTS_MD_BP_SRV.GovernmentProxyToAttachmentProxy" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="GovernmentProxySet" Role="FromRole_GovernmentProxyToAttachmentProxy"/>
+<End EntitySet="AttachmentProxySet" Role="ToRole_GovernmentProxyToAttachmentProxy"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToCompliancePersonsSet" Association="ZTS_MD_BP_SRV.CounterpartyListToCompliancePersons" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToCompliancePersons"/>
+<End EntitySet="CompliancePersonsSet" Role="ToRole_CounterpartyListToCompliancePersons"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToComplianceBlacklisted_" Association="ZTS_MD_BP_SRV.CounterpartyListToComplianceBlacklisted" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToComplianceBlacklisted"/>
+<End EntitySet="ComplianceBlacklistedSet" Role="ToRole_CounterpartyListToComplianceBlacklisted"/>
+</AssociationSet>
+<AssociationSet Name="CounerpartyListToBPRelationshipsSet" Association="ZTS_MD_BP_SRV.CounerpartyListToBPRelationships" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounerpartyListToBPRelationships"/>
+<End EntitySet="BPRelationshipsSet" Role="ToRole_CounerpartyListToBPRelationships"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToComplianceRisksSet" Association="ZTS_MD_BP_SRV.CounterpartyListToComplianceRisks" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToComplianceRisks"/>
+<End EntitySet="ComplianceRisksSet" Role="ToRole_CounterpartyListToComplianceRisks"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToRatingCreditLimTabSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimitTab" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingCreditLimitTab"/>
+<End EntitySet="RatingCreditLimitSet" Role="ToRole_CounterpartyListToRatingCreditLimitTab"/>
+</AssociationSet>
+<AssociationSet Name="AttachHelperToAttachmentsSet" Association="ZTS_MD_BP_SRV.AttachHelperToAttachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="AttachHelperSet" Role="FromRole_AttachHelperToAttachments"/>
+<End EntitySet="AttachmentSet" Role="ToRole_AttachHelperToAttachments"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToAddressBookSet" Association="ZTS_MD_BP_SRV.CounterpartyListToAddressBook" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToAddressBook"/>
+<End EntitySet="CounterpartyAddressBookSet" Role="ToRole_CounterpartyListToAddressBook"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToRatingCreditLimitSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingCreditLimit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingCreditLimit"/>
+<End EntitySet="RatingCreditLimitSet" Role="ToRole_CounterpartyListToRatingCreditLimit"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToBankAccountsSet" Association="ZTS_MD_BP_SRV.CounterpartyListToBankAccounts" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToBankAccounts"/>
+<End EntitySet="CounterpartyBankAccountsSet" Role="ToRole_CounterpartyListToBankAccounts"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToRatingGeneralTabSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingGeneralTab" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingGeneralTab"/>
+<End EntitySet="RatingGeneralSet" Role="ToRole_CounterpartyListToRatingGeneralTab"/>
+</AssociationSet>
+<AssociationSet Name="CounterpartyListToRatingInsureSet" Association="ZTS_MD_BP_SRV.CounterpartyListToRatingInsure" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+<End EntitySet="CounterpartyListSet" Role="FromRole_CounterpartyListToRatingInsure"/>
+<End EntitySet="RatingInsureSet" Role="ToRole_CounterpartyListToRatingInsure"/>
+</AssociationSet>
+</EntityContainer>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="https://ws-erd.corp.suek.ru/sap/opu/odata/sap/ZTS_MD_BP_SRV/$metadata"/>
+<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="https://ws-erd.corp.suek.ru/sap/opu/odata/sap/ZTS_MD_BP_SRV/$metadata"/>
+</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

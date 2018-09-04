@@ -35,6 +35,13 @@
 						<Label text="{EnglishName}" id="lMainInfEnglishName"/>
 					</items>
 				</FlexBox>
+				<ToolbarSpacer/>
+				<FlexBox width="100%" class="columns" alignItems="Stretch">
+					<items>
+						<Label class="black" text="{i18n>rSet}:" width="170px"/>
+						<Label text="{RatingSet}"/>
+					</items>
+				</FlexBox>
 			</l:BlockLayoutCell>
 			<l:BlockLayoutCell>
 				<OverflowToolbar>

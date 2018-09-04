@@ -49,7 +49,8 @@ sap.ui.define([
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
 			});
 			
-			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks", "upload", "uploadDashboard"];
+			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks", "upload", "uploadDashboard", 
+				"managementContacts", "contacts"];
 			this.addDialogs(this.dialogArr);
 		},
 
@@ -326,7 +327,7 @@ sap.ui.define([
 			var listItems = e.getParameters("listItem");
 			if (listItems) {
 				var id = e.getSource().data("id");
-				this.setEnabled([id + "Delete", id + "Edit", id + "Download"], true);
+				this.setEnabled([id + "Delete", id + "Edit", id + "Download", id + "Contacts"], true);
 			}
 		},
 		
@@ -386,7 +387,13 @@ sap.ui.define([
 				
 			}
 		},
-		
+
+        // Dodma
+        // Contacts dialog for management.fragment
+        dialogContacts: function(oEvent) {
+        	alert("OK");
+        },
+        
 		// Table buttons function for add/edit/delete of items
 		tableAdd: function(oEvent) {
 			var button = oEvent.getSource();
@@ -421,13 +428,17 @@ sap.ui.define([
 		tableEdit: function(oEvent) {
 			var button = oEvent.getSource();
 			var id = button.data("id");
-			if(this.byId(id + "Table").getSelectedItem()){
-				var url = this.byId(id + "Table").getSelectedItem().getBindingContextPath();
-				sap.ui.getCore().byId(id + "Dialog").bindElement(url);
-				var oDialog = this.dialogOpen(oEvent);
-				this.setDialogEnabled(oDialog, false);
-				oDialog.getButtons()[1].setVisible(true);
-				oDialog.getButtons()[2].setVisible(false);
+			var table = button.data("table") ? this.byId(button.data("table") + "Table") || sap.ui.getCore().byId(button.data("table") + "Table") : 
+				this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+			if(table.getSelectedItem()){
+				var url = table.getSelectedItem().getBindingContextPath();
+				var dialog = this.dialogOpen(oEvent);
+				dialog.bindElement(url);
+				this.setDialogEnabled(dialog, false);
+				if(!button.data("dialog")){
+					dialog.getButtons()[1].setVisible(true);
+					dialog.getButtons()[2].setVisible(false);
+				}
 				
 				// If upload table set token to uploader
 				if(button.data("upload")){
@@ -558,9 +569,10 @@ sap.ui.define([
 		// Function for openning the dialog for create/edit/copy functions
 		// Also returns dialog object
 		dialogOpen: function(oEvent) {
-			var sTableId = oEvent.getSource().data("id");
-			this[sTableId + "Dialog"].open();
-			return this[sTableId + "Dialog"];
+			var context = oEvent.getSource();
+			var id = context.data("dialog") ? context.data("dialog") : context.data("id");
+			this[id + "Dialog"].open();
+			return this[id + "Dialog"];
 		},
 		
 		// Set key inputs as disabled/enabled for editting, oDialog = object dialog, flag = boolean flag for enabled/disabled
@@ -623,8 +635,9 @@ sap.ui.define([
 		// Enable/Disables inputs depending flag arg
 		setEnabled: function(idArr, flag){
 			for(var i in idArr){
-				if(this.byId(idArr[i])){
-					this.byId(idArr[i]).setEnabled(flag);
+				var input = this.byId(idArr[i]) || sap.ui.getCore().byId(idArr[i]);
+				if(input){
+					input.setEnabled(flag);
 				}
 			}
 		},

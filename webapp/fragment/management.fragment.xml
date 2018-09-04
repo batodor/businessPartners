@@ -8,6 +8,7 @@
 					<Button id="managementAdd" custom:id="management" text="{i18n>add}" press="tableAdd"/>
 					<Button id="managementEdit" custom:id="management" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="managementDelete" custom:id="management" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
+					<Button id="managementContacts" custom:id="management" custom:dialog="managementContacts" text="{i18n>contacts}" press="tableEdit" type="Accept" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="managementTable" custom:id="management" width="100%" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
@@ -16,10 +17,10 @@
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
 						<Column><Label class="black" text="{i18n>position}"/></Column>
 						<Column><Label class="black" text="{i18n>typeOfGovernance}"/></Column>
-						<Column><Label class="black" text="{i18n>contactType}"/></Column>
-						<Column><Label class="black" text="{i18n>phone}"/></Column>
-						<Column><Label class="black" text="{i18n>fax}"/></Column>
-						<Column><Label class="black" text="{i18n>email}"/></Column>
+						<!--<Column><Label class="black" text="{i18n>contactType}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>phone}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>fax}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>email}"/></Column>-->
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -28,10 +29,10 @@
 								<Text text="{Surname}"/>
 								<Text text="{Position}"/>
 								<Text custom:key="{GoverType}" text="{GoverName}"/>
-								<Text custom:key="{ContactType}" text="{ContactName}"/>
-								<Text text="{Phone}"/>
-								<Text text="{FaxNumber}"/>
-								<Text text="{Email}"/>
+								<!--<Text custom:key="{ContactType}" text="{ContactName}"/>-->
+								<!--<Text text="{Phone}"/>-->
+								<!--<Text text="{FaxNumber}"/>-->
+								<!--<Link text="{Email}" href="mailto:{Email}"/>-->
 							</cells>
 						</ColumnListItem>
 					</items>
@@ -56,10 +57,10 @@
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
 						<Column><Label class="black" text="{i18n>position}"/></Column>
 						<Column><Label class="black" text="{i18n>comment}"/></Column>
-						<Column><Label class="black" text="{i18n>contactType}"/></Column>
-						<Column><Label class="black" text="{i18n>phone}"/></Column>
-						<Column><Label class="black" text="{i18n>fax}"/></Column>
-						<Column><Label class="black" text="{i18n>email}"/></Column>
+						<!--<Column><Label class="black" text="{i18n>contactType}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>phone}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>fax}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>email}"/></Column>-->
 						<Column><Label class="black" text="{i18n>file}"/></Column>
 					</columns>
 					<items>
@@ -72,7 +73,7 @@
 								<Text custom:key="{ContactType}" text="{ContactName}"/>
 								<Text text="{Phone}"/>
 								<Text text="{FaxNumber}"/>
-								<Text text="{Email}"/>
+								<Link text="{Email}" href="mailto:{Email}"/>
 								<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsList" showNoData="false">
 									<CustomListItem>
 										<Button icon="sap-icon://download" press="downloadAttachmentButton" />

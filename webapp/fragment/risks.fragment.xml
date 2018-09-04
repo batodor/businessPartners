@@ -58,10 +58,10 @@
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
 						<Column><Label class="black" text="{i18n>position}"/></Column>
 						<Column><Label class="black" text="{i18n>comment}"/></Column>
-						<Column><Label class="black" text="{i18n>contactType}"/></Column>
-						<Column><Label class="black" text="{i18n>phone}"/></Column>
-						<Column><Label class="black" text="{i18n>fax}"/></Column>
-						<Column><Label class="black" text="{i18n>email}"/></Column>
+						<!--<Column><Label class="black" text="{i18n>contactType}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>phone}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>fax}"/></Column>-->
+						<!--<Column><Label class="black" text="{i18n>email}"/></Column>-->
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -73,7 +73,7 @@
 								<Text custom:key="{ContactType}" text="{ContactName}"/>
 								<Text text="{Phone}"/>
 								<Text text="{FaxNumber}"/>
-								<Text text="{Email}"/>
+								<Link text="{Email}" href="mailto:{Email}"/>
 							</cells>
 						</ColumnListItem>
 					</items>
