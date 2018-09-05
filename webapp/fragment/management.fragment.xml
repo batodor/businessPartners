@@ -51,6 +51,7 @@
 						<Column><Label class="black" text="{i18n>position}"/></Column>
 						<Column><Label class="black" text="{i18n>comment}"/></Column>
 						<Column><Label class="black" text="{i18n>file}"/></Column>
+						
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -59,10 +60,6 @@
 								<Text text="{Surname}"/>
 								<Text text="{Position}"/>
 								<Text text="{Comment}"/>
-								<Text custom:key="{ContactType}" text="{ContactName}"/>
-								<Text text="{Phone}"/>
-								<Text text="{FaxNumber}"/>
-								<Link text="{Email}" href="mailto:{Email}"/>
 								<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsList" showNoData="false">
 									<CustomListItem>
 										<Button icon="sap-icon://download" press="downloadAttachmentButton" />
