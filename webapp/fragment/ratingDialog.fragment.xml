@@ -2,13 +2,17 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>rating}" class="sapUiContentPadding" id="ratingDialog">
 		<content>
+			<Label text="{i18n>expressScore}" width="280px"/>
+			<CheckBox select="onCheck" selected="{ExpressScore}"/>
+			<ToolbarSpacer/>
 			<Label text="{i18n>rBusinessScale}" width="280px"/>
-			<Select forceSelection="false" selectedKey="{BusinessScale}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select id="ratingBusinessScale" forceSelection="false" selectedKey="{BusinessScale}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
 			<Label text="{i18n>rCorporateTransparency}" width="280px"/>
-			<Select forceSelection="false" selectedKey="{CorporateTransparency}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Select id="ratingCorporateTransparency" forceSelection="false" selectedKey="{CorporateTransparency}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" 
+				width="140px">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
@@ -29,9 +33,7 @@
 			<ToolbarSpacer/>
 			<Label text="{i18n>date}" width="280px"/>
 			<DatePicker dateValue="{Date}" width="145px"/>
-			<ToolbarSpacer/>
-			<Label text="{i18n>expressScore}" width="280px"/>
-			<CheckBox selected="{ExpressScore}"/>
+			
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="ratingDialog" press="dialogClose"/>

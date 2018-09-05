@@ -8,7 +8,7 @@
 					<Button id="managementAdd" custom:id="management" text="{i18n>add}" press="tableAdd"/>
 					<Button id="managementEdit" custom:id="management" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="managementDelete" custom:id="management" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
-					<Button id="managementContacts" custom:id="management" custom:dialog="managementContacts" text="{i18n>contacts}" press="tableEdit" type="Accept" enabled="false"/>
+					<!--<Button id="managementContacts" custom:id="management" custom:dialog="managementContacts" text="{i18n>contacts}" press="tableEdit" type="Accept" enabled="false"/>-->
 				</OverflowToolbar>
 				<Table id="managementTable" custom:id="management" width="100%" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">

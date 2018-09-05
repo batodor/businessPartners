@@ -732,6 +732,16 @@ sap.ui.define([
 					}
 				}
 			});
+		},
+		
+		onCheck: function(oEvent){
+			var check = oEvent.getSource();
+			if(check.getSelected()){
+				sap.ui.getCore().byId("ratingBusinessScale").setSelectedKey("").setEnabled(false);
+				sap.ui.getCore().byId("ratingCorporateTransparency").setSelectedKey("").setEnabled(false);
+			}else{
+				this.setEnabled(["ratingBusinessScale", "ratingCorporateTransparency"], true);
+			}
 		}
 	});
 });
