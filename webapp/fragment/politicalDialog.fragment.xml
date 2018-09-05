@@ -30,8 +30,8 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="politicalDialog" type="Back" press="dialogClose"/>
-			<Button text="{i18n>edit}" custom:id="political" visible="false" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" custom:id="political" visible="false" custom:url="/CompliancePersonsSet" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>save}" custom:id="political" visible="false" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>save}" custom:id="political" visible="false" custom:url="/CompliancePersonsSet" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

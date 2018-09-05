@@ -9,7 +9,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="blacklistDialog" type="Back" press="dialogClose"/>
-			<Button text="{i18n>edit}" custom:id="blacklist" custom:create="true" custom:url="/ComplianceBlacklistedSet" 
+			<Button text="{i18n>save}" custom:id="blacklist" custom:create="true" custom:url="/ComplianceBlacklistedSet" 
 				custom:expandUrl="/ToComplianceBlacklisted" type="Accept" press="dialogEdit"/>
 		</buttons>
 	</Dialog>

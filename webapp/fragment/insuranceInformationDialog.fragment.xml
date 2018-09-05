@@ -11,7 +11,7 @@
 			<Input value="{Rate}" width="167px" class="margin-right"/>
 			<Input value="%" id="iInsuranceUnit" width="80px" editable="false"/>
 			<ToolbarSpacer/>
-			<Label text="{i18n>contactNumber}" width="250px"/>
+			<Label text="{i18n>contractNumber}" width="250px"/>
 			<Input value="{ContractNum}" width="255px"/>
 			<ToolbarSpacer/>
 			<Label text="{i18n>validityDate}" width="250px"/>
@@ -19,7 +19,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="insuranceInformationDialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" type="Accept" custom:id="insuranceInformation" custom:create="true" custom:url="/RatingInsureSet" 
+			<Button text="{i18n>save}" type="Accept" custom:id="insuranceInformation" custom:create="true" custom:url="/RatingInsureSet" 
 				custom:expandUrl="/ToRatingInsure" press="dialogEdit"/>
 		</buttons>
 	</Dialog>

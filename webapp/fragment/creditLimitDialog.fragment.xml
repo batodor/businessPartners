@@ -12,7 +12,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="creditLimitDialog" type="Back" press="dialogClose"/>
-			<Button text="{i18n>edit}" type="Accept" custom:id="creditLimit" custom:create="true" custom:url="/RatingCreditLimitSet" 
+			<Button text="{i18n>save}" type="Accept" custom:id="creditLimit" custom:create="true" custom:url="/RatingCreditLimitSet" 
 				custom:expandUrl="/ToRatingCreditLimit" press="dialogEdit"/>
 		</buttons>
 	</Dialog>

@@ -25,8 +25,8 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="contacts2Dialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" visible="false" custom:id="contacts2" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" visible="false" custom:id="contacts2" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>save}" visible="false" custom:id="contacts2" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>save}" visible="false" custom:id="contacts2" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

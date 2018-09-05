@@ -37,7 +37,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="ratingDialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" type="Accept" custom:id="rating" custom:create="true" custom:url="/RatingGeneralSet" 
+			<Button text="{i18n>save}" type="Accept" custom:id="rating" custom:create="true" custom:url="/RatingGeneralSet" 
 				custom:expandUrl="/ToRatingGeneral" press="dialogEdit"/>
 		</buttons>
 	</Dialog>
