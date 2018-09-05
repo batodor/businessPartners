@@ -14,13 +14,13 @@
 			<Select forceSelection="false" enabled="false" selectedKey="{GoverType}" width="300px" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
 				<core:Item key="{GoverType}" text="{GoverType} - {GoverTypeName}"/>
 			</Select>
-			<Table class="marginTop" id="managementContactsTable" custom:id="managementContacts" width="100%" items="{ path: 'ToManagementContacts' }" mode="SingleSelectLeft" 
+			<Table class="marginTop" id="managementContactsTable" custom:id="managementContacts" width="600px" items="{ path: 'ToManagementContacts' }" mode="SingleSelectLeft" 
 				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
 				growing="true" growingScrollToLoad="true">
 				<columns>
-					<Column><Label class="black" text="{i18n>name}"/></Column>
-					<Column><Label class="black" text="{i18n>surname}"/></Column>
-					<Column><Label class="black" text="{i18n>position}"/></Column>
+					<!--<Column><Label class="black" text="{i18n>name}"/></Column>-->
+					<!--<Column><Label class="black" text="{i18n>surname}"/></Column>-->
+					<!--<Column><Label class="black" text="{i18n>position}"/></Column>-->
 					<Column><Label class="black" text="{i18n>contactType}"/></Column>
 					<Column><Label class="black" text="{i18n>phone}"/></Column>
 					<Column><Label class="black" text="{i18n>fax}"/></Column>
@@ -29,9 +29,9 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Text text="{Name}"/>
-							<Text text="{Surname}"/>
-							<Text text="{Position}"/>
+							<!--<Text text="{Name}"/>-->
+							<!--<Text text="{Surname}"/>-->
+							<!--<Text text="{Position}"/>-->
 							<Text custom:key="{ContactType}" text="{ContactName}"/>
 							<Text text="{Phone}"/>
 							<Text text="{Fax}"/>
@@ -43,7 +43,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="managementContactsDialog" press="dialogClose"/>
-			<Button text="{i18n>add}" custom:id="contacts" custom:url="/managementContactsSet" type="Emphasized" press="tableAdd"/>
+			<Button text="{i18n>add}" custom:id="contacts" custom:table="managementContacts" custom:url="/ManagementContactsSet" type="Emphasized" press="tableAdd"/>
 			<Button text="{i18n>edit}" enabled="false" id="managementContactsEdit" custom:id="contacts" custom:table="managementContacts" type="Accept" press="tableEdit"/>
 			<Button text="{i18n>delete}" enabled="false" id="managementContactsDelete" custom:id="contacts" custom:table="managementContacts" type="Reject" press="tableDelete"/>
 		</buttons>

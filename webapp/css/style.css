@@ -12,6 +12,8 @@
 }
 .attachmentsListDialog .sapMLIB{
 	border: 0;
+	justify-content: start;
+	padding: 0 !important;
 }
 
 .sapMDialog .sapMDialogScrollCont>*{

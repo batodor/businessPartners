@@ -50,7 +50,7 @@ sap.ui.define([
 			});
 			
 			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks", "upload", "uploadDashboard", 
-				"managementContacts", "contacts"];
+				"managementContacts", "contacts", "contacts2", "proxyContacts", "politicalContacts"];
 			this.addDialogs(this.dialogArr);
 		},
 
@@ -278,7 +278,8 @@ sap.ui.define([
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], false);
-			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", "uploadDashboardAdd", "uploadDashboardDelete"], true);
+			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", 
+				"uploadDashboardAdd", "uploadDashboardDelete"], true);
 		},
 		
 		// Save function of Main Information (Dashboard tab)
@@ -318,7 +319,8 @@ sap.ui.define([
 		
 		// Cancel function of Main Information (Dashboard tab)
 		cancelMainInf: function(){
-			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", "uploadDashboardAdd", "uploadDashboardDelete"], false);
+			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", "uploadDashboardAdd", 
+				"uploadDashboardDelete"], false);
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], true);
 		},
 
@@ -346,23 +348,21 @@ sap.ui.define([
 		// argFilters array of objects, each object contain path, operator and value for Filters.
 		bindTable: function(id, url, update, argFilters){
 			var table = this.byId(id) || sap.ui.getCore().byId(id);
-			if(table.mBindingInfos.items.path !== url || update){
-				var parameters = {
-					path: url,
-					template: table['mBindingInfos'].items.template
-				};
-				if(argFilters && argFilters[0].path){
-					var filters = [];
-					for(var i = 0; i < argFilters.length; i++){
-						var filter = new sap.ui.model.Filter(argFilters[i].path, sap.ui.model.FilterOperator[argFilters[i].operator], argFilters[i].value);
-						filters.push(filter);
-					}
-					parameters.filters = filters;
-				}else if(argFilters && argFilters[0].sPath){
-					parameters.filters = argFilters;
+			var parameters = {
+				path: url,
+				template: table['mBindingInfos'].items.template.clone()
+			};
+			if(argFilters && argFilters[0].path){
+				var filters = [];
+				for(var i = 0; i < argFilters.length; i++){
+					var filter = new sap.ui.model.Filter(argFilters[i].path, sap.ui.model.FilterOperator[argFilters[i].operator], argFilters[i].value);
+					filters.push(filter);
 				}
-				table.bindItems(parameters);
+				parameters.filters = filters;
+			}else if(argFilters && argFilters[0].sPath){
+				parameters.filters = argFilters;
 			}
+			table.bindItems(parameters);
 		},
 		
 		// Bind element function for all elements
@@ -398,12 +398,23 @@ sap.ui.define([
 		tableAdd: function(oEvent) {
 			var button = oEvent.getSource();
 			var id = button.data("id");
-			sap.ui.getCore().byId(id + "Dialog").unbindElement();
+			
 			var oDialog = this.dialogOpen(oEvent);
-			this.setDialogEnabled(oDialog, true);
+			
 			oDialog.getButtons()[1].setVisible(false);
 			oDialog.getButtons()[2].setVisible(true);
 			
+			if(button.data("url")){
+				oDialog.getButtons()[2].data("url",button.data("url"));
+			}
+			if(button.data("table")){
+				var url = sap.ui.getCore().byId(button.data("table") + "Dialog").getBindingContext().getPath();
+				oDialog.bindElement(url);
+				this.setDialogEnabled(oDialog, false);
+			}else{
+				this.setDialogEnabled(oDialog, true);
+				oDialog.unbindElement();
+			}
 			// If upload table set token to uploader
 			if(button.data("upload")){
 				var uploader = this.byId(button.data("upload")) || sap.ui.getCore().byId(button.data("upload"));
@@ -433,6 +444,7 @@ sap.ui.define([
 			if(table.getSelectedItem()){
 				var url = table.getSelectedItem().getBindingContextPath();
 				var dialog = this.dialogOpen(oEvent);
+				dialog.unbindElement();
 				dialog.bindElement(url);
 				this.setDialogEnabled(dialog, false);
 				if(!button.data("dialog")){
@@ -510,6 +522,7 @@ sap.ui.define([
 			}
 			if(bCheckAlert === "Please, enter"){
 				model.create(sUrl, oData, settings);
+				dialog.unbindElement();
 				this[id + "Dialog"].close();
 			}else{
 				MessageBox.alert(bCheckAlert.slice(0, -2), {
@@ -523,9 +536,7 @@ sap.ui.define([
 			var isCreate = button.data("create");
 			var dialog = sap.ui.getCore().byId(id + "Dialog");
 			var url = '';
-			if(dialog.getElementBinding()){
-				url = dialog.getElementBinding().getPath();
-			}else if(dialog.getBindingContext()){
+			if(dialog.getElementBinding() || dialog.getBindingContext()){
 				url = dialog.getElementBinding().getPath();
 			}
 			var model = this.getView().getModel();
@@ -580,7 +591,7 @@ sap.ui.define([
 		setDialogEnabled: function(oDialog, flag){
 			var inputs = oDialog.getAggregation("content");
 			for(var i in inputs){
-				if(inputs[i].data("key")){
+				if(inputs[i].data("key") && !inputs[i].data("omitKey")){
 					inputs[i].setEnabled(flag);
 				}
 			}

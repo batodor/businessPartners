@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>contacts}" class="sapUiContentPadding" id="contactsDialog">
+	<Dialog title="{i18n>contacts}" class="sapUiContentPadding" id="contacts2Dialog">
 		<content>
 			<Label required="true" text="{i18n>name}" width="170px"/>
 			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
@@ -21,11 +21,12 @@
 			<ToolbarSpacer/>
 			<Label text="{i18n>email}" width="170px"/>
 			<Input value="{Email}" width="300px"/>
+			<Input value="{PersonType}" visible="false" />
 		</content>
 		<buttons>
-			<Button text="{i18n>cancel}" type="Back" custom:id="contactsDialog" press="dialogClose"/>
-			<Button text="{i18n>edit}" visible="false" custom:id="contacts" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>add}" visible="false" custom:id="contacts" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>cancel}" type="Back" custom:id="contacts2Dialog" press="dialogClose"/>
+			<Button text="{i18n>edit}" visible="false" custom:id="contacts2" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>add}" visible="false" custom:id="contacts2" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

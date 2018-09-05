@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>proxyContacts}" class="sapUiContentPadding" id="proxyContactsDialog">
+		<content>
+			<Label required="true" text="{i18n>name}" width="150px"/>
+			<Input custom:key="{i18n>name}" enabled="false" value="{Name}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label required="true" text="{i18n>surname}" width="150px"/>
+			<Input custom:key="{i18n>surname}" enabled="false" value="{Surname}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>position}" width="150px"/>
+			<Input value="{Position}" enabled="false" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>comment}" width="150px"/>
+			<TextArea value="{Comment}" enabled="false" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>file}" width="150px"/>
+			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" mode="None" class="attachmentsListDialog" noDataText="{i18n>none}" width="300px">
+				<CustomListItem>
+					<HBox justifyContent="SpaceBetween" alignItems="Center">
+						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
+						<Button icon="sap-icon://download"  press="downloadAttachmentButton" />
+					</HBox>
+				</CustomListItem>
+			</List>
+			<Table class="marginTop" id="proxyContactsTable" custom:id="proxyContacts" width="600px" items="{ path: 'ToPersonContacts' }" mode="SingleSelectLeft" 
+				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
+				growing="true" growingScrollToLoad="true">
+				<columns>
+					<Column><Label class="black" text="{i18n>contactType}"/></Column>
+					<Column><Label class="black" text="{i18n>phone}"/></Column>
+					<Column><Label class="black" text="{i18n>fax}"/></Column>
+					<Column><Label class="black" text="{i18n>email}"/></Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text custom:key="{ContactType}" text="{ContactName}"/>
+							<Text text="{Phone}"/>
+							<Text text="{Fax}"/>
+							<Link text="{Email}" href="mailto:{Email}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" type="Back" custom:id="proxyContactsDialog" press="dialogClose"/>
+			<Button text="{i18n>add}" custom:id="contacts2" custom:table="proxyContacts" custom:url="/PersonContactsSet" type="Emphasized" press="tableAdd"/>
+			<Button text="{i18n>edit}" enabled="false" id="proxyContactsEdit" custom:id="contacts2" custom:table="proxyContacts" type="Accept" press="tableEdit"/>
+			<Button text="{i18n>delete}" enabled="false" id="proxyContactsDelete" custom:id="contacts2" custom:table="proxyContacts" type="Reject" press="tableDelete"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

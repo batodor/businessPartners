@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>politicalContacts}" class="sapUiContentPadding" id="politicalContactsDialog">
+		<content>
+			<Label required="true" text="{i18n>name}" width="150px"/>
+			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<ToolbarSpacer/>
+			<Label required="true" text="{i18n>surname}" width="150px"/>
+			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<ToolbarSpacer/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>position}" width="150px"/>
+			<Input value="{Position}" enabled="false" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>comment}" width="150px"/>
+			<TextArea value="{Comment}" enabled="false" width="300px"/>
+			<Table class="marginTop" id="politicalContactsTable" custom:id="politicalContacts" width="600px" items="{ path: 'ToPersonContacts' }" mode="SingleSelectLeft" 
+				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
+				growing="true" growingScrollToLoad="true">
+				<columns>
+					<Column><Label class="black" text="{i18n>contactType}"/></Column>
+					<Column><Label class="black" text="{i18n>phone}"/></Column>
+					<Column><Label class="black" text="{i18n>fax}"/></Column>
+					<Column><Label class="black" text="{i18n>email}"/></Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text custom:key="{ContactType}" text="{ContactName}"/>
+							<Text text="{Phone}"/>
+							<Text text="{Fax}"/>
+							<Link text="{Email}" href="mailto:{Email}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" type="Back" custom:id="politicalContactsDialog" press="dialogClose"/>
+			<Button text="{i18n>add}" custom:id="contacts2" custom:table="politicalContacts" custom:url="/PersonContactsSet" type="Emphasized" press="tableAdd"/>
+			<Button text="{i18n>edit}" enabled="false" id="politicalContactsEdit" custom:id="contacts2" custom:table="politicalContacts" type="Accept" press="tableEdit"/>
+			<Button text="{i18n>delete}" enabled="false" id="politicalContactsDelete" custom:id="contacts2" custom:table="politicalContacts" type="Reject" press="tableDelete"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -50,6 +50,7 @@
 					<Button text="{i18n>add}" custom:id="political" press="tableAdd"/>
 					<Button text="{i18n>edit}" custom:id="political" press="tableEdit" id="politicalEdit" enabled="false"/>
 					<Button text="{i18n>delete}" custom:id="political" press="tableDelete" id="politicalDelete" type="Reject" enabled="false"/>
+					<Button text="{i18n>contacts}" custom:id="political" press="tableEdit" id="politicalContacts" custom:dialog="politicalContacts" type="Accept" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="politicalTable" width="100%" custom:id="political" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect" items="{}"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
@@ -58,10 +59,6 @@
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
 						<Column><Label class="black" text="{i18n>position}"/></Column>
 						<Column><Label class="black" text="{i18n>comment}"/></Column>
-						<!--<Column><Label class="black" text="{i18n>contactType}"/></Column>-->
-						<!--<Column><Label class="black" text="{i18n>phone}"/></Column>-->
-						<!--<Column><Label class="black" text="{i18n>fax}"/></Column>-->
-						<!--<Column><Label class="black" text="{i18n>email}"/></Column>-->
 					</columns>
 					<items>
 						<ColumnListItem>
