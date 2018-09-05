@@ -13,7 +13,7 @@
 			<ToolbarSpacer/>
 			<Label text="{i18n>comment}" width="150px"/>
 			<TextArea value="{Comment}" enabled="false" width="300px"/>
-			<Table class="marginTop" id="politicalContactsTable" custom:id="politicalContacts" width="600px" items="{ path: 'ToPersonContacts' }" mode="SingleSelectLeft" 
+			<Table class="marginTop" id="politicalContactsTable" custom:id="politicalContacts" width="600px" items="{ path: 'ToPersonContacts2' }" mode="SingleSelectLeft" 
 				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
 				growing="true" growingScrollToLoad="true">
 				<columns>
