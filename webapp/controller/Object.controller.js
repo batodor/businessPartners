@@ -676,12 +676,14 @@ sap.ui.define([
 		// Edit element function
 		elementEdit: function(oEvent){
 			var id = oEvent.getSource().data("id");
+			var dialog = this[id + "Dialog"];
 			var oElement = this.byId(id + "Element");
 			if(oElement.getElementBinding()){
-				var url = this.byId(id + "Element").getElementBinding().getPath();
-				sap.ui.getCore().byId(id + "Dialog").bindElement(url);
+				var url = oElement.getElementBinding().getPath();
+				dialog.unbindElement();
+				dialog.bindElement(url);
 			}
-			this[id + "Dialog"].open();
+			dialog.open();
 		},
 		
 		//============================= UPLOAD Functions =============================

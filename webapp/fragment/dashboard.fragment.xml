@@ -8,9 +8,9 @@
 				</OverflowToolbar>
 				<Label text=""/>
 				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>codeFromKioda}:" width="170px"/>
-				<Label text="{Identifier}" id="lMainInfIdentifier" />
-				<ToolbarSpacer/>
+				<!-- <Label class="black" text="{i18n>codeFromKioda}:" width="170px"/> -->
+				<!-- <Label text="{Identifier}" id="lMainInfIdentifier" /> -->
+				<!-- <ToolbarSpacer/> -->
 				<Label class="black" text="{i18n>regNumber}:" width="170px"/>
 				<Label text="{RegistrationNumber}" id="lMainInfRegistrationNumber"/>
 				<ToolbarSpacer/>
