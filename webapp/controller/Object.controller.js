@@ -48,6 +48,7 @@ sap.ui.define([
 				// Restore original busy indicator delay for the object view
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
 			});
+			this.typeArr = ["value", "dateValue", "selectedKey", "selected"];
 			
 			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks", "upload", "uploadDashboard", 
 				"managementContacts", "contacts", "contacts2", "proxyContacts", "politicalContacts"];
@@ -574,8 +575,26 @@ sap.ui.define([
 			}
 		},
 		dialogClose: function(e) {
-			var dialog = e.getSource().data('id');
-			this[dialog].close();
+			var id = e.getSource().data('id');
+			this.clearValues(this[id]);
+			this[id].close();
+		},
+		
+		clearValues: function(object){
+			var inputs = object.getAggregation("content");
+			for(var i = 0; i < inputs.length; i++){
+				for(var j = 0; j < this.typeArr.length; j++){
+					var input = inputs[i];
+					var type = this.typeArr[j];
+					if(input.mProperties.hasOwnProperty(type)){
+						var evalStr = 'input.set' + type.charAt(0).toUpperCase() + type.substr(1) + '("")';
+						if(type === "dateValue"){
+							var evalStr = 'input.setDateValue(null)';
+						}
+						eval(evalStr);
+					}
+				}
+			}
 		},
 		
 		// Function for openning the dialog for create/edit/copy functions
@@ -753,6 +772,33 @@ sap.ui.define([
 			}else{
 				this.setEnabled(["ratingBusinessScale", "ratingCorporateTransparency"], true);
 			}
+		},
+
+	    // Checking input values for compliance with business-logic.
+	    // For numeric values only.
+		checkDecimal: function(oEvent){
+			var input = oEvent.getSource();
+			var decimal = input.data("decimal") || 2;
+			var max = input.data("max") || 3;
+			var value = oEvent.getParameter("value");
+			var oLocale = new sap.ui.core.Locale("en-US");
+			var oFormatOptions = {
+			    minIntegerDigits: 0,
+			    maxIntegerDigits: max,
+			    minFractionDigits: 0,
+			    maxFractionDigits: decimal
+			};
+			var checkValue  = sap.ui.core.format.NumberFormat.getFloatInstance(oFormatOptions, oLocale);
+			var newValue = checkValue.format(value);
+			// alert( value + " --- " + value.indexOf(".") + " --- " + value.length + " --- " + (value.length - value.indexOf(".")));
+			if( (newValue.indexOf("?") != -1) ||
+			    ( (value.length - value.indexOf(".")) >= 4 )  ){
+			   MessageBox.error("Value '"+ value +"' is invalid.\n" + "The value can be three digits to the decimal point and two after the decimal point.\n" + "Examples:  95.51,  150.1,  2,  999.05,  0.2;");
+			   oEvent.getSource().setValue( "0" );
+			 }else{
+			   oEvent.getSource().setValue( newValue );
+			 }
 		}
+
 	});
 });

@@ -8,7 +8,16 @@
 			</Select>
 			<ToolbarSpacer/>
 			<Label text="{i18n>insurancePremiumRatePercent}" width="250px"/>
-			<Input value="{Rate}" width="167px" class="margin-right"/>
+			<Input
+				value="{Rate}"
+				type="Number"
+				custom:max="3"
+				custom:decimal="2"
+				placeholder="0"
+				change="checkDecimal"
+				width="167px"
+				class="margin-right"/>
+            <!-- <MaskInput value="{Rate}" mask = "999.99" placeholder="Enter digital value" width="167px" class="margin-right"/> -->
 			<Input value="%" id="iInsuranceUnit" width="80px" editable="false"/>
 			<ToolbarSpacer/>
 			<Label text="{i18n>contractNumber}" width="250px"/>
