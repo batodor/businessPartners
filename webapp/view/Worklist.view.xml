@@ -37,7 +37,7 @@
 				items="{ path: '/CounterpartyListSet', sorter: { path: 'Name', descending: false } }" noDataText="{worklistView>/tableNoDataText}"
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished">
 				<columns>
-					<Column width="60px" hAlign="Center">
+					<Column width="60px" hAlign="Left">
 						<Text class="black" text="{i18n>sapId}"/>
 					</Column>
 					<Column width="120px">

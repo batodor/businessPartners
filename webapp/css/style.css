@@ -144,6 +144,9 @@ span[data-rating="C"] {
 .sapUiTheme-utistheme1 .sapMTextArea .sapMTextAreaInner{
 	height: 100%;
 }
+.sapFDynamicPageHeader.sapFDynamicPageHeaderWithContent{
+	padding: 0 1rem;
+}
 .sapUiTheme-utistheme1 .sapMTextAreaInner{
 	min-height: 47px;
 	padding: 0.1875rem 0.5rem;
