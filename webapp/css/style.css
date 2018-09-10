@@ -7,6 +7,9 @@
 .attachmentsList .sapMListNoData{
 	background-color: transparent;
 }
+.sapFDynamicPageContent, .sapFDynamicPageContentFitContainer{
+	padding: 0;
+}
 .attachmentsListDialog{
 	display: inline-block;
 }
@@ -161,7 +164,7 @@ span[data-rating="C"] {
 
 @media (min-width: 1024px){
 	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
-		margin: 1rem 1rem !important;
+		margin: 0 !important;
 	}
 }
 @media(min-width: 80rem){

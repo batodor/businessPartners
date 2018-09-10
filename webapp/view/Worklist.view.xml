@@ -1,37 +1,41 @@
 <mvc:View controllerName="counterparties.Counterparties.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<semantic:FullscreenPage id="page" title="{i18n>worklistViewTitle}">
+	<semantic:SemanticPage 
+		id="page" 
+		preserveHeaderStateOnScroll="true"
+		toggleHeaderOnTitleClick="true">
+		<semantic:titleHeading>
+			<Title
+				id="masterPageTitle"
+				text="{i18n>worklistViewTitle}"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<HBox width='100%' wrap='Wrap' justifyContent="Start" alignContent="SpaceBetween">
+				<SearchField id="searchCode" placeholder="{i18n>sapId}" showSearchButton="false" search="triggerSearch" width="auto"></SearchField>
+				<!--<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch"-->
+				<!--	width="auto" suggestionItems="{ path: '/DictionaryCountrySet', sorter: { path: 'Name' } }" enableSuggestions="true">-->
+				<!--	<suggestionItems>-->
+				<!--		<SuggestionItem text="{Key}" description="- {path:'Name'} - {path:'NameLong'}" key="{Key}"/>-->
+				<!--	</suggestionItems>-->
+				<!--</SearchField>-->
+				<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch"
+					width="auto" />
+				<SearchField id="searchName" placeholder="{i18n>name}" showSearchButton="false" search="triggerSearch" width="auto"/>
+				<SearchField id="searchLegalForm" placeholder="{i18n>legalForm}" showSearchButton="false" search="triggerSearch" width="auto"/>
+				<SearchField id="searchLegalName" placeholder="{i18n>legalName} {i18n>caseSensitive}" showSearchButton="false" search="triggerSearch" width="auto"/>
+				<SearchField id="searchEnglishName" placeholder="{i18n>englishName} {i18n>caseSensitive}" showSearchButton="false" search="triggerSearch" width="auto"/>
+				<SearchField id="searchTaxNumber" placeholder="{i18n>regNumber}" showSearchButton="false" search="triggerSearch" width="auto"/>
+				<DatePicker id="searchDateFrom" placeholder="{i18n>createdDateFrom}" class="sapUiSmallMarginBottom"/>
+				<DatePicker id="searchDateTo" placeholder="{i18n>createdDateTo}" class="sapUiSmallMarginBottom"/>
+				<CheckBox text="{i18n>blacklisted}" select="triggerSearch" id="cbSearchBlacklisted" selected="false"/>
+				<Button id="bSearch" text="{i18n>search}" type="Accept" press="onSearch"/>
+			</HBox>
+		</semantic:headerContent>
 		<semantic:content>
 			<Table id="table" width="auto" class="sapUiResponsiveMargin"
 				items="{ path: '/CounterpartyListSet', sorter: { path: 'Name', descending: false } }" noDataText="{worklistView>/tableNoDataText}"
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished">
-				<headerToolbar>
-					<Toolbar height="auto">
-						<content>
-							<HBox width='100%' wrap='Wrap' justifyContent="Start" alignContent="SpaceBetween">
-								<SearchField id="searchCode" placeholder="{i18n>sapId}" showSearchButton="false" search="triggerSearch" width="auto"></SearchField>
-								<!--<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch"-->
-								<!--	width="auto" suggestionItems="{ path: '/DictionaryCountrySet', sorter: { path: 'Name' } }" enableSuggestions="true">-->
-								<!--	<suggestionItems>-->
-								<!--		<SuggestionItem text="{Key}" description="- {path:'Name'} - {path:'NameLong'}" key="{Key}"/>-->
-								<!--	</suggestionItems>-->
-								<!--</SearchField>-->
-								<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch"
-									width="auto" />
-								<SearchField id="searchName" placeholder="{i18n>name}" showSearchButton="false" search="triggerSearch" width="auto"/>
-								<SearchField id="searchLegalForm" placeholder="{i18n>legalForm}" showSearchButton="false" search="triggerSearch" width="auto"/>
-								<SearchField id="searchLegalName" placeholder="{i18n>legalName} {i18n>caseSensitive}" showSearchButton="false" search="triggerSearch" width="auto"/>
-								<SearchField id="searchEnglishName" placeholder="{i18n>englishName} {i18n>caseSensitive}" showSearchButton="false" search="triggerSearch" width="auto"/>
-								<SearchField id="searchTaxNumber" placeholder="{i18n>regNumber}" showSearchButton="false" search="triggerSearch" width="auto"/>
-								<DatePicker id="searchDateFrom" placeholder="{i18n>createdDateFrom}" class="sapUiSmallMarginBottom"/>
-								<DatePicker id="searchDateTo" placeholder="{i18n>createdDateTo}" class="sapUiSmallMarginBottom"/>
-								<CheckBox text="{i18n>blacklisted}" select="triggerSearch" id="cbSearchBlacklisted" selected="false"/>
-								<Button id="bSearch" text="{i18n>search}" type="Accept" press="onSearch"/>
-							</HBox>
-						</content>
-					</Toolbar>
-				</headerToolbar>
 				<columns>
 					<Column width="60px" hAlign="Center">
 						<Text class="black" text="{i18n>sapId}"/>
@@ -82,14 +86,5 @@
 				</items>
 			</Table>
 		</semantic:content>
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id="shareTile" title="{worklistView>/saveAsTileTitle}"/>
-		</semantic:saveAsTileAction>
-	</semantic:FullscreenPage>
+	</semantic:SemanticPage>
 </mvc:View>
