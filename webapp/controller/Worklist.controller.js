@@ -131,11 +131,11 @@ sap.ui.define([
 				query.push(codeFilter);
 			}
 			if (country !== "") {
-				var countryFilter = new Filter("Country", FilterOperator.EQ, country);
+				var countryFilter = new Filter("Country", FilterOperator.Contains, country);
 				query.push(countryFilter);
 			}
 			if (name !== "") {
-				var nameFilter = new Filter("Name", FilterOperator.EQ, name);
+				var nameFilter = new Filter("Name", FilterOperator.Contains, name);
 				query.push(nameFilter);
 			}
 			if (legalForm !== "") {

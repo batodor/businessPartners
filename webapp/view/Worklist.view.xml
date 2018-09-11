@@ -11,16 +11,9 @@
 				text="{i18n>worklistViewTitle}"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
-			<HBox width='100%' wrap='Wrap' justifyContent="Start" alignContent="SpaceBetween">
-				<SearchField id="searchCode" placeholder="{i18n>sapId}" showSearchButton="false" search="triggerSearch" width="auto"></SearchField>
-				<!--<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch"-->
-				<!--	width="auto" suggestionItems="{ path: '/DictionaryCountrySet', sorter: { path: 'Name' } }" enableSuggestions="true">-->
-				<!--	<suggestionItems>-->
-				<!--		<SuggestionItem text="{Key}" description="- {path:'Name'} - {path:'NameLong'}" key="{Key}"/>-->
-				<!--	</suggestionItems>-->
-				<!--</SearchField>-->
-				<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch"
-					width="auto" />
+			<HBox width='100%' wrap='Wrap' justifyContent="Start" alignContent="Center">
+				<SearchField id="searchCode" placeholder="{i18n>sapId}" showSearchButton="false" search="triggerSearch" width=""></SearchField>
+				<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch" width="auto" />
 				<SearchField id="searchName" placeholder="{i18n>name}" showSearchButton="false" search="triggerSearch" width="auto"/>
 				<SearchField id="searchLegalForm" placeholder="{i18n>legalForm}" showSearchButton="false" search="triggerSearch" width="auto"/>
 				<SearchField id="searchLegalName" placeholder="{i18n>legalName} {i18n>caseSensitive}" showSearchButton="false" search="triggerSearch" width="auto"/>
