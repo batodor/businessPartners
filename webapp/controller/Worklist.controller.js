@@ -139,15 +139,15 @@ sap.ui.define([
 				query.push(nameFilter);
 			}
 			if (legalForm !== "") {
-				var legalFormFilter = new Filter("LegalForm", FilterOperator.EQ, legalForm);
+				var legalFormFilter = new Filter("LegalForm", FilterOperator.Contains, legalForm);
 				query.push(legalFormFilter);
 			}
 			if (legalName !== "") {
-				var legalNameFilter = new Filter("LegalName", FilterOperator.EQ, legalName);
+				var legalNameFilter = new Filter("LegalName", FilterOperator.Contains, legalName);
 				query.push(legalNameFilter);
 			}
 			if (engName !== "") {
-				var engNameFilter = new Filter("EngName", FilterOperator.EQ, engName);
+				var engNameFilter = new Filter("EngName", FilterOperator.Contains, engName);
 				query.push(engNameFilter);
 			}
 			if (taxNumber !== "") {
