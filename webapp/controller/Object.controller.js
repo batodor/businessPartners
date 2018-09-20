@@ -710,12 +710,19 @@ sap.ui.define([
 		
 		// After file uploaded, closes dialog and refreshes the table
 		onFileUploaded: function(oEvent){
-			var id = oEvent.getSource().data("id");
-			var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
-			var url = table.mBindingInfos.items.path;
-			var filters = table.mBindingInfos.items.filters;
-			this.bindTable(id + "Table", url, true, filters);
-			this[id + "Dialog"].close();
+			if(oEvent.getParameter("status") === 400){
+				MessageBox.alert(this.getResourceBundle().getText("alreadyUploaded"), {
+					actions: [sap.m.MessageBox.Action.CLOSE]
+				});
+			}else{
+				var id = oEvent.getSource().data("id");
+				var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+				var url = table.mBindingInfos.items.path;
+				var filters = table.mBindingInfos.items.filters;
+				this.bindTable(id + "Table", url, true, filters);
+				this.clearValues(this[id + "Dialog"]);
+				this[id + "Dialog"].close();
+			}
 		},
 		
 		// Simple upload function
