@@ -44,8 +44,8 @@
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="managementContactsDialog" press="dialogClose"/>
 			<Button text="{i18n>add}" custom:id="contacts" custom:table="managementContacts" custom:url="/ManagementContactsSet" type="Emphasized" press="tableAdd"/>
-			<Button text="{i18n>edit}" enabled="false" id="managementContactsEdit" custom:id="contacts" custom:table="managementContacts" type="Accept" press="tableEdit"/>
-			<Button text="{i18n>delete}" enabled="false" id="managementContactsDelete" custom:id="contacts" custom:table="managementContacts" type="Reject" press="tableDelete"/>
+			<Button text="{i18n>edit}" id="managementContactsEdit" enabled="false" custom:id="contacts" custom:table="managementContacts" type="Accept" press="tableEdit"/>
+			<Button text="{i18n>delete}" id="managementContactsDelete" enabled="false" custom:id="contacts" custom:table="managementContacts" type="Reject" press="tableDelete"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

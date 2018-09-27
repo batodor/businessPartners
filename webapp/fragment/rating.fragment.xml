@@ -33,7 +33,7 @@
 				<Label custom:key="{Date}"
 					text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateRating}" custom:id="rating" type="Emphasized" press="elementEdit"/>
+				<Button text="{i18n>updateRating}" id="ratingUpdate" custom:id="rating" type="Emphasized" press="elementEdit"/>
 			</l:BlockLayoutCell>
 			<!--<l:BlockLayoutCell>-->
 			<!--	<OverflowToolbar>-->
@@ -101,7 +101,7 @@
 				<Label class="black" text="{i18n>validityDate}:" width="240px"/>
 				<Label text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateCreditLimit}" custom:id="creditLimit" type="Emphasized" press="elementEdit"/>
+				<Button text="{i18n>updateCreditLimit}" id="creditLimitUpdate" custom:id="creditLimit" type="Emphasized" press="elementEdit"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
@@ -153,7 +153,7 @@
 				<Label class="black" text="{i18n>validityDate}:" width="280px"/>
 				<Label text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateInsuranceInformation}" type="Emphasized" custom:id="insuranceInformation" press="elementEdit"/>
+				<Button text="{i18n>updateInsuranceInformation}" id="insuranceInformationUpdate" type="Emphasized" custom:id="insuranceInformation" press="elementEdit"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>

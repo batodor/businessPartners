@@ -9,7 +9,7 @@
 					<Label class="black" text="{i18n>country}:" width="80px"/>
 					<Label id="risksCountryElement" text="{Country}"/>
 					<ToolbarSpacer/>
-					<Button custom:id="risks" text="{i18n>add}" press="tableAdd"/>
+					<Button id="risksAdd" custom:id="risks" text="{i18n>add}" press="tableAdd"/>
 					<Button id="risksEdit" custom:id="risks" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="risksDelete" custom:id="risks" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
@@ -47,7 +47,7 @@
 				<OverflowToolbar width="100%">
 					<Title text="{i18n>politicalExposedPerson}" titleStyle="H3"/>
 					<ToolbarSpacer/>
-					<Button text="{i18n>add}" custom:id="political" press="tableAdd"/>
+					<Button text="{i18n>add}" custom:id="political" id="politicalAdd" press="tableAdd"/>
 					<Button text="{i18n>edit}" custom:id="political" press="tableEdit" id="politicalEdit" enabled="false"/>
 					<Button text="{i18n>delete}" custom:id="political" press="tableDelete" id="politicalDelete" type="Reject" enabled="false"/>
 					<Button text="{i18n>contacts}" custom:id="political" press="tableEdit" id="politicalContacts" custom:dialog="politicalContacts" type="Accept" enabled="false"/>
@@ -92,7 +92,7 @@
 				<Label class="black" text="{i18n>justification}:" width="140px"/>
 				<TextArea value="{Justification}" width="460px" height="80px" enabled="false" />
 				<ToolbarSpacer/>
-				<Button text="{i18n>updateBlacklistInf}" type="Emphasized" custom:id="blacklist" press="elementEdit"/>
+				<Button text="{i18n>updateBlacklistInf}" type="Emphasized" custom:id="blacklist" id="blacklistUpdate" press="elementEdit"/>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 		<l:BlockLayoutRow>

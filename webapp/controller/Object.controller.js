@@ -53,6 +53,7 @@ sap.ui.define([
 			this.dialogArr =  ["rating", "creditLimit", "insuranceInformation", "blacklist", "management", "proxy", "political", "risks", "upload", "uploadDashboard", 
 				"managementContacts", "contacts", "contacts2", "proxyContacts", "politicalContacts"];
 			this.addDialogs(this.dialogArr);
+			this.access = true;
 		},
 
 		/* =========================================================== */
@@ -93,7 +94,7 @@ sap.ui.define([
 				this._bindView("/CounterpartyListSet('" + code + "')/ToCounterpartyHeader");
 				this.code = code;
 				// Disabled edit mode and hide edit buttons
-				this.cancelMainInf();
+				//this.cancelMainInf();
 				
 				// Set Relations BP
 				var url = this.getModel().sServiceUrl + "/CounterpartyListSet('" + this.code + "')/ToBPRelationships?$format=json";
@@ -116,9 +117,29 @@ sap.ui.define([
 						that.setRelations(isChild, "relationBPChild");
 				    }
 				});
+				
+				// Access control
+                this.checkUserAccess();
 			}.bind(this));
 		},
 		
+		// Check user access
+		checkUserAccess: function(){
+			this.getModel().callFunction("/GetUserFunctions", {
+				method: "GET",
+				success: this.onCheckUserAccessSuccess.bind(this, "GetUserFunctions")
+			});
+		},
+        // Check user access - processing result
+		onCheckUserAccessSuccess: function(link, oData) {
+			var oResult = oData[link];
+			this.access = oResult.Action === "W" ? true : false; // R
+			for(var i = 0; i < this.dialogArr.length; i++){
+				var id = this.dialogArr[i];
+				this.setVisible([id + "Add", id + "Edit", id + "Delete", id + "Update"], this.access);
+			}
+		},
+
 		// Relations BP function
 		setRelations: function(array, id){
 			var that = this;
@@ -239,8 +260,6 @@ sap.ui.define([
 				this.bindElement("generalElement", this.partnerUrl + "/ToCounterpartyInformation", update);
 				this.bindTable("addressTable", this.partnerUrl + "/ToCounterpartyAddressBook");
 				this.bindTable("bankAccountTable", this.partnerUrl + "/ToCounterpartyBankAccounts");
-				this.setVisible(["editMainInf"], true);
-				
 				var uploadFilter = [{ path: "DocType", operator: "EQ", value: '6'}];
 				this.bindTable("uploadDashboardTable", this.partnerUrl + "/ToAttachments", false, uploadFilter);
 			} else if(key === "government"){
@@ -261,6 +280,8 @@ sap.ui.define([
 			} else if (key === "attachments"){
 				this.bindTable("uploadTable", this.partnerUrl + "/ToAttachments");
 			}
+			
+			this.byId("editMainInf").setVisible(this.access);
 			
 			if (key !== "dashboard") {
 				this.cancelMainInf();
@@ -389,12 +410,6 @@ sap.ui.define([
 			}
 		},
 
-        // Dodma
-        // Contacts dialog for management.fragment
-        dialogContacts: function(oEvent) {
-        	alert("OK");
-        },
-        
 		// Table buttons function for add/edit/delete of items
 		tableAdd: function(oEvent) {
 			var button = oEvent.getSource();

@@ -11,9 +11,19 @@
 			<Label text="{i18n>position}" width="150px"/>
 			<Input value="{Position}" width="300px"/>
 			<ToolbarSpacer/>
+			<Label text="{i18n>proxyType}" width="150px"/>
+			<Select forceSelection="false" selectedKey="{ProxyType}" width="300px" items="{ path: '/DictionaryProxyTypeSet' }">
+				<core:Item key="{ProxyType}" text="{ProxyType} - {ProxyTypeName}"/>
+			</Select>
+			<ToolbarSpacer/>
+			<Label text="{i18n>signType}" width="150px"/>
+			<Select forceSelection="false" selectedKey="{SignType}" width="300px" items="{ path: '/DictionarySignTypeSet' }">
+				<core:Item key="{SignType}" text="{SignType} - {SignTypeName}"/>
+			</Select>
+			<ToolbarSpacer/>
 			<Label text="{i18n>comment}" width="150px"/>
 			<TextArea value="{Comment}" width="300px"/>
-			<Input value="{ContactName}" custom:value="" visible="false" />
+			<!--<Input value="{ContactName}" custom:value="" visible="false" />-->
 			<ToolbarSpacer/>
 			<Label text="{i18n>file}" width="150px"/>
 			<u:FileUploader name="uploadProxy" useMultipart="false" id="uploadProxy" uploadOnChange="false" custom:id="proxy" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
@@ -37,8 +47,8 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="proxyDialog" press="dialogClose"/>
-			<Button text="{i18n>save}" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>save}" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" 
+			<Button text="{i18n>save}" id="proxySaveBtnG" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>save}" id="proxyBtnG" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" 
 				type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>

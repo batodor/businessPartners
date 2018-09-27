@@ -49,6 +49,8 @@
 						<Column><Label class="black" text="{i18n>name}"/></Column>
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
 						<Column><Label class="black" text="{i18n>position}"/></Column>
+						<Column><Label class="black" text="{i18n>proxyType}"/></Column>
+						<Column><Label class="black" text="{i18n>signType}"/></Column>
 						<Column><Label class="black" text="{i18n>comment}"/></Column>
 						<Column><Label class="black" text="{i18n>file}"/></Column>
 						
@@ -59,6 +61,8 @@
 								<Text text="{Name}"/>
 								<Text text="{Surname}"/>
 								<Text text="{Position}"/>
+								<Text text="{ProxyTypeName}"/>
+								<Text text="{SignTypeName}"/>
 								<Text text="{Comment}"/>
 								<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsList" showNoData="false">
 									<CustomListItem>

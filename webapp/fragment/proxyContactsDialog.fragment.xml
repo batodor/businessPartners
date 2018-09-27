@@ -10,6 +10,12 @@
 			<Label text="{i18n>position}" width="150px"/>
 			<Input value="{Position}" enabled="false" width="300px"/>
 			<ToolbarSpacer/>
+			<Label text="{i18n>proxyType}" width="150px"/>
+			<Input value="{ProxyTypeName}" enabled="false" width="300px"/>
+			<ToolbarSpacer/>
+			<Label text="{i18n>signType}" width="150px"/>
+			<Input value="{SignTypeName}" enabled="false" width="300px"/>
+			<ToolbarSpacer/>
 			<Label text="{i18n>comment}" width="150px"/>
 			<TextArea value="{Comment}" enabled="false" width="300px"/>
 			<ToolbarSpacer/>

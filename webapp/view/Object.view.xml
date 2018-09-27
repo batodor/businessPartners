@@ -22,7 +22,7 @@
 			</items>
 		</IconTabBar>
 		<semantic:editAction>
-			<semantic:EditAction id="editMainInf" title="{i18n>edit}" press="editMainInf"/>
+			<semantic:EditAction id="editMainInf" title="{i18n>edit}" visible="false" press="editMainInf"/>
 		</semantic:editAction>
 		<semantic:saveAction>
 			<semantic:SaveAction id="saveMainInf" title="{i18n>save}" visible="false" press="saveMainInf"/>
