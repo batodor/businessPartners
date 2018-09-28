@@ -136,6 +136,10 @@ sap.ui.define([
 			this.access = oResult.Action === "W" ? true : false; // R
 			for(var i = 0; i < this.dialogArr.length; i++){
 				var id = this.dialogArr[i];
+				var buttons = this[id+"Dialog"].getButtons();
+				for(var j = 1; j < buttons.length; j++){
+			    	buttons[j].setVisible(this.access);
+				}
 				this.setVisible([id + "Add", id + "Edit", id + "Delete", id + "Update"], this.access);
 			}
 		},
