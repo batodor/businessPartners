@@ -47,9 +47,10 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="proxyDialog" press="dialogClose"/>
-			<Button text="{i18n>save}" id="proxySaveBtnG" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>save}" id="proxyBtnG" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" custom:id="proxy" custom:url="/GovernmentProxySet" 
-				type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>save}" id="proxySaveBtnG" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" 
+				custom:id="proxy" type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>save}" id="proxyBtnG" custom:upload="uploadProxy" custom:uploadUrl="/ToAttachmentProxy" visible="false" 
+				custom:id="proxy" custom:url="/GovernmentProxySet" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

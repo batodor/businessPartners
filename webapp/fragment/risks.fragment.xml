@@ -9,8 +9,8 @@
 					<Label class="black" text="{i18n>country}:" width="80px"/>
 					<Label id="risksCountryElement" text="{Country}"/>
 					<ToolbarSpacer/>
-					<Button id="risksAdd" custom:id="risks" text="{i18n>add}" press="tableAdd"/>
-					<Button id="risksEdit" custom:id="risks" text="{i18n>edit}" press="tableEdit" enabled="false"/>
+					<Button id="risksAdd" custom:id="risks" custom:upload="uploadRisks" text="{i18n>add}" press="tableAdd"/>
+					<Button id="risksEdit" custom:id="risks" custom:upload="uploadRisks" text="{i18n>edit}" press="tableEdit" enabled="false"/>
 					<Button id="risksDelete" custom:id="risks" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
 				<Table id="risksTable" mode="SingleSelectLeft" includeItemInSelection="true" custom:id="risks" selectionChange="onTableSelect" width="auto" items="{}"
@@ -22,6 +22,7 @@
 						<Column width="80px"><Label class="black" text="{i18n>dateFrom}"/></Column>
 						<Column width="80px"><Label class="black" text="{i18n>dateTo}"/></Column>
 						<Column width="80px"><Label class="black" text="{i18n>actual}"/></Column>
+						<Column width="100px"><Label class="black" text="{i18n>file}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -34,6 +35,11 @@
 								<Text custom:key="{DateTo}"
 									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<CheckBox selected="{Actual}" editable="false"/>
+								<List items="{ path: 'ToAttachmentRisks' }" class="attachmentsList" showNoData="false">
+									<CustomListItem class="customFloat">
+										<core:Icon src="sap-icon://attachment" tooltip="{FileName}" press="downloadAttachmentButton" class="size1" color="#777" hoverColor="#fc7200" />
+									</CustomListItem>
+								</List>
 							</cells>
 						</ColumnListItem>
 					</items>

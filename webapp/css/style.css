@@ -10,6 +10,12 @@
 .sapFDynamicPageContent, .sapFDynamicPageContentFitContainer{
 	padding: 0;
 }
+.customFloat{
+	margin-right: .25rem;
+	float: left;
+	border-bottom: 0;
+	cursor: pointer;
+}
 .attachmentsListDialog{
 	display: inline-block;
 }

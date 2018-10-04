@@ -65,8 +65,8 @@
 								<Text text="{SignTypeName}"/>
 								<Text text="{Comment}"/>
 								<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsList" showNoData="false">
-									<CustomListItem>
-										<Button icon="sap-icon://download" press="downloadAttachmentButton" />
+									<CustomListItem class="customFloat">
+										<core:Icon src="sap-icon://attachment" tooltip="{FileName}" press="downloadAttachmentButton" class="size1" color="#777" hoverColor="#fc7200" />
 									</CustomListItem>
 								</List>
 							</cells>

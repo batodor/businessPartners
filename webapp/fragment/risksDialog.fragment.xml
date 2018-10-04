@@ -1,4 +1,4 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified"  xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="Edit Compliance Risk" class="sapUiContentPadding" id="risksDialog">
 		<content>
 			<Label required="true" text="{i18n>type}" width="160px"/>
@@ -23,11 +23,33 @@
 			
 			<Input value="{Type}" custom:value="" visible="false" />
 			<Input value="{ItemNumber}" custom:value="1" visible="false" />
+			
+			<ToolbarSpacer/>
+			<Label text="{i18n>file}" width="160px"/>
+			<u:FileUploader name="uploadRisks" useMultipart="false" id="uploadRisks" uploadOnChange="false" custom:id="risks" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
+				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="350px">
+				<u:headerParameters>
+					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
+					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
+				</u:headerParameters>
+			</u:FileUploader>
+			<ToolbarSpacer/>
+			<Label text="" width="160px"/>
+			<List items="{ path: 'ToAttachmentRisks', templateShareable:false }" class="attachmentsListDialog" showNoData="false" width="350px">
+				<CustomListItem>
+					<HBox justifyContent="SpaceBetween" alignItems="Center">
+						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
+						<Button icon="sap-icon://download" press="downloadAttachmentButton" />
+						<Button icon="sap-icon://delete" custom:id="risksDialog" press="deleteAttachmentButton" />
+					</HBox>
+				</CustomListItem>
+			</List>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="risksDialog" press="dialogClose"/>
-			<Button text="{i18n>save}" visible="false" custom:id="risks" type="Accept" press="dialogEdit"/>
-			<Button text="{i18n>save}" visible="false" custom:id="risks" custom:url="/ComplianceRisksSet" type="Accept" press="dialogAdd"/>
+			<Button text="{i18n>save}" visible="false" custom:id="risks" custom:upload="uploadRisks" custom:uploadUrl="/ToAttachmentRisks"  type="Accept" press="dialogEdit"/>
+			<Button text="{i18n>save}" visible="false" custom:id="risks" custom:upload="uploadRisks" custom:uploadUrl="/ToAttachmentRisks" 
+				custom:url="/ComplianceRisksSet" type="Accept" press="dialogAdd"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>
