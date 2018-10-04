@@ -31,6 +31,9 @@
 .marginTop{
 	margin-top: 1rem;
 }
+.marginRight{
+	margin-right: .25rem;
+}
 .sapUiBlockLayoutSizeL:not(.sapUiBlockLayoutKeepFontSize) .sapUiBlockCellContent{
 	padding:1rem;
 }

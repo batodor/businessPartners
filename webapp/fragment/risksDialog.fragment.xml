@@ -39,8 +39,10 @@
 				<CustomListItem>
 					<HBox justifyContent="SpaceBetween" alignItems="Center">
 						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
-						<Button icon="sap-icon://download" press="downloadAttachmentButton" />
-						<Button icon="sap-icon://delete" custom:id="risksDialog" press="deleteAttachmentButton" />
+						<HBox justifyContent="End">
+							<Button icon="sap-icon://download" press="downloadAttachmentButton" class="marginRight" />
+							<Button icon="sap-icon://delete" custom:id="risksDialog" press="deleteAttachmentButton" />
+						</HBox>
 					</HBox>
 				</CustomListItem>
 			</List>
