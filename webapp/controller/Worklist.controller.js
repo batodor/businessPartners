@@ -127,7 +127,7 @@ sap.ui.define([
 			var blacklist = this.byId('cbSearchBlacklisted').getSelected();
 			
 			if (code !== "") {
-				var codeFilter = new Filter("Code", FilterOperator.EQ, code);
+				var codeFilter = new Filter("Code", FilterOperator.Contains, code);
 				query.push(codeFilter);
 			}
 			if (country !== "") {
