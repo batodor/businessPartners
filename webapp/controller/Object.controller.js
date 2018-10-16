@@ -553,16 +553,19 @@ sap.ui.define([
 		dialogEdit: function(oEvent) {
 			var button = oEvent.getSource();
 			var id = button.data("id");
-			var isCreate = button.data("create");
+			var isCreate = id === "blacklist" && this.byId("blacklistElement").getBindingContext() ? false : button.data("create");
 			var dialog = sap.ui.getCore().byId(id + "Dialog");
 			var url = '';
 			if(dialog.getElementBinding() || dialog.getBindingContext()){
-				url = dialog.getElementBinding().getPath();
+				if(id === "blacklist" && this.byId("blacklistElement").getBindingContext()){
+					url = this.byId("blacklistElement").getBindingContext().getPath();
+				}else{
+					url = dialog.getElementBinding().getPath();
+				}
 			}
 			var model = this.getView().getModel();
 			var oData = this.getOdata(dialog);
 			var bCheckAlert = this.checkKeys(dialog);
-			
 			if(bCheckAlert === "Please, enter"){
 				if(button.data("upload")){
 					var uploader = this.byId(button.data("upload")) || sap.ui.getCore().byId(button.data("upload"));
@@ -574,8 +577,8 @@ sap.ui.define([
 				}
 				dialog.unbindElement();
 				var settings = {};
+				var that = this;
 				if(isCreate){
-					var that = this;
 					var expandUrl = oEvent.getSource().data("expandUrl");
 					url = oEvent.getSource().data("url");
 					var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
@@ -584,6 +587,11 @@ sap.ui.define([
 					};
 					model.create(url, oData, settings);
 				}else{
+					if(id === "blacklist" && this.byId("blacklistElement").getBindingContext()){
+						settings.success = function(){
+							that.bindElement(id + "Element", url, true);
+						};
+					}
 					model.update(url, oData, settings);
 				}
 				this[id + "Dialog"].close();
