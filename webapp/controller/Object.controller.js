@@ -228,7 +228,10 @@ sap.ui.define([
 				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
-
+			
+			// Set global unlimited to detect 
+			this.unlimited = oObject.Unlimited;
+			
 			if (oObject.TypeID === '1') {
 				this.setVisible(["cGenInf"], false);
 			} else {
@@ -306,6 +309,13 @@ sap.ui.define([
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], false);
 			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", 
 				"uploadDashboardAdd", "uploadDashboardDelete"], true);
+			if(this.unlimited){
+				this.byId("iMainInfLimitSecurity").setEnabled(false);
+				this.byId("sMainInfCurrency").setEnabled(false);
+			}else{
+				this.byId("iMainInfLimitSecurity").setEnabled(true);
+				this.byId("sMainInfCurrency").setEnabled(true);
+			}
 		},
 		
 		// Save function of Main Information (Dashboard tab)
@@ -395,7 +405,7 @@ sap.ui.define([
 		// tableId = id of element, url = full path of binding, update = flag if the operation is update
 		bindElement: function(elementId, url, update){
 			var oElement = this.byId(elementId);
-			if(Object.keys(oElement.mElementBindingContexts).length === 0 || update){
+			if(Object.keys(oElement.mElementBindingContexts).length === 0 || (oElement.getBindingContext() && oElement.getBindingContext().getPath() !== url) || update){
 				oElement.bindElement(url);
 			}
 		},

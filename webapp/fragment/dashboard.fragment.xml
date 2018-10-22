@@ -77,6 +77,10 @@
 				<Label id="lMainInfDateValidity" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
 				<DatePicker id="dpMainInfDateValidity" placeholder="{i18n>enterDate}" value="{DateValidity}" width="170px" visible="false" />
 				<ToolbarSpacer/>
+				<HBox>
+					<Label class="black" text="{i18n>unlimited}:" width="191px"/>
+					<Text text="{= ${Unlimited} ? ${i18n>yes} : ${i18n>no} }" enabled="false" />
+				</HBox>
 				
 				<OverflowToolbar class="toolbar" width="100%">
 					<Text class="black" text="{i18n>attachments}"/>

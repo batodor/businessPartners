@@ -22,7 +22,7 @@
 			</Select>
 			<Input value="{GoverName}" custom:value="" visible="false" />
 			
-			<Input value="{ContactName}" custom:value="" visible="false" />
+			<!--<Input value="{ContactName}" custom:value="" visible="false" />-->
 			<!--<ToolbarSpacer/>-->
 			<!--<Label text="{i18n>phone}" width="170px"/>-->
 			<!--<Input value="{Phone}" width="300px"/>-->
