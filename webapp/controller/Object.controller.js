@@ -195,7 +195,7 @@ sap.ui.define([
 							oViewModel.setProperty("/busy", true);
 						});
 					},
-					dataReceived: function() {
+					dataReceived: function(oEvent) {
 						that.byId('itbMain').setSelectedKey('dashboard');
 						that.onTabSelected('dashboard', true);
 						oViewModel.setProperty("/busy", false);
@@ -229,9 +229,6 @@ sap.ui.define([
 			oViewModel.setProperty("/shareSendEmailMessage",
 				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 			
-			// Set global unlimited to detect 
-			this.unlimited = oObject.Unlimited;
-			
 			if (oObject.TypeID === '1') {
 				this.setVisible(["cGenInf"], false);
 			} else {
@@ -264,7 +261,17 @@ sap.ui.define([
 			this.partnerUrl = "/CounterpartyListSet('" + code + "')";
 			
 			if (key === "dashboard") {
-				this.bindElement("generalElement", this.partnerUrl + "/ToCounterpartyInformation", update);
+				var that = this;
+				this.byId("generalElement").bindElement({
+					path: this.partnerUrl + "/ToCounterpartyInformation",
+					events: {
+						dataReceived: function(oEvent) {
+							var data = oEvent.getParameter("data");
+							that.Unlimited = data.Unlimited;
+							that.LimitSecurity = data.LimitSecurity;
+						}
+					}
+				});
 				this.bindTable("addressTable", this.partnerUrl + "/ToCounterpartyAddressBook");
 				this.bindTable("bankAccountTable", this.partnerUrl + "/ToCounterpartyBankAccounts");
 				var uploadFilter = [{ path: "DocType", operator: "EQ", value: '6'}];
@@ -316,6 +323,7 @@ sap.ui.define([
 				this.byId("iMainInfLimitSecurity").setEnabled(true);
 				this.byId("sMainInfCurrency").setEnabled(true);
 			}
+			this.byId("unlimited").setEnabled(true);
 		},
 		
 		// Save function of Main Information (Dashboard tab)
@@ -338,6 +346,7 @@ sap.ui.define([
 					LegalName: this.byId('lMainInfLegalName').getText(),
 					LegalForm: this.byId('iMainInfLegalForm').getValue(),
 					Identifier: this.byId('lMainInfIdentifier').getText(),
+					Unlimited: this.byId('unlimited').getSelected(),
 					Code: code
 				};
 				var that = this;
@@ -358,6 +367,17 @@ sap.ui.define([
 			this.setVisible(["iMainInfLegalForm", "iMainInfLimitSecurity", "dpMainInfDateValidity", "saveMainInf", "cancelMainInf", "sMainInfCurrency", "uploadDashboardAdd", 
 				"uploadDashboardDelete"], false);
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], true);
+			this.byId("unlimited").setEnabled(false).setSelected(this.Unlimited);
+			this.byId("iMainInfLimitSecurity").setValue(this.LimitSecurity);
+		},
+		
+		onCheckBox: function(oEvent){
+			var selected = oEvent.getParameter("selected");
+			if(selected){
+				this.byId("iMainInfLimitSecurity").setValue("");
+			}
+			this.byId("iMainInfLimitSecurity").setEnabled(!selected);
+			this.byId("sMainInfCurrency").setEnabled(!selected);
 		},
 
 		// On select item in Compliance Risks table

@@ -14,13 +14,11 @@
 				<Label class="black" text="{i18n>regNumber}:" width="170px"/>
 				<Label text="{RegistrationNumber}" id="lMainInfRegistrationNumber"/>
 				<ToolbarSpacer/>
-				<FlexBox width="100%" class="columns" alignItems="Stretch">
-					<items>
-						<Label class="black" text="{i18n>legalForm}:" width="170px"/>
-						<Label text="{LegalForm}" id="lMainInfLegalForm" />
-						<Input class="width-auto" id="iMainInfLegalForm" value="{LegalForm}" width="180px" visible="false" />
-					</items>
-				</FlexBox>
+				<HBox alignItems="Center">
+					<Label class="black" text="{i18n>legalForm}:" width="170px"/>
+					<Label text="{LegalForm}" id="lMainInfLegalForm" />
+					<Input class="width-auto" id="iMainInfLegalForm" value="{LegalForm}" width="180px" visible="false" />
+				</HBox>
 				<ToolbarSpacer/>
 				<FlexBox width="100%" class="columns" alignItems="Stretch">
 					<items>
@@ -62,24 +60,26 @@
 						<FlexBox id="relationBPChildFlex" wrap="Wrap"></FlexBox>
 					</items>
 				</FlexBox>
-				<Label class="black" text="{i18n>limitSecurity}:" width="191px"/>
-				<Label
-					text="{ parts: [ {path: 'LimitSecurity'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
-					class="margin-right"
-					id="lMainInfLimitSecurity" />
-				<Input value="{LimitSecurity}" id="iMainInfLimitSecurity" class="margin-right" width="165px" visible="false" />
-				<Label text="{Currency}" id="lMainInfCurrency" />
-				<Select id="sMainInfCurrency" selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px" visible="false">
-					<core:Item key="{Currency}" text="{Currency}"/>
-				</Select>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>validityDate}:" width="191px"/>
-				<Label id="lMainInfDateValidity" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-				<DatePicker id="dpMainInfDateValidity" placeholder="{i18n>enterDate}" value="{DateValidity}" width="170px" visible="false" />
-				<ToolbarSpacer/>
-				<HBox>
+				<HBox alignItems="Center">
+					<Label class="black" text="{i18n>limitSecurity}:" width="191px"/>
+					<Label
+						text="{ parts: [ {path: 'LimitSecurity'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+						class="margin-right"
+						id="lMainInfLimitSecurity" />
+					<Input value="{LimitSecurity}" id="iMainInfLimitSecurity" class="margin-right" width="165px" visible="false" />
+					<Label text="{Currency}" id="lMainInfCurrency" />
+					<Select id="sMainInfCurrency" selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px" visible="false">
+						<core:Item key="{Currency}" text="{Currency}"/>
+					</Select>
+				</HBox>
+				<HBox alignItems="Center">
+					<Label class="black" text="{i18n>validityDate}:" width="191px"/>
+					<Label id="lMainInfDateValidity" text="{ path: 'DateValidity', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+					<DatePicker id="dpMainInfDateValidity" placeholder="{i18n>enterDate}" value="{DateValidity}" width="170px" visible="false" />
+				</HBox>
+				<HBox alignItems="Center">
 					<Label class="black" text="{i18n>unlimited}:" width="191px"/>
-					<Text text="{= ${Unlimited} ? ${i18n>yes} : ${i18n>no} }" enabled="false" />
+					<CheckBox id="unlimited" select="onCheckBox" selected="{Unlimited}" enabled="false" />
 				</HBox>
 				
 				<OverflowToolbar class="toolbar" width="100%">
