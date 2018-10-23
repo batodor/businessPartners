@@ -21,7 +21,9 @@
 						<Column><Label class="black" text="{i18n>recommendedActions}"/></Column>
 						<Column width="80px"><Label class="black" text="{i18n>dateFrom}"/></Column>
 						<Column width="80px"><Label class="black" text="{i18n>dateTo}"/></Column>
-						<Column width="80px"><Label class="black" text="{i18n>actual}"/></Column>
+						<Column width="50px"><Label class="black" text="{i18n>actual}"/></Column>
+						<Column width="100px" hAlign="Center"><Text class="black" text="{i18n>complComAnalysis}"/></Column>
+						<Column width="80px"><Text class="black" text="{i18n>analysisDate}"/></Column>
 						<Column width="100px"><Label class="black" text="{i18n>file}"/></Column>
 					</columns>
 					<items>
@@ -35,6 +37,8 @@
 								<Text custom:key="{DateTo}"
 									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<CheckBox selected="{Actual}" editable="false"/>
+								<CheckBox selected="{ComplComAnalysis}" editable="false"/>
+								<Text text="{path: 'AnalysisDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<List items="{ path: 'ToAttachmentRisks' }" class="attachmentsList" showNoData="false">
 									<CustomListItem class="customFloat">
 										<core:Icon src="sap-icon://attachment" tooltip="{FileName}" press="downloadAttachmentButton" class="size1" color="#777" hoverColor="#fc7200" />

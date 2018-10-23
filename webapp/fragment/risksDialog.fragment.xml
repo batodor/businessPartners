@@ -20,6 +20,12 @@
 			<ToolbarSpacer/>
 			<Label text="{i18n>actual}" width="160px"/>
 			<CheckBox selected="{Actual}" />
+			<ToolbarSpacer/>
+			<Label wrapping="true" text="{i18n>complComAnalysis}" width="160px"/>
+			<CheckBox selected="{ComplComAnalysis}" />
+			<ToolbarSpacer/>
+			<Label text="{i18n>analysisDate}" width="160px"/>
+			<DatePicker dateValue="{AnalysisDate}" width="350px"/>
 			
 			<Input value="{Type}" custom:value="" visible="false" />
 			<Input value="{ItemNumber}" custom:value="1" visible="false" />
