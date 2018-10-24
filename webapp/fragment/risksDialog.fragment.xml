@@ -13,27 +13,28 @@
 			<TextArea value="{Actions}" width="350px" height="150px"/>
 			<ToolbarSpacer/>
 			<Label required="true" text="{i18n>dateFrom}" width="160px"/>
-			<DatePicker custom:key="{i18n>dateFrom}"  dateValue="{DateFrom}" width="350px"/>
+			<DatePicker custom:key="{i18n>dateFrom}"  dateValue="{DateFrom}" width="356px"/>
 			<ToolbarSpacer/>
 			<Label text="{i18n>dateTo}" width="160px"/>
-			<DatePicker dateValue="{DateTo}" width="350px"/>
+			<DatePicker dateValue="{DateTo}" width="356px"/>
 			<ToolbarSpacer/>
 			<Label text="{i18n>actual}" width="160px"/>
 			<CheckBox selected="{Actual}" />
-			<ToolbarSpacer/>
+			<OverflowToolbar class="marginTop marginBot" height="1px" />
+			
 			<Label wrapping="true" text="{i18n>complComAnalysis}" width="160px"/>
 			<CheckBox selected="{ComplComAnalysis}" />
 			<ToolbarSpacer/>
 			<Label text="{i18n>analysisDate}" width="160px"/>
-			<DatePicker dateValue="{AnalysisDate}" width="350px"/>
+			<DatePicker dateValue="{AnalysisDate}" width="356px"/>
 			
 			<Input value="{Type}" custom:value="" visible="false" />
 			<Input value="{ItemNumber}" custom:value="1" visible="false" />
 			
-			<ToolbarSpacer/>
+			<OverflowToolbar class="marginTop marginBot" height="1px" />
 			<Label text="{i18n>file}" width="160px"/>
 			<u:FileUploader name="uploadRisks" useMultipart="false" id="uploadRisks" uploadOnChange="false" custom:id="risks" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
-				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="350px">
+				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="352px">
 				<u:headerParameters>
 					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
 					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
@@ -44,7 +45,7 @@
 			<List items="{ path: 'ToAttachmentRisks', templateShareable:false }" class="attachmentsListDialog" showNoData="false" width="350px">
 				<CustomListItem>
 					<HBox justifyContent="SpaceBetween" alignItems="Center">
-						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
+						<Label wrapping="true" width="275px" text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
 						<HBox justifyContent="End">
 							<Button icon="sap-icon://download" press="downloadAttachmentButton" class="marginRight" />
 							<Button icon="sap-icon://delete" custom:id="risksDialog" press="deleteAttachmentButton" />
