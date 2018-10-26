@@ -21,7 +21,6 @@
 			<ToolbarSpacer/>
 			<Label class="marginTop" text="{i18n>email}"/>
 			<Input value="{Email}"/>
-			<Input value="{PersonType}" visible="false" />
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="contacts2Dialog" press="dialogClose"/>
