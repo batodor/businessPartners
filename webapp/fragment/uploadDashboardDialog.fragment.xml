@@ -1,16 +1,16 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>attachments}" class="sapUiContentPadding" id="uploadDashboardDialog">
+	<Dialog title="{i18n>attachments}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="uploadDashboardDialog">
 		<content>
-			<Label text="{i18n>type}" width="100px"/>
-			<Select forceSelection="false" change="onTypeSelect" id="uploadDashboardSelect" width="200px" custom:id="uploadDashboard"
+			<Label text="{i18n>type}"/>
+			<Select forceSelection="false" change="onTypeSelect" id="uploadDashboardSelect" width="100%" custom:id="uploadDashboard"
 				items="{ path: '/DictionaryDocTypeSet', sorter: { path: 'DocType' } }">
 				<core:Item key="{DocType}" text="{DocType} - {Description}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>file}" width="100px"/>
+			<Label class="marginTop" text="{i18n>file}"/>
 			<u:FileUploader name="uploadDashboard" useMultipart="false" id="uploadDashboard" uploadOnChange="false" custom:id="uploadDashboard" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
-				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="200px">
+				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="100%">
 				<u:headerParameters>
 					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
 					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>

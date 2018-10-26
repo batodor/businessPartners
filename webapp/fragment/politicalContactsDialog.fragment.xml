@@ -1,26 +1,26 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>politicalContacts}" class="sapUiContentPadding" id="politicalContactsDialog">
+	<Dialog title="{i18n>politicalContacts}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="politicalContactsDialog">
 		<content>
-			<Label required="true" text="{i18n>name}" width="150px"/>
-			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<Label required="true" text="{i18n>name}"/>
+			<Input custom:key="{i18n>name}" value="{Name}"/>
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>surname}" width="150px"/>
-			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<Label class="marginTop" required="true" text="{i18n>surname}"/>
+			<Input custom:key="{i18n>surname}" value="{Surname}"/>
 			<ToolbarSpacer/>
+			<Label class="marginTop" text="{i18n>position}"/>
+			<Input value="{Position}" enabled="false"/>
 			<ToolbarSpacer/>
-			<Label text="{i18n>position}" width="150px"/>
-			<Input value="{Position}" enabled="false" width="300px"/>
-			<ToolbarSpacer/>
-			<Label text="{i18n>comment}" width="150px"/>
-			<TextArea value="{Comment}" enabled="false" width="300px"/>
-			<Table class="marginTop" id="politicalContactsTable" custom:id="politicalContacts" width="600px" items="{ path: 'ToPersonContacts2' }" mode="SingleSelectLeft" 
+			<Label class="marginTop" text="{i18n>comment}"/>
+			<TextArea value="{Comment}" enabled="false" width="100%" rows="6" />
+			<Table class="marginTop" id="politicalContactsTable" popinLayout="GridLarge" custom:id="politicalContacts" width="100%" items="{ path: 'ToPersonContacts' }" 
+				mode="SingleSelectLeft" 
 				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
 				growing="true" growingScrollToLoad="true">
 				<columns>
 					<Column><Label class="black" text="{i18n>contactType}"/></Column>
 					<Column><Label class="black" text="{i18n>phone}"/></Column>
-					<Column><Label class="black" text="{i18n>fax}"/></Column>
-					<Column><Label class="black" text="{i18n>email}"/></Column>
+					<Column minScreenWidth="Tablet" demandPopin="true"><Label class="black" text="{i18n>fax}"/></Column>
+					<Column minScreenWidth="Tablet" demandPopin="true"><Label class="black" text="{i18n>email}"/></Column>
 				</columns>
 				<items>
 					<ColumnListItem>

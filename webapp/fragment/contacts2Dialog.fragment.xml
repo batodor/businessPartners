@@ -1,26 +1,26 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>contacts}" class="sapUiContentPadding" id="contacts2Dialog">
+	<Dialog title="{i18n>contacts}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="contacts2Dialog">
 		<content>
-			<Label required="true" text="{i18n>name}" width="170px"/>
-			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<Label required="true" text="{i18n>name}" />
+			<Input custom:key="{i18n>name}" value="{Name}" />
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>surname}" width="170px"/>
-			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<Label class="marginTop" required="true" text="{i18n>surname}" />
+			<Input custom:key="{i18n>surname}" value="{Surname}" />
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>contactType}" width="170px"/>
-			<Select forceSelection="false" custom:key="{i18n>contactType}" custom:omitKey="true" selectedKey="{ContactType}" width="300px" 
+			<Label class="marginTop" required="true" text="{i18n>contactType}" />
+			<Select forceSelection="false" custom:key="{i18n>contactType}" custom:omitKey="true" selectedKey="{ContactType}" width="100%" 
 				items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">
 				<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>phone}" width="170px"/>
-			<Input value="{Phone}" width="300px"/>
+			<Label class="marginTop" text="{i18n>phone}"/>
+			<Input value="{Phone}"/>
 			<ToolbarSpacer/>
-			<Label text="{i18n>fax}" width="170px"/>
-			<Input value="{Fax}" width="300px"/>
+			<Label class="marginTop" text="{i18n>fax}"/>
+			<Input value="{Fax}"/>
 			<ToolbarSpacer/>
-			<Label text="{i18n>email}" width="170px"/>
-			<Input value="{Email}" width="300px"/>
+			<Label class="marginTop" text="{i18n>email}"/>
+			<Input value="{Email}"/>
 			<Input value="{PersonType}" visible="false" />
 		</content>
 		<buttons>

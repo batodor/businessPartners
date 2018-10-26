@@ -1,37 +1,32 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>managementContacts}" class="sapUiContentPadding" id="managementContactsDialog">
+	<Dialog title="{i18n>managementContacts}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="managementContactsDialog">
 		<content>
-			<Label required="true" text="{i18n>name}" width="170px"/>
-			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<Label required="true" text="{i18n>name}" />
+			<Input custom:key="{i18n>name}" value="{Name}"/>
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>surname}" width="170px"/>
-			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<Label class="marginTop" required="true" text="{i18n>surname}"/>
+			<Input custom:key="{i18n>surname}" value="{Surname}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>position}" width="170px"/>
-			<Input value="{Position}" enabled="false"  width="300px"/>
+			<Label class="marginTop" text="{i18n>position}"/>
+			<Input value="{Position}" enabled="false" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>typeOfGovernance}" width="170px"/>
-			<Select forceSelection="false" enabled="false" selectedKey="{GoverType}" width="300px" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
+			<Label class="marginTop" text="{i18n>typeOfGovernance}" />
+			<Select forceSelection="false" enabled="false" selectedKey="{GoverType}" width="100%" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
 				<core:Item key="{GoverType}" text="{GoverType} - {GoverTypeName}"/>
 			</Select>
-			<Table class="marginTop" id="managementContactsTable" custom:id="managementContacts" width="600px" items="{ path: 'ToManagementContacts' }" mode="SingleSelectLeft" 
+			<Table class="marginTop" popinLayout="GridLarge" id="managementContactsTable" custom:id="managementContacts" width="100%" 
+				items="{ path: 'ToManagementContacts' }" mode="SingleSelectLeft" 
 				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
 				growing="true" growingScrollToLoad="true">
 				<columns>
-					<!--<Column><Label class="black" text="{i18n>name}"/></Column>-->
-					<!--<Column><Label class="black" text="{i18n>surname}"/></Column>-->
-					<!--<Column><Label class="black" text="{i18n>position}"/></Column>-->
 					<Column><Label class="black" text="{i18n>contactType}"/></Column>
 					<Column><Label class="black" text="{i18n>phone}"/></Column>
-					<Column><Label class="black" text="{i18n>fax}"/></Column>
-					<Column><Label class="black" text="{i18n>email}"/></Column>
+					<Column minScreenWidth="Tablet" demandPopin="true"><Label class="black" text="{i18n>fax}"/></Column>
+					<Column minScreenWidth="Tablet" demandPopin="true"><Label class="black" text="{i18n>email}"/></Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
-							<!--<Text text="{Name}"/>-->
-							<!--<Text text="{Surname}"/>-->
-							<!--<Text text="{Position}"/>-->
 							<Text custom:key="{ContactType}" text="{ContactName}"/>
 							<Text text="{Phone}"/>
 							<Text text="{Fax}"/>

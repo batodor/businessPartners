@@ -1,41 +1,48 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Edit Proxy" class="sapUiContentPadding" id="proxyDialog">
+	<Dialog title="Edit Proxy" stretch="{device>/system/phone}" class="sapUiContentPadding" id="proxyDialog">
 		<content>
-			<Label required="true" text="{i18n>name}" width="150px"/>
-			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<Label required="true" text="{i18n>name}"/>
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>surname}" width="150px"/>
-			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<Input custom:key="{i18n>name}" value="{Name}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>position}" width="150px"/>
-			<Input value="{Position}" width="300px"/>
+			<Label class="marginTop" required="true" text="{i18n>surname}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>proxyType}" width="150px"/>
-			<Select forceSelection="false" selectedKey="{ProxyType}" width="300px" items="{ path: '/DictionaryProxyTypeSet' }">
+			<Input custom:key="{i18n>surname}" value="{Surname}" />
+			<ToolbarSpacer/>
+			<Label class="marginTop" text="{i18n>position}" />
+			<ToolbarSpacer/>
+			<Input value="{Position}"/>
+			<ToolbarSpacer/>
+			<Label class="marginTop" text="{i18n>proxyType}" />
+			<ToolbarSpacer/>
+			<Select forceSelection="false" selectedKey="{ProxyType}" width="100%" items="{ path: '/DictionaryProxyTypeSet' }">
 				<core:Item key="{ProxyType}" text="{ProxyType} - {ProxyTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>signType}" width="150px"/>
-			<Select forceSelection="false" selectedKey="{SignType}" width="300px" items="{ path: '/DictionarySignTypeSet' }">
+			<Label class="marginTop" text="{i18n>signType}" />
+			<ToolbarSpacer/>
+			<Select forceSelection="false" selectedKey="{SignType}" width="100%" items="{ path: '/DictionarySignTypeSet' }">
 				<core:Item key="{SignType}" text="{SignType} - {SignTypeName}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>comment}" width="150px"/>
-			<TextArea value="{Comment}" width="300px"/>
-			<!--<Input value="{ContactName}" custom:value="" visible="false" />-->
+			<Label class="marginTop" text="{i18n>comment}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>file}" width="150px"/>
+			<TextArea value="{Comment}" width="100%" />
+			<ToolbarSpacer/>
+			<Label class="marginTop" text="{i18n>file}" />
+			<ToolbarSpacer/>
 			<u:FileUploader name="uploadProxy" useMultipart="false" id="uploadProxy" uploadOnChange="false" custom:id="proxy" sendXHR="true" uploadUrl="{upload>/uploadUrl}" 
-				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="300px">
+				tooltip="Upload your file to the local server" change="onFileChange" uploadComplete="onFileUploaded" style="Emphasized" width="100%">
 				<u:headerParameters>
 					<u:FileUploaderParameter name="slug" value="{upload>/fileName}"/>
 					<u:FileUploaderParameter name="x-csrf-token" value="{upload>/token}"/>
 				</u:headerParameters>
 			</u:FileUploader>
 			<ToolbarSpacer/>
-			<Label text="" width="150px"/>
-			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsListDialog" showNoData="false" width="300px">
+			<Label text="" />
+			<ToolbarSpacer/>
+			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsListDialog" showNoData="false" width="100%">
 				<CustomListItem>
 					<HBox justifyContent="SpaceBetween" alignItems="Center">
 						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />

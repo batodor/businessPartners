@@ -11,8 +11,8 @@
 				text="{i18n>worklistViewTitle}"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
-			<HBox width='100%' wrap='Wrap' justifyContent="Start" alignContent="Center">
-				<SearchField id="searchCode" placeholder="{i18n>sapId}" showSearchButton="false" search="triggerSearch" width=""></SearchField>
+			<HBox width="100%" wrap="Wrap" justifyContent="Start" alignContent="Center" class="mainHbox">
+				<SearchField id="searchCode" placeholder="{i18n>sapId}" showSearchButton="false" search="triggerSearch" />
 				<SearchField id="searchCountry" suggest="onSuggestCountry" placeholder="{i18n>country}" showSearchButton="false" search="triggerSearch" width="auto" />
 				<SearchField id="searchName" placeholder="{i18n>name}" showSearchButton="false" search="triggerSearch" width="auto"/>
 				<SearchField id="searchLegalForm" placeholder="{i18n>legalForm}" showSearchButton="false" search="triggerSearch" width="auto"/>
@@ -26,7 +26,7 @@
 			</HBox>
 		</semantic:headerContent>
 		<semantic:content>
-			<Table id="table" width="auto" class="sapUiResponsiveMargin"
+			<Table id="table" width="auto" popinLayout="GridLarge" class="sapUiResponsiveMargin"
 				items="{ path: '/CounterpartyListSet', sorter: { path: 'Name', descending: false } }" noDataText="{worklistView>/tableNoDataText}"
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished">
 				<columns>
@@ -36,25 +36,25 @@
 					<Column width="120px">
 						<Text class="black" text="{i18n>name}"/>
 					</Column>
-					<Column width="80px">
+					<Column minScreenWidth="Tablet" demandPopin="true" width="80px">
 						<Text class="black" text="{i18n>country}"/>
 					</Column>
-					<Column width="80px" hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" width="80px" hAlign="Center">
 						<Text class="black" text="{i18n>regNumber}"/>
 					</Column>
-					<Column width="80px" hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" width="80px" hAlign="Center">
 						<Text class="black" text="{i18n>blackList}"/>
 					</Column>
-					<Column width="50px" hAlign="Center">
+					<Column minScreenWidth="Tablet" demandPopin="true" width="50px" hAlign="Center">
 						<Text class="black" text="{i18n>codeFromKioda}"/>
 					</Column>
-					<Column width="120px">
+					<Column minScreenWidth="Tablet" demandPopin="true" width="120px">
 						<Text class="black" text="{i18n>englishName}"/>
 					</Column>
-					<Column width="40px" hAlign="Center">
+					<Column minScreenWidth="Desktop" demandPopin="true" width="40px" hAlign="Center">
 						<Text class="black" text="{i18n>rating}"/>
 					</Column>
-					<Column width="60px" hAlign="Center">
+					<Column minScreenWidth="Desktop" demandPopin="true" width="60px" hAlign="Center">
 						<Text class="black" text="{i18n>regDate}"/>
 					</Column>
 				</columns>

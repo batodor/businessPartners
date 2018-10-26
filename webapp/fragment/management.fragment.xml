@@ -10,13 +10,14 @@
 					<Button id="managementDelete" custom:id="management" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 					<Button id="managementContacts" custom:id="management" custom:dialog="managementContacts" text="{i18n>contacts}" press="tableEdit" type="Accept" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="managementTable" custom:id="management" width="100%" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
+				<Table id="managementTable" popinLayout="GridLarge" custom:id="management" width="100%" items="{}" 
+					mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
-						<Column><Label class="black" text="{i18n>position}"/></Column>
-						<Column><Label class="black" text="{i18n>typeOfGovernance}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>position}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>typeOfGovernance}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -43,16 +44,17 @@
 					<Button id="proxyDelete" custom:id="proxy" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 					<Button id="proxyContacts" custom:id="proxy" custom:dialog="proxyContacts" text="{i18n>contacts}" press="tableEdit" type="Accept" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="proxyTable" width="100%" custom:id="proxy" items="{}" mode="SingleSelectLeft" includeItemInSelection="true" selectionChange="onTableSelect"
+				<Table id="proxyTable" width="100%" popinLayout="GridLarge" custom:id="proxy" items="{}" mode="SingleSelectLeft" 
+					includeItemInSelection="true" selectionChange="onTableSelect"
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
 						<Column><Label class="black" text="{i18n>surname}"/></Column>
-						<Column><Label class="black" text="{i18n>position}"/></Column>
-						<Column><Label class="black" text="{i18n>proxyType}"/></Column>
-						<Column><Label class="black" text="{i18n>signType}"/></Column>
-						<Column><Label class="black" text="{i18n>comment}"/></Column>
-						<Column><Label class="black" text="{i18n>file}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>position}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>proxyType}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>signType}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>comment}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>file}"/></Column>
 						
 					</columns>
 					<items>

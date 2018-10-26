@@ -1,37 +1,24 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Edit Management" class="sapUiContentPadding" id="managementDialog">
+	<Dialog title="Edit Management" stretch="{device>/system/phone}" class="sapUiContentPadding" id="managementDialog">
 		<content>
-			<Label required="true" text="{i18n>name}" width="170px"/>
-			<Input custom:key="{i18n>name}" value="{Name}" width="300px"/>
+			<Label required="true" text="{i18n>name}" />
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>surname}" width="170px"/>
-			<Input custom:key="{i18n>surname}" value="{Surname}" width="300px"/>
+			<Input custom:key="{i18n>name}" value="{Name}"/>
 			<ToolbarSpacer/>
-			<!--<Label required="true" text="{i18n>contactType}" width="170px"/>-->
-			<!--<Select forceSelection="false" custom:key="{i18n>contactType}" custom:omitKey="true" selectedKey="{ContactType}" width="300px" -->
-			<!--	items="{ path: '/DictionaryContactTypeSet', sorter: { path: 'ContactType' } }">-->
-			<!--	<core:Item key="{ContactType}" text="{ContactType} - {ContactName}"/>-->
-			<!--</Select>-->
-			<!--<ToolbarSpacer/>-->
-			<Label text="{i18n>position}" width="170px"/>
-			<Input value="{Position}" width="300px"/>
+			<Label class="marginTop" required="true" text="{i18n>surname}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>typeOfGovernance}" width="170px"/>
-			<Select forceSelection="false" selectedKey="{GoverType}" width="300px" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
+			<Input custom:key="{i18n>surname}" value="{Surname}"/>
+			<ToolbarSpacer/>
+			<Label class="marginTop" text="{i18n>position}"/>
+			<ToolbarSpacer/>
+			<Input value="{Position}" />
+			<ToolbarSpacer/>
+			<Label class="marginTop" text="{i18n>typeOfGovernance}" />
+			<ToolbarSpacer/>
+			<Select forceSelection="false" width="100%" selectedKey="{GoverType}" items="{ path: '/DictionaryGoverTypeSet', sorter: { path: 'GoverType' } }">
 				<core:Item key="{GoverType}" text="{GoverType} - {GoverTypeName}"/>
 			</Select>
 			<Input value="{GoverName}" custom:value="" visible="false" />
-			
-			<!--<Input value="{ContactName}" custom:value="" visible="false" />-->
-			<!--<ToolbarSpacer/>-->
-			<!--<Label text="{i18n>phone}" width="170px"/>-->
-			<!--<Input value="{Phone}" width="300px"/>-->
-			<!--<ToolbarSpacer/>-->
-			<!--<Label text="{i18n>fax}" width="170px"/>-->
-			<!--<Input value="{FaxNumber}" width="300px"/>-->
-			<!--<ToolbarSpacer/>-->
-			<!--<Label text="{i18n>email}" width="170px"/>-->
-			<!--<Input value="{Email}" width="300px"/>-->
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="managementDialog" press="dialogClose"/>

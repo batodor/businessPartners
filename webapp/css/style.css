@@ -61,13 +61,24 @@ table[id*="table"] .sapMCbMarkChecked {
 table[id*="table"] .sapMCbBg.sapMCbMarkChecked:before {
     color: red !important;
 }
-
+.maxWidth500{
+	max-width: 500px !important;
+}
+.maxWidth300{
+	max-width: 300px !important;
+}
+.sapMLabel,
 .toolbar .sapMText,
 .sapMListTbl .sapMText,
 .sapMListTbl .sapMLabel,
-.sapMFlexItem>.sapMText{
+.sapMFlexItem>.sapMText,
+.sapMListTblSubCntRow>.sapMListTblSubCntVal .sapMText, 
+.sapMListTblSubCntRow>.sapMListTblSubCntVal .sapMLabel{
     color: #777;
     font-size: 0.875rem !important;
+}
+.sapUiSizeCompact .sapMSF, .sapUiSizeCompact .sapMDP, .sapUiSizeCompact .sapMCb{
+	padding-right: 0 !important;
 }
 
 span[data-rating="C"] {
@@ -157,7 +168,7 @@ span[data-rating="C"] {
 	height: 100%;
 }
 .sapFDynamicPageHeader.sapFDynamicPageHeaderWithContent{
-	padding: 0 1rem;
+	/*padding: 0 1rem;*/
 }
 .sapUiTheme-utistheme1 .sapMTextAreaInner{
 	min-height: 47px;
@@ -169,7 +180,11 @@ span[data-rating="C"] {
 	padding-top: 0.25rem;
 	padding-bottom: 0.25rem;
 }
-
+.sapFDynamicPage-Std-Phone .sapFDynamicPageTitle,
+.sapFDynamicPage-Std-Phone .sapFDynamicPageTitleWrapper.sapFDynamicPageTitleSnapped>.sapFDynamicPageTitle, 
+.sapFDynamicPage-Std-Phone .sapFDynamicPageTitleWrapper.sapFDynamicPageTitleOnly>.sapFDynamicPageTitle{
+	padding: .5rem 0 0 1rem;
+}
 .sapUiTheme-utistheme1 .sapUiFup.sapUiFUM>form>div{
 	top: 0;
 }
@@ -180,6 +195,15 @@ span[data-rating="C"] {
 @media (min-width: 1024px){
 	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
 		margin: 0 !important;
+	}
+}
+@media (max-width: 1024px){
+	.mainHbox .sapMFlexItem {
+		width: calc(50% - 5px);
+		margin-right: 10px;
+	}
+	.mainHbox .sapMFlexItem:nth-child(even){
+		margin-right: 0;
 	}
 }
 @media(min-width: 80rem){

@@ -9,12 +9,12 @@
 					<Button id="uploadDownload" custom:id="upload" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
 					<Button id="uploadDelete" custom:id="upload" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false"/>
 				</OverflowToolbar>
-				<Table id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
+				<Table id="uploadTable" custom:id="upload" popinLayout="GridLarge" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
 					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column width="40%"><Label class="black" text="{i18n>name}"/></Column>
 						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>uploadDate}"/></Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center" width="30%"><Label class="black" text="{i18n>uploadDate}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>

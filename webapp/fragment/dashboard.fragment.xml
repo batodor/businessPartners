@@ -8,9 +8,7 @@
 				</OverflowToolbar>
 				<Label text=""/>
 				<ToolbarSpacer/>
-				<!-- <Label class="black" text="{i18n>codeFromKioda}:" width="170px"/> -->
 				 <Label text="{Identifier}" id="lMainInfIdentifier" visible="false" /> 
-				<!-- <ToolbarSpacer/> -->
 				<Label class="black" text="{i18n>regNumber}:" width="170px"/>
 				<Label text="{RegistrationNumber}" id="lMainInfRegistrationNumber"/>
 				<ToolbarSpacer/>
@@ -60,7 +58,7 @@
 						<FlexBox id="relationBPChildFlex" wrap="Wrap"></FlexBox>
 					</items>
 				</FlexBox>
-				<HBox alignItems="Center">
+				<HBox alignItems="Center" wrap="Wrap" justifyContent="Start">
 					<Label class="black" text="{i18n>limitSecurity}:" width="191px"/>
 					<Label
 						text="{ parts: [ {path: 'LimitSecurity'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
@@ -68,7 +66,7 @@
 						id="lMainInfLimitSecurity" />
 					<Input value="{LimitSecurity}" id="iMainInfLimitSecurity" class="margin-right" width="165px" visible="false" />
 					<Label text="{Currency}" id="lMainInfCurrency" />
-					<Select id="sMainInfCurrency" selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px" visible="false">
+					<Select id="sMainInfCurrency" selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="100px" visible="false">
 						<core:Item key="{Currency}" text="{Currency}"/>
 					</Select>
 				</HBox>
@@ -89,13 +87,13 @@
 					<Button id="uploadDashboardDownload" custom:id="uploadDashboard" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
 					<Button id="uploadDashboardDelete" custom:id="uploadDashboard" custom:upload="true" text="{i18n>delete}" press="tableDelete" type="Reject" enabled="false" visible="false"/>
 				</OverflowToolbar>
-				<Table id="uploadDashboardTable" custom:id="uploadDashboard" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{}" 
-					noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false"
-					class="sapUiSizeCompact">
+				<Table id="uploadDashboardTable" popinLayout="GridLarge" custom:id="uploadDashboard" select="onTableSelect" mode="SingleSelectLeft" 
+					includeItemInSelection="true" width="100%" items="{}" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
+					growing="true" growingThreshold="5" growingScrollToLoad="false" class="sapUiSizeCompact">
 					<columns>
 						<Column width="40%"><Label class="black" text="{i18n>name}"/></Column>
 						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>type}"/></Column>
-						<Column hAlign="Center" width="30%"><Label class="black" text="{i18n>uploadDate}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="30%"><Label class="black" text="{i18n>uploadDate}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -116,16 +114,16 @@
 				<OverflowToolbar>
 					<Title text="{i18n>addressBook}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Table id="addressTable" width="auto" items="{}" noDataText="{worklistView>/tableNoDataText}"
+				<Table id="addressTable" width="auto" popinLayout="GridLarge" items="{}" noDataText="{worklistView>/tableNoDataText}"
 					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column width="100px"><Label class="black" text="{i18n>addressType}"/></Column>
 						<Column width="100px"><Label class="black" text="{i18n>country}"/></Column>
-						<Column width="120px"><Label class="black" text="{i18n>region}"/></Column>
-						<Column width="90px"><Label class="black" text="{i18n>ZIP}"/></Column>
-						<Column width="120px"><Label class="black" text="{i18n>city}"/></Column>
-						<Column width="200px"><Label class="black" text="{i18n>street}"/></Column>
-						<Column width="100px"><Label class="black" text="{i18n>building}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" width="120px"><Label class="black" text="{i18n>region}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" width="90px"><Label class="black" text="{i18n>ZIP}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" width="120px"><Label class="black" text="{i18n>city}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" width="200px"><Label class="black" text="{i18n>street}"/></Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" width="100px"><Label class="black" text="{i18n>building}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -150,18 +148,18 @@
 				<OverflowToolbar>
 					<Title text="{i18n>bankAccount}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Table id="bankAccountTable" width="auto" items="{}" noDataText="{worklistView>/tableNoDataText}"
+				<Table id="bankAccountTable" width="auto" popinLayout="GridLarge" items="{}" noDataText="{worklistView>/tableNoDataText}"
 					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column width="100px"><Label class="black" text="{i18n>country}"/></Column>
 						<Column width="180px"><Label class="black" text="{i18n>bank}"/></Column>
-						<Column width="90px"><Label class="black" text="{i18n>swift}"/></Column>
-						<Column><Label class="black" text="{i18n>address}"/></Column>
-						<Column width="120px"><Label class="black" text="{i18n>bcAcc}"/></Column>
-						<Column width="120px"><Label class="black" text="{i18n>iban}"/></Column>
-						<Column><Label class="black" text="{i18n>accountName}"/></Column>
-						<Column><Label class="black" text="{i18n>account}"/></Column>
-						<Column width="60px"><Label class="black" text="{i18n>currency}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true"  width="90px"><Label class="black" text="{i18n>swift}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>address}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true"  width="120px"><Label class="black" text="{i18n>bcAcc}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true"  width="120px"><Label class="black" text="{i18n>iban}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" ><Label class="black" text="{i18n>accountName}"/></Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" ><Label class="black" text="{i18n>account}"/></Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" width="60px"><Label class="black" text="{i18n>currency}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>

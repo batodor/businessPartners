@@ -1,38 +1,44 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>rating}" class="sapUiContentPadding" id="ratingDialog">
+	<Dialog title="{i18n>rating}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="ratingDialog">
 		<content>
-			<Label text="{i18n>expressScore}" width="280px"/>
+			<Label text="{i18n>expressScore}" />
+			<ToolbarSpacer/>
 			<CheckBox select="onCheck" selected="{ExpressScore}"/>
 			<ToolbarSpacer/>
-			<Label text="{i18n>rBusinessScale}" width="280px"/>
-			<Select id="ratingBusinessScale" forceSelection="false" selectedKey="{BusinessScale}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Label class="marginTop" text="{i18n>rBusinessScale}"/>
+			<ToolbarSpacer/>
+			<Select width="100%" id="ratingBusinessScale" forceSelection="false" selectedKey="{BusinessScale}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>rCorporateTransparency}" width="280px"/>
-			<Select id="ratingCorporateTransparency" forceSelection="false" selectedKey="{CorporateTransparency}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" 
-				width="140px">
+			<Label class="marginTop" text="{i18n>rCorporateTransparency}"/>
+			<ToolbarSpacer/>
+			<Select width="100%" id="ratingCorporateTransparency" forceSelection="false" selectedKey="{CorporateTransparency}" 
+				items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>rFinancialProfile}" width="280px"/>
-			<Select forceSelection="false" selectedKey="{FinancialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Label class="marginTop" text="{i18n>rFinancialProfile}" />
+			<ToolbarSpacer/>
+			<Select width="100%" forceSelection="false" selectedKey="{FinancialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>rCommercialProfile}" width="280px"/>
-			<Select forceSelection="false" selectedKey="{CommercialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Label class="marginTop" text="{i18n>rCommercialProfile}"/>
+			<ToolbarSpacer/>
+			<Select width="100%" forceSelection="false" selectedKey="{CommercialProfile}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>rSet}" width="280px"/>
-			<Select forceSelection="false" selectedKey="{RatingSet}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }" width="140px">
+			<Label class="marginTop" text="{i18n>rSet}" />
+			<ToolbarSpacer/>
+			<Select width="100%" forceSelection="false" selectedKey="{RatingSet}" items="{ path: '/DictionaryRatingSet', sorter: { path: 'Rating' } }">
 				<core:Item key="{Rating}" text="{Rating}"/>
 			</Select>
 			<ToolbarSpacer/>
-			<Label text="{i18n>date}" width="280px"/>
-			<DatePicker dateValue="{Date}" width="145px"/>
+			<Label class="marginTop" text="{i18n>date}" />
+			<DatePicker width="100%" dateValue="{Date}"/>
 			
 		</content>
 		<buttons>

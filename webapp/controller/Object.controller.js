@@ -94,7 +94,7 @@ sap.ui.define([
 				this._bindView("/CounterpartyListSet('" + code + "')/ToCounterpartyHeader");
 				this.code = code;
 				// Disabled edit mode and hide edit buttons
-				//this.cancelMainInf();
+				this.cancelMainInf();
 				
 				// Set Relations BP
 				var url = this.getModel().sServiceUrl + "/CounterpartyListSet('" + this.code + "')/ToBPRelationships?$format=json";
@@ -195,8 +195,7 @@ sap.ui.define([
 							oViewModel.setProperty("/busy", true);
 						});
 					},
-					dataReceived: function(oEvent) {
-						that.byId('itbMain').setSelectedKey('dashboard');
+					dataReceived: function() {
 						that.onTabSelected('dashboard', true);
 						oViewModel.setProperty("/busy", false);
 					}
@@ -240,16 +239,6 @@ sap.ui.define([
 			} else {
 				this.setVisible(["isUnderSanction"], false);
 			}
-		},
-
-		// Upload additional information function
-		handleUploadPress: function(oEvent) {
-			var oFileUploader = this.getView().byId("fileUploader");
-			if (!oFileUploader.getValue()) {
-				MessageToast.show("Choose a file first");
-				return;
-			}
-			oFileUploader.upload();
 		},
 
 		// On tabs selection function
@@ -303,14 +292,6 @@ sap.ui.define([
 			}
 		},
 		
-		// Success and error default functions for dialog CRUD functions 
-		successFunction: function(event) {
-			console.log("Success!", event);
-		},
-		errorFunction: function(event) {
-			console.log("Error!", event);
-		},
-		
 		// Edit function of Main Information (Dashboard tab)
 		editMainInf: function(){
 			this.setVisible(["lMainInfLegalForm", "lMainInfLimitSecurity", "lMainInfDateValidity", "editMainInf", "lMainInfCurrency"], false);
@@ -353,8 +334,7 @@ sap.ui.define([
 				oModel.create("/CounterpartyInformationSet", oData, {
 					success: function(){
 						that.bindElement("generalElement", "/CounterpartyListSet('" + code + "')/ToCounterpartyInformation", true);
-					},
-					error: that.errorFunction.bind(that)
+					}
 				});
 				this.cancelMainInf();
 			}else{
@@ -677,27 +657,54 @@ sap.ui.define([
 		getOdata: function(oDialog){
 			var oData = {};
 			var inputs = oDialog.getAggregation("content");
-			for(var i in inputs){
-				if(inputs[i].data("value") !== null){
-					oData[inputs[i].getBindingInfo("value").binding.sPath] = inputs[i].data("value");
-				}else if(inputs[i].hasOwnProperty("_oMaxDate")){
-					var date = inputs[i].getDateValue();
-					if(date) {
-						date.setMinutes(-date.getTimezoneOffset());
-					} else { 
-						date = null;
+			for(var i = 0; i < inputs.length; i++){
+				var input = inputs[i];
+				if(input["sId"].indexOf('hbox') > -1){
+					var vboxes = input.getItems();
+					for(var j = 0; j < vboxes.length; j++){
+						oData = this.mergeObjects(oData, this.getDataInner(vboxes[j]));
 					}
-					oData[inputs[i].getBindingInfo("dateValue").binding.sPath] = date;
-				}else if(inputs[i].getBindingInfo("value")){
-					oData[inputs[i].getBindingInfo("value").binding.sPath] = inputs[i].getValue();
-				}else if(inputs[i].getBindingInfo("selectedKey")){
-					oData[inputs[i].getBindingInfo("selectedKey").binding.sPath] = inputs[i].getSelectedKey();
-				}else if(inputs[i].getBindingInfo("selected")){
-					oData[inputs[i].getBindingInfo("selected").binding.sPath] = inputs[i].getSelected();
+				}else{
+					oData = this.mergeObjects(oData, this.getDataInner(input));
 				}
 			}
 			oData.Code = this.code;
 			return oData;
+		},
+		
+		// Inner function for getOdata in case hbox is presented 
+		getDataInner: function(input){
+			var oData = {};
+			if(input.data("value") !== null){
+				oData[input.getBindingInfo("value").binding.sPath] = input.data("value");
+			}else if(input.hasOwnProperty("_oMaxDate")){
+				var date = input.getDateValue();
+				if(date) {
+					date.setMinutes(-date.getTimezoneOffset());
+				} else { 
+					date = null;
+				}
+				oData[input.getBindingInfo("dateValue").binding.sPath] = date;
+			}else if(input .getBindingInfo("value")){
+				oData[input .getBindingInfo("value").binding.sPath] = input.getValue();
+			}else if(input.getBindingInfo("selectedKey")){
+				oData[input.getBindingInfo("selectedKey").binding.sPath] = input.getSelectedKey();
+			}else if(input.getBindingInfo("selected")){
+				oData[input.getBindingInfo("selected").binding.sPath] = input.getSelected();
+			}
+			return oData;
+		},
+		
+		// Object.assign doesnt work in IE so this function is created
+		mergeObjects: function(objOne, objTwo){
+			var objs = [objOne, objTwo],
+		    result =  objs.reduce(function (r, o) {
+		        Object.keys(o).forEach(function (k) {
+		            r[k] = o[k];
+		        });
+		        return r;
+		    }, {});
+		    return result;
 		},
 		
 		// Checks the key values to lock them on update

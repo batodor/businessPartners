@@ -1,26 +1,26 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>proxyContacts}" class="sapUiContentPadding" id="proxyContactsDialog">
+	<Dialog title="{i18n>proxyContacts}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="proxyContactsDialog">
 		<content>
-			<Label required="true" text="{i18n>name}" width="150px"/>
-			<Input custom:key="{i18n>name}" enabled="false" value="{Name}" width="300px"/>
+			<Label required="true" text="{i18n>name}"/>
+			<Input custom:key="{i18n>name}" enabled="false" value="{Name}" />
 			<ToolbarSpacer/>
-			<Label required="true" text="{i18n>surname}" width="150px"/>
-			<Input custom:key="{i18n>surname}" enabled="false" value="{Surname}" width="300px"/>
+			<Label class="marginTop" required="true" text="{i18n>surname}" width="150px"/>
+			<Input custom:key="{i18n>surname}" enabled="false" value="{Surname}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>position}" width="150px"/>
-			<Input value="{Position}" enabled="false" width="300px"/>
+			<Label class="marginTop" text="{i18n>position}" />
+			<Input value="{Position}" enabled="false" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>proxyType}" width="150px"/>
-			<Input value="{ProxyTypeName}" enabled="false" width="300px"/>
+			<Label class="marginTop" text="{i18n>proxyType}" />
+			<Input value="{ProxyTypeName}" enabled="false" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>signType}" width="150px"/>
-			<Input value="{SignTypeName}" enabled="false" width="300px"/>
+			<Label class="marginTop" text="{i18n>signType}" />
+			<Input value="{SignTypeName}" enabled="false"/>
 			<ToolbarSpacer/>
-			<Label text="{i18n>comment}" width="150px"/>
-			<TextArea value="{Comment}" enabled="false" width="300px"/>
+			<Label class="marginTop" text="{i18n>comment}"/>
+			<TextArea value="{Comment}" enabled="false" width="100%" rows="6" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>file}" width="150px"/>
-			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" mode="None" class="attachmentsListDialog" noDataText="{i18n>none}" width="300px">
+			<Label class="marginTop" text="{i18n>file}" />
+			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" mode="None" class="attachmentsListDialog" noDataText="{i18n>none}" width="100%">
 				<CustomListItem>
 					<HBox justifyContent="SpaceBetween" alignItems="Center">
 						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
@@ -28,14 +28,15 @@
 					</HBox>
 				</CustomListItem>
 			</List>
-			<Table class="marginTop" id="proxyContactsTable" custom:id="proxyContacts" width="600px" items="{ path: 'ToPersonContacts' }" mode="SingleSelectLeft" 
+			<Table class="marginTop" popinLayout="GridLarge" id="proxyContactsTable" custom:id="proxyContacts" width="100%" 
+				items="{ path: 'ToPersonContacts' }" mode="SingleSelectLeft" 
 				includeItemInSelection="true" selectionChange="onTableSelect" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" 
 				growing="true" growingScrollToLoad="true">
 				<columns>
 					<Column><Label class="black" text="{i18n>contactType}"/></Column>
 					<Column><Label class="black" text="{i18n>phone}"/></Column>
-					<Column><Label class="black" text="{i18n>fax}"/></Column>
-					<Column><Label class="black" text="{i18n>email}"/></Column>
+					<Column minScreenWidth="Tablet" demandPopin="true"><Label class="black" text="{i18n>fax}"/></Column>
+					<Column minScreenWidth="Tablet" demandPopin="true"><Label class="black" text="{i18n>email}"/></Column>
 				</columns>
 				<items>
 					<ColumnListItem>

@@ -1,30 +1,30 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>insuranceInformation}" class="sapUiContentPadding" id="insuranceInformationDialog">
+	<Dialog title="{i18n>insuranceInformation}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="insuranceInformationDialog">
 		<content>
-			<Label text="{i18n>amountOfInsurancedReceivables}" width="250px"/>
-			<Input value="{Amount}" width="167px" class="margin-right"/>
-			<Select selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="80px">
-				<core:Item key="{Currency}" text="{Currency}"/>
-			</Select>
+			<Label text="{i18n>amountOfInsurancedReceivables}"/>
+			<HBox justifyContent="SpaceBetween">
+				<Input value="{Amount}"  class="margin-right"/>
+				<Select selectedKey="{Currency}" items="{ path: '/DictionaryCurrencySet', sorter: { path: 'Currency' } }" width="100px">
+					<core:Item key="{Currency}" text="{Currency}"/>
+				</Select>
+			</HBox>
+			<Label class="marginTop" text="{i18n>insurancePremiumRatePercent}"/>
+			<HBox justifyContent="SpaceBetween">
+				<Input
+					value="{Rate}"
+					type="Number"
+					custom:max="3"
+					custom:decimal="2"
+					placeholder="0"
+					change="checkDecimal"
+					class="margin-right"/>
+				<Input value="%" id="iInsuranceUnit" width="100px" editable="false"/>
+			</HBox>
+			<Label class="marginTop" text="{i18n>contractNumber}" />
+			<Input value="{ContractNum}" />
 			<ToolbarSpacer/>
-			<Label text="{i18n>insurancePremiumRatePercent}" width="250px"/>
-			<Input
-				value="{Rate}"
-				type="Number"
-				custom:max="3"
-				custom:decimal="2"
-				placeholder="0"
-				change="checkDecimal"
-				width="167px"
-				class="margin-right"/>
-            <!-- <MaskInput value="{Rate}" mask = "999.99" placeholder="Enter digital value" width="167px" class="margin-right"/> -->
-			<Input value="%" id="iInsuranceUnit" width="80px" editable="false"/>
-			<ToolbarSpacer/>
-			<Label text="{i18n>contractNumber}" width="250px"/>
-			<Input value="{ContractNum}" width="255px"/>
-			<ToolbarSpacer/>
-			<Label text="{i18n>validityDate}" width="250px"/>
-			<DatePicker dateValue="{DateTo}" width="260px" class="sapUiSmallMarginBottom"/>
+			<Label class="marginTop" text="{i18n>validityDate}" />
+			<DatePicker dateValue="{DateTo}" class="sapUiSmallMarginBottom"/>
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="insuranceInformationDialog" press="dialogClose"/>

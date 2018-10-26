@@ -2,54 +2,46 @@
 	<l:BlockLayout id="ratingElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar>
+				<OverflowToolbar class="maxWidth500">
 					<Title text="{i18n>rating}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Label text=""/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>countryRating}:" width="240px"/>
-				<Label text="{CountryRating}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rBusinessScale}:" width="240px"/>
-				<Label text="{BusinessScale}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rCorporateTransparency}:" width="240px"/>
-				<Label text="{CorporateTransparency}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rFinancialProfile}:" width="240px"/>
-				<Label text="{FinancialProfile}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>rCommercialProfile}:" width="240px"/>
-				<Label text="{CommercialProfile}"/>
-				<ToolbarSpacer/>
-				<c:HorizontalDivider/>
-				<Label design="Bold" class="black" text="{i18n>rSet}:" width="240px"/>
-				<Label design="Bold" text="{RatingSet}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>expressScore}:" width="240px"/>
-				<CheckBox class="rowCheckbox" selected="{ExpressScore}" editable="false"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>date}:" width="240px"/>
-				<Label custom:key="{Date}"
-					text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-				<ToolbarSpacer/>
-				<Button text="{i18n>updateRating}" id="ratingUpdate" custom:id="rating" type="Emphasized" press="elementEdit"/>
+				<VBox class="marginTop maxWidth500">
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>countryRating}"/>
+						<Label text="{CountryRating}"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>rBusinessScale}"/>
+						<Label text="{BusinessScale}"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>rCorporateTransparency}"/>
+						<Label text="{CorporateTransparency}"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>rFinancialProfile}"/>
+						<Label text="{FinancialProfile}"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>rCommercialProfile}"/>
+						<Label text="{CommercialProfile}"/>
+					</HBox>
+					<OverflowToolbar class="marginTop marginBot maxWidth500" height="1px" />
+					<HBox justifyContent="SpaceBetween">
+						<Label design="Bold" class="black" text="{i18n>rSet}"/>
+						<Label design="Bold" text="{RatingSet}"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>expressScore}"/>
+						<CheckBox selected="{ExpressScore}" editable="false"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>date}:"/>
+						<Label custom:key="{Date}" text="{ path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+					</HBox>
+					<Button text="{i18n>updateRating}" id="ratingUpdate" custom:id="rating" type="Emphasized" press="elementEdit"/>
+				</VBox>
 			</l:BlockLayoutCell>
-			<!--<l:BlockLayoutCell>-->
-			<!--	<OverflowToolbar>-->
-			<!--		<Title text="{i18n>limitsCurrentRating}" titleStyle="H3"/>-->
-			<!--	</OverflowToolbar>-->
-			<!--	<Label text=""/>-->
-			<!--	<ToolbarSpacer/>-->
-			<!--	<Label class="black" text="{i18n>tonnage}:" width="240px"/>-->
-			<!--	<Label text=""/>-->
-			<!--	<ToolbarSpacer/>-->
-			<!--	<Label class="black" text="{i18n>period}:" width="240px"/>-->
-			<!--	<Label text=""/>-->
-			<!--	<ToolbarSpacer/>-->
-			<!--	<Label class="black" text="{i18n>paymentTerms}:" width="240px"/>-->
-			<!--	<Label text=""/>-->
-			<!--</l:BlockLayoutCell>-->
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
 	<l:BlockLayout>
@@ -58,16 +50,16 @@
 				<OverflowToolbar>
 					<Title text="{i18n>historicalData}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Table id="historicalDataTable" width="auto" items="{}" noDataText="{worklistView>/tableNoDataText}"
+				<Table id="historicalDataTable" popinLayout="GridLarge" width="100%" items="{}" noDataText="{worklistView>/tableNoDataText}"
 					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>expressScore}"/></Column>
 						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>date}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>businessScale}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>financeProfile}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>commercialProfile}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>corporateTransparency}"/></Column>
-						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>rSet}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="100px"><Label class="black" text="{i18n>businessScale}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="100px"><Label class="black" text="{i18n>financeProfile}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="100px"><Label class="black" text="{i18n>commercialProfile}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="100px"><Label class="black" text="{i18n>corporateTransparency}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="100px"><Label class="black" text="{i18n>rSet}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -89,34 +81,36 @@
 	<l:BlockLayout id="creditLimitElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar width="500px">
+				<OverflowToolbar class="maxWidth500">
 					<Title text="{i18n>validatedCreditLimit}" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label text=""/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>creditLimit}:" width="240px"/>
-				<Label text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" class="margin-right"/>
-				<Label text="{Currency}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>validityDate}:" width="240px"/>
-				<Label text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-				<ToolbarSpacer/>
-				<Button text="{i18n>updateCreditLimit}" id="creditLimitUpdate" custom:id="creditLimit" type="Emphasized" press="elementEdit"/>
+				<VBox class="maxWidth500">
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>creditLimit} ({Currency})"/>
+						<Label text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>validityDate}:"/>
+						<Label text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+					</HBox>
+					<Button text="{i18n>updateCreditLimit}" id="creditLimitUpdate" custom:id="creditLimit" type="Emphasized" press="elementEdit"/>
+				</VBox>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
 	<l:BlockLayout>
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar width="500px">
+				<OverflowToolbar class="maxWidth500">
 					<Title text="{i18n>historicalData}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Table id="historicalDataTable2" width="500px" items="{}" noDataText="{worklistView>/tableNoDataText}"
+				<Table id="historicalDataTable2" class="maxWidth500" popinLayout="GridLarge" items="{}" noDataText="{worklistView>/tableNoDataText}"
 					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>creditLimit}"/></Column>
 						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>currency}"/></Column>
-						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>validityDate}"/></Column>
+						<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center" width="80px"><Label class="black" text="{i18n>validityDate}"/></Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -135,25 +129,29 @@
 	<l:BlockLayout id="insuranceInformationElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar width="500px">
+				<OverflowToolbar class="maxWidth500">
 					<Title text="{i18n>insuranceInformation}" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label text=""/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>amountOfInsurancedReceivables}:" width="280px"/>
-				<Label text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" class="margin-right"/>
-				<Label text="{Currency}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>insurancePremiumRatePercent}:" width="280px"/>
-				<Label text="{Rate} {= ${Rate} ? '%' : ''}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>contractNumber}:" width="280px"/>
-				<Label text="{ContractNum}"/>
-				<ToolbarSpacer/>
-				<Label class="black" text="{i18n>validityDate}:" width="280px"/>
-				<Label text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
-				<ToolbarSpacer/>
-				<Button text="{i18n>updateInsuranceInformation}" id="insuranceInformationUpdate" type="Emphasized" custom:id="insuranceInformation" press="elementEdit"/>
+				<VBox class="maxWidth500">
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>amountOfInsurancedReceivables} ({Currency})"/>
+						<Label text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" />
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>insurancePremiumRatePercent} {= ${Rate} ? '(%)' : ''}"/>
+						<Label text="{Rate}" />
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>contractNumber}"/>
+						<Label text="{ContractNum}"/>
+					</HBox>
+					<HBox justifyContent="SpaceBetween">
+						<Label class="black" text="{i18n>validityDate}"/>
+						<Label text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+					</HBox>
+					<Button text="{i18n>updateInsuranceInformation}" id="insuranceInformationUpdate" type="Emphasized" custom:id="insuranceInformation" press="elementEdit"/>
+				</VBox>
 			</l:BlockLayoutCell>
 		</l:BlockLayoutRow>
 	</l:BlockLayout>
