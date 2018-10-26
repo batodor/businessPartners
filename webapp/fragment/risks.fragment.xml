@@ -31,14 +31,15 @@
 							<cells>
 								<Text custom:key="{RiskType}" text="{Type}"/>
 								<Text text="{Description}"/>
-								<Text text="{Actions}"/>
+								<Text wrapping="true" class="maxWidth300" text="{Actions}"/>
 								<Text custom:key="{DateFrom}"
 									text="{path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<Text custom:key="{DateTo}"
 									text="{path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<CheckBox selected="{Actual}" editable="false"/>
 								<CheckBox selected="{ComplComAnalysis}" editable="false"/>
-								<Text text="{path: 'AnalysisDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
+								<Text wrapping="true" 
+									text="{path: 'AnalysisDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' }, constraints:{displayFormat:'Date'} }"/>
 								<List items="{ path: 'ToAttachmentRisks' }" class="attachmentsList" showNoData="false">
 									<CustomListItem class="customFloat">
 										<core:Icon src="sap-icon://attachment" tooltip="{FileName}" press="downloadAttachmentButton" class="size1" color="#777" hoverColor="#fc7200" />
@@ -78,10 +79,6 @@
 								<Text text="{Surname}"/>
 								<Text text="{Position}"/>
 								<Text text="{Comment}"/>
-								<!--<Text custom:key="{ContactType}" text="{ContactName}"/>-->
-								<!--<Text text="{Phone}"/>-->
-								<!--<Text text="{FaxNumber}"/>-->
-								<!--<Link text="{Email}" href="mailto:{Email}"/>-->
 							</cells>
 						</ColumnListItem>
 					</items>

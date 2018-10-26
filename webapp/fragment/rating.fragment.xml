@@ -87,7 +87,7 @@
 				<Label text=""/>
 				<VBox class="maxWidth500">
 					<HBox justifyContent="SpaceBetween">
-						<Label class="black" text="{i18n>creditLimit} ({Currency})"/>
+						<Label class="black" text="{i18n>creditLimit} {= ${Currency} ? '(' + ${Currency} + ')' : '' }"/>
 						<Label text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"/>
 					</HBox>
 					<HBox justifyContent="SpaceBetween">
@@ -135,7 +135,7 @@
 				<Label text=""/>
 				<VBox class="maxWidth500">
 					<HBox justifyContent="SpaceBetween">
-						<Label class="black" text="{i18n>amountOfInsurancedReceivables} ({Currency})"/>
+						<Label class="black" text="{i18n>amountOfInsurancedReceivables} {= ${Currency} ? '(' + ${Currency} + ')' : '' }"/>
 						<Label text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" />
 					</HBox>
 					<HBox justifyContent="SpaceBetween">

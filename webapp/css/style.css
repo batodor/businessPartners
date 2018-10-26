@@ -61,12 +61,6 @@ table[id*="table"] .sapMCbMarkChecked {
 table[id*="table"] .sapMCbBg.sapMCbMarkChecked:before {
     color: red !important;
 }
-.maxWidth500{
-	max-width: 500px !important;
-}
-.maxWidth300{
-	max-width: 300px !important;
-}
 .sapMLabel,
 .toolbar .sapMText,
 .sapMListTbl .sapMText,
@@ -204,6 +198,12 @@ span[data-rating="C"] {
 	}
 	.mainHbox .sapMFlexItem:nth-child(even){
 		margin-right: 0;
+	}
+	.maxWidth500{
+		max-width: 500px !important;
+	}
+	.maxWidth300{
+		max-width: 300px !important;
 	}
 }
 @media(min-width: 80rem){

@@ -45,7 +45,7 @@
 			<List items="{ path: 'ToAttachmentProxy', templateShareable:false }" class="attachmentsListDialog" showNoData="false" width="100%">
 				<CustomListItem>
 					<HBox justifyContent="SpaceBetween" alignItems="Center">
-						<Label text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
+						<Label wrapping="true" width="275px" text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
 						<HBox justifyContent="End">
 							<Button icon="sap-icon://download" press="downloadAttachmentButton" class="marginRight" />
 							<Button icon="sap-icon://delete" custom:id="proxyDialog" press="deleteAttachmentButton" />

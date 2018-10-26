@@ -140,7 +140,9 @@ sap.ui.define([
 				for(var j = 1; j < buttons.length; j++){
 			    	buttons[j].setVisible(this.access);
 				}
-				this.setVisible([id + "Add", id + "Edit", id + "Delete", id + "Update"], this.access);
+				if(id !== "uploadDashboard"){
+					this.setVisible([id + "Add", id + "Edit", id + "Delete", id + "Update"], this.access);
+				}
 			}
 		},
 
