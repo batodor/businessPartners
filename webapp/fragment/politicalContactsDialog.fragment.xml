@@ -36,7 +36,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="politicalContactsDialog" press="dialogClose"/>
-			<Button text="{i18n>add}" custom:id="contacts2" custom:table="politicalContacts" custom:url="/PersonContactsSet" type="Emphasized" press="tableAdd"/>
+			<Button text="{i18n>add}" custom:id="contacts2" custom:table="politicalContacts" custom:url="/ComplPersContactsSet" type="Emphasized" press="tableAdd"/>
 			<Button text="{i18n>edit}" enabled="false" id="politicalContactsEdit" custom:id="contacts2" custom:table="politicalContacts" type="Accept" press="tableEdit"/>
 			<Button text="{i18n>delete}" enabled="false" id="politicalContactsDelete" custom:id="contacts2" custom:table="politicalContacts" type="Reject" press="tableDelete"/>
 		</buttons>

@@ -120,7 +120,127 @@ sap.ui.define([
 				
 				// Access control
                 this.checkUserAccess();
+                this.onTabSelected(this.byId("itbMain").getSelectedKey());
 			}.bind(this));
+		},
+
+		/**
+		 * Binds the view to the object path.
+		 * @function
+		 * @param {string} sObjectPath path to the object to be bound
+		 * @private
+		 */
+		_bindView: function(url) {
+			var oViewModel = this.getModel("mMain"),
+				oDataModel = this.getModel();
+			
+			this.byId("mainElement").bindElement({
+				path: url,
+				events: {
+					change: this._onBindingChange.bind(this),
+					dataRequested: function() {
+						oDataModel.metadataLoaded().then(function() {
+							// Busy indicator on view should only be set if metadata is loaded,
+							// otherwise there may be two busy indications next to each other on the
+							// screen. This happens because route matched handler already calls '_bindView'
+							// while metadata is loaded.
+							oViewModel.setProperty("/busy", true);
+						});
+					},
+					dataReceived: function() {
+						oViewModel.setProperty("/busy", false);
+					}
+				}
+			});
+		},
+
+		_onBindingChange: function() {
+			var oElement = this.byId("mainElement"),
+				oViewModel = this.getModel("mMain"),
+				oElementBinding = oElement.getElementBinding();
+
+			// No data for the binding
+			if (!oElementBinding.getBoundContext()) {
+				this.getRouter().getTargets().display("objectNotFound");
+				return;
+			}
+
+			var oResourceBundle = this.getResourceBundle(),
+				oObject = oElement.getBindingContext().getObject(),
+				sObjectId = oObject.Code,
+				sObjectName = oObject.Name;
+
+			// Everything went fine.
+			oViewModel.setProperty("/busy", false);
+			oViewModel.setProperty("/saveAsTileTitle", oResourceBundle.getText("saveAsTileTitle", [sObjectName]));
+			oViewModel.setProperty("/shareOnJamTitle", sObjectName);
+			oViewModel.setProperty("/shareSendEmailSubject",
+				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
+			oViewModel.setProperty("/shareSendEmailMessage",
+				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+			
+			if (oObject.TypeID === '1') {
+				this.setVisible(["cGenInf"], false);
+			} else {
+				this.setVisible(["cGenInf"], true);
+			}
+			if (oObject.Sanctions) {
+				this.setVisible(["isUnderSanction"], true);
+			} else {
+				this.setVisible(["isUnderSanction"], false);
+			}
+		},
+
+		// On tabs selection function
+		onTabSelected: function(key) {
+			if(typeof key === "object"){
+				key = key.getParameters("arguments").key;
+			}
+			this.partnerUrl = "/CounterpartyListSet('" + this.code + "')";
+			
+			if (key === "dashboard") {
+				var that = this;
+				this.byId("generalElement").bindElement({
+					path: this.partnerUrl + "/ToCounterpartyInformation",
+					events: {
+						dataReceived: function(oEvent) {
+							var data = oEvent.getParameter("data");
+							if(data){
+								that.Unlimited = data.Unlimited;
+								that.LimitSecurity = data.LimitSecurity;
+							}
+						}
+					}
+				});
+				this.bindTable("addressTable", this.partnerUrl + "/ToCounterpartyAddressBook");
+				this.bindTable("bankAccountTable", this.partnerUrl + "/ToCounterpartyBankAccounts");
+				var uploadFilter = [{ path: "DocType", operator: "EQ", value: '6'}];
+				this.bindTable("uploadDashboardTable", this.partnerUrl + "/ToAttachments", false, uploadFilter);
+			} else if(key === "government"){
+				this.bindTable("managementTable", this.partnerUrl + "/ToGovernmentMgt");
+				this.bindTable("proxyTable", this.partnerUrl + "/ToGovernmentProxy");
+			} else if (key === "rating"){
+				this.bindElement("ratingElement", this.partnerUrl + "/ToRatingGeneral");
+				this.bindTable("historicalDataTable", this.partnerUrl + "/ToRatingGeneralTab");
+				this.bindElement("creditLimitElement", this.partnerUrl + "/ToRatingCreditLimit");
+				this.bindTable("historicalDataTable2", this.partnerUrl + "/ToRatingCreditLimitTab");
+				this.bindElement("insuranceInformationElement", this.partnerUrl + "/ToRatingInsure");
+			} else if (key === "risks"){
+				this.bindTable("risksTable", this.partnerUrl + "/ToComplianceRisks");
+				this.bindTable("politicalTable", this.partnerUrl + "/ToCompliancePersons");
+				this.bindElement("blacklistElement", this.partnerUrl + "/ToComplianceBlacklisted");
+				this.bindTable("blacklistedInfTable", this.partnerUrl + "/ToComplianceBlacklistedTab");
+				this.bindElement("risksCountryElement", this.partnerUrl + "/ToCounterpartyHeader");
+			} else if (key === "attachments"){
+				this.bindTable("uploadTable", this.partnerUrl + "/ToAttachments");
+			}
+			
+			this.byId("editMainInf").setVisible(this.access);
+			
+			if (key !== "dashboard") {
+				this.cancelMainInf();
+				this.setVisible(["editMainInf"], false);
+			}
 		},
 		
 		// Check user access
@@ -170,127 +290,6 @@ sap.ui.define([
 				}
 			}else{
 				flexBox.setVisible(false);
-			}
-		},
-
-		/**
-		 * Binds the view to the object path.
-		 * @function
-		 * @param {string} sObjectPath path to the object to be bound
-		 * @private
-		 */
-		_bindView: function(url) {
-			var oViewModel = this.getModel("mMain"),
-				oDataModel = this.getModel();
-			var that = this;
-			
-			this.byId("mainElement").bindElement({
-				path: url,
-				events: {
-					change: this._onBindingChange.bind(this),
-					dataRequested: function() {
-						oDataModel.metadataLoaded().then(function() {
-							// Busy indicator on view should only be set if metadata is loaded,
-							// otherwise there may be two busy indications next to each other on the
-							// screen. This happens because route matched handler already calls '_bindView'
-							// while metadata is loaded.
-							oViewModel.setProperty("/busy", true);
-						});
-					},
-					dataReceived: function() {
-						that.onTabSelected('dashboard', true);
-						oViewModel.setProperty("/busy", false);
-					}
-				}
-			});
-		},
-
-		_onBindingChange: function() {
-			var oElement = this.byId("mainElement"),
-				oViewModel = this.getModel("mMain"),
-				oElementBinding = oElement.getElementBinding();
-
-			// No data for the binding
-			if (!oElementBinding.getBoundContext()) {
-				this.getRouter().getTargets().display("objectNotFound");
-				return;
-			}
-
-			var oResourceBundle = this.getResourceBundle(),
-				oObject = oElement.getBindingContext().getObject(),
-				sObjectId = oObject.Code,
-				sObjectName = oObject.Name;
-
-			// Everything went fine.
-			oViewModel.setProperty("/busy", false);
-			oViewModel.setProperty("/saveAsTileTitle", oResourceBundle.getText("saveAsTileTitle", [sObjectName]));
-			oViewModel.setProperty("/shareOnJamTitle", sObjectName);
-			oViewModel.setProperty("/shareSendEmailSubject",
-				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-			oViewModel.setProperty("/shareSendEmailMessage",
-				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
-			
-			if (oObject.TypeID === '1') {
-				this.setVisible(["cGenInf"], false);
-			} else {
-				this.setVisible(["cGenInf"], true);
-			}
-
-			if (oObject.Sanctions) {
-				this.setVisible(["isUnderSanction"], true);
-			} else {
-				this.setVisible(["isUnderSanction"], false);
-			}
-		},
-
-		// On tabs selection function
-		onTabSelected: function(key, update) {
-			if(typeof key === "object"){
-				key = key.getParameters("arguments").key;
-			}
-			var code = this.byId('tSAPID').getText();
-			this.partnerUrl = "/CounterpartyListSet('" + code + "')";
-			
-			if (key === "dashboard") {
-				var that = this;
-				this.byId("generalElement").bindElement({
-					path: this.partnerUrl + "/ToCounterpartyInformation",
-					events: {
-						dataReceived: function(oEvent) {
-							var data = oEvent.getParameter("data");
-							that.Unlimited = data.Unlimited;
-							that.LimitSecurity = data.LimitSecurity;
-						}
-					}
-				});
-				this.bindTable("addressTable", this.partnerUrl + "/ToCounterpartyAddressBook");
-				this.bindTable("bankAccountTable", this.partnerUrl + "/ToCounterpartyBankAccounts");
-				var uploadFilter = [{ path: "DocType", operator: "EQ", value: '6'}];
-				this.bindTable("uploadDashboardTable", this.partnerUrl + "/ToAttachments", false, uploadFilter);
-			} else if(key === "government"){
-				this.bindTable("managementTable", this.partnerUrl + "/ToGovernmentMgt");
-				this.bindTable("proxyTable", this.partnerUrl + "/ToGovernmentProxy");
-			} else if (key === "rating"){
-				this.bindElement("ratingElement", this.partnerUrl + "/ToRatingGeneral");
-				this.bindTable("historicalDataTable", this.partnerUrl + "/ToRatingGeneralTab");
-				this.bindElement("creditLimitElement", this.partnerUrl + "/ToRatingCreditLimit");
-				this.bindTable("historicalDataTable2", this.partnerUrl + "/ToRatingCreditLimitTab");
-				this.bindElement("insuranceInformationElement", this.partnerUrl + "/ToRatingInsure");
-			} else if (key === "risks"){
-				this.bindTable("risksTable", this.partnerUrl + "/ToComplianceRisks");
-				this.bindTable("politicalTable", this.partnerUrl + "/ToCompliancePersons");
-				this.bindElement("blacklistElement", this.partnerUrl + "/ToComplianceBlacklisted");
-				this.bindTable("blacklistedInfTable", this.partnerUrl + "/ToComplianceBlacklistedTab");
-				this.bindElement("risksCountryElement", this.partnerUrl + "/ToCounterpartyHeader");
-			} else if (key === "attachments"){
-				this.bindTable("uploadTable", this.partnerUrl + "/ToAttachments");
-			}
-			
-			this.byId("editMainInf").setVisible(this.access);
-			
-			if (key !== "dashboard") {
-				this.cancelMainInf();
-				this.setVisible(["editMainInf"], false);
 			}
 		},
 		
@@ -384,11 +383,11 @@ sap.ui.define([
 		// id = id of table, url = full path of binding
 		// Update boolean force to update
 		// argFilters array of objects, each object contain path, operator and value for Filters.
-		bindTable: function(id, url, update, argFilters){
+		bindTable: function(id, url, argFilters){
 			var table = this.byId(id) || sap.ui.getCore().byId(id);
 			var parameters = {
 				path: url,
-				template: table['mBindingInfos'].items.template.clone()
+				template: table['mBindingInfos'].items.template
 			};
 			if(argFilters && argFilters[0].path){
 				var filters = [];
@@ -785,7 +784,7 @@ sap.ui.define([
 				var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
 				var url = table.mBindingInfos.items.path;
 				var filters = table.mBindingInfos.items.filters;
-				this.bindTable(id + "Table", url, true, filters);
+				this.bindTable(id + "Table", url, filters);
 				this.clearValues(this[id + "Dialog"]);
 				this[id + "Dialog"].close();
 			}

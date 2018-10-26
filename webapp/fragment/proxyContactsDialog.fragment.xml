@@ -52,7 +52,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" type="Back" custom:id="proxyContactsDialog" press="dialogClose"/>
-			<Button text="{i18n>add}" custom:id="contacts2" custom:table="proxyContacts" custom:url="/PersonContactsSet" type="Emphasized" press="tableAdd"/>
+			<Button text="{i18n>add}" custom:id="contacts2" custom:table="proxyContacts" custom:url="/GovProxyContactsSet" type="Emphasized" press="tableAdd"/>
 			<Button text="{i18n>edit}" enabled="false" id="proxyContactsEdit" custom:id="contacts2" custom:table="proxyContacts" type="Accept" press="tableEdit"/>
 			<Button text="{i18n>delete}" enabled="false" id="proxyContactsDelete" custom:id="contacts2" custom:table="proxyContacts" type="Reject" press="tableDelete"/>
 		</buttons>

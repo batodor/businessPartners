@@ -185,7 +185,9 @@ span[data-rating="C"] {
 .sapUshellShell .sapMPageBgStandard{
 	background-color:transparent;
 }
-
+.fullMaxWidth500{
+	max-width: 500px;
+}
 @media (min-width: 1024px){
 	.sapMSplitContainerHideMode>.sapMSplitContainerDetail .sapUiResponsiveMargin,.sapUiResponsiveMargin{
 		margin: 0 !important;

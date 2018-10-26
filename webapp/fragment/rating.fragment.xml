@@ -2,10 +2,10 @@
 	<l:BlockLayout id="ratingElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar class="maxWidth500">
+				<OverflowToolbar class="fullMaxWidth500">
 					<Title text="{i18n>rating}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<VBox class="marginTop maxWidth500">
+				<VBox class="marginTop fullMaxWidth500">
 					<HBox justifyContent="SpaceBetween">
 						<Label class="black" text="{i18n>countryRating}"/>
 						<Label text="{CountryRating}"/>
@@ -26,7 +26,7 @@
 						<Label class="black" text="{i18n>rCommercialProfile}"/>
 						<Label text="{CommercialProfile}"/>
 					</HBox>
-					<OverflowToolbar class="marginTop marginBot maxWidth500" height="1px" />
+					<OverflowToolbar class="marginTop marginBot fullMaxWidth500" height="1px" />
 					<HBox justifyContent="SpaceBetween">
 						<Label design="Bold" class="black" text="{i18n>rSet}"/>
 						<Label design="Bold" text="{RatingSet}"/>
@@ -81,11 +81,11 @@
 	<l:BlockLayout id="creditLimitElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar class="maxWidth500">
+				<OverflowToolbar class="fullMaxWidth500">
 					<Title text="{i18n>validatedCreditLimit}" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label text=""/>
-				<VBox class="maxWidth500">
+				<VBox class="fullMaxWidth500">
 					<HBox justifyContent="SpaceBetween">
 						<Label class="black" text="{i18n>creditLimit} {= ${Currency} ? '(' + ${Currency} + ')' : '' }"/>
 						<Label text="{ parts: [ {path: 'CreditLimit'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"/>
@@ -102,10 +102,10 @@
 	<l:BlockLayout>
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar class="maxWidth500">
+				<OverflowToolbar class="fullMaxWidth500">
 					<Title text="{i18n>historicalData}" titleStyle="H3"/>
 				</OverflowToolbar>
-				<Table id="historicalDataTable2" class="maxWidth500" popinLayout="GridLarge" items="{}" noDataText="{worklistView>/tableNoDataText}"
+				<Table id="historicalDataTable2" class="fullMaxWidth500" popinLayout="GridLarge" items="{}" noDataText="{worklistView>/tableNoDataText}"
 					busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column hAlign="Center" width="80px"><Label class="black" text="{i18n>creditLimit}"/></Column>
@@ -129,11 +129,11 @@
 	<l:BlockLayout id="insuranceInformationElement">
 		<l:BlockLayoutRow>
 			<l:BlockLayoutCell>
-				<OverflowToolbar class="maxWidth500">
+				<OverflowToolbar class="fullMaxWidth500">
 					<Title text="{i18n>insuranceInformation}" titleStyle="H3"/>
 				</OverflowToolbar>
 				<Label text=""/>
-				<VBox class="maxWidth500">
+				<VBox class="fullMaxWidth500">
 					<HBox justifyContent="SpaceBetween">
 						<Label class="black" text="{i18n>amountOfInsurancedReceivables} {= ${Currency} ? '(' + ${Currency} + ')' : '' }"/>
 						<Label text="{ parts: [ {path: 'Amount'}, {path: 'Currency'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }" />
