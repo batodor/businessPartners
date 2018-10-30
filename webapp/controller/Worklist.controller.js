@@ -122,8 +122,18 @@ sap.ui.define([
 			var legalName = this.byId('searchLegalName').getValue();
 			var engName = this.byId('searchEnglishName').getValue();
 			var taxNumber = this.byId('searchTaxNumber').getValue();
-			var dateFrom = this.byId('searchDateFrom').getValue();
-			var dateTo = this.byId('searchDateTo').getValue();
+			var dateFrom = this.byId('searchDateFrom').getDateValue();
+			// Convert to UTC
+			if (dateFrom !== null) {
+				dateFrom.setMinutes(dateFrom.getMinutes() + (-dateFrom.getTimezoneOffset()));
+			}
+			
+			var dateTo = this.byId('searchDateTo').getDateValue();
+			// Convert to UTC
+			if (dateTo !== null) {
+				dateTo.setMinutes(dateTo.getMinutes() + (-dateTo.getTimezoneOffset()));
+			}
+			
 			var blacklist = this.byId('cbSearchBlacklisted').getSelected();
 			
 			if (code !== "") {
@@ -154,15 +164,15 @@ sap.ui.define([
 				var taxNumberFilter = new Filter("TaxNumber", FilterOperator.EQ, taxNumber);
 				query.push(taxNumberFilter);
 			}
-			if (dateFrom !== "" && dateTo !== "") {
+			if (dateFrom !== null && dateTo !== null) {
 				var dateFilter = new Filter("DateCreation", FilterOperator.BT, dateFrom, dateTo);
 				query.push(dateFilter);
 			} else {
-				if (dateFrom !== "") {
+				if (dateFrom !== null) {
 					var dateFromFilter = new Filter("DateCreation", FilterOperator.GT, dateFrom);
 					query.push(dateFromFilter);
 				}
-				if (dateTo !== "") {
+				if (dateTo !== null) {
 					var dateToFilter = new Filter("DateCreation", FilterOperator.LT, dateTo);
 					query.push(dateToFilter);
 				}

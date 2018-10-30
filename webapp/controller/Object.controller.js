@@ -355,7 +355,7 @@ sap.ui.define([
 		onCheckBox: function(oEvent){
 			var selected = oEvent.getParameter("selected");
 			if(selected){
-				this.byId("iMainInfLimitSecurity").setValue("");
+				this.byId("iMainInfLimitSecurity").setValue("0");
 			}
 			this.byId("iMainInfLimitSecurity").setEnabled(!selected);
 			this.byId("sMainInfCurrency").setEnabled(!selected);
