@@ -566,14 +566,7 @@ sap.ui.define([
 			var id = button.data("id");
 			var isCreate = id === "blacklist" && this.byId("blacklistElement").getBindingContext() ? false : button.data("create");
 			var dialog = sap.ui.getCore().byId(id + "Dialog");
-			var url = '';
-			if(dialog.getElementBinding() || dialog.getBindingContext()){
-				if(id === "blacklist" && this.byId("blacklistElement").getBindingContext()){
-					url = this.byId("blacklistElement").getBindingContext().getPath();
-				}else{
-					url = dialog.getElementBinding().getPath();
-				}
-			}
+			var url = dialog.getBindingContext() ? dialog.getBindingContext().getPath() : '';
 			var model = this.getView().getModel();
 			var oData = this.getOdata(dialog);
 			var bCheckAlert = this.checkKeys(dialog);
@@ -589,10 +582,10 @@ sap.ui.define([
 				dialog.unbindElement();
 				var settings = {};
 				var that = this;
+				var expandUrl = button.data("expandUrl");
+				var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
 				if(isCreate){
-					var expandUrl = oEvent.getSource().data("expandUrl");
-					url = oEvent.getSource().data("url");
-					var elementUrl = "/CounterpartyListSet('" + this.code + "')" + expandUrl;
+					url = button.data("url");
 					settings.success = function(){
 						that.bindElement(id + "Element", elementUrl, true);
 					};
@@ -600,7 +593,7 @@ sap.ui.define([
 				}else{
 					if(id === "blacklist" && this.byId("blacklistElement").getBindingContext()){
 						settings.success = function(){
-							that.bindElement(id + "Element", url, true);
+							that.bindElement(id + "Element", elementUrl, true);
 						};
 					}
 					model.update(url, oData, settings);
