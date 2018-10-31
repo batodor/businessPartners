@@ -169,11 +169,11 @@ sap.ui.define([
 				query.push(dateFilter);
 			} else {
 				if (dateFrom !== null) {
-					var dateFromFilter = new Filter("DateCreation", FilterOperator.GT, dateFrom);
+					var dateFromFilter = new Filter("DateCreation", FilterOperator.GE, dateFrom);
 					query.push(dateFromFilter);
 				}
 				if (dateTo !== null) {
-					var dateToFilter = new Filter("DateCreation", FilterOperator.LT, dateTo);
+					var dateToFilter = new Filter("DateCreation", FilterOperator.LE, dateTo);
 					query.push(dateToFilter);
 				}
 			}
